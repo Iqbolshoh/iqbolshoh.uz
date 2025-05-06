@@ -58,7 +58,7 @@
             z-index: 1000;
         }
 
-        header h1 {
+        header h1 a {
             font-size: 2rem;
             font-weight: 700;
             background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
@@ -66,6 +66,7 @@
             background-clip: text;
             color: transparent;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
         }
 
         select {
@@ -339,7 +340,7 @@
 
 <body>
     <header>
-        <h1>iqbolshoh.uz</h1>
+        <h1><a href="./">iqbolshoh.uz</a></h1>
         <select id="languageSelector">
             <option value="en">English</option>
             <option value="uz">Uzbek</option>
@@ -374,7 +375,7 @@
 
             <div class="progress-container">
                 <div class="progress-text">
-                    <span data-i18n="Development Progress"></span>
+                    <span data-i18n="progress"></span>
                     <span id="progress-percent">0.00%</span>
                 </div>
                 <div class="progress-bar">
@@ -421,134 +422,7 @@
         <p id="footer-text">© 2023 iqbolshoh.uz | All Rights Reserved</p>
     </footer>
 
-    <script>
-
-        const translations = {
-            en: {
-                "Development Progress": "Development Progress",
-                days: "Days",
-                hours: "Hours",
-                minutes: "Minutes",
-                seconds: "Seconds"
-            },
-            uz: {
-                "Development Progress": "Ishlab chiqish jarayoni",
-                days: "Kun",
-                hours: "Soat",
-                minutes: "Daqiqa",
-                seconds: "Soniya"
-            },
-            ru: {
-                "Development Progress": "Ход разработки",
-                days: "Дни",
-                hours: "Часы",
-                minutes: "Минуты",
-                seconds: "Секунды"
-            },
-            tj: {
-                "Development Progress": "Раванди рушд",
-                days: "Рӯз",
-                hours: "Соат",
-                minutes: "Дақиқа",
-                seconds: "Сония"
-            }
-        };
-
-        function setLanguage(lang) {
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                el.textContent = translations[lang][key] || key;
-            });
-        }
-
-        // Misol: zabonro ba tojikī (tj) gardon
-        setLanguage("tj");
-
-        const elements = {
-            selector: document.getElementById("languageSelector"),
-            title: document.getElementById("title"),
-            description: document.getElementById("description"),
-            feature1Title: document.getElementById("feature1-title"),
-            feature1Desc: document.getElementById("feature1-desc"),
-            feature2Title: document.getElementById("feature2-title"),
-            feature2Desc: document.getElementById("feature2-desc"),
-            feature3Title: document.getElementById("feature3-title"),
-            feature3Desc: document.getElementById("feature3-desc"),
-            footerText: document.getElementById("footer-text"),
-            progressPercent: document.getElementById("progress-percent"),
-            progressFill: document.querySelector(".progress-fill"),
-            days: document.getElementById("days"),
-            hours: document.getElementById("hours"),
-            minutes: document.getElementById("minutes"),
-            seconds: document.getElementById("seconds")
-        };
-
-
-        async function loadLanguageData() {
-            try {
-                const response = await fetch('lang.json');
-                if (!response.ok) throw new Error('Failed to load language data');
-                return await response.json();
-            } catch (error) {
-                console.error('Error loading language data:', error);
-                return {};
-            }
-        }
-
-        function updateContent(lang, content) {
-            const data = content[lang] || content.en;
-            elements.title.textContent = data.title;
-            elements.description.textContent = data.description;
-            elements.feature1Title.textContent = data["feature1-title"];
-            elements.feature1Desc.textContent = data["feature1-desc"];
-            elements.feature2Title.textContent = data["feature2-title"];
-            elements.feature2Desc.textContent = data["feature2-desc"];
-            elements.feature3Title.textContent = data["feature3-title"];
-            elements.feature3Desc.textContent = data["feature3-desc"];
-            elements.footerText.textContent = data["footer-text"];
-        }
-
-        function updateCountdown() {
-            const now = new Date();
-            const launchDate = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-
-            const diff = launchDate - now;
-            const total = launchDate - new Date(now.getFullYear(), now.getMonth(), 1);
-
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            elements.days.textContent = days.toString().padStart(2, '0');
-            elements.hours.textContent = hours.toString().padStart(2, '0');
-            elements.minutes.textContent = minutes.toString().padStart(2, '0');
-            elements.seconds.textContent = seconds.toString().padStart(2, '0');
-
-            const passed = total - diff;
-            const percent = ((passed / total) * 100).toFixed(2);
-            elements.progressPercent.textContent = `${percent}%`;
-            elements.progressFill.style.width = `${percent}%`;
-
-            requestAnimationFrame(updateCountdown);
-        }
-
-        async function init() {
-            const content = await loadLanguageData();
-            const savedLang = localStorage.getItem('language') || 'uz';
-            elements.selector.value = savedLang;
-            updateContent(savedLang, content);
-            updateCountdown();
-
-            elements.selector.addEventListener('change', () => {
-                const newLang = elements.selector.value;
-                localStorage.setItem('language', newLang);
-                updateContent(newLang, content);
-            });
-        }
-
-        init();
-    </script>
+    <script src="./script.js"></script>
 </body>
 
 </html>

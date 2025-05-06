@@ -9,7 +9,11 @@
         "feature3-title": "Fast Performance",
         "feature3-desc": "Optimized for speed and smooth user experience",
         "footer-text": "© 2023 iqbolshoh.uz | All Rights Reserved",
-        "Development Progress": "Development Progress"
+        "progress": "Development Progress",
+        "days": "Days",
+        "hours": "Hours",
+        "minutes": "Minutes",
+        "seconds": "Seconds"
     },
     "uz": {
         "title": "Sayt ishlab chiqilmoqda",
@@ -21,7 +25,11 @@
         "feature3-title": "Tez Ishlash",
         "feature3-desc": "Tezlik va qulaylik uchun optimallashtirilgan",
         "footer-text": "© 2023 iqbolshoh.uz | Barcha huquqlar himoyalangan",
-        "Development Progress": "Ishlab chiqish jarayoni"
+        "progress": "Ishlab chiqish jarayoni",
+        "days": "Kun",
+        "hours": "Soat",
+        "minutes": "Daqiqa",
+        "seconds": "Soniya"
     },
     "ru": {
         "title": "Сайт в разработке",
@@ -33,7 +41,11 @@
         "feature3-title": "Быстрая производительность",
         "feature3-desc": "Оптимизировано для скорости и плавного пользовательского опыта",
         "footer-text": "© 2023 iqbolshoh.uz | Все права защищены",
-        "Development Progress": "Ход разработки"
+        "progress": "Ход разработки",
+        "days": "Дни",
+        "hours": "Часы",
+        "minutes": "Минуты",
+        "seconds": "Секунды"
     },
     "tj": {
         "title": "Сомона дар ҳоли сохтмон аст",
@@ -45,6 +57,10 @@
         "feature3-title": "Иҷрои зуд",
         "feature3-desc": "Барои суръат ва таҷрибаи хуби истифодабаранда оптимизатсия шудааст",
         "footer-text": "© 2023 iqbolshoh.uz | Ҳамаи ҳуқуқҳо ҳифз шудаанд",
-        "Development Progress": "Раванди рушд"
+        "progress": "Раванди рушд",
+        "days": "Рӯз",
+        "hours": "Соат",
+        "minutes": "Дақиқа",
+        "seconds": "Сония"
     }
 }
