@@ -87,3 +87,28 @@ async function init() {
 }
 
 init();
+
+function createParticles() {
+    const particles = 30;
+    for (let i = 0; i < particles; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+
+        const size = Math.random() * 5 + 2;
+        const posX = Math.random() * window.innerWidth;
+        const posY = Math.random() * window.innerHeight;
+        const duration = Math.random() * 20 + 10;
+        const delay = Math.random() * 5;
+
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}px`;
+        particle.style.top = `${posY}px`;
+        particle.style.animation = `float ${duration}s ${delay}s infinite linear`;
+        particle.style.opacity = Math.random() * 0.5 + 0.1;
+
+        document.body.appendChild(particle);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', createParticles);
