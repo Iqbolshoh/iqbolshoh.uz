@@ -429,6 +429,7 @@ main {
     flex-direction: column;
     text-align: center;
     padding: 100px var(--space-lg) var(--space-2xl);
+    margin-top: 40px;
 }
 
 /* ==================== */
