@@ -1,6 +1,7 @@
 const elements = {
     selector: document.getElementById("languageSelector"),
     content: {
+        pageTitle: document.querySelector('title'),
         title: document.getElementById("title"),
         description: document.getElementById("description"),
         features: Array.from({ length: 3 }, (_, i) => ({
@@ -37,6 +38,7 @@ function updateContent(lang, content) {
     const data = content[lang] || content.en;
     const { content: el } = elements;
 
+    el.pageTitle.textContent = "iqbolshoh.uz | " + data.title;
     el.title.textContent = data.title;
     el.description.textContent = data.description;
     el.features.forEach((f, i) => {
