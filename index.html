@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
 
+    <link rel="stylesheet" href="./favicon.ico">
+
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -341,7 +343,7 @@
             <option value="en">English</option>
             <option value="uz">Uzbek</option>
             <option value="ru">Russian</option>
-            <option value="tj">Tojiki</option>
+            <option value="tj">Tajik</option>
         </select>
     </header>
 
@@ -372,7 +374,7 @@
             <div class="progress-container">
                 <div class="progress-text">
                     <span>Development Progress</span>
-                    <span id="progress-percent">65%</span>
+                    <span id="progress-percent">0.00%</span>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill"></div>
@@ -478,6 +480,8 @@
         const feature3Title = document.getElementById("feature3-title");
         const feature3Desc = document.getElementById("feature3-desc");
         const footerText = document.getElementById("footer-text");
+        const progressPercent = document.getElementById("progress-percent");
+        const progressFill = document.querySelector(".progress-fill");
 
         function loadLang(lang) {
             const content = languageContent[lang] || languageContent["en"];
@@ -496,10 +500,11 @@
             loadLang(selector.value);
         });
 
-        // Countdown timer
+        // Countdown timer with progress calculation
         function updateCountdown() {
             const now = new Date();
             const launchDate = new Date(now.getFullYear(), now.getMonth() + 1, 1); // Set to 1st of next month
+            const totalDays = Math.floor((launchDate - new Date(launchDate.getFullYear(), launchDate.getMonth(), 0)) / (1000 * 60 * 60 * 24));
             const diff = launchDate - now;
 
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -512,14 +517,14 @@
             document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
             document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
 
-            // Update progress bar randomly (for demo)
-            const progress = Math.min(65 + Math.random() * 5, 95);
-            document.querySelector(".progress-fill").style.width = `${progress}%`;
-            document.getElementById("progress-percent").textContent = `${Math.floor(progress)}%`;
+            // Calculate progress percentage based on remaining days (2 decimal places)
+            const remainingPercentage = (100 - ((days / totalDays) * 100)).toFixed(2);
+            progressPercent.textContent = `${remainingPercentage}%`;
+            progressFill.style.width = `${remainingPercentage}%`;
         }
 
         // Initialize
-        loadLang('en');
+        loadLang('uz');
         updateCountdown();
         setInterval(updateCountdown, 1000);
     </script>
