@@ -2,13 +2,527 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iqbolshoh.uz</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4bbf73;
+            --warning: #f0ad4e;
+            --danger: #d9534f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: rgba(15, 23, 42, 0.8);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        select {
+            font-size: 1rem;
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 15px;
+        }
+
+        select:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        select option {
+            background-color: #1e293b;
+            color: white;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 100px 20px 60px;
+        }
+
+        .hero {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(15, 23, 42, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 40px;
+        }
+
+        #title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        #description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            border-radius: 10px;
+            min-width: 80px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .progress-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 30px auto;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 65%;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .socials a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .socials a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .socials a:hover {
+            transform: translateY(-5px);
+            color: var(--accent);
+            box-shadow: 0 8px 25px rgba(0, 242, 254, 0.3);
+        }
+
+        .socials a:hover::before {
+            left: 100%;
+        }
+
+        .socials a:nth-child(1):hover {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+
+        .socials a:nth-child(2):hover {
+            background: linear-gradient(45deg, #0088cc, #00aced);
+        }
+
+        .socials a:nth-child(3):hover {
+            background: linear-gradient(45deg, #333, #6e5494);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 50px auto;
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.8);
+            margin-top: auto;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            #title {
+                font-size: 2rem;
+            }
+
+            #description {
+                font-size: 1rem;
+            }
+
+            .countdown {
+                flex-wrap: wrap;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <header>
+        <h1>iqbolshoh.uz</h1>
+        <select id="languageSelector">
+            <option value="en">English</option>
+            <option value="uz">Uzbek</option>
+            <option value="ru">Russian</option>
+            <option value="tj">Tojiki</option>
+        </select>
+    </header>
 
+    <main>
+        <div class="hero">
+            <h2 id="title">Website under development</h2>
+            <p id="description">This site is currently being built by Iqbolshoh. Stay tuned for something amazing!</p>
+
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-text">
+                    <span>Development Progress</span>
+                    <span id="progress-percent">65%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3 class="feature-title" id="feature1-title">Modern Design</h3>
+                <p class="feature-desc" id="feature1-desc">Cutting-edge design with smooth animations and responsive
+                    layout</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3 class="feature-title" id="feature2-title">Mobile Friendly</h3>
+                <p class="feature-desc" id="feature2-desc">Perfectly adapted for all devices from smartphones to
+                    desktops</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="feature-title" id="feature3-title">Fast Performance</h3>
+                <p class="feature-desc" id="feature3-desc">Optimized for speed and smooth user experience</p>
+            </div>
+        </div>
+
+        <div class="socials">
+            <a href="https://instagram.com/iqbolshoh_777" target="_blank" title="Instagram"><i
+                    class="fab fa-instagram"></i></a>
+            <a href="https://t.me/iqbolshoh_777" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+            <a href="https://github.com/iqbolshoh" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+    </main>
+
+    <footer>
+        <p id="footer-text">© 2023 iqbolshoh.uz | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Language content
+        const languageContent = {
+            "en": {
+                "title": "Website under development",
+                "description": "This site is currently being built by Iqbolshoh. Stay tuned for something amazing!",
+                "feature1-title": "Modern Design",
+                "feature1-desc": "Cutting-edge design with smooth animations and responsive layout",
+                "feature2-title": "Mobile Friendly",
+                "feature2-desc": "Perfectly adapted for all devices from smartphones to desktops",
+                "feature3-title": "Fast Performance",
+                "feature3-desc": "Optimized for speed and smooth user experience",
+                "footer-text": "© 2023 iqbolshoh.uz | All Rights Reserved"
+            },
+            "uz": {
+                "title": "Vebsayt ishlab chiqilmoqda",
+                "description": "Bu sayt hozirda Iqbolshoh tomonidan qurilmoqda. Ajoyib narsalar kutilmoqda!",
+                "feature1-title": "Zamonaviy Dizayn",
+                "feature1-desc": "Silliq animatsiyalar va moslashuvchan tartib bilan zamonaviy dizayn",
+                "feature2-title": "Mobil Moslashuvchan",
+                "feature2-desc": "Smartfondan kompyutergacha barcha qurilmalar uchun moslashtirilgan",
+                "feature3-title": "Tez Ishlash",
+                "feature3-desc": "Tezlik va silliq foydalanuvchi tajribasi uchun optimallashtirilgan",
+                "footer-text": "© 2023 iqbolshoh.uz | Barcha huquqlar himoyalangan"
+            },
+            "ru": {
+                "title": "Сайт в разработке",
+                "description": "Этот сайт в настоящее время разрабатывается Iqbolshoh. Ожидайте чего-то удивительного!",
+                "feature1-title": "Современный Дизайн",
+                "feature1-desc": "Современный дизайн с плавной анимацией и адаптивным макетом",
+                "feature2-title": "Адаптивный",
+                "feature2-desc": "Идеально адаптирован для всех устройств от смартфонов до компьютеров",
+                "feature3-title": "Быстрая Работа",
+                "feature3-desc": "Оптимизирован для скорости и плавного взаимодействия с пользователем",
+                "footer-text": "© 2023 iqbolshoh.uz | Все права защищены"
+            },
+            "tj": {
+                "title": "Вебсайт дар ҳоли сохта шуда истодааст",
+                "description": "Ин вебсайт ҳозир аз ҷониби Iqbolshoh сохта мешавад. Барои чизҳои аҷиб интизор шавед!",
+                "feature1-title": "Тарҳи Ҳозиразамон",
+                "feature1-desc": "Тарҳи ҳозиразамон бо аниматсияҳои равон ва сохти мутобиқшаванда",
+                "feature2-title": "Мутобиқ Барои Мобил",
+                "feature2-desc": "Барои ҳамаи дастгоҳҳо аз телефонҳо то компютерҳо мутобиқ карда шудааст",
+                "feature3-title": "Коркарди Зуд",
+                "feature3-desc": "Барои суръат ва таҷрибаи корбарии равон оптимал карда шудааст",
+                "footer-text": "© 2023 iqbolshoh.uz | Ҳамаи ҳуқуқҳо ҳифз шудаанд"
+            }
+        };
+
+        // DOM elements
+        const selector = document.getElementById("languageSelector");
+        const titleEl = document.getElementById("title");
+        const descEl = document.getElementById("description");
+        const feature1Title = document.getElementById("feature1-title");
+        const feature1Desc = document.getElementById("feature1-desc");
+        const feature2Title = document.getElementById("feature2-title");
+        const feature2Desc = document.getElementById("feature2-desc");
+        const feature3Title = document.getElementById("feature3-title");
+        const feature3Desc = document.getElementById("feature3-desc");
+        const footerText = document.getElementById("footer-text");
+
+        function loadLang(lang) {
+            const content = languageContent[lang] || languageContent["en"];
+            titleEl.textContent = content.title;
+            descEl.textContent = content.description;
+            feature1Title.textContent = content["feature1-title"];
+            feature1Desc.textContent = content["feature1-desc"];
+            feature2Title.textContent = content["feature2-title"];
+            feature2Desc.textContent = content["feature2-desc"];
+            feature3Title.textContent = content["feature3-title"];
+            feature3Desc.textContent = content["feature3-desc"];
+            footerText.textContent = content["footer-text"];
+        }
+
+        selector.addEventListener("change", () => {
+            loadLang(selector.value);
+        });
+
+        // Countdown timer
+        function updateCountdown() {
+            const now = new Date();
+            const launchDate = new Date(now.getFullYear(), now.getMonth() + 1, 1); // Set to 1st of next month
+            const diff = launchDate - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = days.toString().padStart(2, '0');
+            document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+
+            // Update progress bar randomly (for demo)
+            const progress = Math.min(65 + Math.random() * 5, 95);
+            document.querySelector(".progress-fill").style.width = `${progress}%`;
+            document.getElementById("progress-percent").textContent = `${Math.floor(progress)}%`;
+        }
+
+        // Initialize
+        loadLang('en');
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
 </body>
 
 </html>
