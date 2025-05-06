@@ -1,0 +1,50 @@
+{
+    "en": {
+        "title": "Website under development",
+        "description": "This site is currently being built by Iqbolshoh. Stay tuned for something amazing!",
+        "feature1-title": "Modern Design",
+        "feature1-desc": "Cutting-edge design with smooth animations and responsive layout",
+        "feature2-title": "Mobile Friendly",
+        "feature2-desc": "Perfectly adapted for all devices from smartphones to desktops",
+        "feature3-title": "Fast Performance",
+        "feature3-desc": "Optimized for speed and smooth user experience",
+        "footer-text": "© 2023 iqbolshoh.uz | All Rights Reserved",
+        "Development Progress": "Development Progress"
+    },
+    "uz": {
+        "title": "Sayt ishlab chiqilmoqda",
+        "description": "Ushbu sayt Iqbolshoh tomonidan ishlab chiqilmoqda. Tez orada ajoyib narsa kutmoqda!",
+        "feature1-title": "Zamonaviy Dizayn",
+        "feature1-desc": "Silliq animatsiyalar va moslashuvchan tuzilishga ega ilg‘or dizayn",
+        "feature2-title": "Mobil Moslik",
+        "feature2-desc": "Smartfonlardan tortib kompyuterlargacha barcha qurilmalarga moslashtirilgan",
+        "feature3-title": "Tez Ishlash",
+        "feature3-desc": "Tezlik va qulaylik uchun optimallashtirilgan",
+        "footer-text": "© 2023 iqbolshoh.uz | Barcha huquqlar himoyalangan",
+        "Development Progress": "Ishlab chiqish jarayoni"
+    },
+    "ru": {
+        "title": "Сайт в разработке",
+        "description": "Этот сайт разрабатывается Икболшохом. Ожидайте нечто удивительное!",
+        "feature1-title": "Современный дизайн",
+        "feature1-desc": "Передовой дизайн с плавной анимацией и адаптивной версткой",
+        "feature2-title": "Удобен для мобильных",
+        "feature2-desc": "Полностью адаптирован для всех устройств — от смартфонов до компьютеров",
+        "feature3-title": "Быстрая производительность",
+        "feature3-desc": "Оптимизировано для скорости и плавного пользовательского опыта",
+        "footer-text": "© 2023 iqbolshoh.uz | Все права защищены",
+        "Development Progress": "Ход разработки"
+    },
+    "tj": {
+        "title": "Сомона дар ҳоли сохтмон аст",
+        "description": "Ин сомона аз ҷониби Iqbolshoh сохта шуда истодааст. Барои чизе аҷиб интизор шавед!",
+        "feature1-title": "Дизайни муосир",
+        "feature1-desc": "Дизайни замонавӣ бо аниматсияи нарм ва тарҳи ҷавобгӯ",
+        "feature2-title": "Мутобиқ ба мобил",
+        "feature2-desc": "Мусоидат ба ҳамаи дастгоҳҳо — аз телефон то компютер",
+        "feature3-title": "Иҷрои зуд",
+        "feature3-desc": "Барои суръат ва таҷрибаи хуби истифодабаранда оптимизатсия шудааст",
+        "footer-text": "© 2023 iqbolshoh.uz | Ҳамаи ҳуқуқҳо ҳифз шудаанд",
+        "Development Progress": "Раванди рушд"
+    }
+}
