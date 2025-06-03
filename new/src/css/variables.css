@@ -1,0 +1,22 @@
+/* variables.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
+
+:root {
+    --primary-color: #14b8a6;
+    --primary-hover: #0d9488;
+
+    --secondary-color: #f59e0b;
+    --secondary-hover: #d97706;
+
+    --error-color: #ef4444;
+    --success-color: #22c55e;
+
+    --white-color: #ffffff;
+    --bg-color: #f9fafb;
+    --dark-color: #0f172a;
+    --text-color: #111827;
+    --light-text: #6b7280;
+
+    --font-primary: 'Inter', sans-serif;
+    --font-heading: 'Poppins', sans-serif;
+}
