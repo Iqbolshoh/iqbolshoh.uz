@@ -1,0 +1,96 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Github, Linkedin, Send, Instagram, Code, Heart } from 'lucide-react';
+import { personalInfo } from '../../data/content';
+
+export const Footer: React.FC = () => {
+  const { t } = useTranslation();
+
+  return (
+    <footer className="bg-gray-900 dark:bg-dark-900 text-white">
+      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
+          <div className="space-y-8">
+            <div className="flex items-center space-x-2">
+              <Code className="h-8 w-8 text-primary-400" />
+              <span className="font-bold text-xl">Iqbolshoh</span>
+            </div>
+            <p className="text-gray-300 max-w-md">
+              Building modern digital solutions with passion and precision. 
+              Let's turn your ideas into reality.
+            </p>
+            <div className="flex space-x-6">
+              <a
+                href={personalInfo.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-primary-400 transition-colors"
+              >
+                <Github className="h-6 w-6" />
+              </a>
+              <a
+                href={personalInfo.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-primary-400 transition-colors"
+              >
+                <Linkedin className="h-6 w-6" />
+              </a>
+              <a
+                href={personalInfo.social.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-primary-400 transition-colors"
+              >
+                <Send className="h-6 w-6" />
+              </a>
+              <a
+                href={personalInfo.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-primary-400 transition-colors"
+              >
+                <Instagram className="h-6 w-6" />
+              </a>
+            </div>
+          </div>
+          
+          <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+            <div className="md:grid md:grid-cols-2 md:gap-8">
+              <div>
+                <h3 className="text-sm font-semibold leading-6">Navigation</h3>
+                <ul className="mt-6 space-y-4">
+                  <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">{t('nav.home')}</Link></li>
+                  <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">{t('nav.about')}</Link></li>
+                  <li><Link to="/portfolio" className="text-gray-300 hover:text-white transition-colors">{t('nav.portfolio')}</Link></li>
+                  <li><Link to="/services" className="text-gray-300 hover:text-white transition-colors">{t('nav.services')}</Link></li>
+                </ul>
+              </div>
+              <div className="mt-10 md:mt-0">
+                <h3 className="text-sm font-semibold leading-6">Resources</h3>
+                <ul className="mt-6 space-y-4">
+                  <li><Link to="/blog" className="text-gray-300 hover:text-white transition-colors">{t('nav.blog')}</Link></li>
+                  <li><Link to="/contact" className="text-gray-300 hover:text-white transition-colors">{t('nav.contact')}</Link></li>
+                  <li><a href="mailto:iqbolshoh@gmail.com" className="text-gray-300 hover:text-white transition-colors">{t('contact.email')}</a></li>
+                  <li><a href="tel:+998888821221" className="text-gray-300 hover:text-white transition-colors">{t('contact.phone')}</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-16 border-t border-gray-800 dark:border-dark-700 pt-8 sm:mt-20 lg:mt-24">
+          <div className="flex flex-col sm:flex-row justify-between items-center">
+            <p className="text-gray-400">
+              © 2025 Iqbolshoh Ilhomjonov. {t('common.allRightsReserved')}
+            </p>
+            <p className="flex items-center text-gray-400 mt-4 sm:mt-0">
+              {t('common.madeWithLove')} <Heart className="h-4 w-4 text-red-500 mx-1" /> {t('common.fromSamarkand')}
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
