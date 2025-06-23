@@ -253,28 +253,6 @@ export const Contact: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Map Section (Optional - you can add a real map here) */}
-      <section className="py-20 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <Card className="p-12 bg-gradient-to-br from-primary-600 to-accent-600 text-white">
-              <MapPin className="h-16 w-16 mx-auto mb-6 opacity-80" />
-              <h2 className="text-3xl font-bold mb-4">Based in Samarkand</h2>
-              <p className="text-xl text-primary-100 max-w-2xl mx-auto">
-                Located in the historic city of Samarkand, Uzbekistan. 
-                Available for remote work worldwide and local meetings in Samarkand.
-              </p>
-            </Card>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 };

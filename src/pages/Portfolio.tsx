@@ -144,35 +144,6 @@ export const Portfolio: React.FC = () => {
           )}
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary-600 to-accent-600">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              Like What You See?
-            </h2>
-            <p className="mt-4 text-xl text-primary-100">
-              Let's discuss your next project and make it happen
-            </p>
-            <div className="mt-8">
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="bg-white text-primary-600 hover:bg-gray-100"
-                href="/contact"
-              >
-                Start a Project
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 };

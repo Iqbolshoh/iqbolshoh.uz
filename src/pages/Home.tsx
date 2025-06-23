@@ -236,35 +236,6 @@ export const Home: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary-600 via-primary-700 to-accent-600 dark:from-primary-700 dark:to-accent-700 overflow-hidden">
-        <div className="absolute inset-0 bg-light-pattern dark:bg-dark-pattern opacity-10"></div>
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t('common.readyToStart')}
-            </h2>
-            <p className="mt-4 text-xl text-primary-100">
-              {t('common.workTogether')}
-            </p>
-            <div className="mt-8">
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="bg-white text-primary-600 hover:bg-gray-100 border-white shadow-glow-red-lg"
-              >
-                <Link to="/contact">{t('common.getInTouch')}</Link>
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 };

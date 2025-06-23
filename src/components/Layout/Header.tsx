@@ -35,25 +35,28 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
-        <div className="hidden lg:flex lg:items-center lg:space-x-10">
+        <div className="hidden lg:flex lg:items-center lg:space-x-6">
           {navigation.map((item) => (
             <Link
               key={item.name}
               to={item.href}
               className={`text-sm font-semibold transition-colors ${location.pathname === item.href
-                ? 'text-primary-600'
-                : 'text-gray-700 hover:text-primary-600'
+                  ? 'text-primary-600'
+                  : 'text-gray-700 hover:text-primary-600'
                 }`}
             >
               {item.name}
             </Link>
           ))}
-          <Link
-            to="/portfolio"
-            className="rounded-lg bg-gradient-to-r from-primary-600 to-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-md hover:shadow-glow-red transition-all"
-          >
-            {t('nav.portfolio')}
-          </Link>
+          <div className="flex items-center space-x-4 ml-4">
+            <LanguageSwitcher />
+            <Link
+              to="/portfolio"
+              className="rounded-lg bg-gradient-to-r from-primary-600 to-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-md hover:shadow-glow-red transition-all"
+            >
+              {t('nav.portfolio')}
+            </Link>
+          </div>
         </div>
       </nav>
 
@@ -72,7 +75,7 @@ export const Header: React.FC = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 z-50 h-full w-80 bg-white p-6 shadow-lg"
+              className="fixed top-0 right-0 z-50 h-full w-64 sm:w-80 bg-white p-6 shadow-lg"
             >
               <div className="flex items-center justify-between mb-6">
                 <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center space-x-2">
@@ -83,15 +86,15 @@ export const Header: React.FC = () => {
                   <X className="h-6 w-6" />
                 </button>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-2">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     to={item.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={`block px-4 py-2 rounded-md text-sm font-semibold transition-colors ${location.pathname === item.href
-                      ? 'bg-primary-100 text-primary-700'
-                      : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-primary-100 text-primary-700'
+                        : 'text-gray-700 hover:bg-gray-100'
                       }`}
                   >
                     {item.name}
