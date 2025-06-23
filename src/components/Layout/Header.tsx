@@ -19,9 +19,16 @@ export const Header: React.FC = () => {
     { name: t('nav.contact'), href: '/contact' },
   ];
 
+  // Animation variants for mobile menu items
+  const menuItemVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 },
+  };
+
   return (
-    <header className="fixed w-full top-0 z-50 bg-white backdrop-blur-md border-b border-gray-200">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 md:p-6 lg:px-8 bg-white lg:bg-transparent">
+    <header className="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 md:p-6 lg:px-8">
         <div className="flex flex-1 items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
             <img src="/iqbolshoh.svg" alt="Iqbolshoh Logo" className="h-9 w-9" />
@@ -31,30 +38,41 @@ export const Header: React.FC = () => {
           </Link>
           <div className="flex items-center space-x-3 lg:hidden">
             <LanguageSwitcher />
-            <button onClick={() => setMobileMenuOpen(true)} className="p-2 text-gray-700">
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="p-2 text-gray-700 rounded-full hover:bg-gray-100 transition-colors"
+              aria-label="Open menu"
+            >
               <Menu className="h-6 w-6" />
             </button>
           </div>
         </div>
 
-        <div className="hidden lg:flex lg:items-center lg:space-x-6">
+        <div className="hidden lg:flex lg:items-center lg:space-x-8">
           {navigation.map((item) => (
             <Link
               key={item.name}
               to={item.href}
-              className={`text-sm font-semibold transition-colors ${location.pathname === item.href
-                  ? 'text-primary-600'
-                  : 'text-gray-700 hover:text-primary-600'
+              className={`relative px-1 py-2 text-sm font-medium transition-colors ${location.pathname === item.href
+                ? 'text-primary-600'
+                : 'text-gray-700 hover:text-primary-600'
                 }`}
             >
               {item.name}
+              {location.pathname === item.href && (
+                <motion.span
+                  layoutId="activeNav"
+                  className="absolute left-0 bottom-0 h-0.5 w-full bg-primary-600"
+                  transition={{ duration: 0.3 }}
+                />
+              )}
             </Link>
           ))}
           <div className="flex items-center space-x-4 ml-4">
             <LanguageSwitcher />
             <Link
               to="/portfolio"
-              className="rounded-lg bg-gradient-to-r from-primary-600 to-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-md hover:shadow-glow-red transition-all"
+              className="rounded-md bg-gradient-to-r from-primary-600 to-primary-700 px-4 py-2 text-sm font-medium text-white shadow-md hover:shadow-glow-red transition-all"
             >
               {t('nav.portfolio')}
             </Link>
@@ -69,51 +87,77 @@ export const Header: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
               onClick={() => setMobileMenuOpen(false)}
             />
+
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 z-50 h-full w-64 sm:w-80 bg-white p-6 shadow-lg"
+              transition={{ type: 'spring', stiffness: 400, damping: 40 }}
+              className="fixed right-0 top-0 z-50 w-full h-full bg-white"
             >
-              <div className="flex items-center justify-between mb-6">
-                <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center space-x-2">
-                  <img src="/iqbolshoh.svg" alt="Logo" className="h-8 w-8" />
-                  <span className="text-lg font-bold text-gray-900">
-                    Iqbolshoh<span className="text-primary-600"> dev</span>
-                  </span>
-                </Link>
-                <button onClick={() => setMobileMenuOpen(false)} className="p-2 text-gray-700">
-                  <X className="h-6 w-6" />
-                </button>
-              </div>
-              <div className="space-y-2">
-                {navigation.map((item) => (
+              <div className="h-full flex flex-col">
+                <div className="flex items-center justify-between mb-1">
                   <Link
-                    key={item.name}
-                    to={item.href}
+                    to="/"
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`block px-4 py-2 rounded-md text-sm font-semibold transition-colors ${location.pathname === item.href
-                        ? 'bg-primary-100 text-primary-700'
-                        : 'text-gray-700 hover:bg-gray-100'
-                      }`}
+                    className="flex items-center space-x-2"
                   >
-                    {item.name}
+                    <img src="/iqbolshoh.svg" alt="Logo" className="h-8 w-8" />
+                    <span className="text-lg font-bold text-gray-900">
+                      Iqbolshoh<span className="text-primary-600"> dev</span>
+                    </span>
                   </Link>
-                ))}
-              </div>
-              <div className="mt-6 space-y-3">
-                <LanguageSwitcher />
-                <Link
-                  to="/portfolio"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block w-full text-center rounded-md bg-gradient-to-r from-primary-600 to-primary-700 px-4 py-2 text-sm font-semibold text-white"
-                >
-                  {t('nav.portfolio')}
-                </Link>
+                  <button
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                    aria-label="Close menu"
+                  >
+                    <X className="h-7 w-7 text-gray-700" />
+                  </button>
+                </div>
+
+                <nav className="w-full flex-1 flex flex-col space-y-4 bg-white p-4 rounded-xl">
+                  {navigation.map((item, index) => (
+                    <motion.div
+                      key={item.name}
+                      variants={menuItemVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      transition={{ delay: index * 0.08 }}
+                    >
+                      <Link
+                        to={item.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={`block px-4 py-3 rounded-lg text-lg font-medium transition-all duration-200 ${location.pathname === item.href
+                          ? 'bg-primary-50 text-primary-700 shadow-sm'
+                          : 'text-gray-900 hover:bg-gray-50 hover:shadow-sm'
+                          }`}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  ))}
+                  <div className="mt-auto pt-6 space-y-4">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      <Link
+                        to="/portfolio"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block w-full text-center rounded-lg bg-gradient-to-r from-primary-600 to-primary-700 px-4 py-3 text-lg font-medium text-white shadow-md hover:shadow-lg transition-all"
+                      >
+                        {t('nav.portfolio')}
+                      </Link>
+                    </motion.div>
+                  </div>
+                </nav>
               </div>
             </motion.div>
           </>
