@@ -25,7 +25,9 @@ export const Header: React.FC = () => {
         <div className="flex flex-1 items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
             <img src="/iqbolshoh.svg" alt="Iqbolshoh Logo" className="h-9 w-9" />
-            <span className="text-lg font-bold text-gray-900">Iqbolshoh</span>
+            <span className="text-lg font-bold text-gray-900">
+              Iqbolshoh<span className="text-primary-600"> dev</span>
+            </span>
           </Link>
           <div className="flex items-center space-x-3 lg:hidden">
             <LanguageSwitcher />
@@ -80,7 +82,9 @@ export const Header: React.FC = () => {
               <div className="flex items-center justify-between mb-6">
                 <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center space-x-2">
                   <img src="/iqbolshoh.svg" alt="Logo" className="h-8 w-8" />
-                  <span className="text-lg font-bold text-gray-900">Iqbolshoh</span>
+                  <span className="text-lg font-bold text-gray-900">
+                    Iqbolshoh<span className="text-primary-600"> dev</span>
+                  </span>
                 </Link>
                 <button onClick={() => setMobileMenuOpen(false)} className="p-2 text-gray-700">
                   <X className="h-6 w-6" />
