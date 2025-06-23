@@ -1,19 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Github, Linkedin, Send, Instagram, Code, Heart } from 'lucide-react';
+import { Github, Linkedin, Send, Instagram, Heart } from 'lucide-react';
 import { personalInfo } from '../../data/content';
 
 export const Footer: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-gray-900 dark:bg-dark-900 text-white">
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <footer className="bg-gray-900 dark:bg-dark-950 text-white relative overflow-hidden">
+      <div className="absolute inset-0 bg-logo-pattern opacity-5"></div>
+      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8 relative z-10">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8">
-            <div className="flex items-center space-x-2">
-              <Code className="h-8 w-8 text-primary-400" />
+            <div className="flex items-center space-x-3">
+              <img 
+                src="/iqbolshoh.svg" 
+                alt="Iqbolshoh Logo" 
+                className="h-10 w-10 filter brightness-0 invert"
+              />
               <span className="font-bold text-xl">Iqbolshoh</span>
             </div>
             <p className="text-gray-300 max-w-md">
@@ -25,7 +30,7 @@ export const Footer: React.FC = () => {
                 href={personalInfo.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary-400 transition-colors"
+                className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:scale-110"
               >
                 <Github className="h-6 w-6" />
               </a>
@@ -33,7 +38,7 @@ export const Footer: React.FC = () => {
                 href={personalInfo.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary-400 transition-colors"
+                className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:scale-110"
               >
                 <Linkedin className="h-6 w-6" />
               </a>
@@ -41,7 +46,7 @@ export const Footer: React.FC = () => {
                 href={personalInfo.social.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary-400 transition-colors"
+                className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:scale-110"
               >
                 <Send className="h-6 w-6" />
               </a>
@@ -49,7 +54,7 @@ export const Footer: React.FC = () => {
                 href={personalInfo.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary-400 transition-colors"
+                className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:scale-110"
               >
                 <Instagram className="h-6 w-6" />
               </a>
@@ -59,7 +64,7 @@ export const Footer: React.FC = () => {
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold leading-6">Navigation</h3>
+                <h3 className="text-sm font-semibold leading-6 text-primary-400">Navigation</h3>
                 <ul className="mt-6 space-y-4">
                   <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">{t('nav.home')}</Link></li>
                   <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">{t('nav.about')}</Link></li>
@@ -68,7 +73,7 @@ export const Footer: React.FC = () => {
                 </ul>
               </div>
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold leading-6">Resources</h3>
+                <h3 className="text-sm font-semibold leading-6 text-primary-400">Resources</h3>
                 <ul className="mt-6 space-y-4">
                   <li><Link to="/blog" className="text-gray-300 hover:text-white transition-colors">{t('nav.blog')}</Link></li>
                   <li><Link to="/contact" className="text-gray-300 hover:text-white transition-colors">{t('nav.contact')}</Link></li>
@@ -86,7 +91,7 @@ export const Footer: React.FC = () => {
               © 2025 Iqbolshoh Ilhomjonov. {t('common.allRightsReserved')}
             </p>
             <p className="flex items-center text-gray-400 mt-4 sm:mt-0">
-              {t('common.madeWithLove')} <Heart className="h-4 w-4 text-red-500 mx-1" /> {t('common.fromSamarkand')}
+              {t('common.madeWithLove')} <Heart className="h-4 w-4 text-primary-500 mx-1 animate-pulse" /> {t('common.fromSamarkand')}
             </p>
           </div>
         </div>
