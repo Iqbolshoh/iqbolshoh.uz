@@ -1,14 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
-  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
       },
       colors: {
-        // Primary colors based on logo red - improved for dark mode
+        // Primary colors based on logo red
         primary: {
           50: '#fef2f2',
           100: '#fee2e2',
@@ -21,7 +20,7 @@ export default {
           800: '#991b1b',
           900: '#7f1d1d',
           950: '#450a0a',
-        },
+        },  
         // Accent gold colors
         accent: {
           50: '#fffbeb',
@@ -36,33 +35,12 @@ export default {
           900: '#78350f',
           950: '#451a03',
         },
-        // Improved dark mode colors with better contrast
-        dark: {
-          50: '#f8fafc',
-          100: '#f1f5f9',
-          200: '#e2e8f0',
-          300: '#cbd5e1',
-          400: '#94a3b8',
-          500: '#64748b',
-          600: '#475569',
-          700: '#334155',
-          800: '#1e293b',
-          900: '#0f172a',
-          950: '#020617',
-        },
-        // Better dark backgrounds
-        'dark-bg': {
-          primary: '#0a0a0b',
-          secondary: '#111827',
-          tertiary: '#1f2937',
-        },
         // Logo specific colors
         logo: {
           red: '#FF0000',
-          'red-dark': '#CC0000',
           'red-light': '#FF3333',
           black: '#000000',
-        }
+        },
       },
       animation: {
         'fade-in': 'fade-in 0.5s ease-out',
@@ -106,23 +84,20 @@ export default {
         'slideOutRight': {
           '0%': { transform: 'translateX(0)', opacity: '1' },
           '100%': { transform: 'translateX(100%)', opacity: '0' },
-        }
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'dark-pattern': "url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23FF0000\" fill-opacity=\"0.02\"%3E%3Cpath d=\"M30 30c0-16.569 13.431-30 30-30v60c-16.569 0-30-13.431-30-30z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')",
         'light-pattern': "url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"%23FF0000\" fill-opacity=\"0.03\"%3E%3Cpath d=\"M20 20c0-11.046 8.954-20 20-20v40c-11.046 0-20-8.954-20-20z\"/%3E%3C/g%3E%3C/svg%3E')",
       },
       boxShadow: {
         'glow-red': '0 0 20px rgba(255, 0, 0, 0.3)',
         'glow-red-lg': '0 0 40px rgba(255, 0, 0, 0.4)',
-        'dark-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1)',
-        'dark-xl': '0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1)',
       },
       backdropBlur: {
         xs: '2px',
-      }
+      },
     },
   },
   plugins: [],

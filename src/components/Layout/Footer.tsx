@@ -8,21 +8,21 @@ export const Footer: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-gray-900 dark:bg-dark-950 text-white relative overflow-hidden">
+    <footer className="bg-gray-900 text-white relative overflow-hidden">
       <div className="absolute inset-0 bg-logo-pattern opacity-5"></div>
       <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8 relative z-10">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8">
             <div className="flex items-center space-x-3">
-              <img 
-                src="/iqbolshoh.svg" 
-                alt="Iqbolshoh Logo" 
-                className="h-10 w-10 filter brightness-0 invert"
+              <img
+                src="/iqbolshoh.svg"
+                alt="Iqbolshoh Logo"
+                className="h-10 w-10 bg-white rounded-md transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-glow-red"
               />
               <span className="font-bold text-xl">Iqbolshoh</span>
             </div>
             <p className="text-gray-300 max-w-md">
-              Building modern digital solutions with passion and precision. 
+              Building modern digital solutions with passion and precision.
               Let's turn your ideas into reality.
             </p>
             <div className="flex space-x-6">
@@ -60,7 +60,7 @@ export const Footer: React.FC = () => {
               </a>
             </div>
           </div>
-          
+
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
@@ -84,8 +84,8 @@ export const Footer: React.FC = () => {
             </div>
           </div>
         </div>
-        
-        <div className="mt-16 border-t border-gray-800 dark:border-dark-700 pt-8 sm:mt-20 lg:mt-24">
+
+        <div className="mt-16 border-t border-gray-800 pt-8 sm:mt-20 lg:mt-24">
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <p className="text-gray-400">
               © 2025 Iqbolshoh Ilhomjonov. {t('common.allRightsReserved')}
