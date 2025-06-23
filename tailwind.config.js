@@ -7,42 +7,42 @@ export default {
         sans: ['Poppins', 'sans-serif'],
       },
       colors: {
-        // Primary colors based on logo red
+        // Primary colors based on logo red (#FF0000)
         primary: {
-          50: '#fef2f2',
-          100: '#fee2e2',
-          200: '#fecaca',
-          300: '#fca5a5',
-          400: '#f87171',
-          500: '#ef4444',
-          600: '#dc2626',
-          700: '#b91c1c',
-          800: '#991b1b',
-          900: '#7f1d1d',
-          950: '#450a0a',
-        },  
-        // Accent gold colors
-        accent: {
-          50: '#fffbeb',
-          100: '#fef3c7',
-          200: '#fde68a',
-          300: '#fcd34d',
-          400: '#fbbf24',
-          500: '#f59e0b',
-          600: '#d97706',
-          700: '#b45309',
-          800: '#92400e',
-          900: '#78350f',
-          950: '#451a03',
+          50: '#fff0f0',
+          100: '#ffdddd',
+          200: '#ffc0c0',
+          300: '#ff9494',
+          400: '#ff5757',
+          500: '#ff0000', // Exact logo red
+          600: '#e60000',
+          700: '#c50000',
+          800: '#a30000',
+          900: '#870000',
+          950: '#4a0000',
         },
-        // Logo specific colors
+        // Secondary/neutral colors
+        secondary: {
+          50: '#f6f6f6',
+          100: '#e7e7e7',
+          200: '#d1d1d1',
+          300: '#b0b0b0',
+          400: '#888888',
+          500: '#6d6d6d',
+          600: '#5d5d5d',
+          700: '#4f4f4f',
+          800: '#454545',
+          900: '#3d3d3d',
+          950: '#000000', // Exact logo black
+        },
+        // Logo specific colors (direct references)
         logo: {
           red: '#FF0000',
-          'red-light': '#FF3333',
           black: '#000000',
         },
       },
       animation: {
+        // Keep your existing animations
         'fade-in': 'fade-in 0.5s ease-out',
         'slide-up': 'slide-up 0.6s ease-out',
         'float': 'float 3s ease-in-out infinite',
@@ -54,6 +54,7 @@ export default {
         'slide-out-right': 'slideOutRight 0.3s ease-in',
       },
       keyframes: {
+        // Keep your existing keyframes
         'fade-in': {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },

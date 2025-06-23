@@ -1,3 +1,6 @@
+// import React from 'react';
+// import { Code, Laptop};
+
 export const personalInfo = {
   name: "Iqbolshoh Ilhomjonov",
   title: "Full-Stack Developer",
@@ -5,12 +8,12 @@ export const personalInfo = {
   email: "iilhomjonov777@gmail.com",
   phone: "+998 (99) 779 93 33",
   bio: "A passionate Full-Stack Developer with over 3 years of experience in Laravel, React, and Node.js. 3rd-year Software Engineering student at Samarkand State University.",
-  avatar: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400",
+  avatar: "/images/iqbolshoh.jpg",
   social: {
     github: "https://github.com/iqbolshoh",
     linkedin: "https://linkedin.com/in/iqbolshoh",
     telegram: "https://t.me/iqbolshoh_777",
-    instagram: "https://instagram.com/iqbolshoh"
+    instagram: "https://instagram.com/iqbolshoh_777"
   }
 };
 
