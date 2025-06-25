@@ -41,7 +41,7 @@ export const Contact: React.FC = () => {
               Let's Work Together
             </h1>
             <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
-              Got a project in mind or just want to say Salaam? I'd love to hear from you. 
+              Got a project in mind or just want to say Salaam? I'd love to hear from you.
               Let's create something amazing together.
             </p>
           </motion.div>
@@ -77,7 +77,7 @@ export const Contact: React.FC = () => {
                       placeholder="Enter your full name"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                       Email Address *
@@ -93,7 +93,7 @@ export const Contact: React.FC = () => {
                       placeholder="your.email@example.com"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
                       Subject
@@ -108,7 +108,7 @@ export const Contact: React.FC = () => {
                       placeholder="What's this about?"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                       Message *
@@ -124,10 +124,10 @@ export const Contact: React.FC = () => {
                       placeholder="Tell me about your project..."
                     />
                   </div>
-                  
-                  <Button 
+
+                  <Button
                     type="submit"
-                    size="lg" 
+                    size="lg"
                     className="w-full"
                     icon={<Send className="h-5 w-5" />}
                   >
@@ -149,8 +149,8 @@ export const Contact: React.FC = () => {
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
                   <p className="text-gray-600 text-lg">
-                    I'm always excited to work on new projects and collaborate with 
-                    great people. Whether you have a project in mind or just want to chat, 
+                    I'm always excited to work on new projects and collaborate with
+                    great people. Whether you have a project in mind or just want to chat,
                     feel free to reach out!
                   </p>
                 </div>
@@ -164,7 +164,7 @@ export const Contact: React.FC = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900">Email</h3>
-                      <a 
+                      <a
                         href={`mailto:${personalInfo.email}`}
                         className="text-primary-600 hover:text-primary-700 transition-colors"
                       >
@@ -181,7 +181,7 @@ export const Contact: React.FC = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900">Phone</h3>
-                      <a 
+                      <a
                         href={`tel:${personalInfo.phone}`}
                         className="text-primary-600 hover:text-primary-700 transition-colors"
                       >
@@ -244,7 +244,7 @@ export const Contact: React.FC = () => {
                 <Card className="p-6 bg-gradient-to-r from-primary-50 to-accent-50">
                   <h3 className="font-semibold text-gray-900 mb-2">Quick Response Guarantee</h3>
                   <p className="text-gray-600">
-                    I typically respond to all inquiries within 24 hours. 
+                    I typically respond to all inquiries within 24 hours.
                     For urgent projects, feel free to call or message me directly.
                   </p>
                 </Card>

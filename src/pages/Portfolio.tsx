@@ -7,14 +7,14 @@ import { projects } from '../data/content';
 
 export const Portfolio: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('All');
-  
+
   const categories = ['All', 'Laravel', 'React', 'Full-Stack', 'SaaS'];
-  
-  const filteredProjects = activeFilter === 'All' 
-    ? projects 
-    : projects.filter(project => 
-        project.tech.some(tech => tech.toLowerCase().includes(activeFilter.toLowerCase()))
-      );
+
+  const filteredProjects = activeFilter === 'All'
+    ? projects
+    : projects.filter(project =>
+      project.tech.some(tech => tech.toLowerCase().includes(activeFilter.toLowerCase()))
+    );
 
   return (
     <div className="pt-16">
@@ -30,7 +30,7 @@ export const Portfolio: React.FC = () => {
               My Portfolio
             </h1>
             <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
-              A collection of projects that showcase my skills in full-stack development, 
+              A collection of projects that showcase my skills in full-stack development,
               from simple websites to complex SaaS platforms.
             </p>
           </motion.div>
@@ -45,11 +45,10 @@ export const Portfolio: React.FC = () => {
               <button
                 key={category}
                 onClick={() => setActiveFilter(category)}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                  activeFilter === category
-                    ? 'bg-white text-primary-600 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeFilter === category
+                  ? 'bg-white text-primary-600 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+                  }`}
               >
                 {category}
               </button>
@@ -100,11 +99,11 @@ export const Portfolio: React.FC = () => {
                         </Button>
                       </div>
                     </div>
-                    
+
                     <div className="p-6 flex flex-col flex-grow">
                       <h3 className="text-xl font-bold text-gray-900 mb-2">{project.name}</h3>
                       <p className="text-gray-600 mb-4 flex-grow">{project.description}</p>
-                      
+
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.tech.map((tech) => (
                           <span
@@ -115,7 +114,7 @@ export const Portfolio: React.FC = () => {
                           </span>
                         ))}
                       </div>
-                      
+
                       <div className="flex space-x-3">
                         <Button size="sm" href={project.liveDemo} className="flex-1">
                           View Project
@@ -130,7 +129,7 @@ export const Portfolio: React.FC = () => {
               ))}
             </motion.div>
           </AnimatePresence>
-          
+
           {filteredProjects.length === 0 && (
             <motion.div
               initial={{ opacity: 0 }}

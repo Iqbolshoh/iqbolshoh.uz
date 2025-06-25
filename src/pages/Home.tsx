@@ -9,7 +9,7 @@ import { personalInfo, techStack, projects } from '../data/content';
 
 export const Home: React.FC = () => {
   const { t } = useTranslation();
-  
+
   const stats = [
     { label: t('common.yearsExperience'), value: '3+', icon: Star },
     { label: t('common.projectsCompleted'), value: '50+', icon: Award },
@@ -23,7 +23,7 @@ export const Home: React.FC = () => {
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-accent-50 py-20 sm:py-32">
         <div className="absolute inset-0 bg-light-pattern opacity-30"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-accent-500/5"></div>
-        
+
         <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-12 xl:gap-x-8">
             <motion.div
@@ -35,25 +35,25 @@ export const Home: React.FC = () => {
               <div className="flex items-center space-x-2 mb-4">
                 <div className="h-2 w-2 bg-accent-500 rounded-full animate-pulse"></div>
               </div>
-              
+
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-5xl xl:text-6xl">
                 {t('hero.greeting')}{' '}
                 <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
                   {t('hero.name')}
                 </span>{' '}
               </h1>
-              
+
               <p className="mt-6 text-lg leading-8 text-gray-600">
                 {t('hero.description')}
               </p>
-              
+
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button size="lg" icon={<ArrowRight className="h-5 w-5" />} className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-glow-red">
                   <Link to="/portfolio">{t('hero.viewPortfolio')}</Link>
                 </Button>
-                <Button 
-                  variant="outline" 
-                  size="lg" 
+                <Button
+                  variant="outline"
+                  size="lg"
                   icon={<Download className="h-5 w-5" />}
                   href="/resume.pdf"
                   className="border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white"
@@ -62,7 +62,7 @@ export const Home: React.FC = () => {
                 </Button>
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -79,14 +79,17 @@ export const Home: React.FC = () => {
                 </div>
                 <div className="absolute -bottom-4 -right-4 bg-white rounded-full p-4 shadow-lg border-2 border-primary-200">
                   <div className="flex space-x-1">
-                    {techStack.slice(0, 3).map((tech, index) => (
-                      <div key={tech.name} className="text-2xl animate-float" style={{ animationDelay: `${index * 0.5}s` }}>
-                        {tech.icon}
-                      </div>
-                    ))}
+                    {techStack.slice(0, 3).map((tech, index) => {
+                      const Icon = tech.icon; // Get the icon component
+                      return (
+                        <div key={tech.name} className="text-2xl animate-float" style={{ animationDelay: `${index * 0.5}s` }}>
+                          <Icon className="h-6 w-6 text-primary-600" />
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
-                
+
                 {/* Floating logo elements */}
                 <div className="absolute -top-6 -left-6 animate-bounce-slow">
                   <img src="/images/logos/iqbolshoh.svg" alt="Logo" className="h-8 w-8 opacity-20" />
@@ -113,22 +116,25 @@ export const Home: React.FC = () => {
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t('common.techStack')}</h2>
             <p className="mt-4 text-lg text-gray-600">{t('common.technologiesILove')}</p>
           </motion.div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {techStack.map((tech, index) => (
-              <motion.div
-                key={tech.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="p-6 text-center hover:bg-primary-50 transition-all duration-300 hover:shadow-glow-red group border-0">
-                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">{tech.icon}</div>
-                  <h3 className="font-semibold text-gray-900">{tech.name}</h3>
-                </Card>
-              </motion.div>
-            ))}
+            {techStack.map((tech, index) => {
+              const Icon = tech.icon; // Get the icon component
+              return (
+                <motion.div
+                  key={tech.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <Card className="p-6 text-center hover:bg-primary-50 transition-all duration-300 hover:shadow-glow-red group border-0">
+                    <Icon className="h-10 w-10 text-primary-600 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+                    <h3 className="font-semibold text-gray-900">{tech.name}</h3>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -169,7 +175,7 @@ export const Home: React.FC = () => {
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t('common.featuredProjects')}</h2>
             <p className="mt-4 text-lg text-gray-600">{t('common.someRecentWork')}</p>
           </motion.div>
-          
+
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             {projects.filter(p => p.featured).map((project, index) => (
               <motion.div
@@ -214,7 +220,7 @@ export const Home: React.FC = () => {
               </motion.div>
             ))}
           </div>
-          
+
           <div className="text-center">
             <Button variant="outline" size="lg" className="border-primary-600 text-primary-600 hover:bg-primary-600">
               <Link to="/portfolio">{t('common.viewAllProjects')}</Link>

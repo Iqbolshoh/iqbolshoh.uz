@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowRight, Tag } from 'lucide-react';
 import { Card } from '../components/UI/Card';
@@ -21,7 +20,7 @@ export const Blog: React.FC = () => {
               My Blog
             </h1>
             <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
-              Sharing what I learn, build, and believe in. From technical tutorials 
+              Sharing what I learn, build, and believe in. From technical tutorials
               to career insights and personal reflections on the developer journey.
             </p>
           </motion.div>
@@ -63,15 +62,15 @@ export const Blog: React.FC = () => {
                     <span>{blogPosts[0].readTime}</span>
                   </div>
                 </div>
-                
+
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
                   {blogPosts[0].title}
                 </h3>
-                
+
                 <p className="text-gray-600 mb-6">
                   {blogPosts[0].excerpt}
                 </p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-6">
                   {blogPosts[0].tags.map((tag) => (
                     <span
@@ -83,7 +82,7 @@ export const Blog: React.FC = () => {
                     </span>
                   ))}
                 </div>
-                
+
                 <Button icon={<ArrowRight className="h-4 w-4" />}>
                   Read More
                 </Button>
@@ -106,7 +105,7 @@ export const Blog: React.FC = () => {
             <h2 className="text-3xl font-bold text-gray-900">Latest Articles</h2>
             <p className="mt-4 text-lg text-gray-600">Recent thoughts and tutorials</p>
           </motion.div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.slice(1).map((post, index) => (
               <motion.div
@@ -133,15 +132,15 @@ export const Blog: React.FC = () => {
                         <span>{post.readTime}</span>
                       </div>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
                       {post.title}
                     </h3>
-                    
+
                     <p className="text-gray-600 mb-4 flex-grow">
                       {post.excerpt}
                     </p>
-                    
+
                     <div className="flex flex-wrap gap-2 mb-4">
                       {post.tags.map((tag) => (
                         <span
@@ -152,7 +151,7 @@ export const Blog: React.FC = () => {
                         </span>
                       ))}
                     </div>
-                    
+
                     <Button variant="outline" size="sm" className="self-start">
                       Read Article
                     </Button>
@@ -163,7 +162,7 @@ export const Blog: React.FC = () => {
           </div>
         </div>
       </section>
-      
+
     </div>
   );
 };

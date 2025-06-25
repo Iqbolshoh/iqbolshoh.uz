@@ -20,7 +20,7 @@ export const Services: React.FC = () => {
               My Services
             </h1>
             <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
-              Professional web development services tailored to bring your ideas to life. 
+              Professional web development services tailored to bring your ideas to life.
               From concept to deployment, I've got you covered.
             </p>
           </motion.div>
@@ -31,43 +31,46 @@ export const Services: React.FC = () => {
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="p-8 h-full flex flex-col">
-                  <div className="text-center mb-6">
-                    <div className="text-4xl mb-4">{service.icon}</div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{service.title}</h3>
-                    <p className="text-gray-600">{service.description}</p>
-                  </div>
-                  
-                  <div className="flex-grow">
-                    <ul className="space-y-3 mb-6">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center space-x-3">
-                          <Check className="h-5 w-5 text-accent-500 flex-shrink-0" />
-                          <span className="text-gray-700">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  <div className="border-t pt-6">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <Card className="p-8 h-full flex flex-col">
                     <div className="text-center mb-6">
-                      <div className="text-2xl font-bold text-primary-600">{service.price}</div>
+                      <Icon className="h-10 w-10 text-primary-600 mx-auto mb-4" />
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{service.title}</h3>
+                      <p className="text-gray-600">{service.description}</p>
                     </div>
-                    <Button className="w-full" icon={<ArrowRight className="h-4 w-4" />}>
-                      Get Started
-                    </Button>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
+
+                    <div className="flex-grow">
+                      <ul className="space-y-3 mb-6">
+                        {service.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-center space-x-3">
+                            <Check className="h-5 w-5 text-accent-500 flex-shrink-0" />
+                            <span className="text-gray-700">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="border-t pt-6">
+                      <div className="text-center mb-6">
+                        <div className="text-2xl font-bold text-primary-600">{service.price}</div>
+                      </div>
+                      <Button className="w-full" icon={<ArrowRight className="h-4 w-4" />}>
+                        Get Started
+                      </Button>
+                    </div>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -85,7 +88,7 @@ export const Services: React.FC = () => {
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">How I Work</h2>
             <p className="mt-4 text-lg text-gray-600">My proven process for delivering excellent results</p>
           </motion.div>
-          
+
           <div className="grid md:grid-cols-4 gap-8">
             {[
               {
@@ -94,7 +97,7 @@ export const Services: React.FC = () => {
                 description: "Understanding your requirements, goals, and target audience"
               },
               {
-                step: "02", 
+                step: "02",
                 title: "Planning",
                 description: "Creating a detailed project roadmap and technical architecture"
               },

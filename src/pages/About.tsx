@@ -56,15 +56,15 @@ export const About: React.FC = () => {
                 About Me
               </h1>
               <p className="mt-6 text-xl text-gray-600 leading-relaxed">
-                My name is <strong>Iqbolshoh Ilhomjonov</strong>, a 3rd-year Software Engineering 
-                student at Samarkand State University. I specialize in full-stack development 
+                My name is <strong>Iqbolshoh Ilhomjonov</strong>, a 3rd-year Software Engineering
+                student at Samarkand State University. I specialize in full-stack development
                 and love solving real-world problems with code.
               </p>
               <p className="mt-4 text-lg text-gray-600">
-                Born in Tajikistan, raised in Samarkand. I believe in continuous learning 
+                Born in Tajikistan, raised in Samarkand. I believe in continuous learning
                 and align my journey with Islamic values and discipline.
               </p>
-              
+
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="flex items-center space-x-2 text-gray-600">
                   <MapPin className="h-5 w-5 text-primary-600" />
@@ -80,7 +80,7 @@ export const About: React.FC = () => {
                 </div>
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -118,7 +118,7 @@ export const About: React.FC = () => {
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">What Makes Me Different</h2>
             <p className="mt-4 text-lg text-gray-600">Key highlights of my journey</p>
           </motion.div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {highlights.map((highlight, index) => (
               <motion.div
@@ -151,7 +151,7 @@ export const About: React.FC = () => {
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">My Journey</h2>
             <p className="mt-4 text-lg text-gray-600">The path that led me here</p>
           </motion.div>
-          
+
           <div className="relative">
             <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-primary-200"></div>
             <div className="space-y-12">
@@ -162,9 +162,8 @@ export const About: React.FC = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className={`relative flex items-center ${
-                    index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                  }`}
+                  className={`relative flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+                    }`}
                 >
                   <div className="flex-1">
                     <Card className={`p-6 ${index % 2 === 0 ? 'mr-8' : 'ml-8'}`}>
@@ -197,29 +196,32 @@ export const About: React.FC = () => {
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Technical Skills</h2>
               <div className="space-y-4">
-                {techStack.map((tech, index) => (
-                  <div key={tech.name} className="flex items-center space-x-4">
-                    <div className="text-2xl">{tech.icon}</div>
-                    <div className="flex-1">
-                      <div className="flex justify-between mb-1">
-                        <span className="font-medium text-gray-900">{tech.name}</span>
-                        <span className="text-sm text-gray-600">Advanced</span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileInView={{ width: "85%" }}
-                          transition={{ duration: 1, delay: index * 0.1 }}
-                          viewport={{ once: true }}
-                          className="bg-primary-600 h-2 rounded-full"
-                        ></motion.div>
+                {techStack.map((tech, index) => {
+                  const Icon = tech.icon;
+                  return (
+                    <div key={tech.name} className="flex items-center space-x-4">
+                      <Icon className="h-6 w-6 text-primary-600" />
+                      <div className="flex-1">
+                        <div className="flex justify-between mb-1">
+                          <span className="font-medium text-gray-900">{tech.name}</span>
+                          <span className="text-sm text-gray-600">Advanced</span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: "85%" }}
+                            transition={{ duration: 1, delay: index * 0.1 }}
+                            viewport={{ once: true }}
+                            className="bg-primary-600 h-2 rounded-full"
+                          ></motion.div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}

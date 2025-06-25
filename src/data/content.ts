@@ -1,5 +1,17 @@
-// import React from 'react';
-// import { Code, Laptop};
+import React from 'react';
+import { 
+  Server, 
+  Code, 
+  Database, 
+  Palette, 
+  FileCode, 
+  Monitor, 
+  Lock, 
+  Package, 
+  BookOpen, 
+  Star, 
+  ShoppingCart 
+} from 'lucide-react';
 
 export const personalInfo = {
   name: "Iqbolshoh Ilhomjonov",
@@ -18,12 +30,12 @@ export const personalInfo = {
 };
 
 export const techStack = [
-  { name: "Laravel", icon: "🚀" },
-  { name: "React", icon: "⚛️" },
-  { name: "Node.js", icon: "🟢" },
-  { name: "TypeScript", icon: "📘" },
-  { name: "Tailwind CSS", icon: "🎨" },
-  { name: "MySQL", icon: "🗄️" }
+  { name: "Laravel", icon: Server },
+  { name: "React", icon: Code },
+  { name: "Node.js", icon: FileCode },
+  { name: "TypeScript", icon: FileCode },
+  { name: "Tailwind CSS", icon: Palette },
+  { name: "MySQL", icon: Database }
 ];
 
 export const projects = [
@@ -63,7 +75,7 @@ export const services = [
   {
     id: 1,
     title: "Web Development",
-    icon: "💻",
+    icon: Monitor,
     description: "Building responsive websites, admin panels, and full-stack systems using Laravel and React.",
     price: "Starting from $200",
     features: ["Responsive Design", "Admin Panels", "Database Integration", "API Development"]
@@ -71,7 +83,7 @@ export const services = [
   {
     id: 2,
     title: "Frontend UI Design",
-    icon: "🎨",
+    icon: Palette,
     description: "Pixel-perfect, modern UI designs with Tailwind CSS and responsive layouts.",
     price: "Starting from $100",
     features: ["Figma to Code", "Responsive Design", "Interactive UI", "Performance Optimized"]
@@ -79,7 +91,7 @@ export const services = [
   {
     id: 3,
     title: "Backend & APIs",
-    icon: "🔐",
+    icon: Lock,
     description: "Secure, scalable APIs with Laravel, JWT authentication, and MySQL databases.",
     price: "Starting from $150",
     features: ["RESTful APIs", "JWT Authentication", "Database Design", "Security Implementation"]
@@ -87,7 +99,7 @@ export const services = [
   {
     id: 4,
     title: "WordPress CMS",
-    icon: "📦",
+    icon: Package,
     description: "Custom WordPress websites and themes for small businesses and blogs.",
     price: "Starting from $120",
     features: ["Custom Themes", "Plugin Development", "SEO Optimization", "Content Management"]
@@ -95,7 +107,7 @@ export const services = [
   {
     id: 5,
     title: "Mentorship",
-    icon: "🧠",
+    icon: BookOpen,
     description: "1-on-1 mentoring sessions for beginner developers in web development.",
     price: "$15/hour",
     features: ["Code Reviews", "Career Guidance", "Technical Skills", "Project Support"]
