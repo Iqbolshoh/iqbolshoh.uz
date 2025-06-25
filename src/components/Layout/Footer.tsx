@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
           <div className="space-y-8">
             <div className="flex items-center space-x-3">
               <img
-                src="/iqbolshoh.svg"
+                src="/images/logos/iqbolshoh.svg"
                 alt="Iqbolshoh Logo"
                 className="h-10 w-10 bg-white rounded-md transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-glow-red"
               />

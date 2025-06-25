@@ -8,7 +8,7 @@ export const personalInfo = {
   email: "iilhomjonov777@gmail.com",
   phone: "+998 (99) 779 93 33",
   bio: "A passionate Full-Stack Developer with over 3 years of experience in Laravel, React, and Node.js. 3rd-year Software Engineering student at Samarkand State University.",
-  avatar: "/images/iqbolshoh.jpg",
+  avatar: "/images/logos/iqbolshoh.jpg",
   social: {
     github: "https://github.com/iqbolshoh",
     linkedin: "https://linkedin.com/in/iqbolshoh",

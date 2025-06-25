@@ -31,7 +31,7 @@ export const Header: React.FC = () => {
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 md:p-6 lg:px-8">
         <div className="flex flex-1 items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
-            <img src="/iqbolshoh.svg" alt="Iqbolshoh Logo" className="h-9 w-9" />
+            <img src="/images/logos/iqbolshoh.svg" alt="Iqbolshoh Logo" className="h-9 w-9" />
             <span className="text-lg font-bold text-gray-900">
               Iqbolshoh<span className="text-primary-600"> dev</span>
             </span>
@@ -106,7 +106,7 @@ export const Header: React.FC = () => {
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center space-x-2"
                   >
-                    <img src="/iqbolshoh.svg" alt="Logo" className="h-8 w-8" />
+                    <img src="/images/logos/iqbolshoh.svg" alt="Logo" className="h-8 w-8" />
                     <span className="text-lg font-bold text-gray-900">
                       Iqbolshoh<span className="text-primary-600"> dev</span>
                     </span>
