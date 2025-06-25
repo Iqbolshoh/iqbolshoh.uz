@@ -36,7 +36,7 @@ export const Home: React.FC = () => {
             >
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 {t('home.greeting')}{' '}
-                <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
                   {t('home.name')}
                 </span>
               </h1>
@@ -57,7 +57,8 @@ export const Home: React.FC = () => {
                   variant="outline"
                   size="lg"
                   icon={<Download className="h-5 w-5" />}
-                  href="/resume.pdf"
+                  href="/uploads/iqbolshoh-cv.pdf"
+                  download
                   className="border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white w-full sm:w-auto"
                 >
                   {t('home.downloadCV')}

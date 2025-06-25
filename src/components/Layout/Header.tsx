@@ -48,15 +48,16 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
-        <div className="hidden lg:flex lg:items-center lg:space-x-10">
+        <div className="hidden lg:flex lg:items-center lg:space-x-6">
           {navigation.map((item) => (
             <Link
               key={item.name}
               to={item.href}
-              className={`relative px-2 py-3 text-base font-medium transition-colors ${location.pathname === item.href
+              className={`relative px-2 py-3 text-base font-medium transition-colors ${
+                location.pathname === item.href
                   ? 'text-primary-600'
                   : 'text-gray-700 hover:text-primary-600'
-                }`}
+              }`}
             >
               {item.name}
               {location.pathname === item.href && (
@@ -133,10 +134,11 @@ export const Header: React.FC = () => {
                       <Link
                         to={item.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`block px-5 py-3.5 rounded-lg text-xl font-medium transition-all duration-200 ${location.pathname === item.href
+                        className={`block px-5 py-3.5 rounded-lg text-xl font-medium transition-all duration-200 ${
+                          location.pathname === item.href
                             ? 'bg-primary-50 text-primary-700 shadow-sm'
                             : 'text-gray-900 hover:bg-gray-50 hover:shadow-sm'
-                          }`}
+                        }`}
                       >
                         {item.name}
                       </Link>
