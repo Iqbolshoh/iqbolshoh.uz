@@ -74,7 +74,7 @@ export const Home: React.FC = () => {
               className="lg:col-span-5 flex justify-center"
             >
               <div className="relative w-[240px] sm:w-[280px] md:w-[320px] lg:w-[360px] xl:w-[420px]">
-                <div className="aspect-square rounded-full bg-gradient-to-tr from-primary-400 to-accent-400 p-1 shadow-glow-red-lg">
+                <div className="aspect-square rounded-full bg-gradient-to-tr from-primary-400 to-primary-200 p-1 shadow-glow-red-lg">
                   <img
                     src={personalInfo.avatar}
                     alt={personalInfo.name}
@@ -166,7 +166,7 @@ export const Home: React.FC = () => {
               >
                 <Card className="p-6 text-center hover:shadow-glow-red transition-all duration-300 group border-0">
                   <stat.icon className="h-8 w-8 text-primary-600 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
-                  <div className="text-3xl font-bold text-gray-900 mb-2 bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">{stat.value}</div>
+                  <div className="text-3xl font-bold text-gray-900 mb-2 bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent">{stat.value}</div>
                   <div className="text-sm text-gray-600">{stat.label}</div>
                 </Card>
               </motion.div>

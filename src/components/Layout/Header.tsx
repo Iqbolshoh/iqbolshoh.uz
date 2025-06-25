@@ -28,7 +28,7 @@ export const Header: React.FC = () => {
 
   return (
     <header className="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 md:p-6 lg:px-8">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8">
         <div className="flex flex-1 items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
             <img src="/images/logos/iqbolshoh.svg" alt="Iqbolshoh Logo" className="h-10 w-10" />

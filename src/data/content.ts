@@ -1,13 +1,16 @@
 import {
-  Server,
-  Code,
-  Database,
-  Palette,
-  FileCode,
-  Monitor,
-  Lock,
-  Package,
-  BookOpen,
+  Code,          // React
+  FileCode,      // TypeScript
+  Palette,       // Tailwind CSS
+  FileText,      // PHP
+  Server,        // Laravel
+  Database,      // MySQL
+  Monitor,       // HTML
+  BookOpen,      // CSS
+  Package,       // Bootstrap
+  Brush,          // Sass
+  Terminal,      // JavaScript
+  Network,         // API (RESTful, external)
 } from 'lucide-react';
 
 export const personalInfo = {
@@ -27,12 +30,21 @@ export const personalInfo = {
 };
 
 export const techStack = [
-  { name: "Laravel", icon: Server },
-  { name: "React", icon: Code },
-  { name: "Node.js", icon: FileCode },
+  // ==== Frontend ====
+  { name: "HTML", icon: Monitor },
+  { name: "CSS", icon: BookOpen },
+  { name: "JavaScript", icon: Terminal },
   { name: "TypeScript", icon: FileCode },
+  { name: "Bootstrap", icon: Package },
+  { name: "Sass", icon: Brush },
   { name: "Tailwind CSS", icon: Palette },
-  { name: "MySQL", icon: Database }
+  { name: "React", icon: Code },
+
+  // ==== Backend ====
+  { name: "PHP", icon: FileText },
+  { name: "Laravel", icon: Server },
+  { name: "MySQL", icon: Database },
+  { name: "REST API", icon: Network }
 ];
 
 export const projects = [
