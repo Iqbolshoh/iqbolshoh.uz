@@ -20,88 +20,101 @@ export const Home: React.FC = () => {
   return (
     <div className="pt-16 relative">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-accent-50 py-20 sm:py-32">
-        <div className="absolute inset-0 bg-light-pattern opacity-30"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-accent-500/5"></div>
+<section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-accent-50 py-16 sm:py-24 lg:py-32 xl:py-40">
+  <div className="absolute inset-0 bg-light-pattern opacity-30"></div>
+  <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-accent-500/5"></div>
 
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-          <div className="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-12 xl:gap-x-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="col-span-2 max-w-xl lg:col-span-6 xl:col-span-7"
-            >
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="h-2 w-2 bg-accent-500 rounded-full animate-pulse"></div>
-              </div>
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      
+      {/* TEXT SECTION */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="lg:col-span-7 text-center lg:text-left"
+      >
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+          {t('hero.greeting')}{' '}
+          <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
+            {t('hero.name')}
+          </span>
+        </h1>
 
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-5xl xl:text-6xl">
-                {t('hero.greeting')}{' '}
-                <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
-                  {t('hero.name')}
-                </span>{' '}
-              </h1>
+        <p className="mt-6 text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0">
+          {t('hero.description')}
+        </p>
 
-              <p className="mt-6 text-lg leading-8 text-gray-600">
-                {t('hero.description')}
-              </p>
+        <div className="mt-8 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
+          <Button
+            size="lg"
+            icon={<ArrowRight className="h-5 w-5" />}
+            className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-glow-red w-full sm:w-auto"
+          >
+            <Link to="/portfolio">{t('hero.viewPortfolio')}</Link>
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            icon={<Download className="h-5 w-5" />}
+            href="/resume.pdf"
+            className="border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white w-full sm:w-auto"
+          >
+            {t('hero.downloadCV')}
+          </Button>
+        </div>
+      </motion.div>
 
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Button size="lg" icon={<ArrowRight className="h-5 w-5" />} className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-glow-red">
-                  <Link to="/portfolio">{t('hero.viewPortfolio')}</Link>
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  icon={<Download className="h-5 w-5" />}
-                  href="/resume.pdf"
-                  className="border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white"
-                >
-                  {t('hero.downloadCV')}
-                </Button>
-              </div>
-            </motion.div>
+      {/* IMAGE SECTION */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="lg:col-span-5 flex justify-center"
+      >
+        <div className="relative w-[240px] sm:w-[280px] md:w-[320px] lg:w-[360px] xl:w-[420px]">
+          <div className="aspect-square rounded-full bg-gradient-to-tr from-primary-400 to-accent-400 p-1 shadow-glow-red-lg">
+            <img
+              src={personalInfo.avatar}
+              alt={personalInfo.name}
+              className="h-full w-full rounded-full object-cover"
+            />
+          </div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="col-span-2 lg:col-span-6 xl:col-span-5"
-            >
-              <div className="relative">
-                <div className="aspect-square rounded-full bg-gradient-to-tr from-primary-400 to-accent-400 p-1 shadow-glow-red-lg">
-                  <img
-                    src={personalInfo.avatar}
-                    alt={personalInfo.name}
-                    className="h-full w-full rounded-full object-cover"
-                  />
-                </div>
-                <div className="absolute -bottom-4 -right-4 bg-white rounded-full p-4 shadow-lg border-2 border-primary-200">
-                  <div className="flex space-x-1">
-                    {techStack.slice(0, 3).map((tech, index) => {
-                      const Icon = tech.icon; // Get the icon component
-                      return (
-                        <div key={tech.name} className="text-2xl animate-float" style={{ animationDelay: `${index * 0.5}s` }}>
-                          <Icon className="h-6 w-6 text-primary-600" />
-                        </div>
-                      );
-                    })}
+          {/* Floating tech icons */}
+          <div className="absolute -bottom-4 -right-4 bg-white rounded-full p-4 shadow-lg border-2 border-primary-200">
+            <div className="flex space-x-1">
+              {techStack.slice(0, 3).map((tech, index) => {
+                const Icon = tech.icon;
+                return (
+                  <div
+                    key={tech.name}
+                    className="text-2xl animate-float"
+                    style={{ animationDelay: `${index * 0.5}s` }}
+                  >
+                    <Icon className="h-6 w-6 text-primary-600" />
                   </div>
-                </div>
+                );
+              })}
+            </div>
+          </div>
 
-                {/* Floating logo elements */}
-                <div className="absolute -top-6 -left-6 animate-bounce-slow">
-                  <img src="/images/logos/iqbolshoh_dev.svg" alt="Logo" className="h-8 w-8 opacity-20" />
-                </div>
-                <div className="absolute -bottom-8 -left-8 animate-bounce-slow" style={{ animationDelay: '1s' }}>
-                  <img src="/images/logos/iqbolshoh_dev.svg" alt="Logo" className="h-6 w-6 opacity-15" />
-                </div>
-              </div>
-            </motion.div>
+          {/* Floating logos */}
+          <div className="absolute -top-6 -left-6 animate-bounce-slow">
+            <img src="/images/logos/iqbolshoh_dev.svg" alt="Logo" className="h-8 w-8 opacity-20" />
+          </div>
+          <div
+            className="absolute -bottom-8 -left-8 animate-bounce-slow"
+            style={{ animationDelay: '1s' }}
+          >
+            <img src="/images/logos/iqbolshoh_dev.svg" alt="Logo" className="h-6 w-6 opacity-15" />
           </div>
         </div>
-      </section>
+      </motion.div>
+    </div>
+  </div>
+</section>
+
 
       {/* Tech Stack */}
       <section className="py-16 bg-white">
