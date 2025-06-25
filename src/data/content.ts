@@ -1,16 +1,13 @@
-import React from 'react';
-import { 
-  Server, 
-  Code, 
-  Database, 
-  Palette, 
-  FileCode, 
-  Monitor, 
-  Lock, 
-  Package, 
-  BookOpen, 
-  Star, 
-  ShoppingCart 
+import {
+  Server,
+  Code,
+  Database,
+  Palette,
+  FileCode,
+  Monitor,
+  Lock,
+  Package,
+  BookOpen,
 } from 'lucide-react';
 
 export const personalInfo = {

@@ -31,8 +31,8 @@ export const Header: React.FC = () => {
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 md:p-6 lg:px-8">
         <div className="flex flex-1 items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
-            <img src="/images/logos/iqbolshoh.svg" alt="Iqbolshoh Logo" className="h-9 w-9" />
-            <span className="text-lg font-bold text-gray-900">
+            <img src="/images/logos/iqbolshoh.svg" alt="Iqbolshoh Logo" className="h-10 w-10" />
+            <span className="text-xl font-bold text-gray-900">
               Iqbolshoh<span className="text-primary-600"> dev</span>
             </span>
           </Link>
@@ -43,19 +43,19 @@ export const Header: React.FC = () => {
               className="p-2 text-gray-700 rounded-full hover:bg-gray-100 transition-colors"
               aria-label="Open menu"
             >
-              <Menu className="h-6 w-6" />
+              <Menu className="h-7 w-7" />
             </button>
           </div>
         </div>
 
-        <div className="hidden lg:flex lg:items-center lg:space-x-8">
+        <div className="hidden lg:flex lg:items-center lg:space-x-10">
           {navigation.map((item) => (
             <Link
               key={item.name}
               to={item.href}
-              className={`relative px-1 py-2 text-sm font-medium transition-colors ${location.pathname === item.href
-                ? 'text-primary-600'
-                : 'text-gray-700 hover:text-primary-600'
+              className={`relative px-2 py-3 text-base font-medium transition-colors ${location.pathname === item.href
+                  ? 'text-primary-600'
+                  : 'text-gray-700 hover:text-primary-600'
                 }`}
             >
               {item.name}
@@ -68,11 +68,11 @@ export const Header: React.FC = () => {
               )}
             </Link>
           ))}
-          <div className="flex items-center space-x-4 ml-4">
+          <div className="flex items-center space-x-6 ml-6">
             <LanguageSwitcher />
             <Link
               to="/portfolio"
-              className="rounded-md bg-gradient-to-r from-primary-600 to-primary-700 px-4 py-2 text-sm font-medium text-white shadow-md hover:shadow-glow-red transition-all"
+              className="rounded-md bg-gradient-to-r from-primary-600 to-primary-700 px-5 py-2.5 text-base font-medium text-white shadow-md hover:shadow-glow-red transition-all"
             >
               {t('nav.portfolio')}
             </Link>
@@ -100,14 +100,14 @@ export const Header: React.FC = () => {
               className="fixed right-0 top-0 z-50 w-full h-full bg-white"
             >
               <div className="h-full flex flex-col">
-                <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center justify-between p-4">
                   <Link
                     to="/"
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center space-x-2"
                   >
-                    <img src="/images/logos/iqbolshoh.svg" alt="Logo" className="h-8 w-8" />
-                    <span className="text-lg font-bold text-gray-900">
+                    <img src="/images/logos/iqbolshoh.svg" alt="Logo" className="h-9 w-9" />
+                    <span className="text-xl font-bold text-gray-900">
                       Iqbolshoh<span className="text-primary-600"> dev</span>
                     </span>
                   </Link>
@@ -116,11 +116,11 @@ export const Header: React.FC = () => {
                     className="p-2 rounded-full hover:bg-gray-100 transition-colors"
                     aria-label="Close menu"
                   >
-                    <X className="h-7 w-7 text-gray-700" />
+                    <X className="h-8 w-8 text-gray-700" />
                   </button>
                 </div>
 
-                <nav className="w-full flex-1 flex flex-col space-y-4 bg-white p-4 rounded-xl">
+                <nav className="w-full flex-1 flex flex-col space-y-4 bg-white p-6 rounded-xl">
                   {navigation.map((item, index) => (
                     <motion.div
                       key={item.name}
@@ -133,16 +133,16 @@ export const Header: React.FC = () => {
                       <Link
                         to={item.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`block px-4 py-3 rounded-lg text-lg font-medium transition-all duration-200 ${location.pathname === item.href
-                          ? 'bg-primary-50 text-primary-700 shadow-sm'
-                          : 'text-gray-900 hover:bg-gray-50 hover:shadow-sm'
+                        className={`block px-5 py-3.5 rounded-lg text-xl font-medium transition-all duration-200 ${location.pathname === item.href
+                            ? 'bg-primary-50 text-primary-700 shadow-sm'
+                            : 'text-gray-900 hover:bg-gray-50 hover:shadow-sm'
                           }`}
                       >
                         {item.name}
                       </Link>
                     </motion.div>
                   ))}
-                  <div className="mt-auto pt-6 space-y-4">
+                  <div className="mt-auto pt-8 space-y-4">
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -151,7 +151,7 @@ export const Header: React.FC = () => {
                       <Link
                         to="/portfolio"
                         onClick={() => setMobileMenuOpen(false)}
-                        className="block w-full text-center rounded-lg bg-gradient-to-r from-primary-600 to-primary-700 px-4 py-3 text-lg font-medium text-white shadow-md hover:shadow-lg transition-all"
+                        className="block w-full text-center rounded-lg bg-gradient-to-r from-primary-600 to-primary-700 px-5 py-3.5 text-xl font-medium text-white shadow-md hover:shadow-lg transition-all"
                       >
                         {t('nav.portfolio')}
                       </Link>

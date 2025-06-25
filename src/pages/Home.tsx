@@ -92,10 +92,10 @@ export const Home: React.FC = () => {
 
                 {/* Floating logo elements */}
                 <div className="absolute -top-6 -left-6 animate-bounce-slow">
-                  <img src="/images/logos/iqbolshoh.svg" alt="Logo" className="h-8 w-8 opacity-20" />
+                  <img src="/images/logos/iqbolshoh_dev.svg" alt="Logo" className="h-8 w-8 opacity-20" />
                 </div>
                 <div className="absolute -bottom-8 -left-8 animate-bounce-slow" style={{ animationDelay: '1s' }}>
-                  <img src="/images/logos/iqbolshoh.svg" alt="Logo" className="h-6 w-6 opacity-15" />
+                  <img src="/images/logos/iqbolshoh_dev.svg" alt="Logo" className="h-6 w-6 opacity-15" />
                 </div>
               </div>
             </motion.div>
