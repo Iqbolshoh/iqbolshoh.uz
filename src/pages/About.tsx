@@ -201,7 +201,7 @@ export const About: React.FC = () => {
                       <div className="flex-1">
                         <div className="flex justify-between mb-1">
                           <span className="font-medium text-gray-900">{tech.name}</span>
-                          <span className="text-sm text-gray-600">Advanced</span>
+                          <span className="text-sm text-gray-600">{t('about.advanced')}</span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-2">
                           <motion.div

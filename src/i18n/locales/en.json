@@ -20,7 +20,11 @@
     "techStack": "My Tech Stack",
     "technologiesILove": "Technologies I Love Working With",
     "featuredProjects": "Featured Projects",
-    "someRecentWork": "Some of My Recent Work"
+    "someRecentWork": "Some of My Recent Work",
+    "yearsExperience": "Years of Experience",
+    "projectsCompleted": "Projects Completed",
+    "happyClients": "Happy Clients",
+    "cupsOfCoffee": "Cups of Coffee Consumed"
   },
   "about": {
     "title": "About Me",
@@ -41,7 +45,8 @@
     "ethicalTechDesc": "Building technology that serves humanity and aligns with my values",
     "locationInfo": "SamSU Student",
     "experienceInfo": "3+ Years Exp",
-    "codingPassion": "Coding with passion"
+    "codingPassion": "Coding with passion",
+    "advanced": "Advanced"
   },
   "portfolio": {
     "title": "My Portfolio",
@@ -61,7 +66,8 @@
     "title": "My Services",
     "description": "Professional web development services tailored to bring your ideas to life. From concept to deployment, I've got you covered.",
     "howIWorkTitle": "How I Work",
-    "howIWorkDescription": "My proven process for delivering excellent results"
+    "howIWorkDescription": "My proven process for delivering excellent results",
+    "getStarted": "Get Started"
   },
   "blog": {
     "title": "My Blog",

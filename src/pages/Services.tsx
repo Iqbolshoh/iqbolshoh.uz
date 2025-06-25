@@ -122,7 +122,7 @@ export const Services: React.FC = () => {
                         <div className="text-2xl font-bold text-primary-600">{service.price}</div>
                       </div>
                       <Button className="w-full" icon={<ArrowRight className="h-4 w-4" />}>
-                        Get Started
+                        {t('servis.getStarted')}
                       </Button>
                     </div>
                   </Card>
