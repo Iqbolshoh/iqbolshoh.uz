@@ -7,7 +7,8 @@ import { Button } from '../components/UI/Button';
 import { blogPosts } from '../data/content';
 
 export const Blog: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
   return (
     <div className="pt-16">
       {/* Hero Section */}
@@ -38,13 +39,12 @@ export const Blog: React.FC = () => {
             viewport={{ once: true }}
             className="mb-16"
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('blog.featuredArticle')}
-            </h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('blog.featuredArticle')}</h2>
             <Card className="overflow-hidden lg:grid lg:grid-cols-2 lg:gap-0">
               <div className="relative">
                 <img
                   src={blogPosts[0].image}
-                  alt={blogPosts[0].title}
+                  alt={blogPosts[0].title[i18n.language]}
                   className="w-full h-64 lg:h-full object-cover"
                 />
                 <div className="absolute top-4 left-4">
@@ -66,11 +66,11 @@ export const Blog: React.FC = () => {
                 </div>
 
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  {blogPosts[0].title}
+                  {blogPosts[0].title[i18n.language]}
                 </h3>
 
                 <p className="text-gray-600 mb-6">
-                  {blogPosts[0].excerpt}
+                  {blogPosts[0].excerpt[i18n.language]}
                 </p>
 
                 <div className="flex flex-wrap gap-2 mb-6">
@@ -104,10 +104,8 @@ export const Blog: React.FC = () => {
             viewport={{ once: true }}
             className="mb-12"
           >
-            <h2 className="text-3xl font-bold text-gray-900">{t('blog.latestArticles')}
-            </h2>
-            <p className="mt-4 text-lg text-gray-600">{t('blog.recentThoughts')}
-            </p>
+            <h2 className="text-3xl font-bold text-gray-900">{t('blog.latestArticles')}</h2>
+            <p className="mt-4 text-lg text-gray-600">{t('blog.recentThoughts')}</p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -122,7 +120,7 @@ export const Blog: React.FC = () => {
                 <Card className="overflow-hidden h-full">
                   <img
                     src={post.image}
-                    alt={post.title}
+                    alt={post.title[i18n.language]}
                     className="w-full h-48 object-cover"
                   />
                   <div className="p-6 flex flex-col flex-grow">
@@ -138,11 +136,11 @@ export const Blog: React.FC = () => {
                     </div>
 
                     <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                      {post.title}
+                      {post.title[i18n.language]}
                     </h3>
 
                     <p className="text-gray-600 mb-4 flex-grow">
-                      {post.excerpt}
+                      {post.excerpt[i18n.language]}
                     </p>
 
                     <div className="flex flex-wrap gap-2 mb-4">
@@ -166,7 +164,6 @@ export const Blog: React.FC = () => {
           </div>
         </div>
       </section>
-
     </div>
   );
 };

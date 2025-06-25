@@ -7,7 +7,7 @@ import { Button } from '../components/UI/Button';
 import { projects } from '../data/content';
 
 export const Portfolio: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [activeFilter, setActiveFilter] = useState('All');
 
   const categories = ['All', 'Laravel', 'React', 'Full-Stack', 'SaaS'];
@@ -85,7 +85,7 @@ export const Portfolio: React.FC = () => {
                     <div className="relative group">
                       <img
                         src={project.image}
-                        alt={project.name}
+                        alt={project.name[i18n.language as keyof typeof project.name]}
                         className="w-full h-48 object-cover transition-transform group-hover:scale-105"
                       />
                       {project.featured && (
@@ -106,8 +106,8 @@ export const Portfolio: React.FC = () => {
                     </div>
 
                     <div className="p-6 flex flex-col flex-grow">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{project.name}</h3>
-                      <p className="text-gray-600 mb-4 flex-grow">{project.description}</p>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">{project.name[i18n.language as keyof typeof project.name]}</h3>
+                      <p className="text-gray-600 mb-4 flex-grow">{project.description[i18n.language as keyof typeof project.description]}</p>
 
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.tech.map((tech) => (

@@ -8,7 +8,7 @@ import { Card } from '../components/UI/Card';
 import { personalInfo, techStack, projects } from '../data/content';
 
 export const Home: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const stats = [
     { label: t('home.yearsExperience'), value: '3+', icon: Star },
@@ -134,7 +134,7 @@ export const Home: React.FC = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {techStack.map((tech, index) => {
-              const Icon = tech.icon; // Get the icon component
+              const Icon = tech.icon;
               return (
                 <motion.div
                   key={tech.name}
@@ -197,8 +197,12 @@ export const Home: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t('home.featuredProjects')}</h2>
-            <p className="mt-4 text-lg text-gray-600">{t('home.someRecentWork')}</p>
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+              {t('home.featuredProjects')}
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">
+              {t('home.someRecentWork')}
+            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -214,14 +218,18 @@ export const Home: React.FC = () => {
                   <div className="relative overflow-hidden">
                     <img
                       src={project.image}
-                      alt={project.name}
+                      alt={project.name[i18n.language as keyof typeof project.name]}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{project.name}</h3>
-                    <p className="text-gray-600 mb-4">{project.description}</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      {project.name[i18n.language as keyof typeof project.name]}
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      {project.description[i18n.language as keyof typeof project.description]}
+                    </p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.tech.map((tech) => (
                         <span
@@ -233,10 +241,19 @@ export const Home: React.FC = () => {
                       ))}
                     </div>
                     <div className="flex space-x-4">
-                      <Button size="sm" href={project.liveDemo} className="bg-gradient-to-r from-primary-600 to-primary-700">
+                      <Button
+                        size="sm"
+                        href={project.liveDemo}
+                        className="bg-gradient-to-r from-primary-600 to-primary-700"
+                      >
                         {t('portfolio.liveDemo')}
                       </Button>
-                      <Button variant="outline" size="sm" href={project.github} className="border-primary-600 text-primary-600 hover:bg-primary-600">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        href={project.github}
+                        className="border-primary-600 text-primary-600 hover:bg-primary-600"
+                      >
                         {t('portfolio.github')}
                       </Button>
                     </div>
