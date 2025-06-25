@@ -75,11 +75,10 @@ export const Contact: React.FC = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
+                      placeholder={t('contact.namePlaceholder')}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-                      placeholder="Enter your full name"
                     />
                   </div>
-
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                       {t('contact.emailAddress')} *
@@ -91,11 +90,10 @@ export const Contact: React.FC = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
+                      placeholder={t('contact.emailPlaceholder')}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-                      placeholder="your.email@example.com"
                     />
                   </div>
-
                   <div>
                     <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
                       {t('contact.subject')}
@@ -106,11 +104,10 @@ export const Contact: React.FC = () => {
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
+                      placeholder={t('contact.subjectPlaceholder')}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-                      placeholder="What's this about?"
                     />
                   </div>
-
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                       {t('contact.message')} *
@@ -122,8 +119,8 @@ export const Contact: React.FC = () => {
                       rows={6}
                       value={formData.message}
                       onChange={handleChange}
+                      placeholder={t('contact.messagePlaceholder')}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-none"
-                      placeholder="Tell me about your project..."
                     />
                   </div>
 
@@ -136,6 +133,7 @@ export const Contact: React.FC = () => {
                     {t('contact.sendMessageBtn')}
                   </Button>
                 </form>
+
               </Card>
             </motion.div>
 
@@ -263,10 +261,10 @@ export const Contact: React.FC = () => {
             viewport={{ once: true }}
             className="text-center"
           >
-            <Card className="p-12 bg-gradient-to-br from-primary-400 to-primary-500 text-white">
+            <Card className="p-12 bg-gradient-to-br from-primary-700 to-primary-600 text-white">
               <MapPin className="h-16 w-16 mx-auto mb-6 opacity-80" />
               <h2 className="text-3xl font-bold mb-4">{t('contact.basedIn')}</h2>
-              <p className="text-xl text-primary-100 max-w-2xl mx-auto">
+              <p className="text-xl text-white max-w-2xl mx-auto">
                 {t('contact.basedInDesc')}
               </p>
             </Card>

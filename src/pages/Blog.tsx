@@ -86,7 +86,7 @@ export const Blog: React.FC = () => {
                 </div>
 
                 <Button icon={<ArrowRight className="h-4 w-4" />}>
-                  {t('blog.ReadMore')}
+                  {t('blog.readMore')}
                 </Button>
               </div>
             </Card>

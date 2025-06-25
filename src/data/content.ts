@@ -31,20 +31,20 @@ export const personalInfo = {
 
 export const techStack = [
   // ==== Frontend ====
-  { name: "HTML", icon: Monitor },
-  { name: "CSS", icon: BookOpen },
-  { name: "JavaScript", icon: Terminal },
-  { name: "TypeScript", icon: FileCode },
-  { name: "Bootstrap", icon: Package },
-  { name: "Sass", icon: Brush },
-  { name: "Tailwind CSS", icon: Palette },
-  { name: "React", icon: Code },
+  { name: "HTML", icon: Monitor, level: 98 },
+  { name: "CSS", icon: BookOpen, level: 94 },
+  { name: "JavaScript", icon: Terminal, level: 92 },
+  { name: "TypeScript", icon: FileCode, level: 88 },
+  { name: "Bootstrap", icon: Package, level: 80 },
+  { name: "Sass", icon: Brush, level: 76 },
+  { name: "Tailwind CSS", icon: Palette, level: 95 },
+  { name: "React", icon: Code, level: 91 },
 
   // ==== Backend ====
-  { name: "PHP", icon: FileText },
-  { name: "Laravel", icon: Server },
-  { name: "MySQL", icon: Database },
-  { name: "REST API", icon: Network }
+  { name: "PHP", icon: FileText, level: 90 },
+  { name: "Laravel", icon: Server, level: 96 },
+  { name: "MySQL", icon: Database, level: 88 },
+  { name: "REST API", icon: Network, level: 87 }
 ];
 
 export const projects = [

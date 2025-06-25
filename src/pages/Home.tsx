@@ -46,13 +46,15 @@ export const Home: React.FC = () => {
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
-                <Button
-                  size="lg"
-                  icon={<ArrowRight className="h-5 w-5" />}
-                  className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-glow-red w-full sm:w-auto"
-                >
-                  <Link to="/portfolio">{t('home.viewPortfolio')}</Link>
-                </Button>
+                <Link to="/portfolio">
+                  <Button
+                    size="lg"
+                    icon={<ArrowRight className="h-5 w-5" />}
+                    className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-glow-red w-full sm:w-auto"
+                  >
+                    {t('home.viewPortfolio')}
+                  </Button>
+                </Link>
                 <Button
                   variant="outline"
                   size="lg"
@@ -74,7 +76,7 @@ export const Home: React.FC = () => {
               className="lg:col-span-5 flex justify-center"
             >
               <div className="relative w-[240px] sm:w-[280px] md:w-[320px] lg:w-[360px] xl:w-[420px]">
-                <div className="aspect-square rounded-full bg-gradient-to-tr from-primary-400 to-primary-200 p-1 shadow-glow-red-lg">
+                <div className="aspect-square rounded-full bg-gradient-to-tr from-primary-500 to-primary-400 p-1 shadow-glow-red-lg">
                   <img
                     src={personalInfo.avatar}
                     alt={personalInfo.name}
@@ -155,6 +157,16 @@ export const Home: React.FC = () => {
       {/* Stats */}
       <section className="py-16 bg-gray-50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t('home.journeyTitle')}</h2>
+            <p className="mt-4 text-lg text-gray-600">{t('home.journeyDescription')}</p>
+          </motion.div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <motion.div
@@ -166,7 +178,7 @@ export const Home: React.FC = () => {
               >
                 <Card className="p-6 text-center hover:shadow-glow-red transition-all duration-300 group border-0">
                   <stat.icon className="h-8 w-8 text-primary-600 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
-                  <div className="text-3xl font-bold text-gray-900 mb-2 bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent">{stat.value}</div>
+                  <div className="text-3xl font-bold text-gray-900 mb-2 bg-gradient-to-r from-primary-700 to-primary-600 bg-clip-text text-transparent">{stat.value}</div>
                   <div className="text-sm text-gray-600">{stat.label}</div>
                 </Card>
               </motion.div>
@@ -235,9 +247,15 @@ export const Home: React.FC = () => {
           </div>
 
           <div className="text-center">
-            <Button variant="outline" size="lg" className="border-primary-600 text-primary-600 hover:bg-primary-600">
-              <Link to="/portfolio">{t('portfolio.viewAllProjects')}</Link>
-            </Button>
+            <Link to="/portfolio">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white transition"
+              >
+                {t('portfolio.viewAllProjects')}
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

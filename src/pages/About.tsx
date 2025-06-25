@@ -201,12 +201,12 @@ export const About: React.FC = () => {
                       <div className="flex-1">
                         <div className="flex justify-between mb-1">
                           <span className="font-medium text-gray-900">{tech.name}</span>
-                          <span className="text-sm text-gray-600">{t('about.advanced')}</span>
+                          <span className="text-sm text-gray-600">{tech.level}%</span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-2">
                           <motion.div
                             initial={{ width: 0 }}
-                            whileInView={{ width: "85%" }}
+                            whileInView={{ width: `${tech.level}%` }}
                             transition={{ duration: 1, delay: index * 0.1 }}
                             viewport={{ once: true }}
                             className="bg-primary-600 h-2 rounded-full"
