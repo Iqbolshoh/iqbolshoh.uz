@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { GraduationCap, MapPin, Calendar, Heart, Code2, Coffee } from 'lucide-react';
 import { Card } from '../components/UI/Card';
 import { personalInfo, techStack } from '../data/content';
@@ -12,7 +13,7 @@ export const About: React.FC = () => {
     "Building Templates.uz SaaS platform",
     "Active in open-source community"
   ];
-
+  const { t } = useTranslation();
   const journey = [
     {
       year: "2022",
@@ -53,16 +54,13 @@ export const About: React.FC = () => {
               transition={{ duration: 0.6 }}
             >
               <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl lg:text-6xl">
-                About Me
+                {t('about.title')}
               </h1>
               <p className="mt-6 text-xl text-gray-600 leading-relaxed">
-                My name is <strong>Iqbolshoh Ilhomjonov</strong>, a 3rd-year Software Engineering
-                student at Samarkand State University. I specialize in full-stack development
-                and love solving real-world problems with code.
+                {t('about.description')}
               </p>
               <p className="mt-4 text-lg text-gray-600">
-                Born in Tajikistan, raised in Samarkand. I believe in continuous learning
-                and align my journey with Islamic values and discipline.
+                {t('about.subDescription')}
               </p>
 
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -72,11 +70,11 @@ export const About: React.FC = () => {
                 </div>
                 <div className="flex items-center space-x-2 text-gray-600">
                   <GraduationCap className="h-5 w-5 text-primary-600" />
-                  <span>SSU Student</span>
+                  <span>{t('about.locationInfo')}</span>
                 </div>
                 <div className="flex items-center space-x-2 text-gray-600">
                   <Calendar className="h-5 w-5 text-primary-600" />
-                  <span>3+ Years Exp</span>
+                  <span>{t('about.experienceInfo')}</span>
                 </div>
               </div>
             </motion.div>
@@ -96,7 +94,7 @@ export const About: React.FC = () => {
                 <div className="absolute -bottom-6 -right-6 bg-white rounded-xl p-4 shadow-lg">
                   <div className="flex items-center space-x-2">
                     <Heart className="h-5 w-5 text-red-500" />
-                    <span className="text-sm font-medium">Coding with passion</span>
+                    <span className="text-sm font-medium">{t('about.codingPassion')}</span>
                   </div>
                 </div>
               </div>
@@ -115,8 +113,8 @@ export const About: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">What Makes Me Different</h2>
-            <p className="mt-4 text-lg text-gray-600">Key highlights of my journey</p>
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t('about.whatMakesDifferent')}</h2>
+            <p className="mt-4 text-lg text-gray-600">{t('about.keyHighlights')}</p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -148,8 +146,8 @@ export const About: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">My Journey</h2>
-            <p className="mt-4 text-lg text-gray-600">The path that led me here</p>
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t('about.journey')}</h2>
+            <p className="mt-4 text-lg text-gray-600">{t('about.journeyDescription')}</p>
           </motion.div>
 
           <div className="relative">
@@ -162,8 +160,7 @@ export const About: React.FC = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className={`relative flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                    }`}
+                  className={`relative flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
                 >
                   <div className="flex-1">
                     <Card className={`p-6 ${index % 2 === 0 ? 'mr-8' : 'ml-8'}`}>
@@ -194,7 +191,7 @@ export const About: React.FC = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Technical Skills</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('about.technicalSkills')}</h2>
               <div className="space-y-4">
                 {techStack.map((tech, index) => {
                   const Icon = tech.icon;
@@ -228,27 +225,27 @@ export const About: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Beyond Coding</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('about.beyondCoding')}</h2>
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <Coffee className="h-6 w-6 text-primary-600 mt-1" />
                   <div>
-                    <h3 className="font-semibold text-gray-900">Mentoring</h3>
-                    <p className="text-gray-600">Helping junior developers grow and learn new skills</p>
+                    <h3 className="font-semibold text-gray-900">{t('about.mentoring')}</h3>
+                    <p className="text-gray-600">{t('about.mentoringDesc')}</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
                   <Code2 className="h-6 w-6 text-primary-600 mt-1" />
                   <div>
-                    <h3 className="font-semibold text-gray-900">Open Source</h3>
-                    <p className="text-gray-600">Contributing to the developer community through shared projects</p>
+                    <h3 className="font-semibold text-gray-900">{t('about.openSource')}</h3>
+                    <p className="text-gray-600">{t('about.openSourceDesc')}</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
                   <Heart className="h-6 w-6 text-primary-600 mt-1" />
                   <div>
-                    <h3 className="font-semibold text-gray-900">Ethical Tech</h3>
-                    <p className="text-gray-600">Building technology that serves humanity and aligns with my values</p>
+                    <h3 className="font-semibold text-gray-900">{t('about.ethicalTech')}</h3>
+                    <p className="text-gray-600">{t('about.ethicalTechDesc')}</p>
                   </div>
                 </div>
               </div>

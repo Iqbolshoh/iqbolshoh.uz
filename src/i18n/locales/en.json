@@ -22,14 +22,7 @@
     "title": "About Me",
     "subtitle": "Who am I?",
     "description": "My name is Iqbolshoh Ilhomjonov, a 3rd-year Software Engineering student at Samarkand State University. I specialize in full-stack development and love solving real-world problems with code.",
-    "subDescription": "Born in Tajikistan, raised in Samarkand. I believe in continuous learning and align my journey with Islamic values and discipline.",
-    "highlights": [
-      "3+ years of coding experience",
-      "Mentor to junior developers", 
-      "Focused on ethical tech & innovation",
-      "Building Templates.uz SaaS platform",
-      "Active in open-source community"
-    ],
+    "subDescription": "Born in Uzbekistan, raised in Samarkand. I believe in continuous learning and align my journey with Islamic values and discipline.",
     "journey": "My Journey",
     "journeyDescription": "The path that led me here",
     "whatMakesDifferent": "What Makes Me Different",
@@ -41,7 +34,10 @@
     "openSource": "Open Source",
     "openSourceDesc": "Contributing to the developer community through shared projects",
     "ethicalTech": "Ethical Tech",
-    "ethicalTechDesc": "Building technology that serves humanity and aligns with my values"
+    "ethicalTechDesc": "Building technology that serves humanity and aligns with my values",
+    "locationInfo": "SamSU Student",
+    "experienceInfo": "3+ Years Exp",
+    "codingPassion": "Coding with passion"
   },
   "portfolio": {
     "title": "My Portfolio",
@@ -55,7 +51,7 @@
     "description": "Professional web development services tailored to bring your ideas to life. From concept to deployment, I've got you covered.",
     "webDevelopment": "Web Development",
     "webDevDesc": "Building responsive websites, admin panels, and full-stack systems using Laravel and React.",
-    "frontendDesign": "Frontend UI Design", 
+    "frontendDesign": "Frontend UI Design",
     "frontendDesc": "Pixel-perfect, modern UI designs with Tailwind CSS and responsive layouts.",
     "backendAPIs": "Backend & APIs",
     "backendDesc": "Secure, scalable APIs with Laravel, JWT authentication, and MySQL databases.",
@@ -67,7 +63,7 @@
     "provenProcess": "My proven process for delivering excellent results",
     "discovery": "Discovery",
     "discoveryDesc": "Understanding your requirements, goals, and target audience",
-    "planning": "Planning", 
+    "planning": "Planning",
     "planningDesc": "Creating a detailed project roadmap and technical architecture",
     "development": "Development",
     "developmentDesc": "Building your solution with clean, scalable, and maintainable code",
@@ -90,7 +86,7 @@
     "getInTouch": "Get in Touch",
     "getInTouchDesc": "I'm always excited to work on new projects and collaborate with great people. Whether you have a project in mind or just want to chat, feel free to reach out!",
     "email": "Email",
-    "phone": "Phone", 
+    "phone": "Phone",
     "location": "Location",
     "followMe": "Follow Me",
     "quickResponse": "Quick Response Guarantee",
@@ -122,7 +118,7 @@
     "startingFrom": "Starting from",
     "perHour": "/hour",
     "yearsExperience": "Years Experience",
-    "projectsCompleted": "Projects Completed", 
+    "projectsCompleted": "Projects Completed",
     "happyClients": "Happy Clients",
     "cupsOfCoffee": "Cups of Coffee",
     "techStack": "Tech Stack",
@@ -136,5 +132,11 @@
     "madeWithLove": "Made with",
     "fromSamarkand": "from Samarkand",
     "allRightsReserved": "All rights reserved."
+  },
+  "footer": {
+    "description": "Building modern digital solutions with passion and precision. Let's turn your ideas into reality.",
+    "navigation": "Navigation",
+    "resources": "Resources",
+    "copyright": "© 2025 Iqbolshoh Ilhomjonov. All rights reserved."
   }
 }

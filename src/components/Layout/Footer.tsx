@@ -21,10 +21,7 @@ export const Footer: React.FC = () => {
               />
               <span className="font-bold text-xl text-white">Iqbolshoh</span>
             </div>
-            <p className="text-gray-300 max-w-md">
-              Building modern digital solutions with passion and precision.
-              Let's turn your ideas into reality.
-            </p>
+            <p className="text-gray-300 max-w-md">{t('footer.description')}</p>
             <div className="flex space-x-6">
               <a
                 href={personalInfo.social.github}
@@ -64,7 +61,7 @@ export const Footer: React.FC = () => {
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold leading-6 text-primary-400">Navigation</h3>
+                <h3 className="text-sm font-semibold leading-6 text-primary-400">{t('footer.navigation')}</h3>
                 <ul className="mt-6 space-y-4">
                   <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">{t('nav.home')}</Link></li>
                   <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">{t('nav.about')}</Link></li>
@@ -73,7 +70,7 @@ export const Footer: React.FC = () => {
                 </ul>
               </div>
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold leading-6 text-primary-400">Resources</h3>
+                <h3 className="text-sm font-semibold leading-6 text-primary-400">{t('footer.resources')}</h3>
                 <ul className="mt-6 space-y-4">
                   <li><Link to="/blog" className="text-gray-300 hover:text-white transition-colors">{t('nav.blog')}</Link></li>
                   <li><Link to="/contact" className="text-gray-300 hover:text-white transition-colors">{t('nav.contact')}</Link></li>
@@ -87,9 +84,7 @@ export const Footer: React.FC = () => {
 
         <div className="mt-16 border-t border-gray-700 pt-8 sm:mt-20 lg:mt-24">
           <div className="flex flex-col sm:flex-row justify-between items-center">
-            <p className="text-gray-400">
-              © 2025 Iqbolshoh Ilhomjonov. {t('common.allRightsReserved')}
-            </p>
+            <p className="text-gray-400">{t('footer.copyright')}</p>
             <p className="flex items-center text-gray-400 mt-4 sm:mt-0">
               {t('common.madeWithLove')} <Heart className="h-4 w-4 text-primary-400 mx-1 animate-pulse" /> {t('common.fromSamarkand')}
             </p>
