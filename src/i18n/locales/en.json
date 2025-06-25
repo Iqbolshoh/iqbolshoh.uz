@@ -46,15 +46,26 @@
     "startProject": "Start a Project",
     "letsDiscuss": "Let's discuss your next project and make it happen.",
     "featured": "Featured",
+    "viewProject": "View Project",
+    "liveDemo": "Live Demo",
+    "github": "GitHub",
     "noProjects": "No projects found for this category",
     "tryDifferent": "Try selecting a different filter"
   },
   "services": {
     "title": "My Services",
     "description": "Professional web development services tailored to bring your ideas to life. From concept to deployment, I've got you covered.",
-    
     "howIWorkTitle": "How I Work",
     "howIWorkDescription": "My proven process for delivering excellent results"
+  },
+  "blog": {
+    "title": "My Blog",
+    "description": "Sharing what I learn, build, and believe in. From technical tutorials to career insights and personal reflections on the developer journey.",
+    "featured": "Featured",
+    "featuredArticle": "Featured Article",
+    "latestArticles": "Latest Articles",
+    "readMore": "Read More",
+    "readArticle": "Read Article"
   },
   "contact": {
     "title": "Let's Work Together",
@@ -75,45 +86,6 @@
     "quickResponseDesc": "I typically respond to all inquiries within 24 hours. For urgent projects, feel free to call or message me directly.",
     "basedIn": "Based in Samarkand",
     "basedInDesc": "Located in the historic city of Samarkand, Uzbekistan. Available for remote work worldwide and local meetings in Samarkand."
-  },
-  "blog": {
-    "title": "My Blog",
-    "description": "Sharing what I learn, build, and believe in. From technical tutorials to career insights and personal reflections on the developer journey.",
-    "featuredArticle": "Featured Article",
-    "latestArticles": "Latest Articles",
-    "recentThoughts": "Recent thoughts and tutorials",
-    "stayUpdated": "Stay Updated",
-    "stayUpdatedDesc": "Get notified when I publish new articles about web development, career tips, and tech insights.",
-    "enterEmail": "Enter your email",
-    "subscribe": "Subscribe",
-    "noSpam": "No spam, unsubscribe at any time.",
-    "topicsIWrite": "Topics I Write About",
-    "exploringAspects": "Exploring various aspects of technology and development",
-    "readMore": "Read More",
-    "readArticle": "Read Article"
-  },
-  "common": {
-    "getStarted": "Get Started",
-    "viewProject": "View Project",
-    "liveDemo": "Live Demo",
-    "github": "GitHub",
-    "startingFrom": "Starting from",
-    "perHour": "/hour",
-    "yearsExperience": "Years Experience",
-    "projectsCompleted": "Projects Completed",
-    "happyClients": "Happy Clients",
-    "cupsOfCoffee": "Cups of Coffee",
-    "techStack": "Tech Stack",
-    "technologiesILove": "Technologies I love working with",
-    "featuredProjects": "Featured Projects",
-    "someRecentWork": "Some of my recent work",
-    "viewAllProjects": "View All Projects",
-    "readyToStart": "Ready to start your project?",
-    "workTogether": "Let's work together to bring your ideas to life",
-    "getInTouch": "Get In Touch",
-    "madeWithLove": "Made with",
-    "fromSamarkand": "from Samarkand",
-    "allRightsReserved": "All rights reserved."
   },
   "footer": {
     "description": "Building modern digital solutions with passion and precision. Let's turn your ideas into reality.",

@@ -90,17 +90,17 @@ export const Portfolio: React.FC = () => {
                       />
                       {project.featured && (
                         <div className="absolute top-4 left-4">
-                          <span className="bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            {t('portfolio.featured') || 'Featured'}
+                          <span className="bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            {t('portfolio.featured')}
                           </span>
                         </div>
                       )}
                       <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-4">
                         <Button size="sm" href={project.liveDemo} icon={<ExternalLink className="h-4 w-4" />}>
-                          {t('common.liveDemo')}
+                          {t('portfolio.liveDemo')}
                         </Button>
                         <Button variant="outline" size="sm" href={project.github} icon={<Github className="h-4 w-4" />}>
-                          {t('common.github')}
+                          {t('portfolio.github')}
                         </Button>
                       </div>
                     </div>
@@ -122,7 +122,7 @@ export const Portfolio: React.FC = () => {
 
                       <div className="flex space-x-3">
                         <Button size="sm" href={project.liveDemo} className="flex-1">
-                          {t('common.viewProject')}
+                          {t('portfolio.viewProject')}
                         </Button>
                         <Button variant="outline" size="sm" href={project.github}>
                           <Github className="h-4 w-4" />

@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowRight, Tag } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Card } from '../components/UI/Card';
 import { Button } from '../components/UI/Button';
 import { blogPosts } from '../data/content';
 
 export const Blog: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <div className="pt-16">
       {/* Hero Section */}
@@ -17,11 +19,10 @@ export const Blog: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl lg:text-6xl">
-              My Blog
+              {t('blog.title')}
             </h1>
             <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
-              Sharing what I learn, build, and believe in. From technical tutorials
-              to career insights and personal reflections on the developer journey.
+              {t('blog.description')}
             </p>
           </motion.div>
         </div>
@@ -37,7 +38,8 @@ export const Blog: React.FC = () => {
             viewport={{ once: true }}
             className="mb-16"
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Featured Article</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('blog.featuredArticle')}
+            </h2>
             <Card className="overflow-hidden lg:grid lg:grid-cols-2 lg:gap-0">
               <div className="relative">
                 <img
@@ -46,8 +48,8 @@ export const Blog: React.FC = () => {
                   className="w-full h-64 lg:h-full object-cover"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    Featured
+                  <span className="bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    {t('blog.featured')}
                   </span>
                 </div>
               </div>
@@ -84,7 +86,7 @@ export const Blog: React.FC = () => {
                 </div>
 
                 <Button icon={<ArrowRight className="h-4 w-4" />}>
-                  Read More
+                  {t('blog.ReadMore')}
                 </Button>
               </div>
             </Card>
@@ -102,8 +104,10 @@ export const Blog: React.FC = () => {
             viewport={{ once: true }}
             className="mb-12"
           >
-            <h2 className="text-3xl font-bold text-gray-900">Latest Articles</h2>
-            <p className="mt-4 text-lg text-gray-600">Recent thoughts and tutorials</p>
+            <h2 className="text-3xl font-bold text-gray-900">{t('blog.latestArticles')}
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">{t('blog.recentThoughts')}
+            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -153,7 +157,7 @@ export const Blog: React.FC = () => {
                     </div>
 
                     <Button variant="outline" size="sm" className="self-start">
-                      Read Article
+                      {t('blog.readArticle')}
                     </Button>
                   </div>
                 </Card>
