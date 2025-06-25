@@ -44,35 +44,17 @@
     "description": "A collection of projects that showcase my skills in full-stack development, from simple websites to complex SaaS platforms.",
     "likeWhatYouSee": "Like What You See?",
     "startProject": "Start a Project",
-    "letsDiscuss": "Let's discuss your next project and make it happen"
+    "letsDiscuss": "Let's discuss your next project and make it happen.",
+    "featured": "Featured",
+    "noProjects": "No projects found for this category",
+    "tryDifferent": "Try selecting a different filter"
   },
   "services": {
     "title": "My Services",
     "description": "Professional web development services tailored to bring your ideas to life. From concept to deployment, I've got you covered.",
-    "webDevelopment": "Web Development",
-    "webDevDesc": "Building responsive websites, admin panels, and full-stack systems using Laravel and React.",
-    "frontendDesign": "Frontend UI Design",
-    "frontendDesc": "Pixel-perfect, modern UI designs with Tailwind CSS and responsive layouts.",
-    "backendAPIs": "Backend & APIs",
-    "backendDesc": "Secure, scalable APIs with Laravel, JWT authentication, and MySQL databases.",
-    "wordPressCMS": "WordPress CMS",
-    "wordPressDesc": "Custom WordPress websites and themes for small businesses and blogs.",
-    "mentorship": "Mentorship",
-    "mentorshipDesc": "1-on-1 mentoring sessions for beginner developers in web development.",
-    "howIWork": "How I Work",
-    "provenProcess": "My proven process for delivering excellent results",
-    "discovery": "Discovery",
-    "discoveryDesc": "Understanding your requirements, goals, and target audience",
-    "planning": "Planning",
-    "planningDesc": "Creating a detailed project roadmap and technical architecture",
-    "development": "Development",
-    "developmentDesc": "Building your solution with clean, scalable, and maintainable code",
-    "delivery": "Delivery",
-    "deliveryDesc": "Testing, deployment, and ongoing support to ensure success",
-    "faq": "Frequently Asked Questions",
-    "readyToStart": "Ready to Get Started?",
-    "contactToday": "Contact Me Today",
-    "letsDiscuss": "Let's discuss your project and bring your vision to life"
+    
+    "howIWorkTitle": "How I Work",
+    "howIWorkDescription": "My proven process for delivering excellent results"
   },
   "contact": {
     "title": "Let's Work Together",

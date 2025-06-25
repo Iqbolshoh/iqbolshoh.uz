@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Github, Filter } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Card } from '../components/UI/Card';
 import { Button } from '../components/UI/Button';
 import { projects } from '../data/content';
 
 export const Portfolio: React.FC = () => {
+  const { t } = useTranslation();
   const [activeFilter, setActiveFilter] = useState('All');
 
   const categories = ['All', 'Laravel', 'React', 'Full-Stack', 'SaaS'];
 
-  const filteredProjects = activeFilter === 'All'
-    ? projects
-    : projects.filter(project =>
-      project.tech.some(tech => tech.toLowerCase().includes(activeFilter.toLowerCase()))
-    );
+  const filteredProjects =
+    activeFilter === 'All'
+      ? projects
+      : projects.filter((project) =>
+          project.tech.some((tech) =>
+            tech.toLowerCase().includes(activeFilter.toLowerCase())
+          )
+        );
 
   return (
     <div className="pt-16">
@@ -27,11 +32,10 @@ export const Portfolio: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl lg:text-6xl">
-              My Portfolio
+              {t('portfolio.title')}
             </h1>
             <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
-              A collection of projects that showcase my skills in full-stack development,
-              from simple websites to complex SaaS platforms.
+              {t('portfolio.description')}
             </p>
           </motion.div>
         </div>
@@ -45,10 +49,11 @@ export const Portfolio: React.FC = () => {
               <button
                 key={category}
                 onClick={() => setActiveFilter(category)}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeFilter === category
-                  ? 'bg-white text-primary-600 shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
-                  }`}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                  activeFilter === category
+                    ? 'bg-white text-primary-600 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
               >
                 {category}
               </button>
@@ -86,16 +91,16 @@ export const Portfolio: React.FC = () => {
                       {project.featured && (
                         <div className="absolute top-4 left-4">
                           <span className="bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Featured
+                            {t('portfolio.featured') || 'Featured'}
                           </span>
                         </div>
                       )}
                       <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-4">
                         <Button size="sm" href={project.liveDemo} icon={<ExternalLink className="h-4 w-4" />}>
-                          Live Demo
+                          {t('common.liveDemo')}
                         </Button>
                         <Button variant="outline" size="sm" href={project.github} icon={<Github className="h-4 w-4" />}>
-                          Code
+                          {t('common.github')}
                         </Button>
                       </div>
                     </div>
@@ -117,7 +122,7 @@ export const Portfolio: React.FC = () => {
 
                       <div className="flex space-x-3">
                         <Button size="sm" href={project.liveDemo} className="flex-1">
-                          View Project
+                          {t('common.viewProject')}
                         </Button>
                         <Button variant="outline" size="sm" href={project.github}>
                           <Github className="h-4 w-4" />
@@ -137,8 +142,8 @@ export const Portfolio: React.FC = () => {
               className="text-center py-12"
             >
               <Filter className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-xl text-gray-600">No projects found for this category</p>
-              <p className="text-gray-500 mt-2">Try selecting a different filter</p>
+              <p className="text-xl text-gray-600">{t('portfolio.noProjects') || 'No projects found for this category'}</p>
+              <p className="text-gray-500 mt-2">{t('portfolio.tryDifferent') || 'Try selecting a different filter'}</p>
             </motion.div>
           )}
         </div>
