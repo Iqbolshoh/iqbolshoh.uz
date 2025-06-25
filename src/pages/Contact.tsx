@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram } from 'lucide-react';
 import { Card } from '../components/UI/Card';
 import { Button } from '../components/UI/Button';
 import { personalInfo } from '../data/content';
 
 export const Contact: React.FC = () => {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -38,11 +41,10 @@ export const Contact: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl lg:text-6xl">
-              Let's Work Together
+              {t('contact.title')}
             </h1>
             <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
-              Got a project in mind or just want to say Salaam? I'd love to hear from you.
-              Let's create something amazing together.
+              {t('contact.description')}
             </p>
           </motion.div>
         </div>
@@ -60,11 +62,11 @@ export const Contact: React.FC = () => {
               viewport={{ once: true }}
             >
               <Card className="p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Me a Message</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('contact.sendMessage')}</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      Your Name *
+                      {t('contact.yourName')} *
                     </label>
                     <input
                       type="text"
@@ -80,7 +82,7 @@ export const Contact: React.FC = () => {
 
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address *
+                      {t('contact.emailAddress')} *
                     </label>
                     <input
                       type="email"
@@ -96,7 +98,7 @@ export const Contact: React.FC = () => {
 
                   <div>
                     <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                      Subject
+                      {t('contact.subject')}
                     </label>
                     <input
                       type="text"
@@ -111,7 +113,7 @@ export const Contact: React.FC = () => {
 
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Message *
+                      {t('contact.message')} *
                     </label>
                     <textarea
                       id="message"
@@ -131,7 +133,7 @@ export const Contact: React.FC = () => {
                     className="w-full"
                     icon={<Send className="h-5 w-5" />}
                   >
-                    Send Message
+                    {t('contact.sendMessageBtn')}
                   </Button>
                 </form>
               </Card>
@@ -147,11 +149,9 @@ export const Contact: React.FC = () => {
             >
               <div className="space-y-8">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6"> {t('contact.getInTouch')}</h2>
                   <p className="text-gray-600 text-lg">
-                    I'm always excited to work on new projects and collaborate with
-                    great people. Whether you have a project in mind or just want to chat,
-                    feel free to reach out!
+                    {t('contact.getInTouchDesc')}
                   </p>
                 </div>
 
@@ -163,7 +163,7 @@ export const Contact: React.FC = () => {
                       </div>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">Email</h3>
+                      <h3 className="font-semibold text-gray-900">{t('contact.email')}</h3>
                       <a
                         href={`mailto:${personalInfo.email}`}
                         className="text-primary-600 hover:text-primary-700 transition-colors"
@@ -180,7 +180,7 @@ export const Contact: React.FC = () => {
                       </div>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">Phone</h3>
+                      <h3 className="font-semibold text-gray-900">{t('contact.phone')}</h3>
                       <a
                         href={`tel:${personalInfo.phone}`}
                         className="text-primary-600 hover:text-primary-700 transition-colors"
@@ -197,14 +197,14 @@ export const Contact: React.FC = () => {
                       </div>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">Location</h3>
+                      <h3 className="font-semibold text-gray-900">{t('contact.location')}</h3>
                       <p className="text-gray-600">{personalInfo.location}</p>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-4">Follow Me</h3>
+                  <h3 className="font-semibold text-gray-900 mb-4">{t('contact.followMe')}</h3>
                   <div className="flex space-x-4">
                     <a
                       href={personalInfo.social.github}
@@ -242,10 +242,9 @@ export const Contact: React.FC = () => {
                 </div>
 
                 <Card className="p-6 bg-gradient-to-r from-primary-50 to-accent-50">
-                  <h3 className="font-semibold text-gray-900 mb-2">Quick Response Guarantee</h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">{t('contact.quickResponse')}</h3>
                   <p className="text-gray-600">
-                    I typically respond to all inquiries within 24 hours.
-                    For urgent projects, feel free to call or message me directly.
+                    {t('contact.quickResponseDesc')}
                   </p>
                 </Card>
               </div>
@@ -266,10 +265,9 @@ export const Contact: React.FC = () => {
           >
             <Card className="p-12 bg-gradient-to-br from-primary-400 to-primary-500 text-white">
               <MapPin className="h-16 w-16 mx-auto mb-6 opacity-80" />
-              <h2 className="text-3xl font-bold mb-4">Based in Samarkand</h2>
+              <h2 className="text-3xl font-bold mb-4">{t('contact.basedIn')}</h2>
               <p className="text-xl text-primary-100 max-w-2xl mx-auto">
-                Located in the historic city of Samarkand, Uzbekistan.
-                Available for remote work worldwide and local meetings in Samarkand.
+                {t('contact.basedInDesc')}
               </p>
             </Card>
           </motion.div>

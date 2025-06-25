@@ -86,7 +86,7 @@ export const Footer: React.FC = () => {
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <p className="text-gray-400">{t('footer.copyright')}</p>
             <p className="flex items-center text-gray-400 mt-4 sm:mt-0">
-              {t('common.madeWithLove')} <Heart className="h-4 w-4 text-primary-400 mx-1 animate-pulse" /> {t('common.fromSamarkand')}
+              {t('footer.madeWithLove')} <Heart className="h-4 w-4 text-primary-400 mx-1 animate-pulse" /> {t('footer.fromSamarkand')}
             </p>
           </div>
         </div>

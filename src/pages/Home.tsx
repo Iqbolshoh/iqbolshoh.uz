@@ -11,10 +11,10 @@ export const Home: React.FC = () => {
   const { t } = useTranslation();
 
   const stats = [
-    { label: t('common.yearsExperience'), value: '3+', icon: Star },
-    { label: t('common.projectsCompleted'), value: '50+', icon: Award },
-    { label: t('common.happyClients'), value: '25+', icon: Users },
-    { label: t('common.cupsOfCoffee'), value: '1000+', icon: Coffee },
+    { label: t('home.yearsExperience'), value: '3+', icon: Star },
+    { label: t('home.projectsCompleted'), value: '50+', icon: Award },
+    { label: t('home.happyClients'), value: '25+', icon: Users },
+    { label: t('home.cupsOfCoffee'), value: '1000+', icon: Coffee },
   ];
 
   return (
@@ -35,14 +35,14 @@ export const Home: React.FC = () => {
               className="lg:col-span-7 text-center lg:text-left"
             >
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                {t('hero.greeting')}{' '}
+                {t('home.greeting')}{' '}
                 <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
-                  {t('hero.name')}
+                  {t('home.name')}
                 </span>
               </h1>
 
               <p className="mt-6 text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0">
-                {t('hero.description')}
+                {t('home.description')}
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
@@ -51,7 +51,7 @@ export const Home: React.FC = () => {
                   icon={<ArrowRight className="h-5 w-5" />}
                   className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-glow-red w-full sm:w-auto"
                 >
-                  <Link to="/portfolio">{t('hero.viewPortfolio')}</Link>
+                  <Link to="/portfolio">{t('home.viewPortfolio')}</Link>
                 </Button>
                 <Button
                   variant="outline"
@@ -60,7 +60,7 @@ export const Home: React.FC = () => {
                   href="/resume.pdf"
                   className="border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white w-full sm:w-auto"
                 >
-                  {t('hero.downloadCV')}
+                  {t('home.downloadCV')}
                 </Button>
               </div>
             </motion.div>
@@ -125,8 +125,8 @@ export const Home: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t('common.techStack')}</h2>
-            <p className="mt-4 text-lg text-gray-600">{t('common.technologiesILove')}</p>
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t('home.techStack')}</h2>
+            <p className="mt-4 text-lg text-gray-600">{t('home.technologiesILove')}</p>
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -184,8 +184,8 @@ export const Home: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t('common.featuredProjects')}</h2>
-            <p className="mt-4 text-lg text-gray-600">{t('common.someRecentWork')}</p>
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t('home.featuredProjects')}</h2>
+            <p className="mt-4 text-lg text-gray-600">{t('home.someRecentWork')}</p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -221,10 +221,10 @@ export const Home: React.FC = () => {
                     </div>
                     <div className="flex space-x-4">
                       <Button size="sm" href={project.liveDemo} className="bg-gradient-to-r from-primary-600 to-primary-700">
-                        {t('common.liveDemo')}
+                        {t('portfolio.liveDemo')}
                       </Button>
                       <Button variant="outline" size="sm" href={project.github} className="border-primary-600 text-primary-600 hover:bg-primary-600">
-                        {t('common.github')}
+                        {t('portfolio.github')}
                       </Button>
                     </div>
                   </div>
@@ -235,7 +235,7 @@ export const Home: React.FC = () => {
 
           <div className="text-center">
             <Button variant="outline" size="lg" className="border-primary-600 text-primary-600 hover:bg-primary-600">
-              <Link to="/portfolio">{t('common.viewAllProjects')}</Link>
+              <Link to="/portfolio">{t('portfolio.viewAllProjects')}</Link>
             </Button>
           </div>
         </div>

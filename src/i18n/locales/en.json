@@ -8,7 +8,7 @@
     "contact": "Contact",
     "hireMe": "Hire Me"
   },
-  "hero": {
+  "home": {
     "greeting": "Hi, I'm",
     "name": "Iqbolshoh",
     "title": "Full-Stack Developer",
@@ -16,7 +16,11 @@
     "viewPortfolio": "View Portfolio",
     "downloadCV": "Download CV",
     "availableForHire": "Available for hire",
-    "trustedBy": "Trusted by companies like:"
+    "trustedBy": "Trusted by companies like:",
+    "techStack": "My Tech Stack",
+    "technologiesILove": "Technologies I Love Working With",
+    "featuredProjects": "Featured Projects",
+    "someRecentWork": "Some of My Recent Work"
   },
   "about": {
     "title": "About Me",
@@ -50,7 +54,8 @@
     "liveDemo": "Live Demo",
     "github": "GitHub",
     "noProjects": "No projects found for this category",
-    "tryDifferent": "Try selecting a different filter"
+    "tryDifferent": "Try selecting a different filter",
+    "viewAllProjects": "View All Projects"
   },
   "services": {
     "title": "My Services",
@@ -91,6 +96,8 @@
     "description": "Building modern digital solutions with passion and precision. Let's turn your ideas into reality.",
     "navigation": "Navigation",
     "resources": "Resources",
-    "copyright": "© 2025 Iqbolshoh Ilhomjonov. All rights reserved."
+    "copyright": "© 2025 Iqbolshoh Ilhomjonov. All rights reserved.",
+    "madeWithLove": "Made with by Iqbolshoh",
+    "fromSamarkand": "from Samarkand, Uzbekistan"
   }
 }
