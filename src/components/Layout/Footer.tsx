@@ -5,7 +5,7 @@ import { Github, Linkedin, Send, Instagram, Heart, Mail, Phone, MapPin } from 'l
 import { personalInfo } from '../../data/content';
 
 export const Footer: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <footer className="bg-gray-900 text-gray-100 border-t border-gray-700">
@@ -85,7 +85,7 @@ export const Footer: React.FC = () => {
 
           {/* Contact Column */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-primary-400">{t('nav.contact')}</h3>
+            <h3 className="text-sm font-semibold text-primary-400">{ }</h3>
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-gray-300">
                 <Mail className="h-5 w-5" />
@@ -101,7 +101,7 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-2 text-gray-300">
                 <MapPin className="h-5 w-5" />
-                <span>{personalInfo.location}</span>
+                <span>{personalInfo.location[i18n.language as keyof typeof personalInfo.location]}</span>
               </li>
             </ul>
           </div>

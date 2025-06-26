@@ -37,7 +37,7 @@ export const About: React.FC = () => {
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="flex items-center space-x-2 text-gray-600">
                   <MapPin className="h-5 w-5 text-primary-600" />
-                  <span>{personalInfo.location}</span>
+                  <span>{personalInfo.location[i18n.language as keyof typeof personalInfo.location]}</span>
                 </div>
                 <div className="flex items-center space-x-2 text-gray-600">
                   <GraduationCap className="h-5 w-5 text-primary-600" />
@@ -59,7 +59,7 @@ export const About: React.FC = () => {
               <div className="relative">
                 <img
                   src={personalInfo.avatar}
-                  alt={personalInfo.name}
+                  alt={personalInfo.name[i18n.language as keyof typeof personalInfo.name]}
                   className="rounded-2xl shadow-2xl"
                 />
                 <div className="absolute -bottom-6 -right-6 bg-white rounded-xl p-4 shadow-lg">

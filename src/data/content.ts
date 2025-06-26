@@ -30,10 +30,18 @@ import {
 
 // Personal Info
 export const personalInfo = {
-  name: "Iqbolshoh Ilhomjonov",
-  // title: "Full-Stack Developer",
-  location: "Samarkand, Uzbekistan",
-  // bio: "A passionate Full-Stack Developer with over 3 years of experience in Laravel, React, and Node.js. 4rd-year Software Engineering student at Samarkand State University.",
+  name: {
+    en: "Iqbolshoh Ilhomjonov",
+    uz: "Iqbolshoh Ilhomjonov",
+    ru: "Икболшох Илхомжонов",
+    tj: "Иқболшоҳ Илҳомҷонов"
+  },
+  location: {
+    en: "Samarkand, Uzbekistan",
+    uz: "Samarqand, O‘zbekiston",
+    ru: "Самарканд, Узбекистан",
+    tj: "Самарқанд, Ӯзбекистон"
+  },
   avatar: "/images/logos/iqbolshoh.jpg",
   social: {
     email: {

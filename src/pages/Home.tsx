@@ -72,7 +72,7 @@ export const Home: React.FC = () => {
                 <div className="aspect-square rounded-full bg-gradient-to-tr from-primary-500 to-primary-400 p-1 shadow-glow-red-lg">
                   <img
                     src={personalInfo.avatar}
-                    alt={personalInfo.name}
+                    alt={personalInfo.name[i18n.language as keyof typeof personalInfo.name]}
                     className="h-full w-full rounded-full object-cover"
                   />
                 </div>

@@ -7,7 +7,7 @@ import { Button } from '../components/UI/Button';
 import { personalInfo } from '../data/content';
 
 export const Contact: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -194,7 +194,7 @@ export const Contact: React.FC = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900">{t('contact.location')}</h3>
-                      <p className="text-gray-600">{personalInfo.location}</p>
+                      <p className="text-gray-600">{personalInfo.location[i18n.language as keyof typeof personalInfo.location]}</p>
                     </div>
                   </div>
                 </div>
