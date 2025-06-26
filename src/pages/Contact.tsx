@@ -32,17 +32,14 @@ export const Contact: React.FC = () => {
       const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
       const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
 
-      const message = `📨 *New Contact Message*
-
-    🌐 *Website:* [iqbolshoh.uz/contact](https://iqbolshoh.uz/contact)
-
-    🙋‍♂️ *Sender Info:*
-    • 👤 *Name:* ${formData.name}
-    • 📧 *Email:* ${formData.email}
-    • 📝 *Subject:* ${formData.subject || '_No subject provided._'}
-
-    💬 *Message:* ${formData.message || '_No additional message provided._'}
-    `;
+      const message =
+        `📨 *<b>New Contact Message</b>*\n` +
+        `\n🌐 <b>Website:</b> <a href="https://iqbolshoh.uz/contact">iqbolshoh.uz/contact</a>` +
+        `\n\n🙋‍♂️ <b>Sender Info:</b>` +
+        `\n\t• 👤 <b>Name:</b> ${formData.name}` +
+        `\n\t• 📧 <b>Email:</b> ${formData.email}` +
+        `\n\t• 📝 <b>Subject:</b> ${formData.subject || '<i>No subject provided.</i>'}` +
+        `\n\n💬 <b>Message:</b>\n${formData.message || '<i>No additional message provided.</i>'}`;
 
       const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: 'POST',
@@ -50,7 +47,7 @@ export const Contact: React.FC = () => {
         body: JSON.stringify({
           chat_id: chatId,
           text: message,
-          parse_mode: 'Markdown',
+          parse_mode: 'HTML',
           disable_web_page_preview: true,
         }),
       });

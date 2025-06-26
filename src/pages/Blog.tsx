@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, ArrowRight, Tag } from 'lucide-react';
+import { Calendar, ArrowRight, Tag } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Card } from '../components/UI/Card';
 import { Button } from '../components/UI/Button';
@@ -76,10 +76,6 @@ export const Blog: React.FC = () => {
                       <div className="flex items-center space-x-1">
                         <Calendar className="h-4 w-4" />
                         <span>{new Date(post.date).toLocaleDateString()}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Clock className="h-4 w-4" />
-                        <span>{post.readTime}</span>
                       </div>
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-4 line-clamp-2">

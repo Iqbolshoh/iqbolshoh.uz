@@ -65,20 +65,15 @@ export const Services: React.FC = () => {
     const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
     const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
 
-    const message = `🚀 *New Service Request*
-
-    🌐 *Website:* [iqbolshoh.uz/services](https://iqbolshoh.uz/services)
-
-    📌 *Requested Service:* 
-    ${formData.serviceName} — _${formData.servicePrice}_
-
-    🙋‍♂️ *Client Info:*
-    • 👤 *Name:* ${formData.name}
-    • 📧 *Email:* ${formData.email}
-    • 📱 *Phone:* ${formData.phone}
-
-    📝 *Message:* ${formData.message || '_No additional message provided._'}
-    `;
+    const message =
+      `🚀 *<b>New Service Request</b>*\n` +
+      `\n🌐 <b>Website:</b> <a href="https://iqbolshoh.uz/services">iqbolshoh.uz/services</a>` +
+      `\n📌 <b>Requested Service:</b> <i>${formData.serviceName}</i> — <i>${formData.servicePrice}</i>` +
+      `\n\n🙋‍♂️ <b>Client Info:</b>` +
+      `\n\t• 👤 <b>Name:</b> ${formData.name}` +
+      `\n\t• 📧 <b>Email:</b> ${formData.email}` +
+      `\n\t• 📱 <b>Phone:</b> ${formData.phone}` +
+      `\n\n📝 <b>Message:</b>\n${formData.message || '<i>No additional message provided.</i>'}`;
 
     const lang = i18n.language;
     const messages = {
@@ -114,7 +109,7 @@ export const Services: React.FC = () => {
         body: JSON.stringify({
           chat_id: chatId,
           text: message,
-          parse_mode: 'Markdown',
+          parse_mode: 'HTML',
           disable_web_page_preview: true,
         }),
       });

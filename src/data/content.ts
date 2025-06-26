@@ -771,7 +771,6 @@ export const blogPosts = [
     },
     featured: true,
     date: "2025-06-26",
-    readTime: "3 min read",
     tags: ["Portfolio", "Design", "Branding"],
     image: "/images/blogs/blog-1.png",
     slug: "new-design-iqbolshoh-uz"
