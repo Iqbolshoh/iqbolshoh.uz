@@ -223,8 +223,17 @@ export const Home: React.FC = () => {
                       alt={project.name[i18n.language as keyof typeof project.name]}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
+
+                    {/* FEATURED BADGE */}
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                        {t('portfolio.featured')}
+                      </span>
+                    </div>
+
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
+
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-2">
                       {project.name[i18n.language as keyof typeof project.name]}
