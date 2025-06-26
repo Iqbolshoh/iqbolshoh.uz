@@ -64,7 +64,7 @@ export const BlogDetails: React.FC<BlogDetailsProps> = () => {
               <img
                 src={post.image}
                 alt={getLocalizedContent(post.title, i18n.language)}
-                className="w-full h-96 object-cover"
+                className="w-full object-cover"
               />
               <div className="p-8 lg:p-12">
                 <div className="flex items-center space-x-4 text-sm text-gray-600 mb-4">

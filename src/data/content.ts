@@ -216,89 +216,164 @@ export const journey = [
     title: {
       en: "Started University",
       uz: "Universitetni boshladim",
-      ru: "Университетни начал",
-      tj: "Донишгоҳро оғоз кардам"
+      ru: "Начал обучение в университете",
+      tj: "Оғози донишгоҳ"
     },
     description: {
-      en: "Started studying Software Engineering at Samarkand State University",
-      uz: "Samarkand State Universityda Dasturiy injiniring yo‘nalishida o‘qishni boshladim",
-      ru: "Начал обучение по направлению Программная инженерия в Samarkand State University",
-      tj: "Омӯзиши муҳандисии нармафзорро дар Samarkand State University оғоз кардам"
+      en: "Began Software Engineering at Samarkand State University",
+      uz: "Samarkand Davlat Universitetida Dasturiy Injenerlik yo‘nalishini boshladim",
+      ru: "Начал изучение программной инженерии в Самаркандском Государственном Университете",
+      tj: "Дар Донишгоҳи Давлатии Самарқанд муҳандисии нармафзорро оғоз кардам"
     }
   },
   {
     year: "2022",
     title: {
-      en: "Learned Frontend Foundations",
+      en: "Frontend Foundations",
       uz: "Frontend asoslarini o‘rgandim",
-      ru: "Изучил основы Frontend",
+      ru: "Изучил основы frontend",
       tj: "Асосҳои frontend-ро омӯхтам"
     },
     description: {
-      en: "Learned the fundamentals of HTML, CSS, JavaScript, and React — my first step into frontend development",
-      uz: "HTML, CSS, JavaScript va React asoslarini o‘rgandim — frontend rivojlanishiga ilk qadammim",
-      ru: "Изучил основы HTML, CSS, JavaScript и React — мой первый шаг в frontend-разработку",
-      tj: "Асосҳои HTML, CSS, JavaScript ва React-ро омӯхтам — қадами аввалини ман ба рушди frontend буд"
+      en: "Started learning HTML, CSS, JavaScript, and React—my first step into the frontend world",
+      uz: "HTML, CSS, JavaScript va Reactni o‘rganishni boshladim — frontend dunyosiga birinchi qadammim",
+      ru: "Начал изучать HTML, CSS, JavaScript и React — мой первый шаг в мир frontend",
+      tj: "Омӯзиши HTML, CSS, JavaScript ва React-ро оғоз кардам — қадами аввалини ман ба ҷаҳони frontend"
     }
   },
   {
     year: "2023",
     title: {
-      en: "Mastered Backend Development",
-      uz: "Backend rivojini chuqur o‘rgandim",
-      ru: "Углубился в backend-разработку",
-      tj: "Рушди backend-ро амиқ омӯхтам"
+      en: "Backend Breakthrough",
+      uz: "Backend rivoji",
+      ru: "Прорыв в backend",
+      tj: "Пешравӣ дар backend"
     },
     description: {
-      en: "Specialized in backend with Laravel and REST APIs — discovered my passion for backend development",
-      uz: "Laravel va REST APIlar bilan backendga ixtisoslashdim — backendga bo‘lgan ishtiyoqimni kashf etdim",
-      ru: "Специализировался в backend с использованием Laravel и REST API — открыл свою страсть к backend-разработке",
-      tj: "Бо истифодаи Laravel ва REST API дар backend ихтисос ёфтам — иштиёқам ба backend-ро дарёфтам"
+      en: "Dived into Laravel and REST APIs, fell in love with backend development",
+      uz: "Laravel va REST API-larni chuqur o‘rgandim, backend dasturlashga oshiq bo‘ldim",
+      ru: "Глубоко изучил Laravel и REST API — влюбился в backend разработку",
+      tj: "Laravel ва REST API-ро амиқ омӯхтам ва ба backend дил бастам"
     }
   },
   {
     year: "2023",
     title: {
-      en: "First Full Freelance Project",
-      uz: "Birinchi to‘liq freelance loyiham",
-      ru: "Первый полноценный фриланс-проект",
-      tj: "Аввалин лоиҳаи пурраи фриланс"
+      en: "First Real Freelance Project",
+      uz: "Birinchi haqiqiy freelancer loyihasi",
+      ru: "Первый реальный фриланс-проект",
+      tj: "Аввалин лоиҳаи воқеии фриланс"
     },
     description: {
-      en: "Built a full-stack client project from scratch using Laravel and React",
-      uz: "Laravel va React yordamida noldan to‘liq mijoz loyihasini yaratdim",
-      ru: "С нуля создал полноценный клиентский full-stack проект с использованием Laravel и React",
-      tj: "Лоиҳаи пурраи муштариро бо истифодаи Laravel ва React аз сифр сохтам"
+      en: "Completed a full-stack client project from scratch using Laravel and React",
+      uz: "Laravel va React asosida to‘liq mijoz loyihasini noldan yaratdim",
+      ru: "Завершил клиентский full-stack проект с нуля, используя Laravel и React",
+      tj: "Лоиҳаи пурраи муштариро бо истифода аз Laravel ва React аз сифр анҷом додам"
     }
   },
   {
     year: "2024",
     title: {
       en: "Contributed to Open Source",
-      uz: "Open-sourcega hissa qo‘shdim",
-      ru: "Сделал вклад в Open Source",
+      uz: "Open Source’ga hissa qo‘shdim",
+      ru: "Внёс вклад в Open Source",
       tj: "Ба Open Source саҳм гузоштам"
     },
     description: {
-      en: "Published open repositories and joined global development communities",
-      uz: "Ochiq repositorylar e’lon qilib, global dasturchilar hamjamiyatiga qo‘shildim",
-      ru: "Опубликовал открытые репозитории и присоединился к международным сообществам разработчиков",
-      tj: "Repository-ҳои кушодаро нашр карда, ба ҷомеаҳои байналмилалии барномасозон ҳамроҳ шудам"
+      en: "Published several public repositories and joined global developer communities",
+      uz: "Bir nechta ochiq repositorylarni e’lon qildim va jahon dasturchilar hamjamiyatiga qo‘shildim",
+      ru: "Опубликовал несколько открытых репозиториев и присоединился к мировым сообществам разработчиков",
+      tj: "Якчанд репозиторияи оммавиро нашр кардам ва ба ҷомеаҳои байналмилалии барномасозон пайвастам"
     }
   },
   {
     year: "2024",
     title: {
-      en: "Launched Personal Portfolio Website",
-      uz: "Shaxsiy portfolio saytini ishga tushirdim",
-      ru: "Запустил личный сайт-портфолио",
-      tj: "Сомонаи шахсии портфолиоро оғоз кардам"
+      en: "Portfolio and Personal Website",
+      uz: "Portfolio va shaxsiy veb-sayt",
+      ru: "Портфолио и персональный веб-сайт",
+      tj: "Портфолио ва сомонаи шахсӣ"
     },
     description: {
-      en: "Launched iqbolshoh.uz to present my projects, applications, and technical skills",
-      uz: "Iqbolshoh.uz saytini ishga tushirdim — unda loyihalarim, ilovalarim va texnik ko‘nikmalarim mavjud",
-      ru: "Запустил сайт iqbolshoh.uz — на нём представлены мои проекты, приложения и технические навыки",
-      tj: "Сомонаи iqbolshoh.uz-ро оғоз кардам — дар он лоиҳаҳо, барномаҳо ва малакаҳои техникии ман ҷой дода шудаанд"
+      en: "Launched iqbolshoh.uz to showcase my work, applications, and skills",
+      uz: "Iqbolshoh.uz saytini ishga tushirdim — ishlarim, ilovalarim va ko‘nikmalarimni namoyish etish uchun",
+      ru: "Запустил iqbolshoh.uz для демонстрации своих работ, приложений и навыков",
+      tj: "Iqbolshoh.uz-ро барои намоиши корҳо, барномаҳо ва малакаҳоям оғоз кардам"
+    }
+  },
+  {
+    year: "2025",
+    title: {
+      en: "Templates.uz SaaS Platform",
+      uz: "Templates.uz SaaS platformasi",
+      ru: "SaaS платформа Templates.uz",
+      tj: "Платформаи SaaS-и Templates.uz"
+    },
+    description: {
+      en: "Launched a Laravel and React based SaaS platform to simplify website building",
+      uz: "Laravel va React asosida Templates.uz platformasini sayt yaratishni soddalashtirish uchun ishga tushirdim",
+      ru: "Запустил SaaS платформу Templates.uz на базе Laravel и React для упрощения создания сайтов",
+      tj: "Платформаи Templates.uz-ро бо истифода аз Laravel ва React барои содда кардани сохтани сомонаҳо оғоз кардам"
+    }
+  },
+  {
+    year: "2025",
+    title: {
+      en: "Mentored Over 20 Developers",
+      uz: "20 dan ortiq dasturchiga ta’lim berdim",
+      ru: "Наставлял более 20 разработчиков",
+      tj: "Ба беш аз 20 барномасоз роҳнамоӣ кардам"
+    },
+    description: {
+      en: "Taught software development from scratch using C++, React, and Laravel through practical lessons",
+      uz: "C++, React va Laravel yordamida dasturlashni amaliy darslar orqali noldan o‘rgatdim",
+      ru: "Обучал программированию с нуля на C++, React и Laravel через практические занятия",
+      tj: "Ба барномасозӣ аз сифр тавассути дарсҳои амалӣ бо истифода аз C++, React ва Laravel омӯзиш додам"
+    }
+  },
+  {
+    year: "2025",
+    title: {
+      en: "50+ Public Projects",
+      uz: "50+ ochiq loyiha",
+      ru: "Более 50 открытых проектов",
+      tj: "50+ лоиҳаи оммавӣ"
+    },
+    description: {
+      en: "Published over 50 open-source/public projects on GitHub and other platforms",
+      uz: "GitHub va boshqa platformalarda 50 dan ortiq ochiq loyiha e’lon qildim",
+      ru: "Опубликовал более 50 открытых проектов на GitHub и других платформах",
+      tj: "Дар GitHub ва дигар платформаҳо зиёда аз 50 лоиҳаи оммавиро нашр кардам"
+    }
+  },
+  {
+    year: "2025",
+    title: {
+      en: "Educational Content Creator",
+      uz: "Ta’limiy kontent yaratdim",
+      ru: "Создатель образовательного контента",
+      tj: "Муаллифи контенти таълимӣ"
+    },
+    description: {
+      en: "Started sharing free software tutorials on Instagram and YouTube",
+      uz: "Instagram va YouTube’da dasturlash bo‘yicha bepul darslar ulashishni boshladim",
+      ru: "Начал делиться бесплатными уроками по программированию в Instagram и YouTube",
+      tj: "Нашри дарсҳои ройгон оид ба барномасозиро дар Instagram ва YouTube оғоз кардам"
+    }
+  },
+  {
+    year: "2025",
+    title: {
+      en: "Freelance Career Growth",
+      uz: "Freelancerlikdagi yutuqlar",
+      ru: "Рост карьеры во фрилансе",
+      tj: "Пешравии касбӣ дар фриланс"
+    },
+    description: {
+      en: "Worked with multiple clients to build real-world digital solutions",
+      uz: "Bir nechta mijozlar bilan haqiqiy raqamli yechimlar ustida ishladim",
+      ru: "Работал с несколькими клиентами над созданием реальных цифровых решений",
+      tj: "Бо муштариёни зиёд барои сохтани ҳалли рақамии воқеӣ ҳамкорӣ кардам"
     }
   }
 ];
@@ -612,13 +687,13 @@ export const processSteps = [
     step: "01",
     title: {
       en: "Discovery",
-      uz: "Tahlil bosqichi",
+      uz: "Tahlil",
       ru: "Изучение",
       tj: "Омӯзиш"
     },
     description: {
       en: "Understanding your requirements, goals, and target audience",
-      uz: "Talablaringiz, maqsadlaringiz va auditoriyangizni tushunish",
+      uz: "Talablaringizni, maqsadlaringizni va maqsadli auditoriyangizni tushunish",
       ru: "Понимание ваших требований, целей и целевой аудитории",
       tj: "Фаҳмидани талабот, ҳадафҳо ва аудиторияи мақсаднок"
     }
@@ -633,7 +708,7 @@ export const processSteps = [
     },
     description: {
       en: "Creating a detailed project roadmap and technical architecture",
-      uz: "Loyihangiz uchun batafsil reja va texnik arxitektura yaratish",
+      uz: "Batafsil loyiha yo‘l xaritasi va texnik me’moriy tuzilma yaratish",
       ru: "Создание подробной дорожной карты проекта и технической архитектуры",
       tj: "Эҷоди нақшаи муфассали лоиҳа ва меъмории техникӣ"
     }
@@ -648,24 +723,24 @@ export const processSteps = [
     },
     description: {
       en: "Building your solution with clean, scalable, and maintainable code",
-      uz: "Toza, kengaytiriladigan va saqlab bo‘ladigan kod bilan yechim yaratish",
+      uz: "Toza, kengaytiriladigan va texnik xizmat ko‘rsatish mumkin bo‘lgan kod bilan yechim yaratish",
       ru: "Создание решения с чистым, масштабируемым и поддерживаемым кодом",
-      tj: "Сохтани ҳалли масъала бо коди пок ва нигоҳдошташаванда"
+      tj: "Сохтани ҳалли масъала бо коди пок, васеъшаванда ва нигоҳдошташаванда"
     }
   },
   {
     step: "04",
     title: {
       en: "Delivery",
-      uz: "Yetkazish",
+      uz: "Yetkazib berish",
       ru: "Доставка",
       tj: "Супоридан"
     },
     description: {
       en: "Testing, deployment, and ongoing support to ensure success",
-      uz: "Test qilish, ishga tushurish va doimiy texnik yordam",
-      ru: "Тестирование, развертывание и постоянная поддержка",
-      tj: "Санҷиш, татбиқ ва дастгирии доимӣ барои муваффақият"
+      uz: "Test qilish, joylashtirish va doimiy yordam ko‘rsatish orqali muvaffaqiyatni ta'minlash",
+      ru: "Тестирование, развертывание и постоянная поддержка для обеспечения успеха",
+      tj: "Санҷиш, татбиқ ва дастгирии доимӣ барои таъмин намудани муваффақият"
     }
   }
 ];
@@ -675,64 +750,22 @@ export const blogPosts = [
   {
     id: 1,
     title: {
-      en: "Top 10 Phrasal Verbs for Developers",
-      uz: "Dasturchilar uchun 10 ta eng yaxshi frazeologik fe'l",
-      ru: "Топ-10 фразовых глаголов для разработчиков",
-      tj: "10 феълҳои иборати беҳтарин барои барномасозон"
+      en: "The New Look of iqbolshoh.uz – A Digital Masterpiece",
+      uz: "Yangi iqbolshoh.uz – Raqamli san’at asari",
+      ru: "Новый iqbolshoh.uz – Цифровой шедевр",
+      tj: "iqbolshoh.uz-и нав – Шоҳкори рақамӣ"
     },
     excerpt: {
-      en: "Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.",
-      uz: "Texnologik suhbatlarda 'figure out', 'break down' va 'carry on' kabi fe'llardan qanday foydalanishni o'rganing.",
-      ru: "Узнайте, как использовать фразовые глаголы как 'figure out', 'break down', 'carry on' в IT-разговорах.",
-      tj: "Ёд гиред, ки чӣ гуна феълҳои иборавиеро монанди 'figure out', 'break down', 'carry on' дар муколамаҳои техникӣ истифода баред."
-    },
-    featured: false,
-    date: "2025-01-15",
-    readTime: "5 min read",
-    tags: ["English", "Communication"],
-    image: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=800",
-    slug: "phrasal-verbs-developers"
-  },
-  {
-    id: 2,
-    title: {
-      en: "Laravel vs Node.js – Which Backend to Choose?Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.",
-      uz: "Laravel vs Node.js – Qaysi Backendni Tanlash kerak?",
-      ru: "Laravel против Node.js – Что выбрать?",
-      tj: "Laravel ё Node.js – Кадомаш беҳтар аст?"
-    },
-    excerpt: {
-      en: "An honest comparison between two backend giants from a full-stack developer's perspective.",
-      uz: "Full-stack dasturchi nuqtai nazaridan ikki backend giganti haqida samimiy taqqoslash.",
-      ru: "Честное сравнение двух гигантов бэкенда с точки зрения full-stack разработчика.",
-      tj: "Муқоисаи ростини ду абарқудрати backend аз дидгоҳи full-stack developer."
-    },
-    featured: false,
-    date: "2025-01-10",
-    readTime: "8 min read",
-    tags: ["Backend", "Laravel", "Node.js"],
-    image: "https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=800",
-    slug: "laravel-vs-nodejs"
-  },
-  {
-    id: 3,
-    title: {
-      en: "Building Modern UIs with React and TailwindLearn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.",
-      uz: "React va Tailwind bilan zamonaviy UI yaratish",
-      ru: "Создание современных UI с React и Tailwind",
-      tj: "Сохтани UI-и муосир бо React ва Tailwind"
-    },
-    excerpt: {
-      en: "Best practices for creating beautiful, responsive interfaces using React and Tailwind CSS.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.",
-      uz: "React va Tailwind CSS yordamida chiroyli va responsiv interfeyslar yaratish bo'yicha eng yaxshi amaliyotlar.",
-      ru: "Лучшие практики создания красивых, адаптивных интерфейсов с React и Tailwind CSS.",
-      tj: "Беҳтарин усулҳо барои сохтани интерфейсҳои зебо ва ҷавобгӯ бо React ва Tailwind CSS."
+      en: "Today, iqbolshoh.uz got a stunning redesign! A clean UI, elegant layout, powerful multilingual support, and vibrant animations make it a must-see portfolio for developers and clients alike. From the moment you land on the homepage, you are greeted with fluid transitions, clear sections, and intuitive navigation. It reflects not just the skills of a developer, but the vision of a brand. Designed with React and Laravel, it balances beauty with functionality, bringing every element to life. Whether you're a potential client or a curious coder, this site will leave you inspired and impressed.",
+      uz: "Bugun iqbolshoh.uz sayti hayratlanarli darajada yangilandi! Toza interfeys, nafis tuzilma, kuchli ko‘p tilli qo‘llab-quvvatlash va jonli animatsiyalar uni har qanday dasturchi va mijoz uchun ko‘rishga arzigulik portfelga aylantiradi. Bosh sahifaga kirgan zahoti, silliq o‘tishlar, aniq bo‘limlar va tushunarli navigatsiya ko‘zingizga tashlanadi. Bu nafaqat dasturchi mahoratini, balki shaxsiy brend qarashini ham aks ettiradi. React va Laravel asosida ishlab chiqilgan bu sayt funksionallik va estetikani uyg‘unlashtirib, har bir elementni jonlantiradi. Siz mijoz bo‘lasizmi yoki shunchaki o‘rganayotgan dasturchi — bu sayt sizni ilhomlantiradi va qoyil qoldiradi.",
+      ru: "Сегодня сайт iqbolshoh.uz получил потрясающий редизайн! Чистый пользовательский интерфейс, элегантная структура, мощная многоязычная поддержка и яркие анимации делают его портфолио, которое обязательно стоит увидеть как разработчикам, так и клиентам. С первой секунды на главной странице вас встречают плавные переходы, логично структурированные блоки и интуитивная навигация. Этот сайт отражает не только технические навыки разработчика, но и стратегическое видение личного бренда. Построенный на базе React и Laravel, он гармонично сочетает красоту с функциональностью. Будь вы клиент или программист — вы обязательно вдохновитесь этим шедевром.",
+      tj: "Имрӯз сомонаи iqbolshoh.uz бо намуди нави аҷиб навсозӣ гардид! Интерфейси тоза, тарҳи зебо, дастгирии пурқуввати бисёрзабона ва аниматсияҳои рангин онро ба як портфолои воқеан арзандаи дидан барои ҳам барномасозон ва ҳам муштариён табдил додаанд. Аз лаҳзаи аввал, ки ба саҳифаи асосӣ ворид мешавед, гузаришҳои мулоим, қисмҳои возеҳ ва роҳнамоии фаҳмост. Ин сомона на танҳо маҳоратҳои техникии барномасозро нишон медиҳад, балки диди равшани шахсии ӯро низ. Бо истифода аз React ва Laravel сохта шудааст ва зебоӣ ва функсионалиятро ба таври мутавозин муттаҳид мекунад. Новобаста аз он ки шумо муштарӣ ҳастед ё шогирди ҳаваскор — ин сомона шуморо илҳом мебахшад ва дар таассур мегузорад."
     },
     featured: true,
-    date: "2025-01-05",
-    readTime: "6 min read",
-    tags: ["React", "Tailwind", "Frontend"],
-    image: "https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=800",
-    slug: "react-tailwind-modern-ui"
-  },
+    date: "2025-06-26",
+    readTime: "3 min read",
+    tags: ["Portfolio", "Design", "Branding"],
+    image: "/images/blogs/blog-1.png",
+    slug: "new-design-iqbolshoh-uz"
+  }
 ];
