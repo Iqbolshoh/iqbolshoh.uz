@@ -321,13 +321,13 @@ export const blogPosts = [
     id: 1,
     title: {
       en: "Top 10 Phrasal Verbs for Developers",
-      uz: "Dasturchilar uchun 10 ta eng yaxshi frazeologik fe’l",
+      uz: "Dasturchilar uchun 10 ta eng yaxshi frazeologik fe'l",
       ru: "Топ-10 фразовых глаголов для разработчиков",
       tj: "10 феълҳои иборати беҳтарин барои барномасозон"
     },
     excerpt: {
       en: "Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.",
-      uz: "Texnologik suhbatlarda 'figure out', 'break down' va 'carry on' kabi fe’llardan qanday foydalanishni o‘rganing.",
+      uz: "Texnologik suhbatlarda 'figure out', 'break down' va 'carry on' kabi fe'llardan qanday foydalanishni o'rganing.",
       ru: "Узнайте, как использовать фразовые глаголы как 'figure out', 'break down', 'carry on' в IT-разговорах.",
       tj: "Ёд гиред, ки чӣ гуна феълҳои иборавиеро монанди 'figure out', 'break down', 'carry on' дар муколамаҳои техникӣ истифода баред."
     },
@@ -367,7 +367,7 @@ export const blogPosts = [
     },
     excerpt: {
       en: "Best practices for creating beautiful, responsive interfaces using React and Tailwind CSS.",
-      uz: "React va Tailwind CSS yordamida chiroyli va responsiv interfeyslar yaratish bo‘yicha eng yaxshi amaliyotlar.",
+      uz: "React va Tailwind CSS yordamida chiroyli va responsiv interfeyslar yaratish bo'yicha eng yaxshi amaliyotlar.",
       ru: "Лучшие практики создания красивых, адаптивных интерфейсов с React и Tailwind CSS.",
       tj: "Беҳтарин усулҳо барои сохтани интерфейсҳои зебо ва ҷавобгӯ бо React ва Tailwind CSS."
     },

@@ -9,9 +9,13 @@ import { blogPosts } from '../data/content';
 export const Blog: React.FC = () => {
   const { t, i18n } = useTranslation();
 
+  // Helper function to safely get localized content
+  const getLocalizedContent = (content: Record<string, string>, language: string) => {
+    return content[language] || content.en || '';
+  };
+
   return (
     <div className="pt-16">
-      {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-primary-50 via-white to-accent-50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
           <motion.div
@@ -29,72 +33,68 @@ export const Blog: React.FC = () => {
         </div>
       </section>
 
-      {/* Featured Post */}
-      <section className="py-20 bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="mb-16"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('blog.featuredArticle')}</h2>
-            <Card className="overflow-hidden lg:grid lg:grid-cols-2 lg:gap-0">
-              <div className="relative">
-                <img
-                  src={blogPosts[0].image}
-                  alt={blogPosts[0].title[i18n.language]}
-                  className="w-full h-64 lg:h-full object-cover"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    {t('blog.featured')}
-                  </span>
-                </div>
-              </div>
-              <div className="p-8 lg:p-12 flex flex-col justify-center">
-                <div className="flex items-center space-x-4 text-sm text-gray-600 mb-4">
-                  <div className="flex items-center space-x-1">
-                    <Calendar className="h-4 w-4" />
-                    <span>{new Date(blogPosts[0].date).toLocaleDateString()}</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <Clock className="h-4 w-4" />
-                    <span>{blogPosts[0].readTime}</span>
-                  </div>
-                </div>
-
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  {blogPosts[0].title[i18n.language]}
-                </h3>
-
-                <p className="text-gray-600 mb-6">
-                  {blogPosts[0].excerpt[i18n.language]}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {blogPosts[0].tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center px-3 py-1 bg-primary-100 text-primary-800 text-sm rounded-full"
-                    >
-                      <Tag className="h-3 w-3 mr-1" />
-                      {tag}
+      {blogPosts.length > 0 && (
+        <section className="py-20 bg-white">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="mb-16"
+            >
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('blog.featuredArticle')}</h2>
+              <Card className="overflow-hidden lg:grid lg:grid-cols-2 lg:gap-0">
+                <div className="relative">
+                  <img
+                    src={blogPosts[0].image}
+                    alt={getLocalizedContent(blogPosts[0].title, i18n.language)}
+                    className="w-full h-64 lg:h-full object-cover"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                      {t('blog.featured')}
                     </span>
-                  ))}
+                  </div>
                 </div>
+                <div className="p-8 lg:p-12 flex flex-col justify-center">
+                  <div className="flex items-center space-x-4 text-sm text-gray-600 mb-4">
+                    <div className="flex items-center space-x-1">
+                      <Calendar className="h-4 w-4" />
+                      <span>{new Date(blogPosts[0].date).toLocaleDateString()}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Clock className="h-4 w-4" />
+                      <span>{blogPosts[0].readTime}</span>
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    {getLocalizedContent(blogPosts[0].title, i18n.language)}
+                  </h3>
+                  <p className="text-gray-600 mb-6">
+                    {getLocalizedContent(blogPosts[0].excerpt, i18n.language)}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {blogPosts[0].tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-flex items-center px-3 py-1 bg-primary-100 text-primary-800 text-sm rounded-full"
+                      >
+                        <Tag className="h-3 w-3 mr-1" />
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <Button icon={<ArrowRight className="h-4 w-4" />}>
+                    {t('blog.readMore')}
+                  </Button>
+                </div>
+              </Card>
+            </motion.div>
+          </div>
+        </section>
+      )}
 
-                <Button icon={<ArrowRight className="h-4 w-4" />}>
-                  {t('blog.readMore')}
-                </Button>
-              </div>
-            </Card>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Blog Posts Grid */}
       <section className="py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
@@ -120,7 +120,7 @@ export const Blog: React.FC = () => {
                 <Card className="overflow-hidden h-full">
                   <img
                     src={post.image}
-                    alt={post.title[i18n.language]}
+                    alt={getLocalizedContent(post.title, i18n.language)}
                     className="w-full h-48 object-cover"
                   />
                   <div className="p-6 flex flex-col flex-grow">
@@ -134,15 +134,12 @@ export const Blog: React.FC = () => {
                         <span>{post.readTime}</span>
                       </div>
                     </div>
-
                     <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                      {post.title[i18n.language]}
+                      {getLocalizedContent(post.title, i18n.language)}
                     </h3>
-
                     <p className="text-gray-600 mb-4 flex-grow">
-                      {post.excerpt[i18n.language]}
+                      {getLocalizedContent(post.excerpt, i18n.language)}
                     </p>
-
                     <div className="flex flex-wrap gap-2 mb-4">
                       {post.tags.map((tag) => (
                         <span
@@ -153,7 +150,6 @@ export const Blog: React.FC = () => {
                         </span>
                       ))}
                     </div>
-
                     <Button variant="outline" size="sm" className="self-start">
                       {t('blog.readArticle')}
                     </Button>

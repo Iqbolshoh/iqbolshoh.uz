@@ -1,44 +1,141 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { GraduationCap, MapPin, Calendar, Heart, Code2, Coffee } from 'lucide-react';
+import { GraduationCap, MapPin, Calendar, Heart, Code2, Coffee, Award, Users, Star } from 'lucide-react';
 import { Card } from '../components/UI/Card';
 import { personalInfo, techStack } from '../data/content';
 
 export const About: React.FC = () => {
+  const { t, i18n } = useTranslation();
+
+  // Helper function to get localized content
+  const getLocalizedContent = (content: Record<string, string>, language: string) => {
+    return content[language] || content.en || '';
+  };
+
   const highlights = [
-    "3+ years of coding experience",
-    "Mentor to junior developers",
-    "Focused on ethical tech & innovation",
-    "Building Templates.uz SaaS platform",
-    "Active in open-source community"
+    {
+      icon: Award,
+      text: {
+        en: "3+ years of coding experience",
+        uz: "3+ yillik dasturlash tajribasi",
+        ru: "3+ года опыта программирования",
+        tj: "3+ сол таҷрибаи барномасозӣ",
+      },
+    },
+    {
+      icon: Coffee,
+      text: {
+        en: "Mentor to junior developers",
+        uz: "Yosh dasturchilarga mentorlik",
+        ru: "Ментор для junior разработчиков",
+        tj: "Менти барои барномасозони ҷавон",
+      },
+    },
+    {
+      icon: Users,
+      text: {
+        en: "Focused on ethical tech & innovation",
+        uz: "Axloqiy texnologiya va innovatsiyalarga e'tibor",
+        ru: "Фокус на этичные технологии и инновации",
+        tj: "Диққат ба технологияҳои ахлоқӣ ва навовариҳо",
+      },
+    },
+    {
+      icon: Star,
+      text: {
+        en: "Building Templates.uz SaaS platform",
+        uz: "Templates.uz SaaS platformasini qurish",
+        ru: "Создание SaaS платформы Templates.uz",
+        tj: "Сохтани платформаи Templates.uz",
+      },
+    },
+    {
+      icon: Coffee,
+      text: {
+        en: "Active in open-source community",
+        uz: "Ochiq manba hamjamiyatida faol",
+        ru: "Активен в open-source сообществе",
+        tj: "Фаъол дар ҷомеаи open-source",
+      },
+    },
   ];
-  const { t } = useTranslation();
+
   const journey = [
     {
       year: "2022",
-      title: "Started University",
-      description: "Began Software Engineering at Samarkand State University"
+      title: {
+        en: "Started University",
+        uz: "Universitetni boshlash",
+        ru: "Начал университет",
+        tj: "Донишгоҳро оғоз кард"
+      },
+      description: {
+        en: "Began Software Engineering at Samarkand State University",
+        uz: "Samarqand Davlat Universitetida Dasturiy Injiniring yo'nalishini boshlash",
+        ru: "Начал изучать программную инженерию в Самаркандском государственном университете",
+        tj: "Оғози муҳандисии нармафзор дар Донишгоҳи давлатии Самарқанд"
+      }
     },
     {
       year: "2022",
-      title: "First Web Project",
-      description: "Built my first Laravel application and fell in love with backend development"
+      title: {
+        en: "First Web Project",
+        uz: "Birinchi veb loyiha",
+        ru: "Первый веб-проект",
+        tj: "Лоиҳаи аввалини веб"
+      },
+      description: {
+        en: "Built my first Laravel application and fell in love with backend development",
+        uz: "Birinchi Laravel ilovasini yaratish va backend dasturlashga oshiq bo'lish",
+        ru: "Создал своё первое приложение на Laravel и влюбился в backend разработку",
+        tj: "Эҷоди барномаи аввалини Laravel ва ошиқ шудан ба backend барномасозӣ"
+      }
     },
     {
       year: "2023",
-      title: "Frontend Focus",
-      description: "Mastered React and started building full-stack applications"
+      title: {
+        en: "Frontend Focus",
+        uz: "Frontendga e'tibor",
+        ru: "Фокус на Frontend",
+        tj: "Диққат ба Frontend"
+      },
+      description: {
+        en: "Mastered React and started building full-stack applications",
+        uz: "React-ni o'rganish va full-stack ilovalar qurishni boshlash",
+        ru: "Освоил React и начал создавать full-stack приложения",
+        tj: "Омӯзиши React ва оғози сохтани барномаҳои full-stack"
+      }
     },
     {
       year: "2024",
-      title: "Templates.uz",
-      description: "Launched my SaaS platform for website building"
+      title: {
+        en: "Templates.uz",
+        uz: "Templates.uz",
+        ru: "Templates.uz",
+        tj: "Templates.uz"
+      },
+      description: {
+        en: "Launched my SaaS platform for website building",
+        uz: "Vebsayt yaratish uchun SaaS platformamni ishga tushirish",
+        ru: "Запустил свою SaaS платформу для создания сайтов",
+        tj: "Оғози платформаи SaaS-ии ман барои сохтани сомонаҳо"
+      }
     },
     {
       year: "2025",
-      title: "Freelancing",
-      description: "Started taking on client projects and mentoring developers"
+      title: {
+        en: "Freelancing",
+        uz: "Freelancerlik",
+        ru: "Фриланс",
+        tj: "Фриланс"
+      },
+      description: {
+        en: "Started taking on client projects and mentoring developers",
+        uz: "Mijozlar loyihalarini qabul qilish va dasturchilarga mentorlik qilishni boshlash",
+        ru: "Начал брать проекты клиентов и менторить разработчиков",
+        tj: "Оғози қабули лоиҳаҳои муштариён ва роҳнамоӣ ба барномасозон"
+      }
     }
   ];
 
@@ -106,32 +203,26 @@ export const About: React.FC = () => {
       {/* Highlights */}
       <section className="py-16 bg-white">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t('about.whatMakesDifferent')}</h2>
-            <p className="mt-4 text-lg text-gray-600">{t('about.keyHighlights')}</p>
-          </motion.div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {highlights.map((highlight, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="p-6 text-center">
-                  <div className="w-2 h-2 bg-primary-600 rounded-full mx-auto mb-4"></div>
-                  <p className="font-medium text-gray-900">{highlight}</p>
-                </Card>
-              </motion.div>
-            ))}
+            {highlights.map((item, index) => {
+              const Icon = item.icon;
+              const lang = i18n.language as keyof typeof item.text;
+
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <Card className="p-6 text-center hover:bg-primary-50 transition-all duration-300 hover:shadow-glow-red group border-0">
+                    <Icon className="h-10 w-10 text-primary-600 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
+                    <p className="font-medium text-gray-900">{item.text[lang]}</p>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -169,11 +260,14 @@ export const About: React.FC = () => {
                           {item.year}
                         </span>
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                      <p className="text-gray-600">{item.description}</p>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                        {getLocalizedContent(item.title, i18n.language)}
+                      </h3>
+                      <p className="text-gray-600">
+                        {getLocalizedContent(item.description, i18n.language)}
+                      </p>
                     </Card>
                   </div>
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary-600 rounded-full border-4 border-white"></div>
                 </motion.div>
               ))}
             </div>
@@ -224,6 +318,7 @@ export const About: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
+              className="mt-10 lg:mt-0"
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('about.beyondCoding')}</h2>
               <div className="space-y-6">
