@@ -10,16 +10,15 @@ export const Portfolio: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [activeFilter, setActiveFilter] = useState('All');
 
-  // Updated categories with Frontend and Backend
   const categories = [
-    t('portfolio.categories.all'),
-    t('portfolio.categories.frontend'),
-    t('portfolio.categories.backend'),
-    t('portfolio.categories.fullstack'),
+    { key: 'all', label: t('portfolio.categories.all') },
+    { key: 'frontend', label: t('portfolio.categories.frontend') },
+    { key: 'backend', label: t('portfolio.categories.backend') },
+    { key: 'full-stack', label: t('portfolio.categories.fullstack') },
   ];
 
   const filteredProjects =
-    activeFilter === t('portfolio.categories.all')
+    activeFilter === 'all'
       ? projects
       : projects.filter((project) =>
         project.category.toLowerCase().includes(activeFilter.toLowerCase())
@@ -51,14 +50,14 @@ export const Portfolio: React.FC = () => {
           <div className="flex items-center justify-center space-x-1 bg-gray-100 rounded-lg p-1 w-fit mx-auto">
             {categories.map((category) => (
               <button
-                key={category}
-                onClick={() => setActiveFilter(category)}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeFilter === category
+                key={category.key}
+                onClick={() => setActiveFilter(category.key)}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeFilter === category.key
                   ? 'bg-white text-primary-600 shadow-sm'
                   : 'text-gray-600 hover:text-gray-900'
                   }`}
               >
-                {category}
+                {category.label}
               </button>
             ))}
           </div>

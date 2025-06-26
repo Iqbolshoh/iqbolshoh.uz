@@ -49,25 +49,51 @@
     "advanced": "Продвинутый уровень"
   },
   "portfolio": {
-    "title": "Моё портфолио",
-    "description": "Коллекция проектов, демонстрирующих мои навыки Full-Stack разработки — от простых сайтов до сложных SaaS-платформ.",
-    "likeWhatYouSee": "Понравилось?",
-    "startProject": "Начнём проект",
-    "letsDiscuss": "Давайте обсудим ваш проект и воплотим его в реальность.",
-    "featured": "Избранное",
-    "viewProject": "Смотреть проект",
-    "liveDemo": "Демо-версия",
+    "title": "My Portfolio",
+    "description": "A collection of projects that showcase my skills in full-stack development, from simple websites to complex SaaS platforms.",
+    "likeWhatYouSee": "Like What You See?",
+    "startProject": "Start a Project",
+    "letsDiscuss": "Let's discuss your next project and make it happen.",
+    "featured": "Featured",
+    "viewProject": "View Project",
+    "liveDemo": "Live Demo",
     "github": "GitHub",
-    "noProjects": "Проекты для этой категории не найдены",
-    "tryDifferent": "Попробуйте выбрать другой фильтр",
-    "viewAllProjects": "Смотреть все проекты"
+    "noProjects": "No projects found for this category",
+    "tryDifferent": "Try selecting a different filter",
+    "viewAllProjects": "View All Projects",
+    "categories": {
+      "all": "All",
+      "frontend": "1Frontend",
+      "backend": "1Backend",
+      "fullstack": "Full-Stack"
+    }
   },
   "services": {
-    "title": "Мои услуги",
-    "description": "Профессиональные услуги по веб-разработке, адаптированные под ваши идеи. От концепции до запуска — всё под контролем.",
-    "howIWorkTitle": "Как я работаю",
-    "howIWorkDescription": "Мой проверенный процесс достижения отличных результатов",
-    "getStarted": "Начать"
+    "title": "My Services",
+    "description": "Professional web development services tailored to bring your ideas to life. From concept to deployment, I've got you covered.",
+    "howIWorkTitle": "How I Work",
+    "howIWorkDescription": "My proven process for delivering excellent results",
+    "getStarted": "Get Started",
+    "startingFrom": "Starting from",
+    "price": "Price",
+    "requestService": "Request This Service",
+    "categories": {
+      "all": "1All Services",
+      "frontend": "1Frontend",
+      "backend": "1Backend",
+      "fullstack": "1Full-Stack",
+      "special": "1Special"
+    },
+    "form": {
+      "name": "Your Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "service": "Selected Service",
+      "message": "Additional Message (optional)",
+      "submit": "Submit Request",
+      "success": "Thank you! Your request has been received.",
+      "error": "Oops! Something went wrong. Please try again."
+    }
   },
   "blog": {
     "title": "Мой блог",
