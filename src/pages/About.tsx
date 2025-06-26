@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { GraduationCap, MapPin, Calendar, Heart, Code2, Coffee, Award, Users, Star } from 'lucide-react';
+import { GraduationCap, MapPin, Calendar, Heart, Code2, Coffee } from 'lucide-react';
 import { Card } from '../components/UI/Card';
-import { personalInfo, techStack } from '../data/content';
+import { personalInfo, techStack, journey, highlights } from '../data/content';
 
 export const About: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -12,132 +12,6 @@ export const About: React.FC = () => {
   const getLocalizedContent = (content: Record<string, string>, language: string) => {
     return content[language] || content.en || '';
   };
-
-  const highlights = [
-    {
-      icon: Award,
-      text: {
-        en: "3+ years of coding experience",
-        uz: "3+ yillik dasturlash tajribasi",
-        ru: "3+ года опыта программирования",
-        tj: "3+ сол таҷрибаи барномасозӣ",
-      },
-    },
-    {
-      icon: Coffee,
-      text: {
-        en: "Mentor to junior developers",
-        uz: "Yosh dasturchilarga mentorlik",
-        ru: "Ментор для junior разработчиков",
-        tj: "Менти барои барномасозони ҷавон",
-      },
-    },
-    {
-      icon: Users,
-      text: {
-        en: "Focused on ethical tech & innovation",
-        uz: "Axloqiy texnologiya va innovatsiyalarga e'tibor",
-        ru: "Фокус на этичные технологии и инновации",
-        tj: "Диққат ба технологияҳои ахлоқӣ ва навовариҳо",
-      },
-    },
-    {
-      icon: Star,
-      text: {
-        en: "Building Templates.uz SaaS platform",
-        uz: "Templates.uz SaaS platformasini qurish",
-        ru: "Создание SaaS платформы Templates.uz",
-        tj: "Сохтани платформаи Templates.uz",
-      },
-    },
-    {
-      icon: Coffee,
-      text: {
-        en: "Active in open-source community",
-        uz: "Ochiq manba hamjamiyatida faol",
-        ru: "Активен в open-source сообществе",
-        tj: "Фаъол дар ҷомеаи open-source",
-      },
-    },
-  ];
-
-  const journey = [
-    {
-      year: "2022",
-      title: {
-        en: "Started University",
-        uz: "Universitetni boshlash",
-        ru: "Начал университет",
-        tj: "Донишгоҳро оғоз кард"
-      },
-      description: {
-        en: "Began Software Engineering at Samarkand State University",
-        uz: "Samarqand Davlat Universitetida Dasturiy Injiniring yo'nalishini boshlash",
-        ru: "Начал изучать программную инженерию в Самаркандском государственном университете",
-        tj: "Оғози муҳандисии нармафзор дар Донишгоҳи давлатии Самарқанд"
-      }
-    },
-    {
-      year: "2022",
-      title: {
-        en: "First Web Project",
-        uz: "Birinchi veb loyiha",
-        ru: "Первый веб-проект",
-        tj: "Лоиҳаи аввалини веб"
-      },
-      description: {
-        en: "Built my first Laravel application and fell in love with backend development",
-        uz: "Birinchi Laravel ilovasini yaratish va backend dasturlashga oshiq bo'lish",
-        ru: "Создал своё первое приложение на Laravel и влюбился в backend разработку",
-        tj: "Эҷоди барномаи аввалини Laravel ва ошиқ шудан ба backend барномасозӣ"
-      }
-    },
-    {
-      year: "2023",
-      title: {
-        en: "Frontend Focus",
-        uz: "Frontendga e'tibor",
-        ru: "Фокус на Frontend",
-        tj: "Диққат ба Frontend"
-      },
-      description: {
-        en: "Mastered React and started building full-stack applications",
-        uz: "React-ni o'rganish va full-stack ilovalar qurishni boshlash",
-        ru: "Освоил React и начал создавать full-stack приложения",
-        tj: "Омӯзиши React ва оғози сохтани барномаҳои full-stack"
-      }
-    },
-    {
-      year: "2024",
-      title: {
-        en: "Templates.uz",
-        uz: "Templates.uz",
-        ru: "Templates.uz",
-        tj: "Templates.uz"
-      },
-      description: {
-        en: "Launched my SaaS platform for website building",
-        uz: "Vebsayt yaratish uchun SaaS platformamni ishga tushirish",
-        ru: "Запустил свою SaaS платформу для создания сайтов",
-        tj: "Оғози платформаи SaaS-ии ман барои сохтани сомонаҳо"
-      }
-    },
-    {
-      year: "2025",
-      title: {
-        en: "Freelancing",
-        uz: "Freelancerlik",
-        ru: "Фриланс",
-        tj: "Фриланс"
-      },
-      description: {
-        en: "Started taking on client projects and mentoring developers",
-        uz: "Mijozlar loyihalarini qabul qilish va dasturchilarga mentorlik qilishni boshlash",
-        ru: "Начал брать проекты клиентов и менторить разработчиков",
-        tj: "Оғози қабули лоиҳаҳои муштариён ва роҳнамоӣ ба барномасозон"
-      }
-    }
-  ];
 
   return (
     <div className="pt-16">

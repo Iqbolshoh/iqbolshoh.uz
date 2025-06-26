@@ -142,8 +142,8 @@ export const Portfolio: React.FC = () => {
               className="text-center py-12"
             >
               <Filter className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-xl text-gray-600">{t('portfolio.noProjects') || 'No projects found for this category'}</p>
-              <p className="text-gray-500 mt-2">{t('portfolio.tryDifferent') || 'Try selecting a different filter'}</p>
+              <p className="text-xl text-gray-600">{t('portfolio.noProjects')}</p>
+              <p className="text-gray-500 mt-2">{t('portfolio.tryDifferent')}</p>
             </motion.div>
           )}
         </div>

@@ -9,7 +9,6 @@ import { blogPosts } from '../data/content';
 export const Blog: React.FC = () => {
   const { t, i18n } = useTranslation();
 
-  // Helper function to safely get localized content
   const getLocalizedContent = (content: Record<string, string>, language: string) => {
     return content[language] || content.en || '';
   };
