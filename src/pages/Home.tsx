@@ -2,20 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, Star, Users, Coffee, Award } from 'lucide-react';
+import { ArrowRight, Download } from 'lucide-react';
 import { Button } from '../components/UI/Button';
 import { Card } from '../components/UI/Card';
-import { personalInfo, techStack, projects } from '../data/content';
+import { personalInfo, techStack, stats, projects } from '../data/content';
 
 export const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
-
-  const stats = [
-    { label: t('home.yearsExperience'), value: '3+', icon: Star },
-    { label: t('home.projectsCompleted'), value: '50+', icon: Award },
-    { label: t('home.happyClients'), value: '25+', icon: Users },
-    { label: t('home.cupsOfCoffee'), value: '1000+', icon: Coffee },
-  ];
 
   return (
     <div className="pt-16 relative">
@@ -164,13 +157,18 @@ export const Home: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t('home.journeyTitle')}</h2>
-            <p className="mt-4 text-lg text-gray-600">{t('home.journeyDescription')}</p>
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+              {t('home.journeyTitle')}
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">
+              {t('home.journeyDescription')}
+            </p>
           </motion.div>
+
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <motion.div
-                key={stat.label}
+                key={index}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -178,8 +176,12 @@ export const Home: React.FC = () => {
               >
                 <Card className="p-6 text-center hover:shadow-glow-red transition-all duration-300 group border-0">
                   <stat.icon className="h-8 w-8 text-primary-600 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
-                  <div className="text-3xl font-bold text-gray-900 mb-2 bg-gradient-to-r from-primary-700 to-primary-600 bg-clip-text text-transparent">{stat.value}</div>
-                  <div className="text-sm text-gray-600">{stat.label}</div>
+                  <div className="text-3xl font-bold text-gray-900 mb-2 bg-gradient-to-r from-primary-700 to-primary-600 bg-clip-text text-transparent">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    {stat.label[i18n.language as keyof typeof stat.label]}
+                  </div>
                 </Card>
               </motion.div>
             ))}

@@ -4,9 +4,9 @@ import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const languages = [
-  { code: 'uz', name: "O'zbekcha", flagPath: '/images/flags/uz.svg' },
   { code: 'en', name: 'English', flagPath: '/images/flags/gb.svg' },
   { code: 'ru', name: 'Русский', flagPath: '/images/flags/ru.svg' },
+  { code: 'uz', name: "O'zbekcha", flagPath: '/images/flags/uz.svg' },
   { code: 'tj', name: 'Тоҷикӣ', flagPath: '/images/flags/tj.svg' },
 ];
 

@@ -1,22 +1,22 @@
 import {
-  Code,          // React
-  FileCode,      // TypeScript
-  Palette,       // Tailwind CSS
-  FileText,      // PHP
-  Server,        // Laravel
-  Database,      // MySQL
-  Monitor,       // HTML
-  BookOpen,      // CSS
-  Package,       // Bootstrap
-  Brush,          // Sass
-  Terminal,      // JavaScript
-  Network,         // API (RESTful, external)
-  Lock,
-  Gauge,
-  Award,
-  Users,
-  Star,
-  Coffee
+  Code,         // React
+  FileCode,     // TypeScript
+  Palette,      // Tailwind CSS
+  FileText,     // PHP
+  Server,       // Laravel
+  Database,     // MySQL
+  Monitor,      // HTML
+  BookOpen,     // CSS
+  Package,      // Bootstrap
+  Brush,        // Sass
+  Terminal,     // JavaScript
+  Network,      // API
+  Lock,         // Auth
+  Gauge,        // Speed
+  Award,        // Awards
+  Users,        // Users
+  Star,         // Rating
+  Coffee        // Relax/Break
 } from 'lucide-react';
 
 // Personal Info
@@ -24,16 +24,34 @@ export const personalInfo = {
   name: "Iqbolshoh Ilhomjonov",
   title: "Full-Stack Developer",
   location: "Samarkand, Uzbekistan",
-  email: "iilhomjonov777@gmail.com",
-  phone: "+998 (99) 779 93 33",
   bio: "A passionate Full-Stack Developer with over 3 years of experience in Laravel, React, and Node.js. 3rd-year Software Engineering student at Samarkand State University.",
   avatar: "/images/logos/iqbolshoh.jpg",
   social: {
-    github: "https://github.com/Iqbolshoh",
-    linkedin: "https://linkedin.com/in/iqbolshoh",
-    telegram: "https://t.me/iqbolshoh_777",
-    instagram: "https://instagram.com/Iqbolshoh_777"
-  }
+    email: {
+      label: "iilhomjonov777@gmail.com",
+      link: "mailto:iilhomjonov777@gmail.com",
+    },
+    phone: {
+      label: "+998 (99) 779 93 33",
+      link: "tel:+998997799333",
+    },
+    github: {
+      label: "GitHub",
+      link: "https://github.com/Iqbolshoh",
+    },
+    linkedin: {
+      label: "LinkedIn",
+      link: "https://linkedin.com/in/iqbolshoh",
+    },
+    telegram: {
+      label: "Telegram",
+      link: "https://t.me/iqbolshoh_777",
+    },
+    instagram: {
+      label: "Instagram",
+      link: "https://instagram.com/Iqbolshoh_777",
+    },
+  },
 };
 
 // Tech Stack
@@ -53,6 +71,50 @@ export const techStack = [
   { name: "Laravel", icon: Server, level: 96 },
   { name: "MySQL", icon: Database, level: 88 },
   { name: "REST API", icon: Network, level: 87 }
+];
+
+// Stats
+export const stats = [
+  {
+    icon: Star,
+    value: '3+',
+    label: {
+      en: 'Years of Experience',
+      uz: 'Tajriba yillari',
+      ru: 'Годы опыта',
+      tj: 'Солҳои таҷриба',
+    },
+  },
+  {
+    icon: Award,
+    value: '50+',
+    label: {
+      en: 'Projects Completed',
+      uz: 'Bajargan loyihalar',
+      ru: 'Завершённых проектов',
+      tj: 'Лоиҳаҳои анҷомшуда',
+    },
+  },
+  {
+    icon: Users,
+    value: '25+',
+    label: {
+      en: 'Happy Clients',
+      uz: 'Mamnun mijozlar',
+      ru: 'Довольные клиенты',
+      tj: 'Мизоҷони хушнуд',
+    },
+  },
+  {
+    icon: Coffee,
+    value: '1000+',
+    label: {
+      en: 'Cups of Coffee',
+      uz: 'Ichilgan qahvalar',
+      ru: 'Чашек кофе',
+      tj: 'Кафеҳои нӯшида',
+    },
+  },
 ];
 
 // Projects

@@ -161,10 +161,10 @@ export const Contact: React.FC = () => {
                     <div>
                       <h3 className="font-semibold text-gray-900">{t('contact.email')}</h3>
                       <a
-                        href={`mailto:${personalInfo.email}`}
+                        href={personalInfo.social.email.link}
                         className="text-primary-600 hover:text-primary-700 transition-colors"
                       >
-                        {personalInfo.email}
+                        {personalInfo.social.email.label}
                       </a>
                     </div>
                   </div>
@@ -178,10 +178,10 @@ export const Contact: React.FC = () => {
                     <div>
                       <h3 className="font-semibold text-gray-900">{t('contact.phone')}</h3>
                       <a
-                        href={`tel:${personalInfo.phone}`}
+                        href={personalInfo.social.phone.link}
                         className="text-primary-600 hover:text-primary-700 transition-colors"
                       >
-                        {personalInfo.phone}
+                        {personalInfo.social.phone.label}
                       </a>
                     </div>
                   </div>
@@ -203,7 +203,7 @@ export const Contact: React.FC = () => {
                   <h3 className="font-semibold text-gray-900 mb-4">{t('contact.followMe')}</h3>
                   <div className="flex space-x-4">
                     <a
-                      href={personalInfo.social.github}
+                      href={personalInfo.social.github.link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary-100 hover:text-primary-600 transition-colors"
@@ -211,7 +211,7 @@ export const Contact: React.FC = () => {
                       <Github className="h-6 w-6" />
                     </a>
                     <a
-                      href={personalInfo.social.linkedin}
+                      href={personalInfo.social.linkedin.link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary-100 hover:text-primary-600 transition-colors"
@@ -219,7 +219,7 @@ export const Contact: React.FC = () => {
                       <Linkedin className="h-6 w-6" />
                     </a>
                     <a
-                      href={personalInfo.social.telegram}
+                      href={personalInfo.social.telegram.link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary-100 hover:text-primary-600 transition-colors"
@@ -227,7 +227,7 @@ export const Contact: React.FC = () => {
                       <Send className="h-6 w-6" />
                     </a>
                     <a
-                      href={personalInfo.social.instagram}
+                      href={personalInfo.social.instagram.link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary-100 hover:text-primary-600 transition-colors"

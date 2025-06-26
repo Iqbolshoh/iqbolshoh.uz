@@ -1,94 +1,120 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Github, Linkedin, Send, Instagram, Heart } from 'lucide-react';
+import { Github, Linkedin, Send, Instagram, Heart, Mail, Phone, MapPin } from 'lucide-react';
 import { personalInfo } from '../../data/content';
 
 export const Footer: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-gray-900 text-gray-100 border-t border-gray-700 relative overflow-hidden">
-      <div className="absolute inset-0 bg-logo-pattern opacity-5"></div>
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8 relative z-10">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          <div className="space-y-8">
-            <div className="flex items-center space-x-3">
+    <footer className="bg-gray-900 text-gray-100 border-t border-gray-700">
+      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Brand Column */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
               <img
                 src="/images/logos/iqbolshoh.svg"
                 alt="Iqbolshoh Logo"
-                className="h-10 w-10 bg-white rounded-md transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-glow-red"
+                className="h-10 w-10 bg-white rounded-md"
               />
               <span className="font-bold text-xl text-white">Iqbolshoh</span>
             </div>
-            <p className="text-gray-300 max-w-md">{t('footer.description')}</p>
-            <div className="flex space-x-6">
-              <a
-                href={personalInfo.social.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:scale-110"
-              >
-                <Github className="h-6 w-6" />
-              </a>
-              <a
-                href={personalInfo.social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:scale-110"
-              >
-                <Linkedin className="h-6 w-6" />
-              </a>
-              <a
-                href={personalInfo.social.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:scale-110"
-              >
-                <Send className="h-6 w-6" />
-              </a>
-              <a
-                href={personalInfo.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:scale-110"
-              >
-                <Instagram className="h-6 w-6" />
-              </a>
+            <p className="text-gray-300">{t('footer.description')}</p>
+            <div className="flex gap-4">
+              {Object.entries(personalInfo.social).map(([platform, data]) => {
+                type Platform = 'github' | 'linkedin' | 'telegram' | 'instagram';
+                const icons: Record<Platform, JSX.Element> = {
+                  github: <Github className="h-5 w-5" />,
+                  linkedin: <Linkedin className="h-5 w-5" />,
+                  telegram: <Send className="h-5 w-5" />,
+                  instagram: <Instagram className="h-5 w-5" />
+                };
+
+                if (!(platform in icons)) return null;
+
+                return (
+                  <a
+                    key={platform}
+                    href={(data as { link: string }).link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-primary-400 transition-colors"
+                  >
+                    {icons[platform as Platform]}
+                  </a>
+                );
+              })}
             </div>
           </div>
 
-          <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold leading-6 text-primary-400">{t('footer.navigation')}</h3>
-                <ul className="mt-6 space-y-4">
-                  <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">{t('nav.home')}</Link></li>
-                  <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">{t('nav.about')}</Link></li>
-                  <li><Link to="/portfolio" className="text-gray-300 hover:text-white transition-colors">{t('nav.portfolio')}</Link></li>
-                  <li><Link to="/services" className="text-gray-300 hover:text-white transition-colors">{t('nav.services')}</Link></li>
-                </ul>
-              </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold leading-6 text-primary-400">{t('footer.resources')}</h3>
-                <ul className="mt-6 space-y-4">
-                  <li><Link to="/blog" className="text-gray-300 hover:text-white transition-colors">{t('nav.blog')}</Link></li>
-                  <li><Link to="/contact" className="text-gray-300 hover:text-white transition-colors">{t('nav.contact')}</Link></li>
-                  <li><a href="mailto:iqbolshoh@gmail.com" className="text-gray-300 hover:text-white transition-colors">{t('contact.email')}</a></li>
-                  <li><a href="tel:+998997799333" className="text-gray-300 hover:text-white transition-colors">{t('contact.phone')}</a></li>
-                </ul>
-              </div>
-            </div>
+          {/* Navigation Column */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold text-primary-400">{t('footer.navigation')}</h3>
+            <ul className="space-y-3">
+              {['home', 'about', 'portfolio', 'services'].map((item) => (
+                <li key={item}>
+                  <Link
+                    to={`/${item === 'home' ? '' : item}`}
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    {t(`nav.${item}`)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Resources Column */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold text-primary-400">{t('footer.resources')}</h3>
+            <ul className="space-y-3">
+              {['blog', 'contact'].map((item) => (
+                <li key={item}>
+                  <Link
+                    to={`/${item}`}
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    {t(`nav.${item}`)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Column */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold text-primary-400">Contact</h3>
+            <ul className="space-y-3">
+              <li className="flex items-center gap-2 text-gray-300">
+                <Mail className="h-5 w-5" />
+                <a href={personalInfo.social.email.link} className="hover:text-white transition-colors">
+                  {personalInfo.social.email.label}
+                </a>
+              </li>
+              <li className="flex items-center gap-2 text-gray-300">
+                <Phone className="h-5 w-5" />
+                <a href={personalInfo.social.phone.link} className="hover:text-white transition-colors">
+                  {personalInfo.social.phone.label}
+                </a>
+              </li>
+              <li className="flex items-center gap-2 text-gray-300">
+                <MapPin className="h-5 w-5" />
+                <span>{personalInfo.location}</span>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div className="mt-16 border-t border-gray-700 pt-8 sm:mt-20 lg:mt-24">
-          <div className="flex flex-col sm:flex-row justify-between items-center">
-            <p className="text-gray-400">{t('footer.copyright')}</p>
-            <p className="flex items-center text-gray-400 mt-4 sm:mt-0">
-              {t('footer.madeWithLove')} <Heart className="h-4 w-4 text-primary-400 mx-1 animate-pulse" /> {t('footer.fromSamarkand')}
-            </p>
-          </div>
+        {/* Copyright Section */}
+        <div className="mt-12 pt-8 border-t border-gray-700 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-gray-400 text-sm">{t('footer.copyright')}</p>
+          <p className="text-gray-400 text-sm flex items-center">
+            {t('footer.madeWithLove')}
+            <Heart className="h-4 w-4 text-primary-400 mx-1 animate-pulse" />
+            {t('footer.fromSamarkand')}
+          </p>
         </div>
       </div>
     </footer>

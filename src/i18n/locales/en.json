@@ -22,11 +22,7 @@
     "featuredProjects": "Featured Projects",
     "someRecentWork": "Some of My Recent Work",
     "journeyTitle": "By the Numbers",
-    "journeyDescription": "Quick facts about my journey.",
-    "yearsExperience": "Years of Experience",
-    "projectsCompleted": "Projects Completed",
-    "happyClients": "Happy Clients",
-    "cupsOfCoffee": "Cups of Coffee Consumed"
+    "journeyDescription": "Quick facts about my journey."
   },
   "about": {
     "title": "About Me",
@@ -107,11 +103,11 @@
     "basedInDesc": "Located in the historic city of Samarkand, Uzbekistan. Available for remote work worldwide and local meetings in Samarkand."
   },
   "footer": {
-    "description": "Building modern digital solutions with passion and precision. Let's turn your ideas into reality.",
-    "navigation": "Navigation",
-    "resources": "Resources",
+    "description": "Creating digital solutions with passion. Let's bring your ideas to life.",
+    "navigation": "Menu",
+    "resources": "Links",
     "copyright": "© 2025 Iqbolshoh Ilhomjonov. All rights reserved.",
-    "madeWithLove": "Made with by Iqbolshoh",
+    "madeWithLove": "Made with",
     "fromSamarkand": "from Samarkand, Uzbekistan"
   }
 }
