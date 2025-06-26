@@ -60,7 +60,15 @@
     "howIWorkTitle": "How I Work",
     "howIWorkDescription": "My proven process for delivering excellent results",
     "getStarted": "Get Started",
-    "startingFrom": "Starting from"
+    "startingFrom": "Starting from",
+    "form": {
+      "name": "Your Name",
+      "phone": "Phone Number",
+      "service": "Selected Service",
+      "submit": "Submit Request",
+      "success": "Thank you! Your request has been received.",
+      "error": "Oops! Something went wrong. Please try again."
+    }
   },
   "blog": {
     "title": "My Blog",

@@ -85,7 +85,7 @@ export const Footer: React.FC = () => {
 
           {/* Contact Column */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-primary-400">Contact</h3>
+            <h3 className="text-sm font-semibold text-primary-400">{t('nav.contact')}</h3>
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-gray-300">
                 <Mail className="h-5 w-5" />

@@ -16,10 +16,10 @@ export const Portfolio: React.FC = () => {
     activeFilter === 'All'
       ? projects
       : projects.filter((project) =>
-          project.tech.some((tech) =>
-            tech.toLowerCase().includes(activeFilter.toLowerCase())
-          )
-        );
+        project.tech.some((tech) =>
+          tech.toLowerCase().includes(activeFilter.toLowerCase())
+        )
+      );
 
   return (
     <div className="pt-16">
@@ -49,11 +49,10 @@ export const Portfolio: React.FC = () => {
               <button
                 key={category}
                 onClick={() => setActiveFilter(category)}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                  activeFilter === category
-                    ? 'bg-white text-primary-600 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeFilter === category
+                  ? 'bg-white text-primary-600 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+                  }`}
               >
                 {category}
               </button>

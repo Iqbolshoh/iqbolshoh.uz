@@ -11,8 +11,6 @@ import {
   Brush,        // Sass
   Terminal,     // JavaScript
   Network,      // API
-  Lock,         // Auth
-  Gauge,        // Speed
   Award,        // Awards
   Users,        // Users
   Star,         // Rating
@@ -25,7 +23,9 @@ import {
   MessageCircle,
   Code2,
   BookOpenCheck,
-  GraduationCap
+  GraduationCap,
+  Bot,
+  Layout
 } from 'lucide-react';
 
 // Personal Info
@@ -496,144 +496,225 @@ export const beyond = [
   }
 ];
 
-// Services
 export const services = [
   {
     id: 1,
+    category: "frontend",
+    icon: Palette,
+    price: "$100+",
     title: {
-      en: "Web Development",
-      uz: "Veb Dasturlash",
-      ru: "Веб-разработка",
-      tj: "Веб-таҳия"
+      en: "UI/UX Design",
+      uz: "UI/UX Dizayn",
+      ru: "UI/UX дизайн",
+      tj: "Тарроҳии UI/UX"
     },
-    icon: Monitor,
     description: {
-      en: "Building responsive websites, admin panels, and full-stack systems using Laravel and React.",
-      uz: "Laravel va React yordamida responsiv saytlar, admin panellar va to‘liq tizimlar yaratish.",
-      ru: "Создание адаптивных сайтов, админ-панелей и full-stack систем с использованием Laravel и React.",
-      tj: "Сохтани сайтҳои ҷавобгӯ, панелҳои маъмурӣ ва системаҳое, ки бо Laravel ва React таҳия шудаанд."
+      en: "Clean, modern, pixel-perfect interfaces with Tailwind CSS and Figma.",
+      uz: "Tailwind CSS va Figma asosida zamonaviy va mukammal dizaynlar.",
+      ru: "Современный и точный дизайн с Tailwind CSS и Figma.",
+      tj: "Тарроҳии муосири пикселӣ бо Figma ва Tailwind CSS."
     },
-    price: "$200",
+    tech: ["Frontend", "Figma", "Tailwind"],
     features: {
-      en: ["Responsive Design", "Admin Panels", "Database Integration", "API Development"],
-      uz: ["Responsiv Dizayn", "Admin Panellar", "Ma’lumotlar Bazasi", "API Dasturlash"],
-      ru: ["Адаптивный дизайн", "Админ-панели", "Интеграция базы данных", "Разработка API"],
-      tj: ["Тарҳи ҷавобгӯ", "Панелҳои маъмурӣ", "Пойгоҳи додаҳо", "Таҳияи API"]
+      en: ["Figma to Code", "Mobile First", "Tailwind CSS", "Modern Aesthetic"],
+      uz: ["Figma'dan kodga", "Mobilga mos", "Tailwind CSS", "Zamonaviy ko‘rinish"],
+      ru: ["Figma в код", "Мобильная адаптация", "Tailwind CSS", "Современный стиль"],
+      tj: ["Аз Figma ба код", "Мутобиқ ба мобил", "Tailwind CSS", "Услуби муосир"]
     }
   },
   {
     id: 2,
+    category: "backend",
+    icon: Network,
+    price: "$150+",
     title: {
-      en: "Frontend UI Design",
-      uz: "Frontend UI Dizayn",
-      ru: "Дизайн интерфейса",
-      tj: "Тарроҳии UI"
+      en: "Custom API Services",
+      uz: "Moslashuvchan API Xizmatlari",
+      ru: "API под заказ",
+      tj: "Хизматрасонии API"
     },
-    icon: Palette,
     description: {
-      en: "Pixel-perfect, modern UI designs with Tailwind CSS and responsive layouts.",
-      uz: "Tailwind CSS asosida zamonaviy, pixel-perfect dizaynlar.",
-      ru: "Современные дизайны UI с Tailwind CSS и адаптивной вёрсткой.",
-      tj: "Тарроҳии муосири UI бо Tailwind CSS ва тарҳбандии ҷавобгӯ."
+      en: "Secure and scalable RESTful APIs for mobile and web apps.",
+      uz: "Mobil va veb ilovalar uchun xavfsiz REST APIlar yozish.",
+      ru: "Безопасные REST API для приложений.",
+      tj: "API-ҳои бехатар барои сомона ва мобил."
     },
-    price: "$100",
     features: {
-      en: ["Figma to Code", "Responsive Design", "Interactive UI", "Performance Optimized"],
-      uz: ["Figma dan kodga", "Responsiv dizayn", "Interaktiv interfeys", "Yaxshilangan ishlash"],
-      ru: ["Из Figma в код", "Адаптивный дизайн", "Интерактивный интерфейс", "Оптимизация производительности"],
-      tj: ["Аз Figma ба код", "Тарҳи ҷавобгӯ", "Интерфейси интерактивӣ", "Самаранокии беҳтаршуда"]
+      en: ["Custom Routes", "JWT", "Secure Tokens", "Error Handling"],
+      uz: ["Maxsus endpointlar", "JWT", "Token xavfsizligi", "Xatolik nazorati"],
+      ru: ["Собственные пути", "JWT", "Безопасность", "Обработка ошибок"],
+      tj: ["Endpoint махсус", "JWT", "Амнияти токен", "Назорати хатогиҳо"]
     }
   },
   {
     id: 3,
+    category: "backend",
+    icon: ShieldCheck,
+    price: "$180+",
     title: {
-      en: "Backend & APIs",
-      uz: "Backend va APIlar",
-      ru: "Бэкенд и API",
-      tj: "Бекенд ва APIҳо"
+      en: "Security Optimization",
+      uz: "Xavfsizlikni Yaxshilash",
+      ru: "Оптимизация Безопасности",
+      tj: "Бехатарии Пешрафта"
     },
-    icon: Lock,
     description: {
-      en: "Secure, scalable APIs with Laravel, JWT authentication, and MySQL databases.",
-      uz: "Laravel, JWT autentifikatsiyasi va MySQL yordamida xavfsiz APIlar.",
-      ru: "Безопасные, масштабируемые API с Laravel, JWT и MySQL.",
-      tj: "API-ҳои боэътимод ва васеъшаванда бо истифодаи Laravel, JWT ва MySQL."
+      en: "Hardening web apps with secure headers, validations, and attack protection.",
+      uz: "Saytingizni xavfsiz qilish: validatsiya, xavfsiz headerlar, himoya.",
+      ru: "Защита приложений: валидация, безопасные заголовки, анти-атаки.",
+      tj: "Муҳофизати сомона: валидация, header-и амн, зидди ҳамлаҳо."
     },
-    price: "$150",
     features: {
-      en: ["RESTful APIs", "JWT Authentication", "Database Design", "Security Implementation"],
-      uz: ["RESTful APIlar", "JWT autentifikatsiyasi", "Bazani loyihalash", "Xavfsizlikni joriy etish"],
-      ru: ["RESTful API", "JWT аутентификация", "Проектирование БД", "Реализация безопасности"],
-      tj: ["API-ҳои RESTful", "Аутентификатсияи JWT", "Тарҳрезии пойгоҳи додаҳо", "Татбиқи амният"]
+      en: ["Validation", "Rate Limiting", "Secure Headers", "CSRF/XSS Defense"],
+      uz: ["Validatsiya", "Limitlar", "Headerlar", "CSRF/XSS himoya"],
+      ru: ["Валидация", "Ограничения", "Заголовки", "Защита от CSRF/XSS"],
+      tj: ["Валидация", "Маҳдудиятҳо", "Header-ҳои амн", "Ҳимояи CSRF/XSS"]
     }
   },
   {
     id: 4,
+    category: "frontend",
+    icon: Monitor,
+    price: "$200",
     title: {
-      en: "WordPress CMS",
-      uz: "WordPress CMS",
-      ru: "WordPress CMS",
-      tj: "WordPress CMS"
+      en: "Basic Frontend Website",
+      uz: "Oddiy Frontend Sayt",
+      ru: "Базовый Frontend сайт",
+      tj: "Сайти оддии Frontend"
     },
-    icon: Package,
     description: {
-      en: "Custom WordPress websites and themes for small businesses and blogs.",
-      uz: "Kichik biznes va bloglar uchun WordPress sayt va mavzular.",
-      ru: "Индивидуальные WordPress сайты и темы для малого бизнеса и блогов.",
-      tj: "Сайтҳо ва мавзуҳои фармоишии WordPress барои тиҷорати хурд ва блогҳо."
+      en: "Responsive 3-page static website, perfect for portfolios and personal brands.",
+      uz: "Portfolyo va brendlar uchun 3 sahifalik responsiv sayt.",
+      ru: "3-страничный адаптивный сайт для портфолио и брендов.",
+      tj: "Сомонаи ҷавобгӯ бо 3 саҳифа барои портфолио ва брендҳо."
     },
-    price: "$120",
+    tech: ["Frontend", "HTML", "CSS", "JavaScript"],
     features: {
-      en: ["Custom Themes", "Plugin Development", "SEO Optimization", "Content Management"],
-      uz: ["Maxsus mavzular", "Plaginlar yaratish", "SEO optimallashtirish", "Kontent boshqaruvi"],
-      ru: ["Индивидуальные темы", "Разработка плагинов", "Оптимизация SEO", "Управление контентом"],
-      tj: ["Мавзӯъҳои фармоишӣ", "Таҳияи плугинҳо", "Оптимизатсияи SEO", "Идоракунии муҳтаво"]
+      en: ["3 Pages", "Responsive Design", "SEO Friendly", "Performance Optimized"],
+      uz: ["3 sahifa", "Responsiv dizayn", "SEO mos", "Tez ishlash"],
+      ru: ["3 страницы", "Адаптивный дизайн", "SEO", "Быстрая загрузка"],
+      tj: ["3 саҳифа", "Тарҳи ҷавобгӯ", "SEO", "Суръати хуб"]
     }
   },
   {
     id: 5,
+    category: "special",
+    icon: Bot,
+    price: "$250+",
     title: {
-      en: "Mentorship",
-      uz: "Mentorlik",
-      ru: "Наставничество",
-      tj: "Менторӣ"
+      en: "Chatbot Development",
+      uz: "Chatbot Yaratish",
+      ru: "Разработка Чат-бота",
+      tj: "Таҳияи Чатбот"
     },
-    icon: BookOpen,
     description: {
-      en: "1-on-1 mentoring sessions for beginner developers in web development.",
-      uz: "Yangi boshlovchilar uchun veb dasturlash bo‘yicha 1-on-1 mentorlik.",
-      ru: "Индивидуальные сессии наставничества для начинающих веб-разработчиков.",
-      tj: "Машваратҳои як ба як барои барномасозони навкор дар соҳаи веб."
+      en: "Telegram or web chatbots to automate support, orders, and interaction.",
+      uz: "Telegram yoki sayt uchun avtomatlashtirilgan chatbotlar.",
+      ru: "Чат-боты для Telegram или веба для автоматизации задач.",
+      tj: "Чатботҳо барои Telegram ё сомона барои автоматизатсия."
     },
-    price: "$15/hour",
     features: {
-      en: ["Code Reviews", "Career Guidance", "Technical Skills", "Project Support"],
-      uz: ["Kod tekshiruvlari", "Kasbiy yo‘naltirish", "Texnik ko‘nikmalar", "Loyihaga yordam"],
-      ru: ["Код-ревью", "Профориентация", "Технические навыки", "Поддержка проектов"],
-      tj: ["Таҳлили код", "Роҳнамоии касбӣ", "Маҳорати техникӣ", "Дастгирии лоиҳа"]
+      en: ["Telegram Bot", "Web Chatbot", "Webhook", "AI Logic"],
+      uz: ["Telegram bot", "Web chatbot", "Webhook", "AI mantiq"],
+      ru: ["Telegram-бот", "Веб-бот", "Webhook", "AI логика"],
+      tj: ["Боти Telegram", "Чатботи веб", "Webhook", "Мантиқ"]
     }
   },
   {
     id: 6,
+    category: "frontend",
+    icon: Layout,
+    price: "$300+",
     title: {
-      en: "SEO & Performance Optimization",
-      uz: "SEO va Ishlashni Optimallashtirish",
-      ru: "SEO и Оптимизация Производительности",
-      tj: "SEO ва Беҳтарсозии Самаранокӣ"
+      en: "Advanced Frontend Website",
+      uz: "Kengaytirilgan Frontend Sayt",
+      ru: "Продвинутый Frontend сайт",
+      tj: "Сайти пурра Frontend"
     },
-    icon: Gauge,
     description: {
-      en: "Improve your website’s visibility on search engines and ensure it loads fast across all devices.",
-      uz: "Saytingizni qidiruv tizimlarida yuqoriga olib chiqish va barcha qurilmalarda tez yuklanishini ta’minlash.",
-      ru: "Улучшение видимости сайта в поисковиках и обеспечение высокой скорости загрузки на всех устройствах.",
-      tj: "Баланд бардоштани диданпазирии сайт дар ҷустуҷӯгарҳо ва таъмин кардани суръати баланди боркунӣ дар ҳамаи дастгоҳҳо."
+      en: "Multi-page frontend site with animations, effects, and premium layout.",
+      uz: "Animatsiyali, ko‘p sahifali, sifatli frontend sayt.",
+      ru: "Многостраничный сайт с эффектами и хорошим дизайном.",
+      tj: "Сайти чандсаҳифа бо аниматсия ва тарҳи зебо."
     },
-    price: "$100",
+    tech: ["Frontend", "React", "Framer Motion"],
     features: {
-      en: ["Technical SEO Audit", "Image & Code Optimization", "PageSpeed Improvements", "Mobile Optimization"],
-      uz: ["Texnik SEO auditi", "Rasm va kodni optimallashtirish", "Sahifa tezligi", "Mobil optimizatsiya"],
-      ru: ["Технический SEO аудит", "Оптимизация изображений и кода", "Улучшение скорости страницы", "Мобильная оптимизация"],
-      tj: ["SEO аудити", "Оптимизатсияи расм ва код", "Беҳтарсозии суръати саҳифа", "Оптимизатсияи мобилӣ"]
+      en: ["Animations", "Custom Layouts", "Scroll Effects", "Multiple Pages"],
+      uz: ["Animatsiya", "Moslashuvchan sahifalar", "Scroll effektlar", "Ko‘p sahifalar"],
+      ru: ["Анимации", "Индивидуальная вёрстка", "Эффекты", "Много страниц"],
+      tj: ["Аниматсияҳо", "Тарҳи махсус", "Эффектҳо", "Саҳифаҳои зиёд"]
+    }
+  },
+  {
+    id: 7,
+    category: "fullstack",
+    icon: Server,
+    price: "$400+",
+    title: {
+      en: "Dynamic Website",
+      uz: "Dinamik Sayt",
+      ru: "Динамический сайт",
+      tj: "Сомонаи динамикӣ"
+    },
+    description: {
+      en: "Fully dynamic website using Laravel and React for interactive experience.",
+      uz: "Laravel va React asosida foydalanuvchiga interaktiv sayt.",
+      ru: "Интерактивный сайт с Laravel и React.",
+      tj: "Сомонаи интерактивӣ бо Laravel ва React."
+    },
+    tech: ["FullStack", "Laravel", "React"],
+    features: {
+      en: ["Laravel + React", "Interactive UI", "Form Handling", "Database Connected"],
+      uz: ["Laravel + React", "Interaktiv interfeys", "Forma ishlov", "Bazaga ulangan"],
+      ru: ["Laravel + React", "Интерактивность", "Обработка форм", "БД подключено"],
+      tj: ["Laravel + React", "Интерфейси фаъол", "Кори формҳо", "Бо пойгоҳ"]
+    }
+  },
+  {
+    id: 8,
+    category: "backend",
+    icon: Database,
+    price: "$500+",
+    title: {
+      en: "Backend + Admin Panel",
+      uz: "Backend + Admin Panel",
+      ru: "Бэкенд + Админка",
+      tj: "Бекенд + Панели маъмурӣ"
+    },
+    description: {
+      en: "Custom backend system with admin dashboard, user management, and secure API.",
+      uz: "Admin paneli, foydalanuvchi boshqaruvi va xavfsiz API bilan backend.",
+      ru: "Бэкенд с админкой, управлением пользователей и безопасным API.",
+      tj: "Бекенд бо панели маъмурӣ ва API-и бехатар."
+    },
+    features: {
+      en: ["Admin Panel", "User Management", "JWT Auth", "REST API"],
+      uz: ["Admin panel", "Foydalanuvchi boshqaruvi", "JWT autent.", "REST API"],
+      ru: ["Админка", "Пользователи", "JWT авторизация", "REST API"],
+      tj: ["Панел", "Корбарон", "JWT аутент.", "REST API"]
+    }
+  },
+  {
+    id: 9,
+    category: "fullstack",
+    icon: Code,
+    price: "$600+",
+    title: {
+      en: "Full-Stack Application",
+      uz: "Full-Stack Ilova",
+      ru: "Фуллстек Приложение",
+      tj: "Иловаи Full-Stack"
+    },
+    description: {
+      en: "End-to-end app with full frontend and backend logic — ideal for startups.",
+      uz: "Frontend va backendni o‘z ichiga olgan to‘liq ilova — startaplar uchun mos.",
+      ru: "Полное приложение с фронтом и бэкендом — для стартапов.",
+      tj: "Илова бо фронт ва бекенд — барои стартапҳо."
+    },
+    features: {
+      en: ["Full Flow", "Laravel + React", "Advanced Auth", "Scalable DB"],
+      uz: ["To‘liq jarayon", "Laravel + React", "Murakkab auth", "Katta DB"],
+      ru: ["Весь поток", "Laravel + React", "Сложная авторизация", "Большая БД"],
+      tj: ["Ҳама қисмҳо", "Laravel + React", "Авторизатсияи пурра", "Пойгоҳи калон"]
     }
   }
 ];
