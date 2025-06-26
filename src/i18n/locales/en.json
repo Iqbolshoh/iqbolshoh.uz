@@ -52,7 +52,13 @@
     "github": "GitHub",
     "noProjects": "No projects found for this category",
     "tryDifferent": "Try selecting a different filter",
-    "viewAllProjects": "View All Projects"
+    "viewAllProjects": "View All Projects",
+    "categories": {
+      "all": "All",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "fullstack": "Full-Stack"
+    }
   },
   "services": {
     "title": "My Services",
@@ -61,10 +67,21 @@
     "howIWorkDescription": "My proven process for delivering excellent results",
     "getStarted": "Get Started",
     "startingFrom": "Starting from",
+    "price": "Price",
+    "requestService": "Request This Service",
+    "categories": {
+      "all": "All Services",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "fullstack": "Full-Stack",
+      "special": "Special"
+    },
     "form": {
       "name": "Your Name",
+      "email": "Email Address",
       "phone": "Phone Number",
       "service": "Selected Service",
+      "message": "Additional Message (optional)",
       "submit": "Submit Request",
       "success": "Thank you! Your request has been received.",
       "error": "Oops! Something went wrong. Please try again."

@@ -10,15 +10,19 @@ export const Portfolio: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [activeFilter, setActiveFilter] = useState('All');
 
-  const categories = ['All', 'Laravel', 'React', 'Full-Stack', 'SaaS'];
+  // Updated categories with Frontend and Backend
+  const categories = [
+    t('portfolio.categories.all'),
+    t('portfolio.categories.frontend'),
+    t('portfolio.categories.backend'),
+    t('portfolio.categories.fullstack'),
+  ];
 
   const filteredProjects =
-    activeFilter === 'All'
+    activeFilter === t('portfolio.categories.all')
       ? projects
       : projects.filter((project) =>
-        project.tech.some((tech) =>
-          tech.toLowerCase().includes(activeFilter.toLowerCase())
-        )
+        project.category.toLowerCase().includes(activeFilter.toLowerCase())
       );
 
   return (
@@ -95,18 +99,31 @@ export const Portfolio: React.FC = () => {
                         </div>
                       )}
                       <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-4">
-                        <Button size="sm" href={project.liveDemo} icon={<ExternalLink className="h-4 w-4" />}>
+                        <Button
+                          size="sm"
+                          href={project.liveDemo}
+                          icon={<ExternalLink className="h-4 w-4" />}
+                        >
                           {t('portfolio.liveDemo')}
                         </Button>
-                        <Button variant="outline" size="sm" href={project.github} icon={<Github className="h-4 w-4" />}>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          href={project.github}
+                          icon={<Github className="h-4 w-4" />}
+                        >
                           {t('portfolio.github')}
                         </Button>
                       </div>
                     </div>
 
                     <div className="p-6 flex flex-col flex-grow">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{project.name[i18n.language as keyof typeof project.name]}</h3>
-                      <p className="text-gray-600 mb-4 flex-grow">{project.description[i18n.language as keyof typeof project.description]}</p>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                        {project.name[i18n.language as keyof typeof project.name]}
+                      </h3>
+                      <p className="text-gray-600 mb-4 flex-grow">
+                        {project.description[i18n.language as keyof typeof project.description]}
+                      </p>
 
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.tech.map((tech) => (

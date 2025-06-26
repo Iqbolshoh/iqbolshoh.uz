@@ -126,7 +126,6 @@ export const stats = [
   },
 ];
 
-// Projects
 export const projects = [
   {
     id: 1,
@@ -146,7 +145,8 @@ export const projects = [
     tech: ["Laravel", "React", "Vite", "MySQL"],
     liveDemo: "https://templates.uz",
     github: "https://github.com/iqbolshoh/templates-uz",
-    featured: true
+    featured: true,
+    category: "Full-Stack"
   },
   {
     id: 2,
@@ -166,7 +166,8 @@ export const projects = [
     tech: ["React", "TypeScript", "Tailwind"],
     liveDemo: "https://iqbolshoh.uz",
     github: "https://github.com/iqbolshoh/portfolio",
-    featured: true
+    featured: true,
+    category: "Frontend"
   },
   {
     id: 3,
@@ -186,7 +187,8 @@ export const projects = [
     tech: ["Laravel", "Vue.js", "Stripe API"],
     liveDemo: "#",
     github: "#",
-    featured: false
+    featured: false,
+    category: "Full-Stack"
   }
 ];
 
@@ -450,7 +452,7 @@ export const beyond = [
     }
   },
   {
-    icon: HeartHandshake, 
+    icon: HeartHandshake,
     title: {
       en: "Ethical Tech",
       uz: "Axloqiy texnologiya",

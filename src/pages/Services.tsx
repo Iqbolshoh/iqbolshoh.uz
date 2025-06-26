@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, ArrowRight, X } from 'lucide-react';
+import { Check, ArrowRight, X, ChevronRight } from 'lucide-react';
 import { Card } from '../components/UI/Card';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../components/UI/Button';
@@ -10,8 +10,16 @@ export const Services: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<'all' | 'frontend' | 'backend' | 'fullstack' | 'special'>('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedServiceId, setSelectedServiceId] = useState<number | null>(null);
-  const [formData, setFormData] = useState({ name: '', phone: '', serviceId: '' });
+  const [selectedService, setSelectedService] = useState<any>(null);
+  const [formData, setFormData] = useState({ 
+    name: '', 
+    email: '', 
+    phone: '', 
+    message: '',
+    serviceId: '',
+    serviceName: '',
+    servicePrice: ''
+  });
 
   const categories = ['all', 'frontend', 'backend', 'fullstack', 'special'];
 
@@ -20,19 +28,32 @@ export const Services: React.FC = () => {
       ? services
       : services.filter((service) => service.category === activeCategory);
 
-  const handleOpenModal = (serviceId: number) => {
-    setSelectedServiceId(serviceId);
-    setFormData({ ...formData, serviceId: serviceId.toString() });
+  const handleOpenModal = (service: any) => {
+    setSelectedService(service);
+    setFormData({ 
+      ...formData, 
+      serviceId: service.id.toString(),
+      serviceName: service.title[i18n.language as keyof typeof service.title],
+      servicePrice: service.price
+    });
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSelectedServiceId(null);
-    setFormData({ name: '', phone: '', serviceId: '' });
+    setSelectedService(null);
+    setFormData({ 
+      name: '', 
+      email: '', 
+      phone: '', 
+      message: '',
+      serviceId: '',
+      serviceName: '',
+      servicePrice: ''
+    });
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -41,6 +62,15 @@ export const Services: React.FC = () => {
     e.preventDefault();
     console.log('Form submitted:', formData);
     // Here you can add API call to submit formData
+    // Example: 
+    // axios.post('/api/contact', formData)
+    //   .then(response => {
+    //     console.log('Success:', response.data);
+    //     handleCloseModal();
+    //   })
+    //   .catch(error => {
+    //     console.error('Error:', error);
+    //   });
     handleCloseModal();
   };
 
@@ -65,19 +95,20 @@ export const Services: React.FC = () => {
       </section>
 
       {/* Category Filter */}
-      <section className="py-8 bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <div className="flex flex-wrap justify-center gap-3">
+      <section className="py-8 bg-white sticky top-16 z-10 shadow-sm">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex flex-wrap justify-center gap-2">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category as any)}
-                className={`px-4 py-2 rounded-full text-sm font-medium border transition ${activeCategory === category
-                    ? 'bg-primary-600 text-white border-primary-600'
-                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
-                  }`}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  activeCategory === category
+                    ? 'bg-primary-600 text-white shadow-md'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
               >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
+                {t(`services.categories.${category}`)}
               </button>
             ))}
           </div>
@@ -105,10 +136,13 @@ export const Services: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
+                    whileHover={{ y: -5 }}
                   >
-                    <Card className="p-8 h-full flex flex-col">
+                    <Card className="p-8 h-full flex flex-col group hover:shadow-lg transition-all duration-300">
                       <div className="text-center mb-6">
-                        <Icon className="h-10 w-10 text-primary-600 mx-auto mb-4" />
+                        <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 rounded-full mb-4 group-hover:bg-primary-200 transition-colors duration-300">
+                          <Icon className="h-8 w-8 text-primary-600" />
+                        </div>
                         <h3 className="text-2xl font-bold text-gray-900 mb-2">
                           {service.title[i18n.language as keyof typeof service.title]}
                         </h3>
@@ -121,8 +155,8 @@ export const Services: React.FC = () => {
                         <ul className="space-y-3 mb-6">
                           {(service.features[i18n.language as keyof typeof service.features] || []).map(
                             (feature, idx) => (
-                              <li key={idx} className="flex items-center space-x-3">
-                                <Check className="h-5 w-5 text-accent-500 flex-shrink-0" />
+                              <li key={idx} className="flex items-start space-x-3">
+                                <Check className="h-5 w-5 text-accent-500 flex-shrink-0 mt-0.5" />
                                 <span className="text-gray-700">{feature}</span>
                               </li>
                             )
@@ -130,16 +164,16 @@ export const Services: React.FC = () => {
                         </ul>
                       </div>
 
-                      <div className="border-t pt-6">
+                      <div className="border-t pt-6 mt-auto">
                         <div className="text-center mb-6">
                           <div className="text-2xl font-bold text-primary-600">
                             {t('services.startingFrom')} {service.price}
                           </div>
                         </div>
                         <Button
-                          className="w-full"
-                          icon={<ArrowRight className="h-4 w-4" />}
-                          onClick={() => handleOpenModal(service.id)}
+                          className="w-full group-hover:bg-primary-700 transition-colors duration-300"
+                          icon={<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />}
+                          onClick={() => handleOpenModal(service)}
                         >
                           {t('services.getStarted')}
                         </Button>
@@ -160,67 +194,114 @@ export const Services: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
           >
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white rounded-lg p-8 max-w-md w-full mx-4"
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ type: "spring", damping: 25 }}
+              className="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden"
             >
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-900">{t('services.contactForm')}</h2>
-                <button onClick={handleCloseModal}>
-                  <X className="h-6 w-6 text-gray-600 hover:text-gray-900" />
-                </button>
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-bold text-gray-900">
+                    {t('services.requestService')}
+                  </h2>
+                  <button 
+                    onClick={handleCloseModal}
+                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    <X className="h-6 w-6" />
+                  </button>
+                </div>
+
+                {/* Service Info */}
+                {selectedService && (
+                  <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+                    <div className="flex items-center space-x-3 mb-2">
+                      <selectedService.icon className="h-5 w-5 text-primary-600" />
+                      <h3 className="font-semibold text-gray-900">
+                        {selectedService.title[i18n.language as keyof typeof selectedService.title]}
+                      </h3>
+                    </div>
+                    <div className="flex justify-between text-sm text-gray-600">
+                      <span>{t('services.price')}:</span>
+                      <span className="font-medium">{selectedService.price}</span>
+                    </div>
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                      {t('services.form.name')} *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                      {t('services.form.email')} *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                      {t('services.form.phone')} *
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                      {t('services.form.message')}
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      rows={3}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                    />
+                  </div>
+
+                  <input type="hidden" name="serviceId" value={formData.serviceId} />
+                  <input type="hidden" name="serviceName" value={formData.serviceName} />
+                  <input type="hidden" name="servicePrice" value={formData.servicePrice} />
+
+                  <Button type="submit" className="w-full mt-4">
+                    {t('services.form.submit')}
+                    <ChevronRight className="h-4 w-4 ml-2" />
+                  </Button>
+                </form>
               </div>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                    {t('services.form.name')}
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                    {t('services.form.phone')}
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-600 focus:ring-primary-600 sm:text-sm"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="serviceId" className="block text-sm font-medium text-gray-700">
-                    {t('services.form.service')}
-                  </label>
-                  <input
-                    type="text"
-                    id="serviceId"
-                    name="serviceId"
-                    value={formData.serviceId}
-                    readOnly
-                    className="mt-1 block w-full rounded-md border-gray-300 bg-gray-100 shadow-sm sm:text-sm"
-                  />
-                </div>
-                <Button type="submit" className="w-full">
-                  {t('services.form.submit')}
-                </Button>
-              </form>
             </motion.div>
           </motion.div>
         )}
@@ -237,7 +318,9 @@ export const Services: React.FC = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t("services.howIWorkTitle")}</h2>
-            <p className="mt-4 text-lg text-gray-600">{t("services.howIWorkDescription")}</p>
+            <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+              {t("services.howIWorkDescription")}
+            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-4 gap-8">
@@ -248,9 +331,10 @@ export const Services: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
+                whileHover={{ y: -5 }}
               >
-                <Card className="p-6 text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-600 text-white rounded-full text-lg font-bold mb-4">
+                <Card className="p-6 text-center h-full hover:shadow-md transition-shadow">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-600 text-white rounded-full text-lg font-bold mb-4 mx-auto">
                     {phase.step}
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">
