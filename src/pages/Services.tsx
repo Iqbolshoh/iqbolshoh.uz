@@ -5,16 +5,17 @@ import { Card } from '../components/UI/Card';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../components/UI/Button';
 import { services, processSteps } from '../data/content';
+import toast from 'react-hot-toast';
 
 export const Services: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<'all' | 'frontend' | 'backend' | 'fullstack' | 'special'>('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<any>(null);
-  const [formData, setFormData] = useState({ 
-    name: '', 
-    email: '', 
-    phone: '', 
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
     message: '',
     serviceId: '',
     serviceName: '',
@@ -30,8 +31,8 @@ export const Services: React.FC = () => {
 
   const handleOpenModal = (service: any) => {
     setSelectedService(service);
-    setFormData({ 
-      ...formData, 
+    setFormData({
+      ...formData,
       serviceId: service.id.toString(),
       serviceName: service.title[i18n.language as keyof typeof service.title],
       servicePrice: service.price
@@ -42,10 +43,10 @@ export const Services: React.FC = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedService(null);
-    setFormData({ 
-      name: '', 
-      email: '', 
-      phone: '', 
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
       message: '',
       serviceId: '',
       serviceName: '',
@@ -58,20 +59,105 @@ export const Services: React.FC = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Here you can add API call to submit formData
-    // Example: 
-    // axios.post('/api/contact', formData)
-    //   .then(response => {
-    //     console.log('Success:', response.data);
-    //     handleCloseModal();
-    //   })
-    //   .catch(error => {
-    //     console.error('Error:', error);
-    //   });
-    handleCloseModal();
+
+    const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+    const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+
+    const message = `🚀 *New Service Request*
+
+    🌐 *Website:* [iqbolshoh.uz/services](https://iqbolshoh.uz/services)
+
+    📌 *Requested Service:* 
+    ${formData.serviceName} — _${formData.servicePrice}_
+
+    🙋‍♂️ *Client Info:*
+    • 👤 *Name:* ${formData.name}
+    • 📧 *Email:* ${formData.email}
+    • 📱 *Phone:* ${formData.phone}
+
+    📝 *Message:* ${formData.message || '_No additional message provided._'}
+    `;
+
+    const lang = i18n.language;
+    const messages = {
+      en: {
+        success: 'Your request was sent successfully!',
+        error: 'Failed to send. Please try again!',
+        server: 'Server error. Please try again later.',
+      },
+      uz: {
+        success: 'So‘rovingiz muvaffaqiyatli yuborildi!',
+        error: 'Yuborishda xatolik. Qaytadan urinib ko‘ring!',
+        server: 'Server xatosi. Iltimos, keyinroq urinib ko‘ring.',
+      },
+      ru: {
+        success: 'Ваш запрос был успешно отправлен!',
+        error: 'Не удалось отправить. Повторите попытку!',
+        server: 'Ошибка сервера. Попробуйте позже.',
+      },
+      tj: {
+        success: 'Дархости шумо бомуваффақият фиристода шуд!',
+        error: 'Натиҷаи фиристодан ноком аст. Бори дигар кӯшиш кунед!',
+        server: 'Хатои сервер. Баъдтар кӯшиш кунед.',
+      },
+    };
+
+    const getMessage = (type: 'success' | 'error' | 'server') =>
+      messages[lang as keyof typeof messages]?.[type] || messages.en[type];
+
+    try {
+      const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: 'Markdown',
+          disable_web_page_preview: true,
+        }),
+      });
+
+      if (response.ok) {
+        toast.success(getMessage('success'), {
+          duration: 3000,
+          style: {
+            fontSize: '18px',
+            padding: '16px 20px',
+            border: '2px solid #22c55e',
+            borderRadius: '12px',
+            background: '#f0fdf4',
+            color: '#166534',
+            boxShadow: '0 4px 12px rgba(34, 197, 94, 0.3)',
+          },
+          iconTheme: {
+            primary: '#22c55e',
+            secondary: '#f0fdf4',
+          },
+        });
+        handleCloseModal();
+      } else {
+        toast.error(getMessage('error'), {
+          duration: 3000,
+          style: {
+            fontSize: '18px',
+            padding: '16px 20px',
+            border: '2px solid #ef4444',
+            borderRadius: '12px',
+            background: '#fef2f2',
+            color: '#991b1b',
+            boxShadow: '0 4px 12px rgba(239, 68, 68, 0.3)',
+          },
+          iconTheme: {
+            primary: '#ef4444',
+            secondary: '#fef2f2',
+          },
+        });
+      }
+    } catch (error) {
+      toast.error(getMessage('server'));
+    }
   };
 
   return (
@@ -102,11 +188,10 @@ export const Services: React.FC = () => {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category as any)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  activeCategory === category
-                    ? 'bg-primary-600 text-white shadow-md'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === category
+                  ? 'bg-primary-600 text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
               >
                 {t(`services.categories.${category}`)}
               </button>
@@ -208,7 +293,7 @@ export const Services: React.FC = () => {
                   <h2 className="text-2xl font-bold text-gray-900">
                     {t('services.requestService')}
                   </h2>
-                  <button 
+                  <button
                     onClick={handleCloseModal}
                     className="text-gray-400 hover:text-gray-600 transition-colors"
                   >

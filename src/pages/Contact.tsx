@@ -32,7 +32,17 @@ export const Contact: React.FC = () => {
       const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
       const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
 
-      const message = `📝 *New Message!*\n\n🌐 *Website:* [iqbolshoh.uz/contact](https://iqbolshoh.uz/contact)\n👤 *Name:* ${formData.name}\n📧 *Email:* ${formData.email}\n📌 *Subject:* ${formData.subject || '-'}\n💬 *Message:* ${formData.message}`;
+      const message = `📨 *New Contact Message*
+
+    🌐 *Website:* [iqbolshoh.uz/contact](https://iqbolshoh.uz/contact)
+
+    🙋‍♂️ *Sender Info:*
+    • 👤 *Name:* ${formData.name}
+    • 📧 *Email:* ${formData.email}
+    • 📝 *Subject:* ${formData.subject || '_No subject provided._'}
+
+    💬 *Message:* ${formData.message || '_No additional message provided._'}
+    `;
 
       const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: 'POST',
@@ -45,8 +55,24 @@ export const Contact: React.FC = () => {
         }),
       });
 
+      const successMessages: Record<string, string> = {
+        en: 'Message sent successfully!',
+        uz: 'Xabar muvaffaqiyatli yuborildi!',
+        ru: 'Сообщение успешно отправлено!',
+        tj: 'Паём бомуваффақият фиристода шуд!'
+      };
+
+      const errorMessages: Record<string, string> = {
+        en: 'Failed to send message. Please try again.',
+        uz: 'Xabar yuborilmadi. Qayta urinib ko‘ring.',
+        ru: 'Не удалось отправить сообщение. Попробуйте еще раз.',
+        tj: 'Паём фиристода нашуд. Лутфан дубора кӯшиш кунед.'
+      };
+
+      const lang = i18n.language;
+
       if (response.ok) {
-        toast.success('Message sent successfully!', {
+        toast.success(successMessages[lang], {
           duration: 3000,
           style: {
             fontSize: '18px',
@@ -65,7 +91,7 @@ export const Contact: React.FC = () => {
 
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        toast.error('Failed to send message. Please try again.', {
+        toast.error(errorMessages[lang], {
           duration: 3000,
           style: {
             fontSize: '18px',
@@ -84,7 +110,13 @@ export const Contact: React.FC = () => {
       }
     } catch (error) {
       console.error('Telegram error:', error);
-      toast.error('Server error. Please try again later.');
+      const errorLangMessages: Record<string, string> = {
+        en: 'Server error. Please try again later.',
+        uz: 'Serverda xatolik. Keyinroq urinib ko‘ring.',
+        ru: 'Ошибка сервера. Попробуйте позже.',
+        tj: 'Хатои сервер. Баъдтар кӯшиш кунед.'
+      };
+      toast.error(errorLangMessages[i18n.language] || errorLangMessages.en);
     }
   };
 
