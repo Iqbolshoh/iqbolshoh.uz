@@ -5,6 +5,7 @@ import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram } from 'lucide-r
 import { Card } from '../components/UI/Card';
 import { Button } from '../components/UI/Button';
 import { personalInfo } from '../data/content';
+import toast from 'react-hot-toast';
 
 export const Contact: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -13,19 +14,78 @@ export const Contact: React.FC = () => {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+      const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+
+      const message = `📝 *New Message!*\n\n🌐 *Website:* [iqbolshoh.uz/contact](https://iqbolshoh.uz/contact)\n👤 *Name:* ${formData.name}\n📧 *Email:* ${formData.email}\n📌 *Subject:* ${formData.subject || '-'}\n💬 *Message:* ${formData.message}`;
+
+      const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: 'Markdown',
+          disable_web_page_preview: true,
+        }),
+      });
+
+      if (response.ok) {
+        toast.success('Message sent successfully!', {
+          duration: 3000,
+          style: {
+            fontSize: '18px',
+            padding: '16px 20px',
+            border: '2px solid #22c55e',
+            borderRadius: '12px',
+            background: '#f0fdf4',
+            color: '#166534',
+            boxShadow: '0 4px 12px rgba(34, 197, 94, 0.3)',
+          },
+          iconTheme: {
+            primary: '#22c55e',
+            secondary: '#f0fdf4',
+          },
+        });
+
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        toast.error('Failed to send message. Please try again.', {
+          duration: 3000,
+          style: {
+            fontSize: '18px',
+            padding: '16px 20px',
+            border: '2px solid #ef4444',
+            borderRadius: '12px',
+            background: '#fef2f2',
+            color: '#991b1b',
+            boxShadow: '0 4px 12px rgba(239, 68, 68, 0.3)',
+          },
+          iconTheme: {
+            primary: '#ef4444',
+            secondary: '#fef2f2',
+          },
+        });
+      }
+    } catch (error) {
+      console.error('Telegram error:', error);
+      toast.error('Server error. Please try again later.');
+    }
   };
 
   return (

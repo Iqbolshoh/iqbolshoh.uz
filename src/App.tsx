@@ -8,10 +8,12 @@ import { Services } from './pages/Services';
 import { Contact } from './pages/Contact';
 import { Blog } from './pages/Blog';
 import { BlogDetails } from './pages/BlogDetails';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <div className="min-h-screen bg-white">
+      <Toaster position="top-right" reverseOrder={false} />
       <Header />
       <main>
         <Routes>
