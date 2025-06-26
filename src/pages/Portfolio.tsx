@@ -8,7 +8,7 @@ import { projects } from '../data/content';
 
 export const Portfolio: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const [activeFilter, setActiveFilter] = useState('All');
+  const [activeFilter, setActiveFilter] = useState('all');
 
   const categories = [
     { key: 'all', label: t('portfolio.categories.all') },
@@ -21,7 +21,7 @@ export const Portfolio: React.FC = () => {
     activeFilter === 'all'
       ? projects
       : projects.filter((project) =>
-        project.category.toLowerCase().includes(activeFilter.toLowerCase())
+        project.category?.toLowerCase().includes(activeFilter.toLowerCase())
       );
 
   return (

@@ -126,6 +126,7 @@ export const stats = [
   },
 ];
 
+// Projects
 export const projects = [
   {
     id: 1,
