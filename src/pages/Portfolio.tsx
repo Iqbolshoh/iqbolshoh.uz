@@ -46,20 +46,22 @@ export const Portfolio: React.FC = () => {
 
       {/* Filter Tabs */}
       <section className="py-8 bg-white border-b">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex items-center justify-center space-x-1 bg-gray-100 rounded-lg p-1 w-fit mx-auto">
-            {categories.map((category) => (
-              <button
-                key={category.key}
-                onClick={() => setActiveFilter(category.key)}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeFilter === category.key
-                  ? 'bg-white text-primary-600 shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
-                  }`}
-              >
-                {category.label}
-              </button>
-            ))}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="overflow-x-auto">
+            <div className="flex items-center justify-center space-x-1 bg-gray-100 rounded-lg p-1 w-full sm:w-fit mx-auto">
+              {categories.map((category) => (
+                <button
+                  key={category.key}
+                  onClick={() => setActiveFilter(category.key)}
+                  className={`whitespace-nowrap px-3 py-2 text-sm font-medium transition-all ${activeFilter === category.key
+                    ? 'bg-white text-primary-600 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                >
+                  {category.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>

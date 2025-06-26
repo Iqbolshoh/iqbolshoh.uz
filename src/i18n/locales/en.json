@@ -119,11 +119,10 @@
     "basedInDesc": "Located in the historic city of Samarkand, Uzbekistan. Available for remote work worldwide and local meetings in Samarkand."
   },
   "footer": {
-    "description": "Creating digital solutions with passion. Let's bring your ideas to life.",
-    "navigation": "Menu",
-    "resources": "Links",
-    "copyright": "© 2025 Iqbolshoh Ilhomjonov. All rights reserved.",
-    "madeWithLove": "Made with",
-    "fromSamarkand": "from Samarkand, Uzbekistan"
+    "description": "Bringing your vision to life through clean, modern code and design.",
+    "navigation": "Navigation",
+    "resources": "Resources",
+    "contact": "Contact",
+    "copyright": "Iqbolshoh Dev. All rights reserved."
   }
 }
