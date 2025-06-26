@@ -150,13 +150,34 @@ export const projects = [
       ru: "SaaS-платформа для создания профессиональных сайтов с помощью drag & drop инструментов на Laravel и React.",
       tj: "Платформаи SaaS барои сохтани сайтҳои касбӣ бо истифодаи drag & drop бо backend-и Laravel ва frontend-и React."
     },
-    image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "images/projects/templatesuz.png",
     tech: ["Laravel", "React", "Vite", "MySQL"],
     liveDemo: "https://templates.uz",
-    github: "https://github.com/iqbolshoh/templates-uz",
+    github: "https://github.com/iqbolshoh/templates.uz",
     featured: true,
     category: "Full-Stack"
   },
+  {
+    id: 2,
+    name: {
+      en: "PHP Social Messenger",
+      uz: "PHP Social Messenger",
+      ru: "PHP Social Messenger",
+      tj: "PHP Social Messenger"
+    },
+    description: {
+      en: "A real-time social messaging web app built with pure PHP and MySQL, featuring user registration, login, chat system, and message notifications.",
+      uz: "Foydalanuvchi ro‘yxatdan o‘tishi, tizimga kirishi, chat tizimi va xabar bildirishnomalari bilan yaratilgan real vaqtli PHP va MySQL asosidagi ijtimoiy xabar almashish veb-ilovasi.",
+      ru: "Веб-приложение для социальных сообщений в реальном времени на чистом PHP и MySQL с регистрацией, авторизацией, системой чатов и уведомлениями.",
+      tj: "Веб-илова барои паёмнависии иҷтимоии воқеӣ бо истифодаи PHP ва MySQL бо бақайдгирии корбар, воридшавӣ, системаи чат ва огоҳиномаҳои паём."
+    },
+    image: "images/projects/php-social-messenger.png",
+    tech: ["PHP", "MySQL", "AJAX", "Bootstrap"],
+    liveDemo: "https://github.com/Iqbolshoh/php-social-messenger",
+    github: "https://github.com/Iqbolshoh/php-social-messenger",
+    featured: false,
+    category: "Backend"
+  }
 ];
 
 // Highlights
