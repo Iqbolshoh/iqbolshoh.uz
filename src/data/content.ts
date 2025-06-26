@@ -796,11 +796,12 @@ export const blogPosts = [
       tj: "10 феълҳои иборати беҳтарин барои барномасозон"
     },
     excerpt: {
-      en: "Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.",
+      en: "Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.",
       uz: "Texnologik suhbatlarda 'figure out', 'break down' va 'carry on' kabi fe'llardan qanday foydalanishni o'rganing.",
       ru: "Узнайте, как использовать фразовые глаголы как 'figure out', 'break down', 'carry on' в IT-разговорах.",
       tj: "Ёд гиред, ки чӣ гуна феълҳои иборавиеро монанди 'figure out', 'break down', 'carry on' дар муколамаҳои техникӣ истифода баред."
     },
+    featured: false,
     date: "2025-01-15",
     readTime: "5 min read",
     tags: ["English", "Communication"],
@@ -810,7 +811,7 @@ export const blogPosts = [
   {
     id: 2,
     title: {
-      en: "Laravel vs Node.js – Which Backend to Choose?",
+      en: "Laravel vs Node.js – Which Backend to Choose?Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.",
       uz: "Laravel vs Node.js – Qaysi Backendni Tanlash kerak?",
       ru: "Laravel против Node.js – Что выбрать?",
       tj: "Laravel ё Node.js – Кадомаш беҳтар аст?"
@@ -821,6 +822,7 @@ export const blogPosts = [
       ru: "Честное сравнение двух гигантов бэкенда с точки зрения full-stack разработчика.",
       tj: "Муқоисаи ростини ду абарқудрати backend аз дидгоҳи full-stack developer."
     },
+    featured: false,
     date: "2025-01-10",
     readTime: "8 min read",
     tags: ["Backend", "Laravel", "Node.js"],
@@ -830,21 +832,22 @@ export const blogPosts = [
   {
     id: 3,
     title: {
-      en: "Building Modern UIs with React and Tailwind",
+      en: "Building Modern UIs with React and TailwindLearn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.",
       uz: "React va Tailwind bilan zamonaviy UI yaratish",
       ru: "Создание современных UI с React и Tailwind",
       tj: "Сохтани UI-и муосир бо React ва Tailwind"
     },
     excerpt: {
-      en: "Best practices for creating beautiful, responsive interfaces using React and Tailwind CSS.",
+      en: "Best practices for creating beautiful, responsive interfaces using React and Tailwind CSS.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.Learn how to use phrasal verbs like 'figure out', 'break down', and 'carry on' in tech conversations.",
       uz: "React va Tailwind CSS yordamida chiroyli va responsiv interfeyslar yaratish bo'yicha eng yaxshi amaliyotlar.",
       ru: "Лучшие практики создания красивых, адаптивных интерфейсов с React и Tailwind CSS.",
       tj: "Беҳтарин усулҳо барои сохтани интерфейсҳои зебо ва ҷавобгӯ бо React ва Tailwind CSS."
     },
+    featured: true,
     date: "2025-01-05",
     readTime: "6 min read",
     tags: ["React", "Tailwind", "Frontend"],
     image: "https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=800",
     slug: "react-tailwind-modern-ui"
-  }
+  },
 ];

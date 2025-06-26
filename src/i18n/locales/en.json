@@ -91,11 +91,8 @@
     "title": "My Blog",
     "description": "Sharing what I learn, build, and believe in. From technical tutorials to career insights and personal reflections on the developer journey.",
     "featured": "Featured",
-    "featuredArticle": "Featured Article",
-    "latestArticles": "Latest Articles",
-    "recentThoughts": "Here are some of my recent thoughts and insights.",
     "readMore": "Read More",
-    "readArticle": "Read Article"
+    "backToBlog": "Back to Blog"
   },
   "contact": {
     "title": "Let's Work Together",
