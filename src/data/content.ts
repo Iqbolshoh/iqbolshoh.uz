@@ -16,7 +16,16 @@ import {
   Award,        // Awards
   Users,        // Users
   Star,         // Rating
-  Coffee        // Relax/Break
+  Coffee,        // Relax/Break
+  Compass,
+  Lightbulb,
+  HeartHandshake,
+  ShieldCheck,
+  Rocket,
+  MessageCircle,
+  Code2,
+  BookOpenCheck,
+  GraduationCap
 } from 'lucide-react';
 
 // Personal Info
@@ -186,46 +195,55 @@ export const highlights = [
   {
     icon: Award,
     text: {
-      en: "3+ years of coding experience",
-      uz: "3+ yillik dasturlash tajribasi",
-      ru: "3+ года опыта программирования",
-      tj: "3+ сол таҷрибаи барномасозӣ",
+      en: "3+ years of hands-on coding experience",
+      uz: "3+ yillik amaliy kod yozish tajribasi",
+      ru: "3+ года практического опыта программирования",
+      tj: "3+ соли таҷрибаи амалии барномасозӣ",
     },
   },
   {
-    icon: Coffee,
+    icon: Compass,
     text: {
-      en: "Mentor to junior developers",
-      uz: "Yosh dasturchilarga mentorlik",
-      ru: "Ментор для junior разработчиков",
-      tj: "Менти барои барномасозони ҷавон",
+      en: "Guided by purpose, rooted in values",
+      uz: "Maqsadga yo‘naltirilgan, qadriyatlarga asoslangan",
+      ru: "Руководствуется целью и ценностями",
+      tj: "Бо ҳадаф ва арзишҳо роҳнамоӣ мешавад",
     },
   },
   {
-    icon: Users,
+    icon: Lightbulb,
     text: {
-      en: "Focused on ethical tech & innovation",
-      uz: "Axloqiy texnologiya va innovatsiyalarga e'tibor",
-      ru: "Фокус на этичные технологии и инновации",
-      tj: "Диққат ба технологияҳои ахлоқӣ ва навовариҳо",
+      en: "Turning complex ideas into clean code",
+      uz: "Murakkab g‘oyalarni toza kodga aylantirish",
+      ru: "Преобразование сложных идей в чистый код",
+      tj: "Табдили андешаҳои мураккаб ба коди соф",
     },
   },
   {
-    icon: Star,
+    icon: HeartHandshake,
     text: {
-      en: "Building Templates.uz SaaS platform",
-      uz: "Templates.uz SaaS platformasini qurish",
-      ru: "Создание SaaS платформы Templates.uz",
-      tj: "Сохтани платформаи Templates.uz",
+      en: "Mentoring with heart, growing with impact",
+      uz: "Qalb bilan mentorlik, ta’sir bilan o‘sish",
+      ru: "Наставничество с душой, рост с влиянием",
+      tj: "Менторӣ бо дил, рушд бо таъсир",
     },
   },
   {
-    icon: Coffee,
+    icon: ShieldCheck,
     text: {
-      en: "Active in open-source community",
-      uz: "Ochiq manba hamjamiyatida faol",
-      ru: "Активен в open-source сообществе",
-      tj: "Фаъол дар ҷомеаи open-source",
+      en: "Committed to ethical and secure tech",
+      uz: "Axloqiy va xavfsiz texnologiyaga sadoqat",
+      ru: "Приверженность этичным и безопасным технологиям",
+      tj: "Садоқат ба технологияҳои ахлоқӣ ва амн",
+    },
+  },
+  {
+    icon: Rocket,
+    text: {
+      en: "Founder of Templates.uz SaaS platform",
+      uz: "Templates.uz SaaS asoschisi",
+      ru: "Основатель SaaS платформы Templates.uz",
+      tj: "Асосгузори платформаи Templates.uz",
     },
   },
 ];
@@ -236,75 +254,244 @@ export const journey = [
     year: "2022",
     title: {
       en: "Started University",
-      uz: "Universitetni boshlash",
-      ru: "Начал университет",
-      tj: "Донишгоҳро оғоз кард"
+      uz: "Universitetga kirish",
+      ru: "Начало университета",
+      tj: "Оғози донишгоҳ"
     },
     description: {
       en: "Began Software Engineering at Samarkand State University",
-      uz: "Samarqand Davlat Universitetida Dasturiy Injiniring yo'nalishini boshlash",
-      ru: "Начал изучать программную инженерию в Самаркандском государственном университете",
-      tj: "Оғози муҳандисии нармафзор дар Донишгоҳи давлатии Самарқанд"
+      uz: "SamDUda Dasturiy injiniringni boshladim",
+      ru: "Начал изучать программную инженерию в СамДУ",
+      tj: "Муҳандисии нармафзорро дар СамДУ оғоз кардам"
     }
   },
   {
     year: "2022",
     title: {
-      en: "First Web Project",
-      uz: "Birinchi veb loyiha",
-      ru: "Первый веб-проект",
-      tj: "Лоиҳаи аввалини веб"
+      en: "Frontend Foundations",
+      uz: "Frontend asoslari",
+      ru: "Основы Frontend",
+      tj: "Асосҳои Frontend"
     },
     description: {
-      en: "Built my first Laravel application and fell in love with backend development",
-      uz: "Birinchi Laravel ilovasini yaratish va backend dasturlashga oshiq bo'lish",
-      ru: "Создал своё первое приложение на Laravel и влюбился в backend разработку",
-      tj: "Эҷоди барномаи аввалини Laravel ва ошиқ шудан ба backend барномасозӣ"
+      en: "Started learning HTML, CSS, JS, and React—my first step into frontend world.",
+      uz: "HTML, CSS, JS va Reactni o‘rganishni boshladim — frontend olamiga birinchi qadammim.",
+      ru: "Начал изучать HTML, CSS, JS и React — мой первый шаг в мир frontend.",
+      tj: "HTML, CSS, JS ва React-ро омӯхтам — қадами аввалини ман ба ҷаҳони frontend."
     }
   },
   {
     year: "2023",
     title: {
-      en: "Frontend Focus",
-      uz: "Frontendga e'tibor",
-      ru: "Фокус на Frontend",
-      tj: "Диққат ба Frontend"
+      en: "Backend Breakthrough",
+      uz: "Backend yuksalishi",
+      ru: "Прорыв в Backend",
+      tj: "Пешравӣ дар Backend"
     },
     description: {
-      en: "Mastered React and started building full-stack applications",
-      uz: "React-ni o'rganish va full-stack ilovalar qurishni boshlash",
-      ru: "Освоил React и начал создавать full-stack приложения",
-      tj: "Омӯзиши React ва оғози сохтани барномаҳои full-stack"
+      en: "Dived into Laravel and REST APIs, fell in love with backend development.",
+      uz: "Laravel va REST API-larni chuqur o‘rgandim, backendga oshiq bo‘ldim.",
+      ru: "Глубоко изучил Laravel и REST API — влюбился в backend.",
+      tj: "Laravel ва REST API-ро амиқ омӯхтам ва ба backend дил бастам."
+    }
+  },
+  {
+    year: "2023",
+    title: {
+      en: "First Real Freelance Project",
+      uz: "Birinchi real freelancer loyiha",
+      ru: "Первый реальный фриланс проект",
+      tj: "Аввалин лоиҳаи воқеии фриланс"
+    },
+    description: {
+      en: "Completed a full-stack client project from scratch using Laravel + React.",
+      uz: "Laravel + React asosida to‘liq mijoz loyihasini noldan bajardim.",
+      ru: "Реализовал full-stack проект с нуля для клиента на Laravel + React.",
+      tj: "Лоиҳаи пурраи full-stack-ро барои муштарӣ бо Laravel + React анҷом додам."
     }
   },
   {
     year: "2024",
     title: {
-      en: "Templates.uz",
-      uz: "Templates.uz",
-      ru: "Templates.uz",
-      tj: "Templates.uz"
+      en: "Contributed to Open Source",
+      uz: "Open-sourcega hissa qo‘shdim",
+      ru: "Внёс вклад в Open Source",
+      tj: "Саҳм дар Open Source"
     },
     description: {
-      en: "Launched my SaaS platform for website building",
-      uz: "Vebsayt yaratish uchun SaaS platformamni ishga tushirish",
-      ru: "Запустил свою SaaS платформу для создания сайтов",
-      tj: "Оғози платформаи SaaS-ии ман барои сохтани сомонаҳо"
+      en: "Published several public repositories and joined global dev communities.",
+      uz: "Bir nechta open-source repositorylar e’lon qildim va jahon dev hamjamiyatiga qo‘shildim.",
+      ru: "Опубликовал несколько open-source репозиториев и вступил в глобальные сообщества.",
+      tj: "Якчанд repository-и open-source нашр кардам ва ба ҷомеаҳои ҷаҳонӣ пайвастам."
+    }
+  },
+  {
+    year: "2024",
+    title: {
+      en: "Portfolio & Personal Website",
+      uz: "Portfolio va shaxsiy sayt",
+      ru: "Портфолио и личный сайт",
+      tj: "Портфолио ва сомонаи шахсӣ"
+    },
+    description: {
+      en: "Launched iqbolshoh.uz to showcase my work, apps, and skills.",
+      uz: "Iqbolshoh.uz saytini ishga tushirdim — barcha ishlarim va ilovalarim u yerda.",
+      ru: "Запустил iqbolshoh.uz — там вся моя работа и проекты.",
+      tj: "Iqbolshoh.uz-ро оғоз кардам — ҳама кору барномаҳои ман дар онҷост."
     }
   },
   {
     year: "2025",
     title: {
-      en: "Freelancing",
-      uz: "Freelancerlik",
-      ru: "Фриланс",
-      tj: "Фриланс"
+      en: "Templates.uz SaaS Platform",
+      uz: "Templates.uz SaaS platformasi",
+      ru: "Платформа Templates.uz",
+      tj: "Платформаи Templates.uz"
     },
     description: {
-      en: "Started taking on client projects and mentoring developers",
-      uz: "Mijozlar loyihalarini qabul qilish va dasturchilarga mentorlik qilishni boshlash",
-      ru: "Начал брать проекты клиентов и менторить разработчиков",
-      tj: "Оғози қабули лоиҳаҳои муштариён ва роҳнамоӣ ба барномасозон"
+      en: "Launched a Laravel + React SaaS platform to help users build websites easier.",
+      uz: "Laravel + React asosida Templates.uz platformasini ishga tushirdim — sayt qurishni soddalashtirish uchun.",
+      ru: "Запустил SaaS платформу на Laravel + React для упрощения создания сайтов.",
+      tj: "Платформаи SaaS-ро бо Laravel + React оғоз кардам — барои осон кардани сохтани сомонаҳо."
+    }
+  },
+  {
+    year: "2025",
+    title: {
+      en: "Mentored 20+ Developers",
+      uz: "20+ dasturchiga noldan ta’lim berdim",
+      ru: "Обучил с нуля 20+ разработчиков",
+      tj: "Ба 20+ барномасоз аз сифр таълим додам"
+    },
+    description: {
+      en: "Taught 0 to 1 skills in C++, frontend (React), and backend (Laravel) through practical lessons and personal guidance.",
+      uz: "C++, frontend (React) va backend (Laravel) yo‘nalishlarida amaliy darslar orqali 0 dan boshlab o‘rgatdim.",
+      ru: "Обучал C++, frontend (React) и backend (Laravel) с нуля через практические уроки и личное наставничество.",
+      tj: "Ба шогирдон аз сифр C++, frontend (React) ва backend (Laravel)-ро бо дарсҳои амалӣ ва роҳнамоии инфиродӣ омӯзонидам."
+    }
+  },
+  {
+    year: "2025",
+    title: {
+      en: "50+ Public Projects",
+      uz: "50+ ommaviy loyiha",
+      ru: "50+ публичных проектов",
+      tj: "50+ лоиҳаи оммавӣ"
+    },
+    description: {
+      en: "Published over 50 open/public projects across GitHub and platforms.",
+      uz: "GitHub va boshqa platformalarda 50+ ochiq loyiha e’lon qildim.",
+      ru: "Опубликовал 50+ проектов на GitHub и других платформах.",
+      tj: "Дар GitHub ва дигар платформаҳо зиёда аз 50 лоиҳаро нашр кардам."
+    }
+  },
+  {
+    year: "2025",
+    title: {
+      en: "Educational Content Creator",
+      uz: "Ta’limiy kontent muallifi",
+      ru: "Создатель обучающего контента",
+      tj: "Муаллифи контенти таълимӣ"
+    },
+    description: {
+      en: "Started sharing free tutorials on Instagram and YouTube.",
+      uz: "Instagram va YouTube’da bepul darsliklarni ulashishni boshladim.",
+      ru: "Начал делиться бесплатными туториалами в Instagram и YouTube.",
+      tj: "Доро дар Instagram ва YouTube дарсҳои ройгон нашр карданро оғоз кардам."
+    }
+  },
+  {
+    year: "2025",
+    title: {
+      en: "Freelance Career Growth",
+      uz: "Freelancerlikda yuksalish",
+      ru: "Рост фриланс карьеры",
+      tj: "Рушди фриланс карйера"
+    },
+    description: {
+      en: "Collaborated with multiple clients building real-world digital solutions.",
+      uz: "Bir nechta mijoz bilan real raqamli loyihalar ustida ishladim.",
+      ru: "Сотрудничал с клиентами, создавая цифровые решения.",
+      tj: "Бо муштариёни зиёд барои сохтани ҳалли рақамии воқеӣ ҳамкорӣ кардам."
+    }
+  }
+];
+
+
+export const beyond = [
+  {
+    icon: GraduationCap,
+    title: {
+      en: "Mentoring",
+      uz: "Mentorlik",
+      ru: "Наставничество",
+      tj: "Менторинг"
+    },
+    description: {
+      en: "Guided 20+ students from zero to hero in C++, frontend, and backend with structured lessons, real-world projects, and hands-on support.",
+      uz: "20+ shogirdlarga C++, frontend va backendni 0 dan o‘rgatdim — nazariyani amaliyot bilan uyg‘unlashtirib, mustahkam bilim berdim.",
+      ru: "Наставлял более 20 учеников по C++, фронтенду и бэкенду с упором на практику, реальные проекты и развитие навыков.",
+      tj: "Беш аз 20 шогирдро дар C++, frontend ва backend аз сифр омӯхтам — бо дарсҳои мураттаб ва таҷрибаи амалӣ."
+    }
+  },
+  {
+    icon: Code2,
+    title: {
+      en: "Open Source",
+      uz: "Ochiq manba",
+      ru: "Опен-сорс",
+      tj: "Open Source"
+    },
+    description: {
+      en: "Actively contribute to GitHub and public repositories, sharing reusable code, templates, and tools that help the community build faster.",
+      uz: "GitHub orqali ochiq manbali loyihalarga hissa qo‘shaman — kodlar, shablonlar va foydali vositalarni baham ko‘raman.",
+      ru: "Активно участвую в open-source проектах, делюсь шаблонами и полезными инструментами для быстрого развития.",
+      tj: "Дар GitHub ва лоиҳаҳои open-source фаъолона иштирок мекунам — абзорҳо ва шаблонҳоро дастрас менамоям."
+    }
+  },
+  {
+    icon: HeartHandshake, 
+    title: {
+      en: "Ethical Tech",
+      uz: "Axloqiy texnologiya",
+      ru: "Этичные технологии",
+      tj: "Технологияи ахлоқӣ"
+    },
+    description: {
+      en: "I strive to create software that respects user privacy, promotes positive values, and solves real-world problems for good causes.",
+      uz: "Foydalanuvchi maxfiyligini hurmat qiladigan, ijobiy qadriyatlarni targ‘ib qiladigan va jamiyatga foyda keltiradigan dasturlar yarataman.",
+      ru: "Создаю технологии, уважающие конфиденциальность и способствующие решению социальных задач с добрыми намерениями.",
+      tj: "Нармавсореро месозам, ки ахлоқро риоя мекунад ва ба нафъи ҷомеа хизмат мекунад."
+    }
+  },
+  {
+    icon: MessageCircle,
+    title: {
+      en: "Community Engagement",
+      uz: "Jamoaviy ishtirok",
+      ru: "Вовлеченность в сообщество",
+      tj: "Фаъолият дар ҷомеа"
+    },
+    description: {
+      en: "Consistently share tutorials, coding tips, and dev lifestyle content on Instagram and YouTube to inspire and educate others.",
+      uz: "Instagram va YouTube’da kod yozish darslari, maslahatlar va dasturchilar hayoti haqida kontent ulashib kelmoqdaman.",
+      ru: "Делюсь лайфхаками, туториалами и мотивационным контентом в Instagram и YouTube для начинающих программистов.",
+      tj: "Дар Instagram ва YouTube дарсҳо, маслиҳатҳо ва ҳаёти барномасозиро нақл мекунам."
+    }
+  },
+  {
+    icon: BookOpenCheck,
+    title: {
+      en: "Continuous Learning",
+      uz: "Doimiy o‘rganish",
+      ru: "Непрерывное обучение",
+      tj: "Омӯзиши пайваста"
+    },
+    description: {
+      en: "Always hungry for growth — from Laravel upgrades to mastering TypeScript, I dedicate time to sharpen my skills daily.",
+      uz: "Laravel yangiliklaridan tortib TypeScript’gacha — har kuni bilimimni oshirishga vaqt ajrataman.",
+      ru: "Постоянно учусь и слежу за новыми технологиями, прокачивая навыки каждый день.",
+      tj: "Ҳар рӯз барои омӯхтани технологияҳои нав, малакаҳои худро такмил медиҳам."
     }
   }
 ];

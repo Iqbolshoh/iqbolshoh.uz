@@ -27,7 +27,7 @@
   "about": {
     "title": "About Me",
     "subtitle": "Who am I?",
-    "description": "My name is Iqbolshoh Ilhomjonov, a 3rd-year Software Engineering student at Samarkand State University. I specialize in full-stack development and love solving real-world problems with code.",
+    "description": "My name is Iqbolshoh Ilhomjonov, a 4rd-year Software Engineering student at Samarkand State University. I specialize in full-stack development and love solving real-world problems with code.",
     "subDescription": "Born in Uzbekistan, raised in Samarkand. I believe in continuous learning and align my journey with Islamic values and discipline.",
     "journey": "My Journey",
     "journeyDescription": "The path that led me here",
@@ -35,15 +35,9 @@
     "keyHighlights": "Key highlights of my journey",
     "technicalSkills": "Technical Skills",
     "beyondCoding": "Beyond Coding",
-    "mentoring": "Mentoring",
-    "mentoringDesc": "Helping junior developers grow and learn new skills",
-    "openSource": "Open Source",
-    "openSourceDesc": "Contributing to the developer community through shared projects",
-    "ethicalTech": "Ethical Tech",
-    "ethicalTechDesc": "Building technology that serves humanity and aligns with my values",
     "locationInfo": "SamSU Student",
     "experienceInfo": "3+ Years Exp",
-    "codingPassion": "Coding with passion",
+    "codingPurpose": "Solving with code, guided by purpose",
     "advanced": "Advanced"
   },
   "portfolio": {

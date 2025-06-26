@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { GraduationCap, MapPin, Calendar, Heart, Code2, Coffee } from 'lucide-react';
+import { GraduationCap, MapPin, Calendar, Focus } from 'lucide-react';
 import { Card } from '../components/UI/Card';
-import { personalInfo, techStack, journey, highlights } from '../data/content';
+import { personalInfo, techStack, journey, highlights, beyond } from '../data/content';
 
 export const About: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -64,8 +64,8 @@ export const About: React.FC = () => {
                 />
                 <div className="absolute -bottom-6 -right-6 bg-white rounded-xl p-4 shadow-lg">
                   <div className="flex items-center space-x-2">
-                    <Heart className="h-5 w-5 text-red-500" />
-                    <span className="text-sm font-medium">{t('about.codingPassion')}</span>
+                    <Focus className="h-5 w-5 text-primary-500" />
+                    <span className="text-sm font-medium">{t('about.codingPurpose')}</span>
                   </div>
                 </div>
               </div>
@@ -153,6 +153,7 @@ export const About: React.FC = () => {
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:gap-16">
+            {/* Technical Skills */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -165,7 +166,7 @@ export const About: React.FC = () => {
                   const Icon = tech.icon;
                   return (
                     <div key={tech.name} className="flex items-center space-x-4">
-                      <Icon className="h-6 w-6 text-primary-600" />
+                      <Icon className="h-7 w-7 text-primary-600" />
                       <div className="flex-1">
                         <div className="flex justify-between mb-1">
                           <span className="font-medium text-gray-900">{tech.name}</span>
@@ -187,6 +188,7 @@ export const About: React.FC = () => {
               </div>
             </motion.div>
 
+            {/* Beyond Coding */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -196,27 +198,20 @@ export const About: React.FC = () => {
             >
               <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('about.beyondCoding')}</h2>
               <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <Coffee className="h-6 w-6 text-primary-600 mt-1" />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">{t('about.mentoring')}</h3>
-                    <p className="text-gray-600">{t('about.mentoringDesc')}</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <Code2 className="h-6 w-6 text-primary-600 mt-1" />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">{t('about.openSource')}</h3>
-                    <p className="text-gray-600">{t('about.openSourceDesc')}</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <Heart className="h-6 w-6 text-primary-600 mt-1" />
-                  <div>
-                    <h3 className="font-semibold text-gray-900">{t('about.ethicalTech')}</h3>
-                    <p className="text-gray-600">{t('about.ethicalTechDesc')}</p>
-                  </div>
-                </div>
+                {beyond.map((item, index) => {
+                  const lang = i18n.language as keyof typeof item.title;
+                  const Icon = item.icon;
+
+                  return (
+                    <div key={index} className="flex items-start space-x-5">
+                      <Icon className="h-7 w-7 text-primary-600 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-semibold text-gray-900 text-lg">{item.title[lang]}</h3>
+                        <p className="text-gray-600 text-base">{item.description[lang]}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </motion.div>
           </div>
