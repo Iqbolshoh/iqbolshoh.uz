@@ -679,6 +679,90 @@ export const projects = [
     github: "https://github.com/Iqbolshoh/javascript-timer",
     featured: false,
     category: "Frontend"
+  },
+  {
+    id: 27,
+    name: {
+      en: "HTML CSS Login Form",
+      uz: "HTML CSS Login Forma",
+      ru: "Форма входа HTML CSS",
+      tj: "Формаи воридшавӣ HTML CSS"
+    },
+    description: {
+      en: "A modern and responsive login form built using HTML and CSS featuring clean UI design, smooth animations, and customizable components.",
+      uz: "HTML va CSS yordamida yaratilgan zamonaviy login forma. Unda responsiv dizayn, animatsiyalar va toza UI elementlari mavjud.",
+      ru: "Современная адаптивная форма входа, созданная с использованием HTML и CSS с плавными анимациями и чистым интерфейсом.",
+      tj: "Формаи воридшавии замонавӣ бо HTML ва CSS бо тарҳи тоза ва анимацияҳои ҳамвор."
+    },
+    image: "images/projects/html-css-login-form.png",
+    tech: ["HTML", "CSS", "Responsive Design", "UI Animation"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/html-css-form",
+    featured: false,
+    category: "Frontend"
+  },
+  {
+    id: 28,
+    name: {
+      en: "PHP Send Mail System",
+      uz: "PHP Email Yuborish Tizimi",
+      ru: "Система отправки почты на PHP",
+      tj: "Системаи фиристодани email бо PHP"
+    },
+    description: {
+      en: "A secure email sending system built with PHP using PHPMailer and SMTP. It includes CSRF protection, AJAX requests, Bootstrap UI, and SweetAlert2 notifications.",
+      uz: "PHPMailer va SMTP yordamida yaratilgan xavfsiz email yuborish tizimi. Unda CSRF himoya, AJAX so‘rovlar, Bootstrap interfeysi va SweetAlert2 bildirishnomalari mavjud.",
+      ru: "Система отправки email на PHP с использованием PHPMailer и SMTP с защитой CSRF, AJAX запросами и уведомлениями SweetAlert2.",
+      tj: "Системаи фиристодани email бо PHP бо истифодаи PHPMailer ва SMTP бо муҳофизати CSRF ва AJAX."
+    },
+    image: "images/projects/php-send-mail.png",
+    tech: ["PHP", "PHPMailer", "SMTP", "Bootstrap", "AJAX"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/php-send-mail",
+    featured: false,
+    category: "Backend"
+  },
+  {
+    id: 29,
+    name: {
+      en: "PHP MySQL Marketplace",
+      uz: "PHP MySQL Marketplace",
+      ru: "Маркетплейс на PHP и MySQL",
+      tj: "Marketplace бо PHP ва MySQL"
+    },
+    description: {
+      en: "An online marketplace platform built with PHP and MySQL where users can buy and sell products, manage listings, search products, and place orders through a shopping cart system.",
+      uz: "PHP va MySQL yordamida yaratilgan marketplace platformasi. Unda foydalanuvchilar mahsulot qo‘shishi, qidirishi, savatchaga qo‘shishi va buyurtma berishi mumkin.",
+      ru: "Онлайн маркетплейс на PHP и MySQL, позволяющий пользователям размещать товары, искать продукты, добавлять их в корзину и оформлять заказы.",
+      tj: "Платформаи marketplace бо PHP ва MySQL, ки имкон медиҳад корбарон маҳсулот илова кунанд, ҷустуҷӯ кунанд ва фармоиш диҳанд."
+    },
+    image: "images/projects/php-mysql-marketplace.png",
+    tech: ["PHP", "MySQL", "Bootstrap", "E-commerce"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/php-mysql-marketplace",
+    featured: true,
+    category: "Full-Stack"
+  },
+  {
+    id: 30,
+    name: {
+      en: "PHP Database Manager",
+      uz: "PHP Database Manager",
+      ru: "Менеджер базы данных PHP",
+      tj: "Менеҷери базаи додаҳо бо PHP"
+    },
+    description: {
+      en: "A lightweight and secure PHP database wrapper built with MySQLi that simplifies database queries, supports prepared statements, transaction management, and error handling.",
+      uz: "MySQLi asosida yaratilgan yengil va xavfsiz PHP database wrapper. U prepared statements, transaction boshqaruvi va qulay query metodlarini taqdim etadi.",
+      ru: "Легкий и безопасный PHP wrapper для работы с базой данных MySQLi с поддержкой prepared statements и управления транзакциями.",
+      tj: "Wrapper-и сабук барои идоракунии базаи додаҳо бо PHP ва MySQLi бо дастгирии prepared statements ва transaction."
+    },
+    image: "images/projects/php-database-manager.png",
+    tech: ["PHP", "MySQLi", "Database Wrapper", "Prepared Statements"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/php-database-manager",
+    featured: true,
+    category: "Backend"
   }
 ];
 
