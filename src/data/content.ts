@@ -175,6 +175,510 @@ export const projects = [
     github: "https://github.com/Iqbolshoh/php-social-messenger",
     featured: false,
     category: "Backend"
+  },
+  {
+    id: 3,
+    name: {
+      en: "JavaScript Vocabulary Quiz",
+      uz: "JavaScript Vocabulary Quiz",
+      ru: "JavaScript Vocabulary Quiz",
+      tj: "JavaScript Vocabulary Quiz"
+    },
+    description: {
+      en: "An interactive vocabulary learning game built with JavaScript. It includes multiple vocabulary levels, AJAX-based dynamic questions, text-to-speech pronunciation, and real-time score tracking.",
+      uz: "JavaScript yordamida yaratilgan interaktiv lug‘at o‘rganish o‘yini. Unda turli darajadagi so‘zlar, AJAX orqali dinamik savollar, text-to-speech talaffuz va real vaqt natija kuzatuvi mavjud.",
+      ru: "Интерактивная игра для изучения словарного запаса, созданная на JavaScript. Включает уровни словаря, динамические вопросы через AJAX, произношение text-to-speech и отслеживание результатов в реальном времени.",
+      tj: "Бозии интерактивӣ барои омӯзиши луғат, ки бо JavaScript сохта шудааст. Он дорои сатҳҳои луғат, саволҳои динамикӣ бо AJAX, талаффузи text-to-speech ва пайгирии натиҷаҳо дар вақти воқеӣ мебошад."
+    },
+    image: "images/projects/javascript-vocabulary-quiz.png",
+    tech: ["JavaScript", "AJAX", "Bootstrap", "SweetAlert2"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/javascript-vocabulary-quiz",
+    featured: false,
+    category: "Frontend"
+  },
+  {
+    id: 4,
+    name: {
+      en: "Java Calculator App",
+      uz: "Java Calculator App",
+      ru: "Java Calculator App",
+      tj: "Java Calculator App"
+    },
+    description: {
+      en: "A simple desktop calculator built with Java and Swing. It supports basic arithmetic operations, a clean graphical interface, and error handling such as division by zero.",
+      uz: "Java va Swing yordamida yaratilgan oddiy desktop kalkulyator. Unda asosiy arifmetik amallar, sodda grafik interfeys va nolga bo‘lish kabi xatolarni boshqarish mavjud.",
+      ru: "Простой настольный калькулятор, созданный на Java с использованием Swing. Поддерживает базовые арифметические операции, удобный графический интерфейс и обработку ошибок.",
+      tj: "Калкулятори оддии desktop, ки бо Java ва Swing сохта шудааст. Он амалиётҳои асосии арифметикӣ, интерфейси графикии содда ва идоракунии хатогиҳоро дастгирӣ мекунад."
+    },
+    image: "images/projects/java-calculator.png",
+    tech: ["Java", "Swing", "OOP"],
+    liveDemo: null,
+    github: "https://github.com/iqbolshoh/java-calculator-app",
+    featured: false,
+    category: "Desktop"
+  },
+  {
+    id: 5,
+    name: {
+      en: "Java Test Platform",
+      uz: "Java Test Platform",
+      ru: "Java Test Platform",
+      tj: "Java Test Platform"
+    },
+    description: {
+      en: "A Java Swing-based quiz platform designed to test vocabulary skills with timed questions, randomized answers, scoring system, and final performance summary.",
+      uz: "Java Swing asosida yaratilgan test platformasi bo‘lib, unda vaqt bilan savollar, tasodifiy javob variantlari, ball tizimi va yakuniy natija hisoboti mavjud.",
+      ru: "Платформа для тестирования, созданная на Java Swing, с таймером для вопросов, случайным порядком ответов, системой подсчёта баллов и итоговой статистикой.",
+      tj: "Платформаи тестӣ, ки бо Java Swing сохта шудааст ва дорои саволҳои бо вақт маҳдуд, ҷавобҳои тасодуфӣ, системаи холгузорӣ ва натиҷаи ниҳоӣ мебошад."
+    },
+    image: "images/projects/java-test-platform.png",
+    tech: ["Java", "Swing", "AWT", "OOP"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/java-test-platform",
+    featured: false,
+    category: "Desktop"
+  },
+  {
+    id: 6,
+    name: {
+      en: "Java To-Do List",
+      uz: "Java To-Do List",
+      ru: "Java To-Do List",
+      tj: "Java To-Do List"
+    },
+    description: {
+      en: "A simple task management desktop application built with Java Swing that allows users to add, edit, delete, and mark tasks as completed with an intuitive user interface.",
+      uz: "Java Swing yordamida yaratilgan oddiy vazifalar boshqaruvi desktop ilovasi. Unda vazifalarni qo‘shish, tahrirlash, o‘chirish va bajarilgan deb belgilash imkoniyati mavjud.",
+      ru: "Простое настольное приложение для управления задачами, созданное на Java Swing. Позволяет добавлять, редактировать, удалять задачи и отмечать их как выполненные.",
+      tj: "Барномаи оддии идоракунии вазифаҳо, ки бо Java Swing сохта шудааст. Имкон медиҳад вазифаҳоро илова, таҳрир, нест ва ҳамчун анҷомшуда қайд кард."
+    },
+    image: "images/projects/java-todo-list.png",
+    tech: ["Java", "Swing", "OOP"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/java-todo-list",
+    featured: false,
+    category: "Desktop"
+  },
+  {
+    id: 7,
+    name: {
+      en: "Java Android Messenger",
+      uz: "Java Android Messenger",
+      ru: "Java Android Messenger",
+      tj: "Java Android Messenger"
+    },
+    description: {
+      en: "An AI-powered Android chat application built with Java and Room Database. It integrates Google Gemini API to generate real-time conversational responses and stores messages locally using SQLite.",
+      uz: "Java va Room Database asosida yaratilgan AI chat Android ilovasi. Google Gemini API orqali real vaqt rejimida javoblar yaratadi va xabarlarni SQLite orqali lokal saqlaydi.",
+      ru: "Android чат-приложение с искусственным интеллектом, созданное на Java с использованием Room Database. Интегрирует Gemini API для генерации ответов в реальном времени.",
+      tj: "Барномаи чати Android бо зеҳни сунъӣ, ки бо Java ва Room Database сохта шудааст. Gemini API-ро барои тавлиди ҷавобҳои воқеӣ истифода мебарад."
+    },
+    image: "images/projects/java-android-messenger.png",
+    tech: ["Java", "Android", "Room DB", "SQLite", "Gemini API"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/java-android-messenger",
+    featured: false,
+    category: "Mobile"
+  },
+  {
+    id: 8,
+    name: {
+      en: "PHP Authentication System",
+      uz: "PHP Authentication System",
+      ru: "PHP Authentication System",
+      tj: "PHP Authentication System"
+    },
+    description: {
+      en: "A secure authentication system built with PHP and MySQL featuring user registration, login, logout, session management, and password hashing for improved security.",
+      uz: "PHP va MySQL yordamida yaratilgan xavfsiz autentifikatsiya tizimi. Unda foydalanuvchi ro‘yxatdan o‘tishi, tizimga kirishi, chiqishi, sessiya boshqaruvi va parolni xeshlash funksiyalari mavjud.",
+      ru: "Безопасная система аутентификации на PHP и MySQL с регистрацией пользователей, входом в систему, управлением сессиями и хешированием паролей.",
+      tj: "Системаи бехатари аутентификатсия, ки бо PHP ва MySQL сохта шудааст. Он бақайдгирӣ, воридшавӣ, идоракунии сессия ва ҳешкунии паролро дар бар мегирад."
+    },
+    image: "images/projects/php-authentication-system.png",
+    tech: ["PHP", "MySQL", "Sessions", "Security"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/php-authentication-system",
+    featured: false,
+    category: "Backend"
+  },
+  {
+    id: 9,
+    name: {
+      en: "PHP Business Website",
+      uz: "PHP Business Website",
+      ru: "PHP Business Website",
+      tj: "PHP Business Website"
+    },
+    description: {
+      en: "A modern and responsive business website template built with PHP, HTML, and CSS. It is designed for companies to showcase services, products, and marketing content with a customizable layout.",
+      uz: "PHP, HTML va CSS yordamida yaratilgan zamonaviy va responsiv biznes veb-sayt shabloni. Kompaniyalar xizmatlari, mahsulotlari va marketing kontentlarini ko‘rsatish uchun mo‘ljallangan.",
+      ru: "Современный и адаптивный бизнес-сайт, созданный на PHP, HTML и CSS. Подходит для компаний, которые хотят представить свои услуги, продукты и маркетинговый контент.",
+      tj: "Шаблони муосири сомонаи бизнес, ки бо PHP, HTML ва CSS сохта шудааст. Барои ширкатҳо барои муаррифии хизматрасониҳо ва маҳсулот мувофиқ аст."
+    },
+    image: "images/projects/php-business-website.png",
+    tech: ["PHP", "HTML", "CSS", "Bootstrap"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/php-business-website",
+    featured: false,
+    category: "Full-Stack"
+  },
+  {
+    id: 10,
+    name: {
+      en: "Laravel Business Website",
+      uz: "Laravel Business Website",
+      ru: "Laravel Business Website",
+      tj: "Laravel Business Website"
+    },
+    description: {
+      en: "A modern business website built with Laravel featuring a customizable design, admin dashboard, portfolio management, and content management system for businesses.",
+      uz: "Laravel asosida yaratilgan zamonaviy biznes veb-sayti. Unda admin panel, portfolio boshqaruvi va kontentni boshqarish tizimi mavjud.",
+      ru: "Современный бизнес-сайт на Laravel с административной панелью, управлением портфолио и системой управления контентом.",
+      tj: "Сомонаи муосири бизнес, ки бо Laravel сохта шудааст ва дорои панели идоракунӣ ва системаи идоракунии контент мебошад."
+    },
+    image: "images/projects/laravel-business-website.png",
+    tech: ["Laravel", "PHP", "MySQL", "Bootstrap"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/laravel-business-website",
+    featured: false,
+    category: "Full-Stack"
+  },
+  {
+    id: 11,
+    name: {
+      en: "PHP Click Payment Integration",
+      uz: "PHP Click Payment Integratsiyasi",
+      ru: "Интеграция платежной системы Click на PHP",
+      tj: "Интегратсияи пардохти Click бо PHP"
+    },
+    description: {
+      en: "A PHP-based integration for the Click payment system that enables secure online payments through API communication with prepare and complete payment stages.",
+      uz: "Click to‘lov tizimini PHP orqali integratsiya qilish loyihasi. Unda prepare va complete bosqichlari orqali API orqali xavfsiz onlayn to‘lovlar amalga oshiriladi.",
+      ru: "Интеграция платежной системы Click на PHP, позволяющая выполнять безопасные онлайн-платежи через API с этапами prepare и complete.",
+      tj: "Интегратсияи системаи пардохти Click бо PHP, ки пардохтҳои онлайнро тавассути API бо марҳилаҳои prepare ва complete амалӣ мекунад."
+    },
+    image: "images/projects/php-click-payment.png",
+    tech: ["PHP", "MySQL", "Click API", "Payment Integration"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/php-click-payment",
+    featured: false,
+    category: "Backend"
+  },
+  {
+    id: 12,
+    name: {
+      en: "PHP User Role Manager",
+      uz: "PHP User Role Manager",
+      ru: "PHP User Role Manager",
+      tj: "PHP User Role Manager"
+    },
+    description: {
+      en: "A role-based user management system built with PHP that includes authentication, admin and user roles, profile image uploads, and secure access control.",
+      uz: "PHP yordamida yaratilgan rolga asoslangan foydalanuvchi boshqaruv tizimi. Unda autentifikatsiya, admin va user rollari, profil rasmi yuklash va xavfsiz kirish nazorati mavjud.",
+      ru: "Система управления пользователями на PHP с ролевым доступом, регистрацией, входом в систему, загрузкой изображений профиля и безопасной авторизацией.",
+      tj: "Системаи идоракунии корбарон бо PHP, ки дорои дастрасии вобаста ба нақш, бақайдгирӣ, воридшавӣ ва боркунии аксҳои профил мебошад."
+    },
+    image: "images/projects/php-user-role-manager.png",
+    tech: ["PHP", "MySQL", "RBAC", "Authentication"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/php-user-role-manager",
+    featured: false,
+    category: "Backend"
+  },
+  {
+    id: 13,
+    name: {
+      en: "PHP Education Management System",
+      uz: "PHP Ta'lim Boshqaruv Tizimi",
+      ru: "PHP Система управления образованием",
+      tj: "Системаи идоракунии таълим бо PHP"
+    },
+    description: {
+      en: "A comprehensive education management system built with PHP that allows institutions to manage courses, student records, learning materials, and track academic performance through an intuitive admin dashboard.",
+      uz: "PHP yordamida yaratilgan ta'lim boshqaruv tizimi. Unda kurslarni boshqarish, talabalar ma'lumotlarini yuritish, o‘quv materiallarini yuklash va admin panel orqali o‘quv jarayonini nazorat qilish mumkin.",
+      ru: "Система управления образованием на PHP, позволяющая управлять курсами, студентами, учебными материалами и отслеживать успеваемость через административную панель.",
+      tj: "Системаи идоракунии таълим бо PHP, ки имкон медиҳад курсҳо, маълумоти донишҷӯён ва маводҳои таълимиро тавассути панели идоракунӣ идора кард."
+    },
+    image: "images/projects/php-education-management.png",
+    tech: ["PHP", "MySQL", "Admin Panel", "Education System"],
+    liveDemo: "https://uzwriter.uz",
+    github: "https://github.com/Iqbolshoh/php-education-management",
+    featured: true,
+    category: "Full-Stack"
+  },
+  {
+    id: 14,
+    name: {
+      en: "JavaScript Test Platform",
+      uz: "JavaScript Test Platform",
+      ru: "JavaScript Test Platform",
+      tj: "JavaScript Test Platform"
+    },
+    description: {
+      en: "An interactive quiz platform built with JavaScript that helps users test their knowledge of HTML, CSS, and JavaScript with dynamic questions, SweetAlert2 feedback, and a real-time countdown timer.",
+      uz: "JavaScript yordamida yaratilgan interaktiv test platformasi. Unda HTML, CSS va JavaScript bo‘yicha bilimlarni tekshirish uchun dinamik savollar, SweetAlert2 bildirishnomalari va real vaqt taymeri mavjud.",
+      ru: "Интерактивная платформа тестирования на JavaScript для проверки знаний HTML, CSS и JavaScript с динамической загрузкой вопросов, уведомлениями SweetAlert2 и таймером.",
+      tj: "Платформаи интерактивии тестӣ бо JavaScript барои санҷиши донишҳои HTML, CSS ва JavaScript бо саволҳои динамикӣ, SweetAlert2 ва таймер."
+    },
+    image: "images/projects/javascript-test-platform.png",
+    tech: ["JavaScript", "AJAX", "JSON", "SweetAlert2", "Bootstrap"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/javascript-test-platform",
+    featured: false,
+    category: "Frontend"
+  },
+  {
+    id: 15,
+    name: {
+      en: "JavaScript Dynamic Slider",
+      uz: "JavaScript Dynamic Slider",
+      ru: "JavaScript Dynamic Slider",
+      tj: "JavaScript Dynamic Slider"
+    },
+    description: {
+      en: "A lightweight and responsive image slider built with HTML, CSS, and JavaScript featuring smooth transitions, navigation controls, and auto-play functionality.",
+      uz: "HTML, CSS va JavaScript yordamida yaratilgan responsiv rasm slideri. Unda silliq animatsiyalar, navigatsiya tugmalari va avtomatik aylanish funksiyasi mavjud.",
+      ru: "Легкий и адаптивный слайдер изображений, созданный с использованием HTML, CSS и JavaScript с плавными переходами, навигационными кнопками и автопрокруткой.",
+      tj: "Слайдери тасвирҳои сабук ва мутобиқшаванда, ки бо HTML, CSS ва JavaScript сохта шудааст ва дорои гузаришҳои ҳамвор ва autoplay мебошад."
+    },
+    image: "images/projects/javascript-dynamic-slider.png",
+    tech: ["JavaScript", "HTML", "CSS", "Responsive Design"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/javascript-dynamic-slider",
+    featured: false,
+    category: "Frontend"
+  },
+  {
+    id: 16,
+    name: {
+      en: "JavaScript Text Encryption",
+      uz: "JavaScript Text Encryption",
+      ru: "JavaScript Text Encryption",
+      tj: "JavaScript Text Encryption"
+    },
+    description: {
+      en: "A simple web application that allows users to encrypt and decrypt text using AES encryption. Built with HTML, CSS, and JavaScript with clipboard support and responsive design.",
+      uz: "AES shifrlash yordamida matnni shifrlash va qayta ochish imkonini beruvchi oddiy web ilova. HTML, CSS va JavaScript yordamida yaratilgan.",
+      ru: "Простое веб-приложение для шифрования и дешифрования текста с использованием AES. Построено на HTML, CSS и JavaScript.",
+      tj: "Барномаи веб барои рамзгузорӣ ва кушодани матн бо истифодаи AES, ки бо HTML, CSS ва JavaScript сохта шудааст."
+    },
+    image: "images/projects/javascript-text-encryption.png",
+    tech: ["JavaScript", "AES Encryption", "HTML", "CSS"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/javascript-text-encryption",
+    featured: false,
+    category: "Frontend"
+  },
+  {
+    id: 17,
+    name: {
+      en: "PHP Auth Master",
+      uz: "PHP Auth Master",
+      ru: "PHP Auth Master",
+      tj: "PHP Auth Master"
+    },
+    description: {
+      en: "A secure authentication and role management system built with PHP featuring admin dashboard, role-based access control, active session tracking, and advanced security mechanisms.",
+      uz: "PHP yordamida yaratilgan xavfsiz autentifikatsiya va rol boshqaruv tizimi. Unda admin panel, rolga asoslangan kirish nazorati, faol sessiyalarni kuzatish va xavfsizlik mexanizmlari mavjud.",
+      ru: "Безопасная система аутентификации и управления ролями на PHP с административной панелью, контролем доступа на основе ролей и отслеживанием активных сессий.",
+      tj: "Системаи бехатари аутентификатсия ва идоракунии нақшҳо бо PHP, ки дорои панели админ ва назорати дастрасӣ мебошад."
+    },
+    image: "images/projects/php-auth-master.png",
+    tech: ["PHP", "MySQL", "RBAC", "Security", "Sessions"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/php-auth-master",
+    featured: false,
+    category: "Backend"
+  },
+  {
+    id: 18,
+    name: {
+      en: "PHP English Learning Platform",
+      uz: "PHP Ingliz Tili O‘rganish Platformasi",
+      ru: "PHP Платформа для изучения английского",
+      tj: "Платформаи омӯзиши англисӣ бо PHP"
+    },
+    description: {
+      en: "An English learning platform built with PHP that helps users improve vocabulary, sentence structure, and reading skills through exercises, translations, and PDF exports.",
+      uz: "PHP yordamida yaratilgan ingliz tili o‘rganish platformasi. Unda lug‘at qo‘shish, gaplar tuzish, matnlarni tarjima qilish va mashqlar orqali bilimni mustahkamlash imkoniyati mavjud.",
+      ru: "Платформа для изучения английского языка на PHP с функциями словаря, предложений, переводов текстов, упражнений и экспорта в PDF.",
+      tj: "Платформаи омӯзиши забони англисӣ бо PHP, ки луғат, ҷумлаҳо, тарҷумаи матн ва машқҳоро дар бар мегирад."
+    },
+    image: "images/projects/php-english-platform.png",
+    tech: ["PHP", "MySQL", "PDF Export", "Education System"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/php-english-platform",
+    featured: false,
+    category: "Full-Stack"
+  },
+  {
+    id: 19,
+    name: {
+      en: "SAMSU AI Lab Website",
+      uz: "SAMDU Sun'iy Intellekt Laboratoriyasi Sayti",
+      ru: "Сайт лаборатории искусственного интеллекта СамГУ",
+      tj: "Сомонаи лабораторияи зеҳни сунъии СамДУ"
+    },
+    description: {
+      en: "A Laravel-based website developed for the SAMSU Artificial Intelligence Laboratory to showcase research activities, projects, news, members, and collaboration opportunities.",
+      uz: "Samarqand davlat universiteti Sun'iy intellekt laboratoriyasi uchun Laravel asosida yaratilgan rasmiy veb-sayt. Unda tadqiqotlar, loyihalar, yangiliklar va laboratoriya a'zolari haqida ma'lumotlar mavjud.",
+      ru: "Веб-сайт лаборатории искусственного интеллекта Самаркандского государственного университета, разработанный на Laravel для демонстрации исследований, проектов и новостей.",
+      tj: "Сомонаи лабораторияи зеҳни сунъии Донишгоҳи давлатии Самарқанд, ки бо Laravel сохта шудааст ва маълумот дар бораи тадқиқотҳо ва лоиҳаҳоро пешниҳод мекунад."
+    },
+    image: "images/projects/samsu-ai-lab.png",
+    tech: ["Laravel", "PHP", "Blade", "Vite", "MySQL"],
+    liveDemo: "https://ai-lab.sampc.uz/",
+    github: "https://github.com/Iqbolshoh/samsu-ai-lab-laravel",
+    featured: true,
+    category: "Full-Stack"
+  },
+  {
+    id: 20,
+    name: {
+      en: "Iqbolshoh Personal Website",
+      uz: "Iqbolshoh Shaxsiy Veb-sayti",
+      ru: "Персональный сайт Икболшоха",
+      tj: "Сомонаи шахсии Иқболшоҳ"
+    },
+    description: {
+      en: "A personal portfolio website showcasing my skills, experience, and projects as a Full-Stack Developer. Built with a modern design to present my work and allow visitors to contact me easily.",
+      uz: "Full-Stack Developer sifatidagi ko‘nikmalarim, tajribam va loyihalarimni ko‘rsatish uchun yaratilgan shaxsiy portfolio veb-sayt.",
+      ru: "Персональный сайт-портфолио, демонстрирующий мои навыки, опыт и проекты как Full-Stack разработчика.",
+      tj: "Сомонаи шахсии портфолио барои нишон додани малакаҳо, таҷриба ва лоиҳаҳои ман ҳамчун Full-Stack developer."
+    },
+    image: "images/projects/iqbolshoh-portfolio.png",
+    tech: ["React", "TypeScript", "Vite", "TailwindCSS"],
+    liveDemo: "https://iqbolshoh.uz",
+    github: "https://github.com/Iqbolshoh/iqbolshoh-portfolio",
+    featured: true,
+    category: "Frontend"
+  },
+  {
+    id: 21,
+    name: {
+      en: "JavaScript XO Game",
+      uz: "JavaScript XO O‘yini",
+      ru: "Игра Крестики-Нолики на JavaScript",
+      tj: "Бозии XO бо JavaScript"
+    },
+    description: {
+      en: "A classic Tic-Tac-Toe (XO) game built using HTML, CSS, and JavaScript where two players compete on a 3x3 grid with winner detection, draw handling, and restart functionality.",
+      uz: "HTML, CSS va JavaScript yordamida yaratilgan klassik XO (Tic-Tac-Toe) o‘yini. Unda g‘olibni aniqlash, durangni ko‘rsatish va o‘yinni qayta boshlash funksiyalari mavjud.",
+      ru: "Классическая игра Крестики-Нолики, созданная с использованием HTML, CSS и JavaScript с определением победителя и возможностью перезапуска.",
+      tj: "Бозии классикии XO, ки бо HTML, CSS ва JavaScript сохта шудааст ва муайянкунии ғолиб ва бозоғозиро дастгирӣ мекунад."
+    },
+    image: "images/projects/javascript-xo-game.png",
+    tech: ["JavaScript", "HTML", "CSS"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/javascript-xo-game",
+    featured: false,
+    category: "Frontend"
+  },
+  {
+    id: 22,
+    name: {
+      en: "JavaScript Calculator Website",
+      uz: "JavaScript Kalkulyator Veb-sayti",
+      ru: "Веб-калькулятор на JavaScript",
+      tj: "Калкулятори веб бо JavaScript"
+    },
+    description: {
+      en: "A responsive calculator web application built with HTML, CSS, and JavaScript supporting basic arithmetic operations with a clean and intuitive interface.",
+      uz: "HTML, CSS va JavaScript yordamida yaratilgan responsiv kalkulyator veb-ilovasi. Unda asosiy arifmetik amallar va qulay foydalanuvchi interfeysi mavjud.",
+      ru: "Простое и удобное веб-приложение калькулятора на HTML, CSS и JavaScript с поддержкой основных арифметических операций.",
+      tj: "Барномаи веб-калкулятор бо HTML, CSS ва JavaScript, ки амалиётҳои асосии арифметикиро дастгирӣ мекунад."
+    },
+    image: "images/projects/javascript-calculator-website.png",
+    tech: ["JavaScript", "HTML", "CSS"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/javascript-calculator-website",
+    featured: false,
+    category: "Frontend"
+  },
+  {
+    id: 23,
+    name: {
+      en: "JavaScript Language Switcher",
+      uz: "JavaScript Til Almashtirgich",
+      ru: "JavaScript Переключатель языков",
+      tj: "Ивазкунандаи забон бо JavaScript"
+    },
+    description: {
+      en: "A lightweight multilingual system built with vanilla JavaScript that dynamically switches website language using JSON files and stores user preference in localStorage.",
+      uz: "Vanilla JavaScript yordamida yaratilgan ko‘p tilli tizim. JSON fayllar orqali sayt tilini dinamik almashtiradi va foydalanuvchi tilini localStorage’da saqlaydi.",
+      ru: "Легкая система мультиязычности на JavaScript, позволяющая переключать язык сайта с помощью JSON файлов и сохранять выбор пользователя.",
+      tj: "Системаи бисёрзабона бо JavaScript, ки бо истифодаи JSON файлҳо забони сайтро иваз мекунад ва интихоби корбарро нигоҳ медорад."
+    },
+    image: "images/projects/javascript-language-switcher.png",
+    tech: ["JavaScript", "JSON", "Bootstrap", "localStorage"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/javascript-language-switcher",
+    featured: false,
+    category: "Frontend"
+  },
+  {
+    id: 24,
+    name: {
+      en: "Samarkand Travel Guide",
+      uz: "Samarqand Sayohat Qo‘llanmasi",
+      ru: "Путеводитель по Самарканду",
+      tj: "Роҳнамои саёҳат ба Самарқанд"
+    },
+    description: {
+      en: "A responsive tourism website that provides detailed information about the historic city of Samarkand including landmarks, museums, history, and travel attractions.",
+      uz: "Samarqand shahri haqida batafsil ma'lumot beruvchi turistik veb-sayt. Unda tarixiy obidalar, muzeylar, sayohat joylari va shahar tarixi haqida ma'lumotlar mavjud.",
+      ru: "Туристический сайт о Самарканде, предоставляющий информацию о достопримечательностях, музеях, истории и туристических маршрутах.",
+      tj: "Сомонаи туристӣ дар бораи Самарқанд, ки маълумот дар бораи ёдгориҳо, музейҳо ва таърихи шаҳр пешниҳод мекунад."
+    },
+    image: "images/projects/samarkand-travel-guide.png",
+    tech: ["HTML", "CSS", "JavaScript", "Responsive Design"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/samarkand-travel-guide",
+    featured: false,
+    category: "Frontend"
+  },
+  {
+    id: 25,
+    name: {
+      en: "JavaScript Digital Clock",
+      uz: "JavaScript Raqamli Soat",
+      ru: "Цифровые часы на JavaScript",
+      tj: "Соати рақамӣ бо JavaScript"
+    },
+    description: {
+      en: "A simple digital clock built with HTML, CSS, and JavaScript that displays the current time and updates every second in real-time.",
+      uz: "HTML, CSS va JavaScript yordamida yaratilgan oddiy raqamli soat. U real vaqtni ko‘rsatadi va har soniyada avtomatik yangilanadi.",
+      ru: "Простые цифровые часы, созданные с использованием HTML, CSS и JavaScript, отображающие текущее время с обновлением каждую секунду.",
+      tj: "Соати рақамӣ бо HTML, CSS ва JavaScript, ки вақтро дар вақти воқеӣ нишон медиҳад ва ҳар сония нав мешавад."
+    },
+    image: "images/projects/javascript-digital-clock.png",
+    tech: ["JavaScript", "HTML", "CSS"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/javascript-digital-clock",
+    featured: false,
+    category: "Frontend"
+  },
+  {
+    id: 26,
+    name: {
+      en: "JavaScript Countdown Timer",
+      uz: "JavaScript Taymer",
+      ru: "Таймер обратного отсчета на JavaScript",
+      tj: "Таймери ҳисобкунии баръакс бо JavaScript"
+    },
+    description: {
+      en: "A responsive countdown timer built with HTML, CSS, and JavaScript featuring play/pause controls and alert notifications when the timer reaches zero.",
+      uz: "HTML, CSS va JavaScript yordamida yaratilgan taymer. Unda countdown funksiyasi, play/pause boshqaruvi va vaqt tugaganda ogohlantirish mavjud.",
+      ru: "Таймер обратного отсчета на HTML, CSS и JavaScript с возможностью паузы, продолжения и уведомлением при завершении времени.",
+      tj: "Таймери ҳисобкунии баръакс бо HTML, CSS ва JavaScript бо имкони pause/play ва огоҳӣ ҳангоми ба анҷом расидани вақт."
+    },
+    image: "images/projects/javascript-timer.png",
+    tech: ["JavaScript", "HTML", "CSS"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/javascript-timer",
+    featured: false,
+    category: "Frontend"
   }
 ];
 
