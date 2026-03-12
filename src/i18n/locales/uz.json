@@ -12,7 +12,7 @@
     "greeting": "Salom, men",
     "name": "Iqbolshoh",
     "title": "Full-Stack Dasturchi",
-    "description": "Samarqandda faoliyat yurituvchi ishtiyoqli Full-Stack Dasturchi. Laravel, React va Node.js bo'yicha 3 yildan ortiq tajribaga ega bo'lib, zamonaviy va samarali raqamli yechimlarni yarataman.",
+    "description": "Samarqandlik ishtiyoqli Full-Stack dasturchi. Zamonaviy veb-ilovalarni yaratish bo'yicha 4 yildan ortiq tajribaga egaman. Men Laravel, React va kengaytiriladigan tizim arxitekturasiga ixtisoslashganman hamda g'oyadan tortib ishga tushirishgacha tez, xavfsiz va foydalanuvchiga qaratilgan raqamli mahsulotlarni yetkazib beraman.",
     "viewPortfolio": "Portfelni ko'rish",
     "downloadCV": "CV yuklab olish",
     "availableForHire": "Yollash uchun ochiq",
@@ -36,7 +36,7 @@
     "technicalSkills": "Texnik ko'nikmalar",
     "beyondCoding": "Dasturlashdan tashqari",
     "locationInfo": "SamDU talabasi",
-    "experienceInfo": "3+ yillik tajriba",
+    "experienceInfo": "4+ Yillik Tajriba",
     "codingPurpose": "Kod orqali yechim, maqsad bilan boshqariladi",
     "advanced": "Ilg'or"
   },
@@ -118,11 +118,39 @@
     "basedIn": "Samarqandda joylashgan",
     "basedInDesc": "O'zbekistonning tarixiy shahri Samarqandda joylashganman. Butun dunyo bo'ylab masofaviy ishlash va Samarqandda yuzma-yuz uchrashuvlar uchun ochiqman."
   },
-  "footer": {
-    "description": "Toza, zamonaviy kod va dizayn orqali qarashlaringizni hayotga tatbiq etaman.",
-    "navigation": "Navigatsiya",
-    "resources": "Resurslar",
-    "contact": "Aloqa",
-    "copyright": "Iqbolshoh Dev. Barcha huquqlar himoyalangan."
+  "seo": {
+    "home": {
+      "title": "Iqbolshoh Ilhomjonov | Full-Stack Dasturchi (Laravel & React)",
+      "description": "Samarqandlik Full-Stack dasturchi Iqbolshoh Ilhomjonovning portfel sayti. Laravel, React va kengaytiriladigan SaaS platformalarini yaratishga ixtisoslashgan.",
+      "keywords": "Iqbolshoh Ilhomjonov, Full-Stack Dasturchi, Laravel dasturchi, React dasturchi, veb dasturlash O'zbekiston, Samarqand dasturchi, frilans dasturchi"
+    },
+    "about": {
+      "title": "Iqbolshoh haqida | O'zbekistonda Dasturiy Injiniring Mutaxassisi",
+      "description": "Iqbolshoh Ilhomjonovning SamDU talabaligidan boshlab Templates.uz kabi SaaS platformalarini yaratish va 70 dan ortiq dasturchilarga ustozlik qilishigacha bo'lgan yo'li haqida bilib oling.",
+      "keywords": "Iqbolshoh haqida, dasturiy injiniring Samarqand, SamDU talabasi, Laravel ekspert, IT mentor O'zbekiston"
+    },
+    "portfolio": {
+      "title": "Loyihalar va Portfel | Iqbolshoh Dev",
+      "description": "Iqbolshoh tomonidan React, Tailwind CSS, PHP va Laravel yordamida yaratilgan maxsus veb-ilovalar, SaaS platformalar va dinamik veb-saytlarni ko'rib chiqing.",
+      "keywords": "full-stack portfel, veb-ilova loyihalari, SaaS dasturchi, Laravel loyihalar, React ilovalar, maxsus veb-sayt yaratish"
+    },
+    "services": {
+      "title": "Veb Dasturlash Xizmatlari | UI/UX, API-lar va Full-Stack Ilovalar",
+      "description": "Professional frilans veb dasturlash xizmatlari: UI/UX dizayn, maxsus REST API-lar, Chatbot yaratish va to'liq Full-Stack veb ilovalarini ishlab chiqish.",
+      "keywords": "veb dasturlash xizmatlari, frilans dasturchi yollash, API yaratish, UI/UX dizayn, chatbot yaratuvchi, full-stack ilova ishlab chiqish"
+    },
+    "contact": {
+      "title": "Bog'lanish | Full-Stack Dasturchini Yollash",
+      "description": "Raqamli mahsulot yaratmoqchimisiz? Keyingi veb-loyiha haqida gaplashish uchun Iqbolshoh bilan bog'laning. Masofaviy ishlash uchun ham tayyor.",
+      "keywords": "dasturchi yollash, dasturiy injiner bilan bog'lanish, frilans veb dasturchi O'zbekiston, masofaviy full-stack dasturchi"
+    },
+    "blog": {
+      "title": "Dasturchi Blogi | Iqbolshohdan IT Maqolalar va Darsliklar",
+      "description": "Iqbolshoh Ilhomjonovning full-stack dasturlash, dasturiy injiniring va IT hayoti haqidagi maqolalari, darsliklari va fikr-mulohazalarini o'qing.",
+      "keywords": "dasturchi blogi, dasturlash darsliklari, Laravel maslahatlar, React darsliklar, dasturiy injiniring blogi"
+    },
+    "notFound": {
+      "title": "Sahifa Topilmadi | Iqbolshoh.uz"
+    }
   }
 }

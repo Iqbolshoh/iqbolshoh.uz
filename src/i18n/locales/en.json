@@ -27,7 +27,7 @@
   "about": {
     "title": "About Me",
     "subtitle": "Who am I?",
-    "description": "My name is Iqbolshoh Ilhomjonov, a 4rd-year Software Engineering student at Samarkand State University. I specialize in full-stack development and love solving real-world problems with code.",
+    "description": "My name is Iqbolshoh Ilhomjonov, a 4th-year Software Engineering student at Samarkand State University. I specialize in full-stack development and love solving real-world problems with code.",
     "subDescription": "Born in Uzbekistan, raised in Samarkand. I believe in continuous learning and align my journey with Islamic values and discipline.",
     "journey": "My Journey",
     "journeyDescription": "The path that led me here",
@@ -118,11 +118,39 @@
     "basedIn": "Based in Samarkand",
     "basedInDesc": "Located in the historic city of Samarkand, Uzbekistan. Available for remote work worldwide and local meetings in Samarkand."
   },
-  "footer": {
-    "description": "Bringing your vision to life through clean, modern code and design.",
-    "navigation": "Navigation",
-    "resources": "Resources",
-    "contact": "Contact",
-    "copyright": "Iqbolshoh Dev. All rights reserved."
+  "seo": {
+    "home": {
+      "title": "Iqbolshoh Ilhomjonov | Full-Stack Developer (Laravel & React)",
+      "description": "Portfolio of Iqbolshoh Ilhomjonov, a Full-Stack Developer from Samarkand, Uzbekistan specializing in Laravel, React, and scalable SaaS platforms.",
+      "keywords": "Iqbolshoh Ilhomjonov, Full-Stack Developer, Laravel developer, React developer, web development Uzbekistan, Samarkand developer, freelance developer"
+    },
+    "about": {
+      "title": "About Iqbolshoh | Software Engineer in Uzbekistan",
+      "description": "Learn about Iqbolshoh Ilhomjonov's journey from a Software Engineering student at SamSU to building SaaS platforms like Templates.uz and mentoring over 70 developers.",
+      "keywords": "about Iqbolshoh, software engineer Samarkand, SamSU student, Laravel expert, tech mentor Uzbekistan"
+    },
+    "portfolio": {
+      "title": "Projects & Portfolio | Iqbolshoh Dev",
+      "description": "Explore custom web applications, SaaS platforms, and dynamic websites built by Iqbolshoh using React, Tailwind CSS, PHP, and Laravel.",
+      "keywords": "full-stack portfolio, web app projects, SaaS developer, Laravel projects, React apps, custom website development"
+    },
+    "services": {
+      "title": "Web Development Services | UI/UX, APIs & Full-Stack Apps",
+      "description": "Professional freelance web development services: UI/UX design, custom REST APIs, Chatbot development, and complete Full-Stack web applications.",
+      "keywords": "web development services, hire freelance developer, API development, UI/UX design, chatbot developer, full-stack application development"
+    },
+    "contact": {
+      "title": "Contact Me | Hire a Full-Stack Developer",
+      "description": "Looking to build a digital product? Get in touch with Iqbolshoh to discuss your next web development project. Available for remote work.",
+      "keywords": "hire developer, contact software engineer, freelance web developer Uzbekistan, remote full-stack developer"
+    },
+    "blog": {
+      "title": "Developer Blog | Tech Insights & Tutorials by Iqbolshoh",
+      "description": "Read articles, tutorials, and insights on full-stack development, software engineering, and tech life by Iqbolshoh Ilhomjonov.",
+      "keywords": "developer blog, programming tutorials, Laravel tips, React tutorials, software engineering blog"
+    },
+    "notFound": {
+      "title": "Page Not Found | Iqbolshoh.uz"
+    }
   }
 }
