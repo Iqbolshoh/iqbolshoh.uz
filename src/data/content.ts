@@ -14,7 +14,6 @@ import {
   Award,             // Awards
   Users,             // Users
   Star,              // Rating
-  Coffee,            // Break
   Compass,           // Direction
   Lightbulb,         // Idea
   HeartHandshake,    // Partnership
@@ -42,7 +41,6 @@ export const personalInfo = {
     ru: "Самарканд, Узбекистан",
     tj: "Самарқанд, Ӯзбекистон"
   },
-  avatar: "/images/logos/iqbolshoh.jpg",
   social: {
     email: {
       label: "iilhomjonov777@gmail.com",
@@ -114,22 +112,22 @@ export const stats = [
   },
   {
     icon: Users,
-    value: '25+',
+    value: '45+',
     label: {
       en: 'Satisfied Clients',
-      uz: 'Qoniqarli mijozlar',
+      uz: 'Mamnun mijozlar',
       ru: 'Довольные клиенты',
       tj: 'Мизоҷони қаноатманд',
     },
   },
   {
-    icon: Coffee,
-    value: '1000+',
+    icon: GraduationCap,
+    value: '70+',
     label: {
-      en: 'Cups of Coffee Consumed',
-      uz: 'Ichilgan qahva piyolalari',
-      ru: 'Выпитые чашки кофе',
-      tj: 'Пиёлаҳои қаҳваи нӯшидашуда',
+      en: 'Mentored Students',
+      uz: 'O‘qitilgan shogirdlar',
+      ru: 'Обученные ученики',
+      tj: 'Шогирдони омӯзонидашуда',
     },
   },
 ];
@@ -146,9 +144,9 @@ export const projects = [
     },
     description: {
       en: "A SaaS platform to build professional websites using drag & drop tools with Laravel backend and React frontend.",
-      uz: "Laravel va React asosida professional saytlar yaratish uchun drag & drop vositalari bilan SaaS platforma.",
-      ru: "SaaS-платформа для создания профессиональных сайтов с помощью drag & drop инструментов на Laravel и React.",
-      tj: "Платформаи SaaS барои сохтани сайтҳои касбӣ бо истифодаи drag & drop бо backend-и Laravel ва frontend-и React."
+      uz: "Laravel backend va React frontend yordamida drag & drop vositalari orqali professional saytlar yaratish uchun SaaS platformasi.",
+      ru: "SaaS-платформа для создания профессиональных сайтов с помощью инструментов drag & drop на базе backend Laravel и frontend React.",
+      tj: "Платформаи SaaS барои сохтани сомонаҳои касбӣ бо истифодаи абзорҳои drag & drop бо backend-и Laravel ва frontend-и React."
     },
     image: "images/projects/templatesuz.png",
     tech: ["Laravel", "React", "Vite", "MySQL"],
@@ -167,9 +165,9 @@ export const projects = [
     },
     description: {
       en: "A real-time social messaging web app built with pure PHP and MySQL, featuring user registration, login, chat system, and message notifications.",
-      uz: "Foydalanuvchi ro‘yxatdan o‘tishi, tizimga kirishi, chat tizimi va xabar bildirishnomalari bilan yaratilgan real vaqtli PHP va MySQL asosidagi ijtimoiy xabar almashish veb-ilovasi.",
-      ru: "Веб-приложение для социальных сообщений в реальном времени на чистом PHP и MySQL с регистрацией, авторизацией, системой чатов и уведомлениями.",
-      tj: "Веб-илова барои паёмнависии иҷтимоии воқеӣ бо истифодаи PHP ва MySQL бо бақайдгирии корбар, воридшавӣ, системаи чат ва огоҳиномаҳои паём."
+      uz: "Foydalanuvchi ro‘yxatdan o‘tishi, tizimga kirishi, chat tizimi va xabar bildirishnomalarini o'z ichiga olgan, toza PHP va MySQL'da qurilgan real vaqt rejimida ishlovchi messenjer.",
+      ru: "Веб-приложение для обмена сообщениями в реальном времени, созданное на чистом PHP и MySQL, с функциями регистрации, авторизации, системой чата и уведомлениями.",
+      tj: "Веб-иловаи паёмнависии иҷтимоии воқеӣ, ки бо PHP ва MySQL сохта шудааст ва дорои бақайдгирии корбар, воридшавӣ, системаи чат ва огоҳиномаҳои паёмӣ мебошад."
     },
     image: "images/projects/php-social-messenger.png",
     tech: ["PHP", "MySQL", "AJAX", "Bootstrap"],
@@ -188,7 +186,7 @@ export const highlights = [
       en: "Three or more years of hands-on programming experience",
       uz: "Uch yoki undan ortiq yillik amaliy dasturlash tajribasi",
       ru: "Три или более лет практического опыта программирования",
-      tj: "Се ё бештар сол таҷрибаи амалии барномасозӣ",
+      tj: "Се ё зиёда сол таҷрибаи амалии барномасозӣ",
     },
   },
   {
@@ -196,8 +194,8 @@ export const highlights = [
     text: {
       en: "Guided by purpose and grounded in values",
       uz: "Maqsad bilan yo‘naltirilgan va qadriyatlarga asoslangan",
-      ru: "Руководствуюсь целью и основываюсь на ценностях",
-      tj: "Роҳнамоиишуда бо ҳадаф ва бунёдшуда бар арзишҳо",
+      ru: "Руководствуюсь целью и опираюсь на ценности",
+      tj: "Бо мақсад роҳнамоӣ шуда ва ба арзишҳо такя мекунад",
     },
   },
   {
@@ -205,8 +203,8 @@ export const highlights = [
     text: {
       en: "Transforming complex ideas into clean and efficient code",
       uz: "Murakkab g‘oyalarni toza va samarali kodga aylantirish",
-      ru: "Преобразование сложных идей в чистый и эффективный код",
-      tj: "Табдили андешаҳои мураккаб ба коди пок ва самаранок",
+      ru: "Превращение сложных идей в чистый и эффективный код",
+      tj: "Табдили ғояҳои мураккаб ба коди тоза ва самаранок",
     },
   },
   {
@@ -214,8 +212,8 @@ export const highlights = [
     text: {
       en: "Providing mentorship with sincerity and growing through meaningful impact",
       uz: "Samimiylik bilan mentorlik qilish va mazmunli ta’sir orqali o‘sish",
-      ru: "Наставничество с искренностью и рост через значимое влияние",
-      tj: "Менторӣ бо ихлосмандӣ ва рушд тавассути таъсири арзишманд",
+      ru: "Искреннее наставничество и профессиональный рост через значимое влияние",
+      tj: "Пешниҳоди менторинг бо самимият ва рушд тавассути таъсири пурмазмун",
     },
   },
   {
@@ -224,16 +222,16 @@ export const highlights = [
       en: "Dedicated to ethical principles and secure technology practices",
       uz: "Axloqiy tamoyillar va xavfsiz texnologik amaliyotlarga sodiqman",
       ru: "Привержен этическим принципам и безопасным технологиям",
-      tj: "Ба меъёрҳои ахлоқӣ ва усулҳои бехатари технологии содиқам",
+      tj: "Ба принсипҳои ахлоқӣ ва таҷрибаҳои бехатари технологӣ содиқам",
     },
   },
   {
     icon: Rocket,
     text: {
       en: "Founder of the Templates.uz Software-as-a-Service platform",
-      uz: "Templates.uz dasturiy xizmat platformasining asoschisi",
-      ru: "Основатель платформы программного обеспечения как услуги Templates.uz",
-      tj: "Асосгузори платформаи барнома ҳамчун хидмат — Templates.uz",
+      uz: "Templates.uz SaaS (Software-as-a-Service) platformasi asoschisi",
+      ru: "Основатель платформы Software-as-a-Service Templates.uz",
+      tj: "Муассиси платформаи Software-as-a-Service Templates.uz",
     },
   },
 ];
@@ -245,28 +243,28 @@ export const journey = [
     title: {
       en: "Started University",
       uz: "Universitetni boshladim",
-      ru: "Начал обучение в университете",
+      ru: "Начало обучения в университете",
       tj: "Оғози донишгоҳ"
     },
     description: {
       en: "Began Software Engineering at Samarkand State University",
-      uz: "Samarkand Davlat Universitetida Dasturiy Injenerlik yo‘nalishini boshladim",
-      ru: "Начал изучение программной инженерии в Самаркандском Государственном Университете",
-      tj: "Дар Донишгоҳи Давлатии Самарқанд муҳандисии нармафзорро оғоз кардам"
+      uz: "Samarqand Davlat Universitetida Dasturiy Injenering yo‘nalishida o'qishni boshladim",
+      ru: "Начал изучать программную инженерию в Самаркандском Государственном Университете",
+      tj: "Муҳандисии нармафзорро дар Донишгоҳи Давлатии Самарқанд оғоз кардам"
     }
   },
   {
     year: "2022",
     title: {
       en: "Frontend Foundations",
-      uz: "Frontend asoslarini o‘rgandim",
-      ru: "Изучил основы frontend",
-      tj: "Асосҳои frontend-ро омӯхтам"
+      uz: "Frontend asoslari",
+      ru: "Основы Frontend",
+      tj: "Асосҳои Frontend"
     },
     description: {
       en: "Started learning HTML, CSS, JavaScript, and React—my first step into the frontend world",
-      uz: "HTML, CSS, JavaScript va Reactni o‘rganishni boshladim — frontend dunyosiga birinchi qadammim",
-      ru: "Начал изучать HTML, CSS, JavaScript и React — мой первый шаг в мир frontend",
+      uz: "HTML, CSS, JavaScript va Reactni o‘rganishni boshladim — bu mening frontend dunyosiga birinchi qadamim edi",
+      ru: "Начал изучать HTML, CSS, JavaScript и React — мой первый шаг в мир фронтенда",
       tj: "Омӯзиши HTML, CSS, JavaScript ва React-ро оғоз кардам — қадами аввалини ман ба ҷаҳони frontend"
     }
   },
@@ -274,29 +272,29 @@ export const journey = [
     year: "2023",
     title: {
       en: "Backend Breakthrough",
-      uz: "Backend rivoji",
-      ru: "Прорыв в backend",
-      tj: "Пешравӣ дар backend"
+      uz: "Backend rivojlanishi",
+      ru: "Прорыв в Backend",
+      tj: "Пешравии Backend"
     },
     description: {
       en: "Dived into Laravel and REST APIs, fell in love with backend development",
-      uz: "Laravel va REST API-larni chuqur o‘rgandim, backend dasturlashga oshiq bo‘ldim",
-      ru: "Глубоко изучил Laravel и REST API — влюбился в backend разработку",
-      tj: "Laravel ва REST API-ро амиқ омӯхтам ва ба backend дил бастам"
+      uz: "Laravel va REST API-larni chuqur o‘rgandim va backend dasturlashga mehrim tushdi",
+      ru: "Погрузился в изучение Laravel и REST API, влюбился в бэкенд-разработку",
+      tj: "Ба омӯзиши Laravel ва REST API дохил шудам ва ба таҳияи backend дилбастагӣ пайдо кардам"
     }
   },
   {
     year: "2023",
     title: {
       en: "First Real Freelance Project",
-      uz: "Birinchi haqiqiy freelancer loyihasi",
+      uz: "Birinchi haqiqiy frilans loyiha",
       ru: "Первый реальный фриланс-проект",
       tj: "Аввалин лоиҳаи воқеии фриланс"
     },
     description: {
       en: "Completed a full-stack client project from scratch using Laravel and React",
-      uz: "Laravel va React asosida to‘liq mijoz loyihasini noldan yaratdim",
-      ru: "Завершил клиентский full-stack проект с нуля, используя Laravel и React",
+      uz: "Laravel va React yordamida mijozning to'liq (full-stack) loyihasini noldan tugatdim",
+      ru: "С нуля выполнил full-stack клиентский проект с использованием Laravel и React",
       tj: "Лоиҳаи пурраи муштариро бо истифода аз Laravel ва React аз сифр анҷом додам"
     }
   },
@@ -304,15 +302,15 @@ export const journey = [
     year: "2024",
     title: {
       en: "Contributed to Open Source",
-      uz: "Open Source’ga hissa qo‘shdim",
-      ru: "Внёс вклад в Open Source",
-      tj: "Ба Open Source саҳм гузоштам"
+      uz: "Open Source’ga hissa",
+      ru: "Вклад в Open Source",
+      tj: "Саҳм дар Open Source"
     },
     description: {
       en: "Published several public repositories and joined global developer communities",
-      uz: "Bir nechta ochiq repositorylarni e’lon qildim va jahon dasturchilar hamjamiyatiga qo‘shildim",
+      uz: "Bir nechta ochiq repozitoriylarni nashr qildim va global dasturchilar hamjamiyatlariga qo‘shildim",
       ru: "Опубликовал несколько открытых репозиториев и присоединился к мировым сообществам разработчиков",
-      tj: "Якчанд репозиторияи оммавиро нашр кардам ва ба ҷомеаҳои байналмилалии барномасозон пайвастам"
+      tj: "Якчанд репозиторийҳои оммавиро нашр кардам ва ба ҷомеаҳои глобалии таҳиягарон пайвастам"
     }
   },
   {
@@ -320,91 +318,91 @@ export const journey = [
     title: {
       en: "Portfolio and Personal Website",
       uz: "Portfolio va shaxsiy veb-sayt",
-      ru: "Портфолио и персональный веб-сайт",
-      tj: "Портфолио ва сомонаи шахсӣ"
+      ru: "Портфолио и личный сайт",
+      tj: "Портфолио ва вебсайти шахсӣ"
     },
     description: {
       en: "Launched iqbolshoh.uz to showcase my work, applications, and skills",
-      uz: "Iqbolshoh.uz saytini ishga tushirdim — ishlarim, ilovalarim va ko‘nikmalarimni namoyish etish uchun",
-      ru: "Запустил iqbolshoh.uz для демонстрации своих работ, приложений и навыков",
-      tj: "Iqbolshoh.uz-ро барои намоиши корҳо, барномаҳо ва малакаҳоям оғоз кардам"
+      uz: "O'z ishlarim, ilovalarim va ko‘nikmalarimni namoyish etish uchun iqbolshoh.uz saytini ishga tushirdim",
+      ru: "Запустил сайт iqbolshoh.uz для демонстрации своих работ, приложений и навыков",
+      tj: "Барои намоиши корҳо, барномаҳо ва малакаҳои худ iqbolshoh.uz-ро ба кор даровардам"
     }
   },
   {
     year: "2025",
     title: {
-      en: "Templates.uz SaaS Platform",
-      uz: "Templates.uz SaaS platformasi",
-      ru: "SaaS платформа Templates.uz",
-      tj: "Платформаи SaaS-и Templates.uz"
-    },
-    description: {
-      en: "Launched a Laravel and React based SaaS platform to simplify website building",
-      uz: "Laravel va React asosida Templates.uz platformasini sayt yaratishni soddalashtirish uchun ishga tushirdim",
-      ru: "Запустил SaaS платформу Templates.uz на базе Laravel и React для упрощения создания сайтов",
-      tj: "Платформаи Templates.uz-ро бо истифода аз Laravel ва React барои содда кардани сохтани сомонаҳо оғоз кардам"
-    }
-  },
-  {
-    year: "2025",
-    title: {
-      en: "Mentored Over 20 Developers",
-      uz: "20 dan ortiq dasturchiga ta’lim berdim",
-      ru: "Наставлял более 20 разработчиков",
-      tj: "Ба беш аз 20 барномасоз роҳнамоӣ кардам"
+      en: "Mentored Over 70 Developers",
+      uz: "70 dan ortiq dasturchilarga ustozlik",
+      ru: "Обучил более 70 разработчиков",
+      tj: "Ба зиёда аз 70 таҳиягарон устодӣ кардам"
     },
     description: {
       en: "Taught software development from scratch using C++, React, and Laravel through practical lessons",
-      uz: "C++, React va Laravel yordamida dasturlashni amaliy darslar orqali noldan o‘rgatdim",
-      ru: "Обучал программированию с нуля на C++, React и Laravel через практические занятия",
-      tj: "Ба барномасозӣ аз сифр тавассути дарсҳои амалӣ бо истифода аз C++, React ва Laravel омӯзиш додам"
+      uz: "Amaliy darslar orqali C++, React va Laravel yordamida dasturiy ta'minot ishlab chiqishni noldan o‘rgatdim",
+      ru: "Обучал разработке программного обеспечения с нуля на C++, React и Laravel через практические уроки",
+      tj: "Тавассути дарсҳои амалӣ таҳияи нармафзорро аз сифр бо истифодаи C++, React ва Laravel омӯзонидам"
     }
   },
   {
     year: "2025",
     title: {
       en: "50+ Public Projects",
-      uz: "50+ ochiq loyiha",
-      ru: "Более 50 открытых проектов",
-      tj: "50+ лоиҳаи оммавӣ"
+      uz: "50+ Ochiq loyihalar",
+      ru: "50+ Открытых проектов",
+      tj: "50+ Лоиҳаҳои оммавӣ"
     },
     description: {
       en: "Published over 50 open-source/public projects on GitHub and other platforms",
-      uz: "GitHub va boshqa platformalarda 50 dan ortiq ochiq loyiha e’lon qildim",
-      ru: "Опубликовал более 50 открытых проектов на GitHub и других платформах",
-      tj: "Дар GitHub ва дигар платформаҳо зиёда аз 50 лоиҳаи оммавиро нашр кардам"
+      uz: "GitHub va boshqa platformalarda 50 dan ortiq ochiq manbali/ommaviy loyihalarni e'lon qildim",
+      ru: "Опубликовал более 50 open-source проектов на GitHub и других платформах",
+      tj: "Дар GitHub ва дигар платформаҳо зиёда аз 50 лоиҳаи кушодаасос/оммавиро нашр кардам"
     }
   },
   {
     year: "2025",
     title: {
       en: "Educational Content Creator",
-      uz: "Ta’limiy kontent yaratdim",
+      uz: "Ta'limiy kontent yaratuvchisi",
       ru: "Создатель образовательного контента",
-      tj: "Муаллифи контенти таълимӣ"
+      tj: "Эҷодкори мундариҷаи таълимӣ"
     },
     description: {
       en: "Started sharing free software tutorials on Instagram and YouTube",
-      uz: "Instagram va YouTube’da dasturlash bo‘yicha bepul darslar ulashishni boshladim",
-      ru: "Начал делиться бесплатными уроками по программированию в Instagram и YouTube",
-      tj: "Нашри дарсҳои ройгон оид ба барномасозиро дар Instagram ва YouTube оғоз кардам"
+      uz: "Instagram va YouTube tarmog'ida bepul dasturlash darsliklarini ulashishni boshladim",
+      ru: "Начал публиковать бесплатные уроки по программированию в Instagram и YouTube",
+      tj: "Мубодилаи дарсҳои ройгони нармафзорро дар Instagram ва YouTube оғоз кардам"
     }
   },
   {
     year: "2025",
     title: {
       en: "Freelance Career Growth",
-      uz: "Freelancerlikdagi yutuqlar",
-      ru: "Рост карьеры во фрилансе",
-      tj: "Пешравии касбӣ дар фриланс"
+      uz: "Frilansdagi karyera o'sishi",
+      ru: "Карьерный рост во фрилансе",
+      tj: "Афзоиши касб дар фриланс"
     },
     description: {
       en: "Worked with multiple clients to build real-world digital solutions",
-      uz: "Bir nechta mijozlar bilan haqiqiy raqamli yechimlar ustida ishladim",
-      ru: "Работал с несколькими клиентами над созданием реальных цифровых решений",
-      tj: "Бо муштариёни зиёд барои сохтани ҳалли рақамии воқеӣ ҳамкорӣ кардам"
+      uz: "Haqiqiy raqamli yechimlarni yaratish bo'yicha ko'plab mijozlar bilan ishladim",
+      ru: "Работал с множеством клиентов над созданием реальных цифровых решений",
+      tj: "Бо муштариёни сершумор барои сохтани ҳалли воқеии рақамӣ ҳамкорӣ кардам"
     }
-  }
+  },
+  {
+    year: "2026",
+    title: {
+      en: "Templates.uz SaaS Platform",
+      uz: "Templates.uz SaaS platformasi",
+      ru: "SaaS платформа Templates.uz",
+      tj: "Платформаи SaaS Templates.uz"
+    },
+    description: {
+      en: "Founded and developed Templates.uz, a SaaS no-code website builder that allows users to create modern websites in minutes without coding.",
+      uz: "Templates.uz SaaS no-code platformasini yaratdim, u foydalanuvchilarga kod yozmasdan bir necha daqiqada zamonaviy saytlar yaratish imkonini beradi.",
+      ru: "Создал платформу Templates.uz — SaaS конструктор сайтов без кода, позволяющий пользователям создавать современные сайты за считанные минуты.",
+      tj: "Платформаи Templates.uz-ро сохтaм — созандаи вебсайтҳои SaaS бе код, ки имкон медиҳад дар чанд дақиқа вебсайтҳои муосир эҷод карда шаванд."
+    }
+  },
 ];
 
 // Beyond
@@ -413,30 +411,30 @@ export const beyond = [
     icon: GraduationCap,
     title: {
       en: "Mentoring",
-      uz: "Mentorlik",
+      uz: "Ustozlik",
       ru: "Наставничество",
       tj: "Менторинг"
     },
     description: {
       en: "Taught more than twenty students from scratch in C++, frontend, and backend through structured lessons, real projects, and practical support.",
-      uz: "Yigirmadan ortiq shogirdlarga C++, frontend va backendni noldan o‘rgatdim — tuzilgan darslar, real loyihalar va amaliy yordam orqali.",
-      ru: "Обучил более двадцати учеников C++, фронтенду и бэкенду с нуля — через структурированные уроки, реальные проекты и практическую поддержку.",
-      tj: "Беш аз бист шогирдро дар C++, frontend ва backend аз сифр омӯзонидам — бо дарсҳои мураттаб, лоиҳаҳои воқеӣ ва дастгирии амалӣ."
+      uz: "Yigirmadan ortiq talabalarga tizimli darslar, haqiqiy loyihalar va amaliy ko'mak orqali C++, frontend va backendni noldan o'rgatdim.",
+      ru: "Обучил более двадцати студентов с нуля программированию на C++, фронтенду и бэкенду с помощью структурированных уроков, реальных проектов и практической поддержки.",
+      tj: "Ба зиёда аз бист донишҷӯ аз сифр C++, frontend ва backend-ро тавассути дарсҳои сохторӣ, лоиҳаҳои воқеӣ ва дастгирии амалӣ омӯзонидам."
     }
   },
   {
     icon: Code2,
     title: {
       en: "Open Source Contributions",
-      uz: "Ochiq manbali hissa",
+      uz: "Ochiq kodli dasturlarga hissa",
       ru: "Вклад в Open Source",
       tj: "Саҳмгузорӣ дар Open Source"
     },
     description: {
       en: "Actively contribute to GitHub by sharing open repositories, reusable code, templates, and development tools that support the programming community.",
-      uz: "GitHub’da ochiq repositorylar, qayta ishlatiladigan kodlar, shablonlar va dasturlash vositalarini ulashib, dasturchilar jamiyatiga hissa qo‘shaman.",
-      ru: "Активно делюсь на GitHub открытыми репозиториями, многократно используемым кодом, шаблонами и инструментами, полезными для сообщества разработчиков.",
-      tj: "Дар GitHub repository-ҳои кушода, коди такроран истифодашаванда, шаблонҳо ва абзорҳои рушдро мубодила карда, ба ҷомеаи барномасозон саҳм мегузорам."
+      uz: "Ochiq repozitoriylar, qayta ishlatiladigan kodlar, shablonlar va dasturlash asboblarini baham ko'rish orqali GitHub'ga faol hissa qo'shaman.",
+      ru: "Активно вношу вклад в GitHub, делясь открытыми репозиториями, переиспользуемым кодом, шаблонами и инструментами разработки.",
+      tj: "Тавассути мубодилаи репозиторийҳои кушода, коди такроран истифодашаванда, қолабҳо ва абзорҳои таҳия дар GitHub саҳми фаъол мегузорам."
     }
   },
   {
@@ -449,39 +447,39 @@ export const beyond = [
     },
     description: {
       en: "I develop software that protects user privacy, upholds moral values, and contributes to solving social problems with good intentions.",
-      uz: "Foydalanuvchi maxfiyligini himoya qiladigan, axloqiy qadriyatlarni saqlaydigan va ijobiy niyatlar bilan ijtimoiy muammolarni hal qiladigan dasturlar yarataman.",
-      ru: "Создаю программное обеспечение, которое защищает конфиденциальность пользователей, поддерживает моральные ценности и решает социальные задачи с добрыми намерениями.",
-      tj: "Нармавсореро таҳия мекунам, ки махфияти корбарро ҳифз мекунад, арзишҳои ахлоқиро риоя мекунад ва бо нияти нек барои ҳалли мушкилоти иҷтимоӣ хизмат мерасонад."
+      uz: "Foydalanuvchi maxfiyligini himoya qiluvchi, axloqiy qadriyatlarni qo'llab-quvvatlovchi va ezgu niyatlar bilan ijtimoiy muammolarni hal qilishga yordam beruvchi dasturlar yarataman.",
+      ru: "Я разрабатываю программное обеспечение, которое защищает конфиденциальность пользователей, поддерживает моральные ценности и помогает решать социальные проблемы с добрыми намерениями.",
+      tj: "Ман нармафзоре таҳия мекунам, ки махфияти корбаронро ҳифз мекунад, арзишҳои ахлоқиро дастгирӣ мекунад ва ба ҳалли мушкилоти иҷтимоӣ бо ниятҳои нек мусоидат мекунад."
     }
   },
   {
     icon: MessageCircle,
     title: {
       en: "Community Engagement",
-      uz: "Jamoaviy faollik",
+      uz: "Hamjamiyat bilan ishlash",
       ru: "Участие в сообществе",
       tj: "Фаъолият дар ҷомеа"
     },
     description: {
       en: "Regularly publish tutorials, programming tips, and developer lifestyle content on Instagram and YouTube to educate and inspire others.",
-      uz: "Instagram va YouTube’da muntazam darslar, dasturlash bo‘yicha maslahatlar va dasturchilar hayoti haqida kontent ulashaman — o‘rgatish va ilhom berish maqsadida.",
-      ru: "Регулярно публикую туториалы, советы по программированию и контент о жизни разработчиков в Instagram и YouTube, чтобы обучать и вдохновлять других.",
-      tj: "Дар Instagram ва YouTube пайваста дарсҳо, маслиҳатҳои барномасозӣ ва мазмуни ҳаёти барномасозонро нашр мекунам — бо ҳадафи омӯзиш ва илҳомбахшӣ."
+      uz: "Boshqalarga o'rgatish va ilhomlantirish uchun Instagram va YouTube'da muntazam darsliklar, dasturlash maslahatlari va dasturchi hayoti haqida kontent nashr etaman.",
+      ru: "Регулярно публикую обучающие материалы, советы по программированию и контент о жизни разработчика в Instagram и YouTube, чтобы обучать и вдохновлять других.",
+      tj: "Барои таълим ва илҳом бахшидан ба дигарон, дар Instagram ва YouTube мунтазам дарсҳо, маслиҳатҳои барномасозӣ ва мундариҷаи ҳаёти таҳиягаронро нашр мекунам."
     }
   },
   {
     icon: BookOpenCheck,
     title: {
       en: "Lifelong Learning",
-      uz: "Umrbod o‘rganish",
-      ru: "Обучение на протяжении всей жизни",
-      tj: "Омӯзиши пайвастаи умрбод"
+      uz: "Uzluksiz ta'lim",
+      ru: "Пожизненное обучение",
+      tj: "Омӯзиши якумра"
     },
     description: {
       en: "I continuously invest time in learning—from upgrading Laravel to mastering TypeScript—focusing on daily improvement and professional growth.",
-      uz: "Laravel yangilanishlaridan tortib TypeScript’ni mukammal o‘rganishgacha — har kuni bilim va rivojlanishga vaqt ajrataman.",
-      ru: "Постоянно уделяю время обучению — от обновлений Laravel до глубокого освоения TypeScript, с упором на ежедневное развитие.",
-      tj: "Аз навсозии Laravel то омӯхтани амиқи TypeScript — пайваста барои дониш ва рушди касбӣ вақт ҷудо мекунам."
+      uz: "Laravel'ni yangilashdan tortib TypeScript'ni mukammal o'zlashtirishgacha o'rganishga doimiy vaqt ajrataman — kunlik rivojlanish va kasbiy o'sishga e'tibor qarataman.",
+      ru: "Я постоянно инвестирую время в обучение — от обновления Laravel до освоения TypeScript — сосредотачиваясь на ежедневном улучшении и профессиональном росте.",
+      tj: "Ман ҳамеша барои омӯзиш вақт ҷудо мекунам — аз навсозии Laravel то азхудкунии TypeScript — ба беҳтаршавии ҳаррӯза ва рушди касбӣ диққат медиҳам."
     }
   }
 ];
@@ -492,7 +490,7 @@ export const services = [
     id: 1,
     category: "frontend",
     icon: Palette,
-    price: "$100+",
+    price: "1 200 000+ UZS",
     title: {
       en: "UI/UX Design",
       uz: "UI/UX Dizayn",
@@ -501,211 +499,211 @@ export const services = [
     },
     description: {
       en: "Clean, modern, pixel-perfect interfaces with Tailwind CSS and Figma.",
-      uz: "Tailwind CSS va Figma asosida zamonaviy va mukammal dizaynlar.",
-      ru: "Современный и точный дизайн с Tailwind CSS и Figma.",
-      tj: "Тарроҳии муосири пикселӣ бо Figma ва Tailwind CSS."
+      uz: "Tailwind CSS va Figma yordamida toza, zamonaviy va piksellarigacha aniq interfeyslar.",
+      ru: "Чистые, современные и точные до пикселя интерфейсы с использованием Tailwind CSS и Figma.",
+      tj: "Интерфейсҳои тоза, муосир ва дақиқ бо истифодаи Tailwind CSS ва Figma."
     },
     tech: ["Frontend", "Figma", "Tailwind"],
     features: {
       en: ["Figma to Code", "Mobile First", "Tailwind CSS", "Modern Aesthetic"],
-      uz: ["Figma'dan kodga", "Mobilga mos", "Tailwind CSS", "Zamonaviy ko‘rinish"],
-      ru: ["Figma в код", "Мобильная адаптация", "Tailwind CSS", "Современный стиль"],
-      tj: ["Аз Figma ба код", "Мутобиқ ба мобил", "Tailwind CSS", "Услуби муосир"]
+      uz: ["Figma'dan Kodga", "Mobil qurilmalar uchun mos", "Tailwind CSS", "Zamonaviy estetika"],
+      ru: ["Из Figma в код", "Mobile First", "Tailwind CSS", "Современная эстетика"],
+      tj: ["Аз Figma ба Код", "Барои мобилӣ мувофиқ", "Tailwind CSS", "Эстетикаи муосир"]
     }
   },
   {
     id: 2,
     category: "backend",
     icon: Network,
-    price: "$150+",
+    price: "1 800 000+ UZS",
     title: {
       en: "Custom API Services",
-      uz: "Moslashuvchan API Xizmatlari",
-      ru: "API под заказ",
-      tj: "Хизматрасонии API"
+      uz: "Maxsus API xizmatlari",
+      ru: "Пользовательские API сервисы",
+      tj: "Хизматрасониҳои махсуси API"
     },
     description: {
       en: "Secure and scalable RESTful APIs for mobile and web apps.",
-      uz: "Mobil va veb ilovalar uchun xavfsiz REST APIlar yozish.",
-      ru: "Безопасные REST API для приложений.",
-      tj: "API-ҳои бехатар барои сомона ва мобил."
+      uz: "Mobil va veb ilovalar uchun xavfsiz va kengaytiriladigan RESTful API-lar.",
+      ru: "Безопасные и масштабируемые RESTful API для мобильных и веб-приложений.",
+      tj: "API-ҳои бехатар ва васеъшавандаи RESTful барои барномаҳои мобилӣ ва веб."
     },
     features: {
       en: ["Custom Routes", "JWT", "Secure Tokens", "Error Handling"],
-      uz: ["Maxsus endpointlar", "JWT", "Token xavfsizligi", "Xatolik nazorati"],
-      ru: ["Собственные пути", "JWT", "Безопасность", "Обработка ошибок"],
-      tj: ["Endpoint махсус", "JWT", "Амнияти токен", "Назорати хатогиҳо"]
+      uz: ["Maxsus yo'nalishlar", "JWT", "Xavfsiz tokenlar", "Xatoliklarni boshqarish"],
+      ru: ["Кастомные маршруты", "JWT", "Безопасные токены", "Обработка ошибок"],
+      tj: ["Хатсайрҳои махсус", "JWT", "Токенҳои бехатар", "Идоракунии хатогиҳо"]
     }
   },
   {
     id: 3,
     category: "backend",
     icon: ShieldCheck,
-    price: "$180+",
+    price: "2 500 000+ UZS",
     title: {
       en: "Security Optimization",
-      uz: "Xavfsizlikni Yaxshilash",
-      ru: "Оптимизация Безопасности",
-      tj: "Бехатарии Пешрафта"
+      uz: "Xavfsizlikni optimallashtirish",
+      ru: "Оптимизация безопасности",
+      tj: "Оптимизатсияи амният"
     },
     description: {
       en: "Hardening web apps with secure headers, validations, and attack protection.",
-      uz: "Saytingizni xavfsiz qilish: validatsiya, xavfsiz headerlar, himoya.",
-      ru: "Защита приложений: валидация, безопасные заголовки, анти-атаки.",
-      tj: "Муҳофизати сомона: валидация, header-и амн, зидди ҳамлаҳо."
+      uz: "Xavfsiz sarlavhalar, tekshiruvlar va hujumlardan himoya qilish bilan veb-ilovalarni kuchaytirish.",
+      ru: "Укрепление веб-приложений с помощью безопасных заголовков, валидации и защиты от атак.",
+      tj: "Мустаҳкамкунии барномаҳои веб бо сарлавҳаҳои бехатар, валидатсия ва муҳофизат аз ҳамлаҳо."
     },
     features: {
       en: ["Validation", "Rate Limiting", "Secure Headers", "CSRF/XSS Defense"],
-      uz: ["Validatsiya", "Limitlar", "Headerlar", "CSRF/XSS himoya"],
-      ru: ["Валидация", "Ограничения", "Заголовки", "Защита от CSRF/XSS"],
-      tj: ["Валидация", "Маҳдудиятҳо", "Header-ҳои амн", "Ҳимояи CSRF/XSS"]
+      uz: ["Validatsiya", "So'rovlar chegarasi", "Xavfsiz sarlavhalar", "CSRF/XSS himoyasi"],
+      ru: ["Валидация", "Ограничение скорости", "Безопасные заголовки", "Защита от CSRF/XSS"],
+      tj: ["Валидатсия", "Маҳдудияти суръат", "Сарлавҳаҳои бехатар", "Муҳофизати CSRF/XSS"]
     }
   },
   {
     id: 4,
     category: "frontend",
     icon: Monitor,
-    price: "$200",
+    price: "2 500 000+ UZS",
     title: {
       en: "Basic Frontend Website",
-      uz: "Oddiy Frontend Sayt",
+      uz: "Oddiy Frontend sayt",
       ru: "Базовый Frontend сайт",
-      tj: "Сайти оддии Frontend"
+      tj: "Вебсайти оддии Frontend"
     },
     description: {
       en: "Responsive 3-page static website, perfect for portfolios and personal brands.",
-      uz: "Portfolyo va brendlar uchun 3 sahifalik responsiv sayt.",
-      ru: "3-страничный адаптивный сайт для портфолио и брендов.",
-      tj: "Сомонаи ҷавобгӯ бо 3 саҳифа барои портфолио ва брендҳо."
+      uz: "Portfoliolar va shaxsiy brendlar uchun mukammal bo'lgan moslashuvchan (responsive) 3 sahifali statik veb-sayt.",
+      ru: "Адаптивный 3-страничный статический сайт, идеально подходящий для портфолио и личных брендов.",
+      tj: "Вебсайти статикии 3-саҳифагӣ, комил барои портфолио ва брендҳои шахсӣ."
     },
     tech: ["Frontend", "HTML", "CSS", "JavaScript"],
     features: {
       en: ["3 Pages", "Responsive Design", "SEO Friendly", "Performance Optimized"],
-      uz: ["3 sahifa", "Responsiv dizayn", "SEO mos", "Tez ishlash"],
-      ru: ["3 страницы", "Адаптивный дизайн", "SEO", "Быстрая загрузка"],
-      tj: ["3 саҳифа", "Тарҳи ҷавобгӯ", "SEO", "Суръати хуб"]
+      uz: ["3 ta sahifa", "Moslashuvchan dizayn", "SEO qulay", "Tezlik optimallashtirilgan"],
+      ru: ["3 страницы", "Адаптивный дизайн", "SEO оптимизация", "Оптимизация производительности"],
+      tj: ["3 Саҳифа", "Тарроҳии ҷавобгӯ", "Дӯстона бо SEO", "Иҷрои оптимизатсияшуда"]
     }
   },
   {
     id: 5,
     category: "special",
     icon: Bot,
-    price: "$250+",
+    price: "3 500 000+ UZS",
     title: {
       en: "Chatbot Development",
-      uz: "Chatbot Yaratish",
-      ru: "Разработка Чат-бота",
-      tj: "Таҳияи Чатбот"
+      uz: "Chatbot yaratish",
+      ru: "Разработка чат-ботов",
+      tj: "Таҳияи чатботҳо"
     },
     description: {
       en: "Telegram or web chatbots to automate support, orders, and interaction.",
-      uz: "Telegram yoki sayt uchun avtomatlashtirilgan chatbotlar.",
-      ru: "Чат-боты для Telegram или веба для автоматизации задач.",
-      tj: "Чатботҳо барои Telegram ё сомона барои автоматизатсия."
+      uz: "Qo'llab-quvvatlash, buyurtmalar va o'zaro aloqani avtomatlashtirish uchun Telegram yoki veb chatbotlar.",
+      ru: "Telegram или веб чат-боты для автоматизации поддержки, заказов и взаимодействия.",
+      tj: "Чатботҳои Telegram ё веб барои автоматикунонии дастгирӣ, фармоишҳо ва ҳамкорӣ."
     },
     features: {
       en: ["Telegram Bot", "Web Chatbot", "Webhook", "AI Logic"],
-      uz: ["Telegram bot", "Web chatbot", "Webhook", "AI mantiq"],
-      ru: ["Telegram-бот", "Веб-бот", "Webhook", "AI логика"],
-      tj: ["Боти Telegram", "Чатботи веб", "Webhook", "Мантиқ"]
+      uz: ["Telegram bot", "Veb Chatbot", "Webhook", "AI mantiq"],
+      ru: ["Telegram-бот", "Веб-чатбот", "Webhook", "ИИ логика"],
+      tj: ["Telegram Bot", "Web Chatbot", "Webhook", "Мантиқи AI"]
     }
   },
   {
     id: 6,
     category: "frontend",
     icon: Layout,
-    price: "$300+",
+    price: "5 000 000+ UZS",
     title: {
       en: "Advanced Frontend Website",
-      uz: "Kengaytirilgan Frontend Sayt",
+      uz: "Kengaytirilgan Frontend sayt",
       ru: "Продвинутый Frontend сайт",
-      tj: "Сайти пурра Frontend"
+      tj: "Вебсайти пешрафтаи Frontend"
     },
     description: {
       en: "Multi-page frontend site with animations, effects, and premium layout.",
-      uz: "Animatsiyali, ko‘p sahifali, sifatli frontend sayt.",
-      ru: "Многостраничный сайт с эффектами и хорошим дизайном.",
-      tj: "Сайти чандсаҳифа бо аниматсия ва тарҳи зебо."
+      uz: "Animatsiyalar, effektlar va premium dizaynga ega ko'p sahifali frontend sayt.",
+      ru: "Многостраничный frontend сайт с анимациями, эффектами и премиум-дизайном.",
+      tj: "Сайти бисёрсаҳифагии frontend бо аниматсияҳо, эффектҳо ва тарҳбандии премиум."
     },
     tech: ["Frontend", "React", "Framer Motion"],
     features: {
       en: ["Animations", "Custom Layouts", "Scroll Effects", "Multiple Pages"],
-      uz: ["Animatsiya", "Moslashuvchan sahifalar", "Scroll effektlar", "Ko‘p sahifalar"],
-      ru: ["Анимации", "Индивидуальная вёрстка", "Эффекты", "Много страниц"],
-      tj: ["Аниматсияҳо", "Тарҳи махсус", "Эффектҳо", "Саҳифаҳои зиёд"]
+      uz: ["Animatsiyalar", "Maxsus tuzilmalar", "Aylantirish effektlari", "Ko'p sahifali"],
+      ru: ["Анимации", "Пользовательские макеты", "Эффекты прокрутки", "Многостраничность"],
+      tj: ["Аниматсияҳо", "Тарҳҳои махсус", "Эффектҳои ҳаракат", "Саҳифаҳои сершумор"]
     }
   },
   {
     id: 7,
     category: "fullstack",
     icon: Server,
-    price: "$400+",
+    price: "6 000 000+ UZS",
     title: {
       en: "Dynamic Website",
-      uz: "Dinamik Sayt",
+      uz: "Dinamik veb-sayt",
       ru: "Динамический сайт",
-      tj: "Сомонаи динамикӣ"
+      tj: "Вебсайти динамикӣ"
     },
     description: {
       en: "Fully dynamic website using Laravel and React for interactive experience.",
-      uz: "Laravel va React asosida foydalanuvchiga interaktiv sayt.",
-      ru: "Интерактивный сайт с Laravel и React.",
-      tj: "Сомонаи интерактивӣ бо Laravel ва React."
+      uz: "Interaktiv tajriba uchun Laravel va React yordamida to'liq dinamik veb-sayt.",
+      ru: "Полностью динамический сайт с использованием Laravel и React для интерактивного опыта.",
+      tj: "Вебсайти комилан динамикӣ бо истифодаи Laravel ва React барои таҷрибаи интерактивӣ."
     },
     tech: ["FullStack", "Laravel", "React"],
     features: {
       en: ["Laravel + React", "Interactive UI", "Form Handling", "Database Connected"],
-      uz: ["Laravel + React", "Interaktiv interfeys", "Forma ishlov", "Bazaga ulangan"],
-      ru: ["Laravel + React", "Интерактивность", "Обработка форм", "БД подключено"],
-      tj: ["Laravel + React", "Интерфейси фаъол", "Кори формҳо", "Бо пойгоҳ"]
+      uz: ["Laravel + React", "Interaktiv UI", "Formalarni ishlash", "Ma'lumotlar bazasiga ulangan"],
+      ru: ["Laravel + React", "Интерактивный UI", "Обработка форм", "Подключенная БД"],
+      tj: ["Laravel + React", "UI интерактивӣ", "Коркарди шаклҳо", "Пайваст ба пойгоҳи додаҳо"]
     }
   },
   {
     id: 8,
     category: "backend",
     icon: Database,
-    price: "$500+",
+    price: "7 500 000+ UZS",
     title: {
       en: "Backend + Admin Panel",
-      uz: "Backend + Admin Panel",
-      ru: "Бэкенд + Админка",
-      tj: "Бекенд + Панели маъмурӣ"
+      uz: "Backend + Admin panel",
+      ru: "Backend + Админ панель",
+      tj: "Backend + Панели администратор"
     },
     description: {
       en: "Custom backend system with admin dashboard, user management, and secure API.",
-      uz: "Admin paneli, foydalanuvchi boshqaruvi va xavfsiz API bilan backend.",
-      ru: "Бэкенд с админкой, управлением пользователей и безопасным API.",
-      tj: "Бекенд бо панели маъмурӣ ва API-и бехатар."
+      uz: "Boshqaruv paneli, foydalanuvchilarni boshqarish va xavfsiz API bilan maxsus backend tizimi.",
+      ru: "Пользовательская backend система с панелью администратора, управлением пользователями и безопасным API.",
+      tj: "Системаи махсуси backend бо панели маъмурӣ, идоракунии корбарон ва API бехатар."
     },
     features: {
       en: ["Admin Panel", "User Management", "JWT Auth", "REST API"],
-      uz: ["Admin panel", "Foydalanuvchi boshqaruvi", "JWT autent.", "REST API"],
-      ru: ["Админка", "Пользователи", "JWT авторизация", "REST API"],
-      tj: ["Панел", "Корбарон", "JWT аутент.", "REST API"]
+      uz: ["Admin panel", "Foydalanuvchilarni boshqarish", "JWT avtorizatsiya", "REST API"],
+      ru: ["Админ панель", "Управление пользователями", "JWT авторизация", "REST API"],
+      tj: ["Панели маъмурӣ", "Идоракунии корбарон", "Аутентификатсияи JWT", "REST API"]
     }
   },
   {
     id: 9,
     category: "fullstack",
     icon: Code,
-    price: "$600+",
+    price: "11 000 000+ UZS",
     title: {
       en: "Full-Stack Application",
-      uz: "Full-Stack Ilova",
-      ru: "Фуллстек Приложение",
-      tj: "Иловаи Full-Stack"
+      uz: "Full-Stack ilova",
+      ru: "Full-Stack приложение",
+      tj: "Барномаи Full-Stack"
     },
     description: {
       en: "End-to-end app with full frontend and backend logic — ideal for startups.",
-      uz: "Frontend va backendni o‘z ichiga olgan to‘liq ilova — startaplar uchun mos.",
-      ru: "Полное приложение с фронтом и бэкендом — для стартапов.",
-      tj: "Илова бо фронт ва бекенд — барои стартапҳо."
+      uz: "To'liq frontend va backend mantig'iga ega keng qamrovli ilova — startaplar uchun ideal.",
+      ru: "Комплексное приложение с полной логикой frontend и backend — идеально для стартапов.",
+      tj: "Барномаи мукаммал бо мантиқи пурраи frontend ва backend — беҳтарин барои стартапҳо."
     },
     features: {
       en: ["Full Flow", "Laravel + React", "Advanced Auth", "Scalable DB"],
-      uz: ["To‘liq jarayon", "Laravel + React", "Murakkab auth", "Katta DB"],
-      ru: ["Весь поток", "Laravel + React", "Сложная авторизация", "Большая БД"],
-      tj: ["Ҳама қисмҳо", "Laravel + React", "Авторизатсияи пурра", "Пойгоҳи калон"]
+      uz: ["To'liq oqim", "Laravel + React", "Murakkab avtorizatsiya", "Kengaytiriladigan bazalar"],
+      ru: ["Полный цикл", "Laravel + React", "Продвинутая авторизация", "Масштабируемая БД"],
+      tj: ["Ҷараёни пурра", "Laravel + React", "Аутентификатсияи пешрафта", "Махзани васеъшаванда"]
     }
   }
 ];
@@ -716,15 +714,15 @@ export const processSteps = [
     step: "01",
     title: {
       en: "Discovery",
-      uz: "Tahlil",
+      uz: "O'rganish",
       ru: "Изучение",
       tj: "Омӯзиш"
     },
     description: {
       en: "Understanding your requirements, goals, and target audience",
-      uz: "Talablaringizni, maqsadlaringizni va maqsadli auditoriyangizni tushunish",
+      uz: "Sizning talablaringiz, maqsadlaringiz va maqsadli auditoriyangizni tushunish",
       ru: "Понимание ваших требований, целей и целевой аудитории",
-      tj: "Фаҳмидани талабот, ҳадафҳо ва аудиторияи мақсаднок"
+      tj: "Фаҳмидани талабот, ҳадафҳо ва шунавандагони мақсадноки шумо"
     }
   },
   {
@@ -733,43 +731,43 @@ export const processSteps = [
       en: "Planning",
       uz: "Rejalashtirish",
       ru: "Планирование",
-      tj: "Нақшакашӣ"
+      tj: "Банақшагирӣ"
     },
     description: {
       en: "Creating a detailed project roadmap and technical architecture",
-      uz: "Batafsil loyiha yo‘l xaritasi va texnik me’moriy tuzilma yaratish",
+      uz: "Batafsil loyiha xaritasi va texnik arxitekturani yaratish",
       ru: "Создание подробной дорожной карты проекта и технической архитектуры",
-      tj: "Эҷоди нақшаи муфассали лоиҳа ва меъмории техникӣ"
+      tj: "Таҳияи харитаи муфассали лоиҳа ва меъмории техникӣ"
     }
   },
   {
     step: "03",
     title: {
       en: "Development",
-      uz: "Dasturlash",
+      uz: "Ishlab chiqish",
       ru: "Разработка",
       tj: "Таҳия"
     },
     description: {
       en: "Building your solution with clean, scalable, and maintainable code",
-      uz: "Toza, kengaytiriladigan va texnik xizmat ko‘rsatish mumkin bo‘lgan kod bilan yechim yaratish",
-      ru: "Создание решения с чистым, масштабируемым и поддерживаемым кодом",
-      tj: "Сохтани ҳалли масъала бо коди пок, васеъшаванда ва нигоҳдошташаванда"
+      uz: "Toza, kengaytiriladigan va saqlash oson bo'lgan kod bilan yechimingizni yaratish",
+      ru: "Создание вашего решения с чистым, масштабируемым и поддерживаемым кодом",
+      tj: "Сохтани ҳалли шумо бо коди тоза, васеъшаванда ва қобили нигоҳдорӣ"
     }
   },
   {
     step: "04",
     title: {
       en: "Delivery",
-      uz: "Yetkazib berish",
-      ru: "Доставка",
+      uz: "Topshirish",
+      ru: "Сдача проекта",
       tj: "Супоридан"
     },
     description: {
       en: "Testing, deployment, and ongoing support to ensure success",
-      uz: "Test qilish, joylashtirish va doimiy yordam ko‘rsatish orqali muvaffaqiyatni ta'minlash",
+      uz: "Muvaffaqiyatni ta'minlash uchun sinovdan o'tkazish, joylashtirish va doimiy qo'llab-quvvatlash",
       ru: "Тестирование, развертывание и постоянная поддержка для обеспечения успеха",
-      tj: "Санҷиш, татбиқ ва дастгирии доимӣ барои таъмин намудани муваффақият"
+      tj: "Санҷиш, татбиқ ва дастгирии доимӣ барои таъмини муваффақият"
     }
   }
 ];

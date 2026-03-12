@@ -71,7 +71,7 @@ export const Home: React.FC = () => {
               <div className="relative w-[240px] sm:w-[280px] md:w-[320px] lg:w-[360px] xl:w-[420px]">
                 <div className="aspect-square rounded-full bg-gradient-to-tr from-primary-500 to-primary-400 p-1 shadow-glow-red-lg">
                   <img
-                    src={personalInfo.avatar}
+                    src={'/images/logos/iqbolshoh-1.jpg'}
                     alt={personalInfo.name[i18n.language as keyof typeof personalInfo.name]}
                     className="h-full w-full rounded-full object-cover"
                   />

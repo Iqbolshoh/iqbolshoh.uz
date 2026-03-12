@@ -1,21 +1,39 @@
-import { Routes, Route } from 'react-router-dom';
-import { Header } from './components/Layout/Header';
-import { Footer } from './components/Layout/Footer';
-import { Home } from './pages/Home';
-import { About } from './pages/About';
-import { Portfolio } from './pages/Portfolio';
-import { Services } from './pages/Services';
-import { Contact } from './pages/Contact';
-import { Blog } from './pages/Blog';
-import { BlogDetails } from './pages/BlogDetails';
-import { Toaster } from 'react-hot-toast';
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Header } from './components/Layout/Header'
+import { Footer } from './components/Layout/Footer'
+import { Home } from './pages/Home'
+import { About } from './pages/About'
+import { Portfolio } from './pages/Portfolio'
+import { Services } from './pages/Services'
+import { Contact } from './pages/Contact'
+import { Blog } from './pages/Blog'
+import { BlogDetails } from './pages/BlogDetails'
+import { Toaster } from 'react-hot-toast'
+
+/**
+ * Scroll to top on route change
+ */
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white flex flex-col">
       <Toaster position="top-right" reverseOrder={false} />
+
+      <ScrollToTop />
+
       <Header />
-      <main>
+
+      <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -26,9 +44,10 @@ function App() {
           <Route path="/blog/:id" element={<BlogDetails />} />
         </Routes>
       </main>
+
       <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

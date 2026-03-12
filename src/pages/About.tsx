@@ -58,7 +58,7 @@ export const About: React.FC = () => {
             >
               <div className="relative">
                 <img
-                  src={personalInfo.avatar}
+                  src={'/images/logos/iqbolshoh-2.png'}
                   alt={personalInfo.name[i18n.language as keyof typeof personalInfo.name]}
                   className="rounded-2xl shadow-2xl"
                 />
