@@ -763,6 +763,27 @@ export const projects = [
     github: "https://github.com/Iqbolshoh/php-database-manager",
     featured: true,
     category: "Backend"
+  },
+  {
+    id: 31,
+    name: {
+      en: "PHP Ninja Multiplayer Game",
+      uz: "PHP Ninja Multiplayer O'yini",
+      ru: "Мультиплеерная игра Ninja на PHP",
+      tj: "Бозии multiplayer Ninja бо PHP"
+    },
+    description: {
+      en: "A multiplayer browser game built with PHP where users can create unique game links and invite others to play simultaneously. The system includes authentication, leaderboard, and game management features.",
+      uz: "PHP yordamida yaratilgan multiplayer brauzer o‘yini. Foydalanuvchilar maxsus o‘yin linki yaratib boshqalarni taklif qilishi va bir vaqtning o‘zida o‘ynashi mumkin. Tizimda login, leaderboard va o‘yin boshqaruvi mavjud.",
+      ru: "Мультиплеерная браузерная игра на PHP, где пользователи могут создавать уникальные ссылки и приглашать других игроков для совместной игры.",
+      tj: "Бозии multiplayer дар браузер бо PHP, ки корбарон метавонанд линк эҷод кунанд ва дигаронро барои бозӣ даъват намоянд."
+    },
+    image: "images/projects/php-ninja-game.png",
+    tech: ["PHP", "JavaScript", "MySQL", "Multiplayer", "Game Logic"],
+    liveDemo: null,
+    github: "https://github.com/Iqbolshoh/php-ninja-game",
+    featured: true,
+    category: "Full-Stack"
   }
 ];
 
