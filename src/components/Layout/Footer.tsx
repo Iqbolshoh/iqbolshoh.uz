@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
                   href={(data as { link: string }).link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white hover:bg-gray-800 p-2 rounded-full transition"
+                  className="text-gray-400 hover:text-primary-400 hover:bg-gray-800 p-2 rounded-full transition"
                 >
                   {platform === 'github' && <Github className="h-5 w-5" />}
                   {platform === 'linkedin' && <Linkedin className="h-5 w-5" />}
@@ -85,7 +85,7 @@ export const Footer: React.FC = () => {
                   <div className="bg-gray-800 p-2 rounded-full">
                     <Mail className="h-4 w-4 text-primary-400" />
                   </div>
-                  <a href={personalInfo.social.email.link} className="hover:text-white transition">
+                  <a href={personalInfo.social.email.link} className="hover:text-primary-400 transition">
                     {personalInfo.social.email.label}
                   </a>
                 </li>
@@ -93,7 +93,7 @@ export const Footer: React.FC = () => {
                   <div className="bg-gray-800 p-2 rounded-full">
                     <Phone className="h-4 w-4 text-primary-400" />
                   </div>
-                  <a href={personalInfo.social.phone.link} className="hover:text-white transition">
+                  <a href={personalInfo.social.phone.link} className="hover:text-primary-400 transition">
                     {personalInfo.social.phone.label}
                   </a>
                 </li>

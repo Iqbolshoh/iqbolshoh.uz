@@ -152,5 +152,12 @@
     "notFound": {
       "title": "Page Not Found | Iqbolshoh.uz"
     }
+  },
+  "footer": {
+    "description": "Bringing your vision to life through clean, modern code and design.",
+    "navigation": "Navigation",
+    "resources": "Resources",
+    "contact": "Contact",
+    "copyright": "Iqbolshoh dev. All rights reserved."
   }
 }

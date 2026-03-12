@@ -152,5 +152,12 @@
     "notFound": {
       "title": "Страница Не Найдена | Iqbolshoh.uz"
     }
+  },
+  "footer": {
+    "description": "Воплощаю ваши идеи в жизнь через чистый, современный код и дизайн.",
+    "navigation": "Навигация",
+    "resources": "Ресурсы",
+    "contact": "Контакты",
+    "copyright": "Iqbolshoh dev. Все права защищены."
   }
 }

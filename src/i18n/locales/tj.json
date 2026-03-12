@@ -152,5 +152,12 @@
     "notFound": {
       "title": "Саҳифа Ёфт Нашуд | Iqbolshoh.uz"
     }
+  },
+  "footer": {
+    "description": "Идеяҳои шуморо тавассути код ва тарроҳии тоза ва муосир амалӣ месозам.",
+    "navigation": "Навигатсия",
+    "resources": "Захираҳо",
+    "contact": "Тамос",
+    "copyright": "Iqbolshoh dev. Ҳамаи ҳуқуқҳо маҳфузанд."
   }
 }

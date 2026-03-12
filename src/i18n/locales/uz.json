@@ -152,5 +152,12 @@
     "notFound": {
       "title": "Sahifa Topilmadi | Iqbolshoh.uz"
     }
+  },
+  "footer": {
+    "description": "Toza, zamonaviy kod va dizayn orqali g'oyalaringizni hayotga tatbiq etaman.",
+    "navigation": "Navigatsiya",
+    "resources": "Resurslar",
+    "contact": "Aloqa",
+    "copyright": "Iqbolshoh dev. Barcha huquqlar himoyalangan."
   }
 }

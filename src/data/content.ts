@@ -150,8 +150,8 @@ export const projects = [
     },
     image: "images/projects/templatesuz.png",
     tech: ["Laravel", "React", "Vite", "MySQL"],
-    liveDemo: "https://templates.uz",
-    github: "https://github.com/iqbolshoh/templates.uz",
+    liveDemo: 'https://templates.uz/',
+    github: null,
     featured: true,
     category: "Full-Stack"
   },
@@ -171,7 +171,7 @@ export const projects = [
     },
     image: "images/projects/php-social-messenger.png",
     tech: ["PHP", "MySQL", "AJAX", "Bootstrap"],
-    liveDemo: "https://github.com/Iqbolshoh/php-social-messenger",
+    liveDemo: null,
     github: "https://github.com/Iqbolshoh/php-social-messenger",
     featured: false,
     category: "Backend"

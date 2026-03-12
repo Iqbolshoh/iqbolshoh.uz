@@ -217,11 +217,11 @@ export const Home: React.FC = () => {
                 viewport={{ once: true }}
               >
                 <Card className="overflow-hidden hover:shadow-glow-red transition-all duration-300 group border-0">
-                  <div className="relative overflow-hidden">
+                  <div className="relative overflow-hidden aspect-video">
                     <img
                       src={project.image}
                       alt={project.name[i18n.language as keyof typeof project.name]}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
 
                     {/* FEATURED BADGE */}
@@ -252,21 +252,26 @@ export const Home: React.FC = () => {
                       ))}
                     </div>
                     <div className="flex space-x-4">
-                      <Button
-                        size="sm"
-                        href={project.liveDemo}
-                        className="bg-gradient-to-r from-primary-600 to-primary-700"
-                      >
-                        {t('portfolio.liveDemo')}
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        href={project.github}
-                        className="border-primary-600 text-primary-600 hover:bg-primary-600"
-                      >
-                        {t('portfolio.github')}
-                      </Button>
+                      {project.liveDemo && (
+                        <Button
+                          size="sm"
+                          href={project.liveDemo}
+                          className="bg-gradient-to-r from-primary-600 to-primary-700"
+                        >
+                          {t('portfolio.liveDemo')}
+                        </Button>
+                      )}
+
+                      {project.github && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          href={project.github}
+                          className="border-primary-600 text-primary-600 hover:bg-primary-600"
+                        >
+                          {t('portfolio.github')}
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </Card>

@@ -99,23 +99,32 @@ export const Portfolio: React.FC = () => {
                           </span>
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-4">
-                        <Button
-                          size="sm"
-                          href={project.liveDemo}
-                          icon={<ExternalLink className="h-4 w-4" />}
-                        >
-                          {t('portfolio.liveDemo')}
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          href={project.github}
-                          icon={<Github className="h-4 w-4" />}
-                        >
-                          {t('portfolio.github')}
-                        </Button>
-                      </div>
+                      {(project.liveDemo || project.github) && (
+                        <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-4">
+
+                          {project.liveDemo && (
+                            <Button
+                              size="sm"
+                              href={project.liveDemo}
+                              icon={<ExternalLink className="h-4 w-4" />}
+                            >
+                              {t('portfolio.liveDemo')}
+                            </Button>
+                          )}
+
+                          {project.github && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              href={project.github}
+                              icon={<Github className="h-4 w-4" />}
+                            >
+                              {t('portfolio.github')}
+                            </Button>
+                          )}
+
+                        </div>
+                      )}
                     </div>
 
                     <div className="p-6 flex flex-col flex-grow">
@@ -137,14 +146,32 @@ export const Portfolio: React.FC = () => {
                         ))}
                       </div>
 
-                      <div className="flex space-x-3">
-                        <Button size="sm" href={project.liveDemo} className="flex-1">
-                          {t('portfolio.viewProject')}
-                        </Button>
-                        <Button variant="outline" size="sm" href={project.github}>
-                          <Github className="h-4 w-4" />
-                        </Button>
-                      </div>
+                      {(project.liveDemo || project.github) && (
+                        <div className="flex space-x-3">
+
+                          {project.liveDemo && (
+                            <Button
+                              size="sm"
+                              href={project.liveDemo}
+                              className={!project.github ? "w-full" : "flex-1"}
+                            >
+                              {t('portfolio.viewProject')}
+                            </Button>
+                          )}
+
+                          {project.github && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              href={project.github}
+                              className={!project.liveDemo ? "w-full" : ""}
+                            >
+                              <Github className="h-4 w-4" />
+                            </Button>
+                          )}
+
+                        </div>
+                      )}
                     </div>
                   </Card>
                 </motion.div>
