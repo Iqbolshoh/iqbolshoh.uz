@@ -92,7 +92,7 @@ export const techStack = [
 export const stats = [
   {
     icon: Star,
-    value: '3+',
+    value: '4+',
     label: {
       en: 'Years of Experience',
       uz: 'Tajriba yillari',

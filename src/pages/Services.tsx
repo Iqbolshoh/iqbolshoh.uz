@@ -11,7 +11,10 @@ export const Services: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<'all' | 'frontend' | 'backend' | 'fullstack' | 'special'>('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedService, setSelectedService] = useState<any>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -28,13 +31,13 @@ export const Services: React.FC = () => {
     activeCategory === 'all'
       ? services
       : services.filter((service) => service.category === activeCategory);
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleOpenModal = (service: any) => {
     setSelectedService(service);
     setFormData({
       ...formData,
       serviceId: service.id.toString(),
-      serviceName: service.title[i18n.language as keyof typeof service.title],
+      serviceName: service.title.en, // Passing the English title to the backend for consistency
       servicePrice: service.price
     });
     setIsModalOpen(true);
@@ -61,22 +64,13 @@ export const Services: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
-    const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
-    const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
-
-    const message =
-      `🚀 *<b>New Service Request</b>*\n` +
-      `\n🌐 <b>Website:</b> <a href="https://iqbolshoh.uz/services">iqbolshoh.uz/services</a>` +
-      `\n📌 <b>Requested Service:</b> <i>${formData.serviceName}</i> — <i>${formData.servicePrice}</i>` +
-      `\n\n🙋‍♂️ <b>Client Info:</b>` +
-      `\n\t• 👤 <b>Name:</b> ${formData.name}` +
-      `\n\t• 📧 <b>Email:</b> ${formData.email}` +
-      `\n\t• 📱 <b>Phone:</b> ${formData.phone}` +
-      `\n\n📝 <b>Message:</b>\n${formData.message || '<i>No additional message provided.</i>'}`;
+    // Update this URL to match your production environment
+    const API_URL = 'https://iqbolshoh.uz/api/send-message.php';
 
     const lang = i18n.language;
-    const messages = {
+    const messages: Record<string, Record<string, string>> = {
       en: {
         success: 'Your request was sent successfully!',
         error: 'Failed to send. Please try again!',
@@ -100,21 +94,21 @@ export const Services: React.FC = () => {
     };
 
     const getMessage = (type: 'success' | 'error' | 'server') =>
-      messages[lang as keyof typeof messages]?.[type] || messages.en[type];
+      messages[lang]?.[type] || messages.en[type];
 
     try {
-      const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          chat_id: chatId,
-          text: message,
-          parse_mode: 'HTML',
-          disable_web_page_preview: true,
+          type: 'service',
+          data: formData
         }),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         toast.success(getMessage('success'), {
           duration: 3000,
           style: {
@@ -151,7 +145,10 @@ export const Services: React.FC = () => {
         });
       }
     } catch (error) {
+      console.error('API connection failed:', error);
       toast.error(getMessage('server'));
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -182,10 +179,11 @@ export const Services: React.FC = () => {
             {categories.map((category) => (
               <button
                 key={category}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 onClick={() => setActiveCategory(category as any)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === category
-                  ? 'bg-primary-600 text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-primary-600 text-white shadow-md'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
               >
                 {t(`services.categories.${category}`)}
@@ -267,7 +265,7 @@ export const Services: React.FC = () => {
         </div>
       </section>
 
-      {/* Modal */}
+      {/* Booking Modal */}
       <AnimatePresence>
         {isModalOpen && (
           <motion.div
@@ -296,7 +294,7 @@ export const Services: React.FC = () => {
                   </button>
                 </div>
 
-                {/* Service Info */}
+                {/* Service Info Header */}
                 {selectedService && (
                   <div className="mb-6 p-4 bg-gray-50 rounded-lg">
                     <div className="flex items-center space-x-3 mb-2">
@@ -312,6 +310,7 @@ export const Services: React.FC = () => {
                   </div>
                 )}
 
+                {/* Form Fields */}
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -372,12 +371,13 @@ export const Services: React.FC = () => {
                     />
                   </div>
 
+                  {/* Hidden payload data */}
                   <input type="hidden" name="serviceId" value={formData.serviceId} />
                   <input type="hidden" name="serviceName" value={formData.serviceName} />
                   <input type="hidden" name="servicePrice" value={formData.servicePrice} />
 
-                  <Button type="submit" className="w-full mt-4">
-                    {t('services.form.submit')}
+                  <Button type="submit" className="w-full mt-4" disabled={isSubmitting}>
+                    {isSubmitting ? '...' : t('services.form.submit')}
                     <ChevronRight className="h-4 w-4 ml-2" />
                   </Button>
                 </form>

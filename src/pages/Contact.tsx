@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 
 export const Contact: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -28,29 +29,22 @@ export const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    // Update this URL to match your production environment
+    const API_URL = 'https://iqbolshoh.uz/api/send-message.php';
+
     try {
-      const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
-      const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
-
-      const message =
-        `📨 *<b>New Contact Message</b>*\n` +
-        `\n🌐 <b>Website:</b> <a href="https://iqbolshoh.uz/contact">iqbolshoh.uz/contact</a>` +
-        `\n\n🙋‍♂️ <b>Sender Info:</b>` +
-        `\n\t• 👤 <b>Name:</b> ${formData.name}` +
-        `\n\t• 📧 <b>Email:</b> ${formData.email}` +
-        `\n\t• 📝 <b>Subject:</b> ${formData.subject || '<i>No subject provided.</i>'}` +
-        `\n\n💬 <b>Message:</b>\n${formData.message || '<i>No additional message provided.</i>'}`;
-
-      const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          chat_id: chatId,
-          text: message,
-          parse_mode: 'HTML',
-          disable_web_page_preview: true,
+          type: 'contact',
+          data: formData
         }),
       });
+
+      const result = await response.json();
 
       const successMessages: Record<string, string> = {
         en: 'Message sent successfully!',
@@ -68,8 +62,8 @@ export const Contact: React.FC = () => {
 
       const lang = i18n.language;
 
-      if (response.ok) {
-        toast.success(successMessages[lang], {
+      if (response.ok && result.success) {
+        toast.success(successMessages[lang] || successMessages.en, {
           duration: 3000,
           style: {
             fontSize: '18px',
@@ -86,9 +80,10 @@ export const Contact: React.FC = () => {
           },
         });
 
+        // Reset the form
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        toast.error(errorMessages[lang], {
+        toast.error(errorMessages[lang] || errorMessages.en, {
           duration: 3000,
           style: {
             fontSize: '18px',
@@ -106,7 +101,7 @@ export const Contact: React.FC = () => {
         });
       }
     } catch (error) {
-      console.error('Telegram error:', error);
+      console.error('Server connection error:', error);
       const errorLangMessages: Record<string, string> = {
         en: 'Server error. Please try again later.',
         uz: 'Serverda xatolik. Keyinroq urinib ko‘ring.',
@@ -114,6 +109,8 @@ export const Contact: React.FC = () => {
         tj: 'Хатои сервер. Баъдтар кӯшиш кунед.'
       };
       toast.error(errorLangMessages[i18n.language] || errorLangMessages.en);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -215,12 +212,12 @@ export const Contact: React.FC = () => {
                     type="submit"
                     size="lg"
                     className="w-full"
+                    disabled={isSubmitting}
                     icon={<Send className="h-5 w-5" />}
                   >
-                    {t('contact.sendMessageBtn')}
+                    {isSubmitting ? '...' : t('contact.sendMessageBtn')}
                   </Button>
                 </form>
-
               </Card>
             </motion.div>
 
@@ -338,7 +335,7 @@ export const Contact: React.FC = () => {
         </div>
       </section>
 
-      {/* Map Section (Optional - you can add a real map here) */}
+      {/* Optional Map Section */}
       <section className="py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
@@ -358,7 +355,6 @@ export const Contact: React.FC = () => {
           </motion.div>
         </div>
       </section>
-
     </div>
   );
 };
