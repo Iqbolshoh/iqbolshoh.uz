@@ -404,7 +404,7 @@ export const projects = [
     tech: ["PHP", "MySQL", "Admin Panel", "Education System"],
     liveDemo: "https://uzwriter.uz",
     github: "https://github.com/Iqbolshoh/php-education-management",
-    featured: true,
+    featured: false,
     category: "Full-Stack"
   },
   {
@@ -530,7 +530,7 @@ export const projects = [
     tech: ["Laravel", "PHP", "Blade", "Vite", "MySQL"],
     liveDemo: "https://ai-lab.sampc.uz/",
     github: "https://github.com/Iqbolshoh/samsu-ai-lab-laravel",
-    featured: true,
+    featured: false,
     category: "Full-Stack"
   },
   {
@@ -551,7 +551,7 @@ export const projects = [
     tech: ["React", "TypeScript", "Vite", "TailwindCSS"],
     liveDemo: "https://iqbolshoh.uz",
     github: "https://github.com/Iqbolshoh/iqbolshoh-portfolio",
-    featured: true,
+    featured: false,
     category: "Frontend"
   },
   {
@@ -761,7 +761,7 @@ export const projects = [
     tech: ["PHP", "MySQLi", "Database Wrapper", "Prepared Statements"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/php-database-manager",
-    featured: true,
+    featured: false,
     category: "Backend"
   },
   {
@@ -782,7 +782,7 @@ export const projects = [
     tech: ["PHP", "JavaScript", "MySQL", "Multiplayer", "Game Logic"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/php-ninja-game",
-    featured: true,
+    featured: false,
     category: "Full-Stack"
   }
 ];
@@ -1397,7 +1397,7 @@ export const blogPosts = [
       ru: "Сегодня сайт iqbolshoh.uz получил потрясающий редизайн! Чистый пользовательский интерфейс, элегантная структура, мощная многоязычная поддержка и яркие анимации делают его портфолио, которое обязательно стоит увидеть как разработчикам, так и клиентам. С первой секунды на главной странице вас встречают плавные переходы, логично структурированные блоки и интуитивная навигация. Этот сайт отражает не только технические навыки разработчика, но и стратегическое видение личного бренда. Построенный на базе React и Laravel, он гармонично сочетает красоту с функциональностью. Будь вы клиент или программист — вы обязательно вдохновитесь этим шедевром.",
       tj: "Имрӯз сомонаи iqbolshoh.uz бо намуди нави аҷиб навсозӣ гардид! Интерфейси тоза, тарҳи зебо, дастгирии пурқуввати бисёрзабона ва аниматсияҳои рангин онро ба як портфолои воқеан арзандаи дидан барои ҳам барномасозон ва ҳам муштариён табдил додаанд. Аз лаҳзаи аввал, ки ба саҳифаи асосӣ ворид мешавед, гузаришҳои мулоим, қисмҳои возеҳ ва роҳнамоии фаҳмост. Ин сомона на танҳо маҳоратҳои техникии барномасозро нишон медиҳад, балки диди равшани шахсии ӯро низ. Бо истифода аз React ва Laravel сохта шудааст ва зебоӣ ва функсионалиятро ба таври мутавозин муттаҳид мекунад. Новобаста аз он ки шумо муштарӣ ҳастед ё шогирди ҳаваскор — ин сомона шуморо илҳом мебахшад ва дар таассур мегузорад."
     },
-    featured: true,
+    featured: false,
     date: "2025-06-26",
     tags: ["Portfolio", "Design", "Branding"],
     image: "/images/blogs/blog-1.png",

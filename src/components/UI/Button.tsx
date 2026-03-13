@@ -1,8 +1,8 @@
 import React from 'react';
-import { motion, HTMLMotionProps } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-// Extend HTMLMotionProps instead of standard HTML attributes to prevent type conflicts
-export interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
+// Extending standard button attributes but omitting conflicting animation props
+export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag'> {
   variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   href?: string;
@@ -13,6 +13,7 @@ export interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
 }
 
 export const Button: React.FC<ButtonProps> = ({
+  children,
   variant = 'primary',
   size = 'md',
   type = 'button',
@@ -20,10 +21,8 @@ export const Button: React.FC<ButtonProps> = ({
   className = '',
   icon,
   download,
-  disabled,
-  target,
-  rel,
-  ...props
+  disabled, // Destructure disabled so we can use it for custom styling and logic
+  ...props  // Catches all other standard props (onClick, id, etc.)
 }) => {
   const baseClasses =
     'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
@@ -40,36 +39,47 @@ export const Button: React.FC<ButtonProps> = ({
     lg: 'px-8 py-4 text-lg',
   };
 
+  // Add styles for disabled state
   const disabledClasses = disabled ? 'opacity-60 cursor-not-allowed shadow-none hover:shadow-none pointer-events-none' : '';
 
   const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${disabledClasses} ${className}`;
 
+  // Render as an Anchor link if href is provided
   if (href) {
-    // If it's a link, render an anchor tag. (Note: we use standard 'a' here, not motion.a, to keep types simple and avoid conflicts)
     return (
-      <a
+      <motion.a
         href={href}
-        className={`${classes} ${disabled ? '' : 'hover:scale-[1.02] active:scale-[0.98] transform transition-transform'}`}
-        target={target || (href.startsWith('http') ? '_blank' : undefined)}
-        rel={rel || (href.startsWith('http') ? 'noopener noreferrer' : undefined)}
+        className={classes}
+        // Disable hover/tap animations if disabled
+        whileHover={!disabled ? { scale: 1.02 } : {}}
+        whileTap={!disabled ? { scale: 0.98 } : {}}
+        target={href.startsWith('http') ? '_blank' : undefined}
+        rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
         download={download}
-        style={{ pointerEvents: disabled ? 'none' : 'auto' }}
+        // Bypass strict typing for anchor/button mixed props
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        {...(props as any)}
       >
         {icon && <span className="mr-2 flex items-center justify-center">{icon}</span>}
-      </a>
+        {children}
+      </motion.a>
     );
   }
 
+  // Render as a standard Button
   return (
     <motion.button
       type={type}
       className={classes}
       disabled={disabled}
-      whileHover={!disabled ? { scale: 1.02 } : undefined}
-      whileTap={!disabled ? { scale: 0.98 } : undefined}
-      {...props}
+      whileHover={!disabled ? { scale: 1.02 } : {}}
+      whileTap={!disabled ? { scale: 0.98 } : {}}
+      // Bypass strict typing for motion specific event overlaps
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      {...(props as any)}
     >
       {icon && <span className="mr-2 flex items-center justify-center">{icon}</span>}
+      {children}
     </motion.button>
   );
 };
