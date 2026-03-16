@@ -32,7 +32,7 @@ export const Contact: React.FC = () => {
     setIsSubmitting(true);
 
     // Update this URL to match your production environment
-    const API_URL = 'https://iqbolshoh.uz/api/send-message.php';
+    const API_URL = '/send-message.php';
 
     try {
       const response = await fetch(API_URL, {

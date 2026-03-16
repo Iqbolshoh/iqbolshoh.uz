@@ -67,7 +67,7 @@ export const Services: React.FC = () => {
     setIsSubmitting(true);
 
     // Update this URL to match your production environment
-    const API_URL = 'https://iqbolshoh.uz/api/send-message.php';
+    const API_URL = '/send-message.php';
 
     const lang = i18n.language;
     const messages: Record<string, Record<string, string>> = {
