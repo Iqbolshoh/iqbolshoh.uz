@@ -90,7 +90,6 @@ export const BlogDetails: React.FC<BlogDetailsProps> = () => {
                 <p className="text-gray-600 leading-relaxed">
                   {getLocalizedContent(post.excerpt, i18n.language)}
                 </p>
-                {/* Add full content here if available */}
               </div>
             </Card>
           </motion.div>

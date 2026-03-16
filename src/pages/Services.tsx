@@ -66,7 +66,6 @@ export const Services: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Update this URL to match your production environment
     const API_URL = '/send-message.php';
 
     const lang = i18n.language;
@@ -182,8 +181,8 @@ export const Services: React.FC = () => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 onClick={() => setActiveCategory(category as any)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === category
-                    ? 'bg-primary-600 text-white shadow-md'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-primary-600 text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
               >
                 {t(`services.categories.${category}`)}

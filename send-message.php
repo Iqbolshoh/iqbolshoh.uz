@@ -64,7 +64,7 @@ $telegramMessage = "";
 // Sanitize inputs to prevent XSS and HTML injection
 $sanitizedData = [];
 foreach ($payloadData as $key => $value) {
-    $sanitizedData[$key] = htmlspecialchars(strip_tags((string)$value));
+    $sanitizedData[$key] = htmlspecialchars(strip_tags((string) $value));
 }
 
 // Format message based on request type
@@ -132,8 +132,8 @@ if ($httpStatusCode === 200) {
 } else {
     http_response_code(502); // Bad Gateway
     echo json_encode([
-        'success' => false, 
-        'error' => 'Failed to communicate with Telegram API.', 
+        'success' => false,
+        'error' => 'Failed to communicate with Telegram API.',
         'details' => $curlError ? $curlError : 'HTTP Status ' . $httpStatusCode
     ]);
 }

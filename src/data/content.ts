@@ -47,8 +47,8 @@ export const personalInfo = {
       link: "mailto:iilhomjonov777@gmail.com",
     },
     phone: {
-      label: "+998 (99) 779 93 33",
-      link: "tel:+998997799333",
+      label: "+998 (77) 603 00 33",
+      link: "tel:+998776030033",
     },
     github: {
       label: "GitHub",
