@@ -90,7 +90,7 @@ export const LanguageSwitcher: React.FC = () => {
         ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={handleButtonKeyDown}
-        className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+        className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         aria-haspopup="listbox"
@@ -129,7 +129,7 @@ export const LanguageSwitcher: React.FC = () => {
                     ref={el => { optionRefs.current[index] = el; }}
                     onClick={() => handleLanguageChange(language.code)}
                     onKeyDown={(e) => handleOptionKeyDown(e, index)}
-                    className={`w-full flex items-center space-x-3 px-4 py-3 text-left rounded-lg transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none
+                    className={`w-full flex items-center space-x-3 px-4 py-3 text-left rounded-lg transition-all duration-200 cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none
                       ${isSelected
                         ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300'
                         : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100'

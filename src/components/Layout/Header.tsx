@@ -28,12 +28,14 @@ export const Header: React.FC = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  // Focus close button when menu opens; restore focus to open button when it closes
+  // Focus management: open → focus close button; close → restore focus to open button
+  const didMountRef = React.useRef(false);
   useEffect(() => {
+    if (!didMountRef.current) { didMountRef.current = true; return; }
     if (mobileMenuOpen) {
       setTimeout(() => closeButtonRef.current?.focus(), 100);
     } else {
-      openButtonRef.current?.focus();
+      setTimeout(() => openButtonRef.current?.focus(), 50);
     }
   }, [mobileMenuOpen]);
 
@@ -103,7 +105,7 @@ export const Header: React.FC = () => {
             <LanguageSwitcher />
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500"
+              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-primary-500"
               aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -111,7 +113,7 @@ export const Header: React.FC = () => {
             <button
               ref={openButtonRef}
               onClick={() => setMobileMenuOpen(true)}
-              className="p-2 text-gray-700 dark:text-gray-300 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500"
+              className="p-2 text-gray-700 dark:text-gray-300 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-primary-500"
               aria-label="Open navigation menu"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
@@ -148,7 +150,7 @@ export const Header: React.FC = () => {
           <div className="flex items-center space-x-4 ml-6">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500"
+              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-primary-500"
               aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -205,7 +207,7 @@ export const Header: React.FC = () => {
                   <button
                     ref={closeButtonRef}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500"
+                    className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-primary-500"
                     aria-label="Close navigation menu"
                   >
                     <X className="h-8 w-8 text-gray-700 dark:text-gray-300" aria-hidden="true" />

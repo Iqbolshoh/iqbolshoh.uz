@@ -6,8 +6,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-family-sans: Inter, system-ui, sans-serif;
-  --font-family-display: Inter, system-ui, sans-serif;
+  --font-family-sans: 'Poppins', Inter, system-ui, sans-serif;
+  --font-family-display: 'Poppins', Inter, system-ui, sans-serif;
 
   --color-primary-50: #fef2f2;
   --color-primary-100: #fee2e2;
@@ -51,6 +51,8 @@
 
   --shadow-glow: 0 0 20px rgba(239, 68, 68, 0.3);
   --shadow-glow-lg: 0 0 40px rgba(239, 68, 68, 0.4);
+  --shadow-glow-red: 0 0 20px rgba(239, 68, 68, 0.3);
+  --shadow-glow-red-lg: 0 0 40px rgba(239, 68, 68, 0.4);
   --shadow-inner-glow: inset 0 0 20px rgba(239, 68, 68, 0.1);
   --shadow-elegant: 0 10px 40px rgba(0, 0, 0, 0.1);
   --shadow-elegant-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
@@ -64,6 +66,7 @@
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-bounce-subtle: bounceSubtle 2s infinite;
+  --animate-bounce-slow: bounceSubtle 3s ease-in-out infinite;
   --animate-glow: glow 2s ease-in-out infinite alternate;
   --animate-gradient: gradient 8s ease infinite;
 }
@@ -199,6 +202,10 @@
     animation: bounceSubtle 2s infinite;
   }
 
+  .animate-bounce-slow {
+    animation: bounceSubtle 3s ease-in-out infinite;
+  }
+
   .animate-glow {
     animation: glow 2s ease-in-out infinite alternate;
   }
@@ -213,6 +220,24 @@
   position: relative;
   white-space: pre;
   height: 28px;
+}
+
+/* ─── Base font ─── */
+body {
+  font-family: 'Poppins', Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Global interactive cursor ─── */
+a,
+button,
+[role="button"],
+[role="tab"],
+[role="option"],
+label[for],
+summary {
+  cursor: pointer;
 }
 
 /* ─── Dark mode base ─── */

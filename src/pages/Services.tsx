@@ -168,7 +168,7 @@ export const Services: React.FC = () => {
                 aria-selected={activeCategory === category}
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 onClick={() => setActiveCategory(category as any)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none ${
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none ${
                   activeCategory === category
                     ? 'bg-primary-600 text-white shadow-md'
                     : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -284,7 +284,7 @@ export const Services: React.FC = () => {
                   </h2>
                   <button
                     onClick={handleCloseModal}
-                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 rounded-lg p-1"
+                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-primary-500 rounded-lg p-1"
                     aria-label="Close modal"
                   >
                     <X className="h-6 w-6" aria-hidden="true" />

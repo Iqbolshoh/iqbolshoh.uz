@@ -113,7 +113,7 @@ export const Blog: React.FC = () => {
                     onClick={() => setCurrentPage(page)}
                     aria-label={`Page ${page}`}
                     aria-current={page === currentPage ? 'page' : undefined}
-                    className={`px-4 py-2 text-sm rounded-full border transition focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none ${
+                    className={`px-4 py-2 text-sm rounded-full border transition cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none ${
                       page === currentPage
                         ? 'bg-primary-500 text-white border-primary-500'
                         : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700'

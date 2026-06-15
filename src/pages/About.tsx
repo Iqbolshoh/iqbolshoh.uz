@@ -55,13 +55,13 @@ export const About: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mt-12 lg:mt-0"
             >
-              <div className="relative">
+              <div className="relative pb-8 pr-4 sm:pr-8">
                 <img
                   src="/images/logos/iqbolshoh-2.png"
                   alt={personalInfo.name[i18n.language as keyof typeof personalInfo.name]}
                   className="rounded-2xl shadow-2xl w-full"
                 />
-                <div className="absolute -bottom-6 -right-6 bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg border border-gray-100 dark:border-gray-700">
+                <div className="absolute bottom-0 right-0 sm:-bottom-2 sm:right-2 bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg border border-gray-100 dark:border-gray-700">
                   <div className="flex items-center space-x-2">
                     <Focus className="h-5 w-5 text-primary-500" aria-hidden="true" />
                     <span className="text-sm font-medium text-gray-900 dark:text-white">{t('about.codingPurpose')}</span>
