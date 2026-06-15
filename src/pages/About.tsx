@@ -12,6 +12,21 @@ export const About: React.FC = () => {
     return content[language] || content.en || '';
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
   return (
     <div className="pt-16">
       {/* Hero Section */}
@@ -19,21 +34,21 @@ export const About: React.FC = () => {
         <div className="mx-auto max-w-7xl px-6 lg:px-8 w-full">
           <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              initial="hidden"
+              animate="show"
+              variants={containerVariants}
             >
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl lg:text-5xl">
+              <motion.h1 variants={itemVariants} className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl lg:text-5xl">
                 {t('about.title')}
-              </h1>
-              <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+              </motion.h1>
+              <motion.p variants={itemVariants} className="mt-4 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 {t('about.description')}
-              </p>
-              <p className="mt-3 text-base text-gray-600 dark:text-gray-400">
+              </motion.p>
+              <motion.p variants={itemVariants} className="mt-3 text-base text-gray-600 dark:text-gray-400">
                 {t('about.subDescription')}
-              </p>
+              </motion.p>
 
-              <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <motion.div variants={itemVariants} className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 text-sm">
                   <MapPin className="h-4 w-4 text-primary-600 flex-shrink-0" aria-hidden="true" />
                   <span>{personalInfo.location[i18n.language as keyof typeof personalInfo.location]}</span>
@@ -46,13 +61,13 @@ export const About: React.FC = () => {
                   <Calendar className="h-4 w-4 text-primary-600 flex-shrink-0" aria-hidden="true" />
                   <span>{t('about.experienceInfo')}</span>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               className="mt-10 lg:mt-0"
             >
               <div className="relative pb-6 pr-4 sm:pr-6">
@@ -76,19 +91,19 @@ export const About: React.FC = () => {
       {/* Highlights */}
       <section className="py-16 bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {highlights.map((item, index) => {
               const Icon = item.icon;
               const lang = i18n.language as keyof typeof item.text;
 
               return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
+                <motion.div key={index} variants={itemVariants}>
                   <Card className="p-5 text-center hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all duration-300 hover:shadow-glow-red group border-0">
                     <Icon className="h-8 w-8 text-primary-600 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
                     <p className="text-sm font-medium text-gray-900 dark:text-white">{item.text[lang]}</p>
@@ -96,7 +111,7 @@ export const About: React.FC = () => {
                 </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -116,14 +131,20 @@ export const About: React.FC = () => {
 
           <div className="relative" aria-label="Career timeline">
             <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-primary-200 dark:bg-primary-900" aria-hidden="true"></div>
-            <div className="space-y-10">
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={containerVariants}
+              className="space-y-10"
+            >
               {journey.map((item, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+                  variants={{
+                    hidden: { opacity: 0, x: index % 2 === 0 ? -20 : 20 },
+                    show: { opacity: 1, x: 0 }
+                  }}
                   className={`relative flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
                 >
                   <div className="flex-1">
@@ -143,7 +164,7 @@ export const About: React.FC = () => {
                   </div>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

@@ -58,27 +58,34 @@ export const Portfolio: React.FC = () => {
       </section>
 
       {/* Filter Tabs */}
-      <section className="py-6 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+      <section className="py-8 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div
-            className="overflow-x-auto"
-            role="tablist"
-            aria-label="Filter projects by category"
-          >
-            <div className="flex items-center justify-center space-x-1 bg-gray-100 dark:bg-gray-800 rounded-lg p-1 w-full sm:w-fit mx-auto">
+          <div className="flex flex-col items-center">
+            <div
+              className="inline-flex p-1.5 bg-gray-100 dark:bg-gray-800 rounded-xl overflow-x-auto max-w-full no-scrollbar"
+              role="tablist"
+              aria-label="Filter projects by category"
+            >
               {categories.map((category) => (
                 <button
                   key={category.key}
                   role="tab"
                   aria-selected={activeFilter === category.key}
                   onClick={() => handleFilterChange(category.key)}
-                  className={`whitespace-nowrap px-4 py-2 text-sm font-medium transition-all duration-300 rounded-md cursor-pointer focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none ${
+                  className={`relative whitespace-nowrap px-6 py-2.5 text-sm font-semibold transition-colors duration-300 rounded-lg cursor-pointer focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none ${
                     activeFilter === category.key
-                      ? 'bg-white dark:bg-gray-700 text-primary-600 dark:text-primary-400 shadow-sm transform scale-105'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700'
+                      ? 'text-primary-600 dark:text-primary-400'
+                      : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
                   }`}
                 >
-                  {category.label}
+                  {activeFilter === category.key && (
+                    <motion.span
+                      layoutId="activeTab"
+                      className="absolute inset-0 bg-white dark:bg-gray-700 rounded-lg shadow-sm"
+                      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{category.label}</span>
                 </button>
               ))}
             </div>
@@ -92,18 +99,28 @@ export const Portfolio: React.FC = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeFilter + currentPage}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
+              initial="hidden"
+              animate="show"
+              exit="hidden"
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.1
+                  }
+                }
+              }}
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {paginatedProjects.map((project, index) => (
+              {paginatedProjects.map((project) => (
                 <motion.div
                   key={project.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    show: { opacity: 1, y: 0 }
+                  }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                 >
                   <Card className="overflow-hidden h-full flex flex-col group hover:shadow-xl transition-shadow duration-300 border border-gray-100 dark:border-gray-700">
                     <div className="relative overflow-hidden">

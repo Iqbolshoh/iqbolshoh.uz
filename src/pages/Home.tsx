@@ -21,23 +21,47 @@ export const Home: React.FC = () => {
 
             {/* TEXT SECTION */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              initial="hidden"
+              animate="show"
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.1 }
+                }
+              }}
               className="lg:col-span-7 text-center lg:text-left"
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+              <motion.h1
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  show: { opacity: 1, y: 0 }
+                }}
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight"
+              >
                 {t('home.greeting')}{' '}
                 <span className="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
                   {t('home.name')}
                 </span>
-              </h1>
+              </motion.h1>
 
-              <p className="mt-6 text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto lg:mx-0">
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  show: { opacity: 1, y: 0 }
+                }}
+                className="mt-6 text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto lg:mx-0"
+              >
                 {t('home.description')}
-              </p>
+              </motion.p>
 
-              <div className="mt-8 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  show: { opacity: 1, y: 0 }
+                }}
+                className="mt-8 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4"
+              >
                 <Link to="/portfolio">
                   <Button
                     size="lg"
@@ -58,7 +82,7 @@ export const Home: React.FC = () => {
                 >
                   {t('home.downloadCV')}
                 </Button>
-              </div>
+              </motion.div>
             </motion.div>
 
             {/* IMAGE SECTION */}
@@ -126,17 +150,32 @@ export const Home: React.FC = () => {
             <p className="mt-4 text-base text-gray-600 dark:text-gray-400">{t('home.technologiesILove')}</p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6" role="list" aria-label="Technology stack">
-            {techStack.map((tech, index) => {
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: { staggerChildren: 0.05 }
+              }
+            }}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6"
+            role="list"
+            aria-label="Technology stack"
+          >
+            {techStack.map((tech) => {
               const Icon = tech.icon;
               return (
                 <motion.div
                   key={tech.name}
                   role="listitem"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    show: { opacity: 1, y: 0 }
+                  }}
+                  transition={{ duration: 0.4 }}
                 >
                   <Card className="p-4 text-center hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all duration-300 hover:shadow-glow-red group border-0">
                     <Icon className="h-8 w-8 text-primary-600 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
@@ -145,7 +184,7 @@ export const Home: React.FC = () => {
                 </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -167,16 +206,29 @@ export const Home: React.FC = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: { staggerChildren: 0.1 }
+              }
+            }}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-8"
+          >
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.9 },
+                  show: { opacity: 1, scale: 1 }
+                }}
+                transition={{ duration: 0.5 }}
               >
-                <Card className="p-4 text-center hover:shadow-glow-red transition-all duration-300 group border-0">
+                <Card className="p-4 text-center hover:shadow-glow-red transition-all duration-300 group border-0 cursor-default">
                   <stat.icon className="h-6 w-6 text-primary-600 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
                   <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1 bg-gradient-to-r from-primary-700 to-primary-600 bg-clip-text text-transparent">
                     {stat.value}
@@ -187,7 +239,7 @@ export const Home: React.FC = () => {
                 </Card>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 

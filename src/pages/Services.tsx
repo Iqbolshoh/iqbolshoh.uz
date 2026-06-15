@@ -154,29 +154,38 @@ export const Services: React.FC = () => {
       </section>
 
       {/* Category Filter */}
-      <section className="py-6 bg-white dark:bg-gray-900 sticky top-16 z-10 shadow-sm border-b border-gray-100 dark:border-gray-800">
+      <section className="py-8 bg-white dark:bg-gray-900 sticky top-16 z-10 shadow-sm border-b border-gray-100 dark:border-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div
-            className="flex flex-wrap justify-center gap-2"
-            role="tablist"
-            aria-label="Filter services by category"
-          >
-            {categories.map((category) => (
-              <button
-                key={category}
-                role="tab"
-                aria-selected={activeCategory === category}
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                onClick={() => setActiveCategory(category as any)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none ${
-                  activeCategory === category
-                    ? 'bg-primary-600 text-white shadow-md'
-                    : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-                }`}
-              >
-                {t(`services.categories.${category}`)}
-              </button>
-            ))}
+          <div className="flex flex-col items-center">
+            <div
+              className="inline-flex p-1.5 bg-gray-100 dark:bg-gray-800 rounded-xl overflow-x-auto max-w-full no-scrollbar"
+              role="tablist"
+              aria-label="Filter services by category"
+            >
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  role="tab"
+                  aria-selected={activeCategory === category}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  onClick={() => setActiveCategory(category as any)}
+                  className={`relative whitespace-nowrap px-6 py-2.5 text-sm font-semibold transition-colors duration-300 rounded-lg cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none ${
+                    activeCategory === category
+                      ? 'text-primary-600 dark:text-primary-400'
+                      : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
+                  }`}
+                >
+                  {activeCategory === category && (
+                    <motion.span
+                      layoutId="activeCategory"
+                      className="absolute inset-0 bg-white dark:bg-gray-700 rounded-lg shadow-sm"
+                      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{t(`services.categories.${category}`)}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -187,20 +196,30 @@ export const Services: React.FC = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeCategory}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
+              initial="hidden"
+              animate="show"
+              exit="hidden"
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.1
+                  }
+                }
+              }}
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {filteredServices.map((service, index) => {
+              {filteredServices.map((service) => {
                 const Icon = service.icon;
                 return (
                   <motion.div
                     key={service.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      show: { opacity: 1, y: 0 }
+                    }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
                     viewport={{ once: true }}
                     whileHover={{ y: -5 }}
                   >
