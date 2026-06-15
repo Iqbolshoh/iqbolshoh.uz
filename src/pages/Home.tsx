@@ -113,7 +113,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* Tech Stack */}
-      <section className="py-12 bg-white dark:bg-gray-900">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -150,7 +150,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* Stats */}
-      <section className="py-12 bg-gray-50 dark:bg-gray-800">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -192,7 +192,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* Featured Projects */}
-      <section className="py-16 bg-white dark:bg-gray-900">
+      <section className="py-24 bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

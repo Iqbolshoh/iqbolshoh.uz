@@ -15,7 +15,7 @@ export const About: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+      <section className="min-h-[70vh] flex items-center py-20 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 w-full">
           <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
             <motion.div
@@ -74,7 +74,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* Highlights */}
-      <section className="py-12 bg-white dark:bg-gray-900">
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {highlights.map((item, index) => {
@@ -101,7 +101,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* Journey Timeline */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -149,7 +149,7 @@ export const About: React.FC = () => {
       </section>
 
       {/* Skills & Interests */}
-      <section className="py-16 bg-white dark:bg-gray-900">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:gap-16">
             {/* Technical Skills */}

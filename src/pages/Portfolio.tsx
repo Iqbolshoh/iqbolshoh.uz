@@ -40,7 +40,7 @@ export const Portfolio: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+      <section className="min-h-[45vh] flex items-center py-16 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -87,7 +87,7 @@ export const Portfolio: React.FC = () => {
       </section>
 
       {/* Projects Grid */}
-      <section className="py-12 bg-gray-50 dark:bg-gray-800" aria-live="polite" aria-label="Projects list">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800" aria-live="polite" aria-label="Projects list">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <AnimatePresence mode="wait">
             <motion.div

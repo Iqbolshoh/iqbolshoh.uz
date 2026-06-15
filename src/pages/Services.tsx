@@ -140,7 +140,7 @@ export const Services: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+      <section className="min-h-[45vh] flex items-center py-16 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center w-full">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl lg:text-5xl">
@@ -182,7 +182,7 @@ export const Services: React.FC = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-12 bg-white dark:bg-gray-900" aria-live="polite">
+      <section className="py-20 bg-white dark:bg-gray-900" aria-live="polite">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <AnimatePresence mode="wait">
             <motion.div
@@ -388,7 +388,7 @@ export const Services: React.FC = () => {
       </AnimatePresence>
 
       {/* Process Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
