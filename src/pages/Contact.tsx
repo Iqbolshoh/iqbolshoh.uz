@@ -18,13 +18,8 @@ export const Contact: React.FC = () => {
     message: '',
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -37,10 +32,7 @@ export const Contact: React.FC = () => {
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'contact',
-          data: formData
-        }),
+        body: JSON.stringify({ type: 'contact', data: formData }),
       });
 
       const result = await response.json();
@@ -51,10 +43,9 @@ export const Contact: React.FC = () => {
         ru: 'Сообщение успешно отправлено!',
         tj: 'Паём бомуваффақият фиристода шуд!'
       };
-
       const errorMessages: Record<string, string> = {
         en: 'Failed to send message. Please try again.',
-        uz: 'Xabar yuborilmadi. Qayta urinib ko‘ring.',
+        uz: "Xabar yuborilmadi. Qayta urinib ko'ring.",
         ru: 'Не удалось отправить сообщение. Попробуйте еще раз.',
         tj: 'Паём фиристода нашуд. Лутфан дубора кӯшиш кунед.'
       };
@@ -64,46 +55,22 @@ export const Contact: React.FC = () => {
       if (response.ok && result.success) {
         toast.success(successMessages[lang] || successMessages.en, {
           duration: 3000,
-          style: {
-            fontSize: '18px',
-            padding: '16px 20px',
-            border: '2px solid #22c55e',
-            borderRadius: '12px',
-            background: '#f0fdf4',
-            color: '#166534',
-            boxShadow: '0 4px 12px rgba(34, 197, 94, 0.3)',
-          },
-          iconTheme: {
-            primary: '#22c55e',
-            secondary: '#f0fdf4',
-          },
+          style: { fontSize: '18px', padding: '16px 20px', border: '2px solid #22c55e', borderRadius: '12px', background: '#f0fdf4', color: '#166534', boxShadow: '0 4px 12px rgba(34, 197, 94, 0.3)' },
+          iconTheme: { primary: '#22c55e', secondary: '#f0fdf4' },
         });
-
-        // Reset the form
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
         toast.error(errorMessages[lang] || errorMessages.en, {
           duration: 3000,
-          style: {
-            fontSize: '18px',
-            padding: '16px 20px',
-            border: '2px solid #ef4444',
-            borderRadius: '12px',
-            background: '#fef2f2',
-            color: '#991b1b',
-            boxShadow: '0 4px 12px rgba(239, 68, 68, 0.3)',
-          },
-          iconTheme: {
-            primary: '#ef4444',
-            secondary: '#fef2f2',
-          },
+          style: { fontSize: '18px', padding: '16px 20px', border: '2px solid #ef4444', borderRadius: '12px', background: '#fef2f2', color: '#991b1b', boxShadow: '0 4px 12px rgba(239, 68, 68, 0.3)' },
+          iconTheme: { primary: '#ef4444', secondary: '#fef2f2' },
         });
       }
     } catch (error) {
       console.error('Server connection error:', error);
       const errorLangMessages: Record<string, string> = {
         en: 'Server error. Please try again later.',
-        uz: 'Serverda xatolik. Keyinroq urinib ko‘ring.',
+        uz: "Serverda xatolik. Keyinroq urinib ko'ring.",
         ru: 'Ошибка сервера. Попробуйте позже.',
         tj: 'Хатои сервер. Баъдтар кӯшиш кунед.'
       };
@@ -113,20 +80,18 @@ export const Contact: React.FC = () => {
     }
   };
 
+  const inputClass = "w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:outline-none transition-colors";
+
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+      <section className="py-20 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl lg:text-6xl">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
               {t('contact.title')}
             </h1>
-            <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="mt-6 text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               {t('contact.description')}
             </p>
           </motion.div>
@@ -134,7 +99,7 @@ export const Contact: React.FC = () => {
       </section>
 
       {/* Contact Form & Info */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:gap-16">
             {/* Contact Form */}
@@ -145,65 +110,70 @@ export const Contact: React.FC = () => {
               viewport={{ once: true }}
             >
               <Card className="p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('contact.sendMessage')}</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('contact.sendMessage')}</h2>
+                <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('contact.yourName')} *
+                    <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      {t('contact.yourName')} <span aria-hidden="true">*</span>
+                      <span className="sr-only">(required)</span>
                     </label>
                     <input
                       type="text"
-                      id="name"
+                      id="contact-name"
                       name="name"
                       required
                       value={formData.name}
                       onChange={handleChange}
                       placeholder={t('contact.namePlaceholder')}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                      className={inputClass}
+                      autoComplete="name"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('contact.emailAddress')} *
+                    <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      {t('contact.emailAddress')} <span aria-hidden="true">*</span>
+                      <span className="sr-only">(required)</span>
                     </label>
                     <input
                       type="email"
-                      id="email"
+                      id="contact-email"
                       name="email"
                       required
                       value={formData.email}
                       onChange={handleChange}
                       placeholder={t('contact.emailPlaceholder')}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                      className={inputClass}
+                      autoComplete="email"
                     />
                   </div>
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="contact-subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       {t('contact.subject')}
                     </label>
                     <input
                       type="text"
-                      id="subject"
+                      id="contact-subject"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder={t('contact.subjectPlaceholder')}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                      className={inputClass}
                     />
                   </div>
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('contact.message')} *
+                    <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      {t('contact.message')} <span aria-hidden="true">*</span>
+                      <span className="sr-only">(required)</span>
                     </label>
                     <textarea
-                      id="message"
+                      id="contact-message"
                       name="message"
                       required
                       rows={6}
                       value={formData.message}
                       onChange={handleChange}
                       placeholder={t('contact.messagePlaceholder')}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-none"
+                      className={`${inputClass} resize-none`}
                     />
                   </div>
 
@@ -212,7 +182,8 @@ export const Contact: React.FC = () => {
                     size="lg"
                     className="w-full"
                     disabled={isSubmitting}
-                    icon={<Send className="h-5 w-5" />}
+                    icon={<Send className="h-5 w-5" aria-hidden="true" />}
+                    aria-busy={isSubmitting}
                   >
                     {isSubmitting ? '...' : t('contact.sendMessageBtn')}
                   </Button>
@@ -230,103 +201,75 @@ export const Contact: React.FC = () => {
             >
               <div className="space-y-8">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6"> {t('contact.getInTouch')}</h2>
-                  <p className="text-gray-600 text-lg">
-                    {t('contact.getInTouchDesc')}
-                  </p>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('contact.getInTouch')}</h2>
+                  <p className="text-gray-600 dark:text-gray-400 text-lg">{t('contact.getInTouchDesc')}</p>
                 </div>
 
                 <div className="space-y-6">
                   <div className="flex items-center space-x-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                        <Mail className="h-6 w-6 text-primary-600" />
-                      </div>
+                    <div className="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center" aria-hidden="true">
+                      <Mail className="h-6 w-6 text-primary-600 dark:text-primary-400" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">{t('contact.email')}</h3>
-                      <a
-                        href={personalInfo.social.email.link}
-                        className="text-primary-600 hover:text-primary-700 transition-colors"
-                      >
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{t('contact.email')}</h3>
+                      <a href={personalInfo.social.email.link} className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 rounded">
                         {personalInfo.social.email.label}
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-center space-x-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                        <Phone className="h-6 w-6 text-primary-600" />
-                      </div>
+                    <div className="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center" aria-hidden="true">
+                      <Phone className="h-6 w-6 text-primary-600 dark:text-primary-400" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">{t('contact.phone')}</h3>
-                      <a
-                        href={personalInfo.social.phone.link}
-                        className="text-primary-600 hover:text-primary-700 transition-colors"
-                      >
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{t('contact.phone')}</h3>
+                      <a href={personalInfo.social.phone.link} className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 rounded">
                         {personalInfo.social.phone.label}
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-center space-x-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                        <MapPin className="h-6 w-6 text-primary-600" />
-                      </div>
+                    <div className="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center" aria-hidden="true">
+                      <MapPin className="h-6 w-6 text-primary-600 dark:text-primary-400" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">{t('contact.location')}</h3>
-                      <p className="text-gray-600">{personalInfo.location[i18n.language as keyof typeof personalInfo.location]}</p>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{t('contact.location')}</h3>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        {personalInfo.location[i18n.language as keyof typeof personalInfo.location]}
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-4">{t('contact.followMe')}</h3>
-                  <div className="flex space-x-4">
-                    <a
-                      href={personalInfo.social.github.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary-100 hover:text-primary-600 transition-colors"
-                    >
-                      <Github className="h-6 w-6" />
-                    </a>
-                    <a
-                      href={personalInfo.social.linkedin.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary-100 hover:text-primary-600 transition-colors"
-                    >
-                      <Linkedin className="h-6 w-6" />
-                    </a>
-                    <a
-                      href={personalInfo.social.telegram.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary-100 hover:text-primary-600 transition-colors"
-                    >
-                      <Send className="h-6 w-6" />
-                    </a>
-                    <a
-                      href={personalInfo.social.instagram.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary-100 hover:text-primary-600 transition-colors"
-                    >
-                      <Instagram className="h-6 w-6" />
-                    </a>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-4">{t('contact.followMe')}</h3>
+                  <div className="flex space-x-4" role="list" aria-label="Social media links">
+                    {[
+                      { href: personalInfo.social.github.link, Icon: Github, label: 'GitHub' },
+                      { href: personalInfo.social.linkedin.link, Icon: Linkedin, label: 'LinkedIn' },
+                      { href: personalInfo.social.telegram.link, Icon: Send, label: 'Telegram' },
+                      { href: personalInfo.social.instagram.link, Icon: Instagram, label: 'Instagram' },
+                    ].map(({ href, Icon, label }) => (
+                      <a
+                        key={label}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        role="listitem"
+                        aria-label={label}
+                        className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 text-gray-700 dark:text-gray-300 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none"
+                      >
+                        <Icon className="h-6 w-6" aria-hidden="true" />
+                      </a>
+                    ))}
                   </div>
                 </div>
 
-                <Card className="p-6 bg-gradient-to-r from-primary-50 to-accent-50">
-                  <h3 className="font-semibold text-gray-900 mb-2">{t('contact.quickResponse')}</h3>
-                  <p className="text-gray-600">
-                    {t('contact.quickResponseDesc')}
-                  </p>
+                <Card className="p-6 bg-gradient-to-r from-primary-50 to-gray-50 dark:from-primary-950/30 dark:to-gray-800">
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{t('contact.quickResponse')}</h3>
+                  <p className="text-gray-600 dark:text-gray-400">{t('contact.quickResponseDesc')}</p>
                 </Card>
               </div>
             </motion.div>
@@ -334,8 +277,8 @@ export const Contact: React.FC = () => {
         </div>
       </section>
 
-      {/* Optional Map Section */}
-      <section className="py-20 bg-gray-50">
+      {/* Location Banner */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -344,12 +287,10 @@ export const Contact: React.FC = () => {
             viewport={{ once: true }}
             className="text-center"
           >
-            <Card className="p-12 bg-gradient-to-br from-primary-700 to-primary-600 text-white">
-              <MapPin className="h-16 w-16 mx-auto mb-6 opacity-80" />
+            <Card className="p-12 bg-gradient-to-br from-primary-700 to-primary-600 text-white" hover={false}>
+              <MapPin className="h-16 w-16 mx-auto mb-6 opacity-80" aria-hidden="true" />
               <h2 className="text-3xl font-bold mb-4">{t('contact.basedIn')}</h2>
-              <p className="text-xl text-white max-w-2xl mx-auto">
-                {t('contact.basedInDesc')}
-              </p>
+              <p className="text-xl text-white max-w-2xl mx-auto">{t('contact.basedInDesc')}</p>
             </Card>
           </motion.div>
         </div>

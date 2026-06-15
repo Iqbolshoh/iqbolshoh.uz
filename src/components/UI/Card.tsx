@@ -7,14 +7,14 @@ interface CardProps {
   hover?: boolean;
 }
 
-export const Card: React.FC<CardProps> = ({ 
-  children, 
-  className = '', 
-  hover = true 
+export const Card: React.FC<CardProps> = ({
+  children,
+  className = '',
+  hover = true
 }) => {
   return (
     <motion.div
-      className={`bg-white rounded-xl shadow-lg ${hover ? 'hover:shadow-xl' : ''} transition-shadow duration-300 ${className}`}
+      className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg ${hover ? 'hover:shadow-xl' : ''} transition-all duration-300 ${className}`}
       whileHover={hover ? { y: -5 } : undefined}
       transition={{ type: 'tween', duration: 0.2 }}
     >

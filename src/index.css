@@ -2,6 +2,9 @@
 @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities);
 
+/* Class-based dark mode — overrides the default media-query dark variant */
+@custom-variant dark (&:is(.dark *));
+
 @theme {
   --font-family-sans: Inter, system-ui, sans-serif;
   --font-family-display: Inter, system-ui, sans-serif;
@@ -210,4 +213,70 @@
   position: relative;
   white-space: pre;
   height: 28px;
+}
+
+/* ─── Dark mode base ─── */
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
+/* ─── Smooth theme transitions ─── */
+body,
+header,
+footer,
+main,
+nav,
+aside,
+section,
+article,
+.card-transition {
+  transition-property: background-color, border-color, color;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+/* ─── Keyboard focus styles ─── */
+:focus-visible {
+  outline: 2px solid #ef4444;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Skip-to-content link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: #ef4444;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0 0 0.5rem 0.5rem;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ─── Dark mode scrollbar ─── */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
 }
