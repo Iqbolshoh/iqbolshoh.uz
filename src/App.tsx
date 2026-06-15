@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { Toaster } from 'react-hot-toast';
@@ -9,15 +9,15 @@ import { Header } from './components/Layout/Header';
 import { Footer } from './components/Layout/Footer';
 import SEO from './components/SEO';
 
-// Pages
-import { Home } from './pages/Home';
-import { About } from './pages/About';
-import { Portfolio } from './pages/Portfolio';
-import { Services } from './pages/Services';
-import { Contact } from './pages/Contact';
-import { Blog } from './pages/Blog';
-import { BlogDetails } from './pages/BlogDetails';
-import { NotFound } from './pages/NotFound';
+// Pages (lazy loaded for code splitting)
+const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
+const About = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
+const Portfolio = lazy(() => import('./pages/Portfolio').then(m => ({ default: m.Portfolio })));
+const Services = lazy(() => import('./pages/Services').then(m => ({ default: m.Services })));
+const Contact = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
+const Blog = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })));
+const BlogDetails = lazy(() => import('./pages/BlogDetails').then(m => ({ default: m.BlogDetails })));
+const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -44,7 +44,8 @@ function App() {
         <Header />
 
         <main id="main-content" className="flex-grow" tabIndex={-1}>
-          <Routes>
+          <Suspense fallback={null}>
+            <Routes>
             <Route path="/" element={
               <>
                 <SEO
@@ -126,7 +127,8 @@ function App() {
                 <NotFound />
               </>
             } />
-          </Routes>
+            </Routes>
+          </Suspense>
         </main>
 
         <Footer />
