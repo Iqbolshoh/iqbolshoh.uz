@@ -80,18 +80,18 @@ export const Contact: React.FC = () => {
     }
   };
 
-  const inputClass = "w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:outline-none transition-colors";
+  const inputClass = "w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:outline-none transition-colors text-sm";
 
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="min-h-[50vh] flex items-center py-24 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+      <section className="py-16 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center w-full">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl lg:text-5xl">
               {t('contact.title')}
             </h1>
-            <p className="mt-6 text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               {t('contact.description')}
             </p>
           </motion.div>
@@ -99,7 +99,7 @@ export const Contact: React.FC = () => {
       </section>
 
       {/* Contact Form & Info */}
-      <section className="py-20 bg-white dark:bg-gray-900">
+      <section className="py-12 bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:gap-16">
             {/* Contact Form */}
@@ -109,13 +109,12 @@ export const Contact: React.FC = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <Card className="p-8">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('contact.sendMessage')}</h2>
-                <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+              <Card className="p-6">
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">{t('contact.sendMessage')}</h2>
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                   <div>
-                    <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       {t('contact.yourName')} <span aria-hidden="true">*</span>
-                      <span className="sr-only">(required)</span>
                     </label>
                     <input
                       type="text"
@@ -130,9 +129,8 @@ export const Contact: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       {t('contact.emailAddress')} <span aria-hidden="true">*</span>
-                      <span className="sr-only">(required)</span>
                     </label>
                     <input
                       type="email"
@@ -147,7 +145,7 @@ export const Contact: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="contact-subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="contact-subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       {t('contact.subject')}
                     </label>
                     <input
@@ -161,15 +159,14 @@ export const Contact: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       {t('contact.message')} <span aria-hidden="true">*</span>
-                      <span className="sr-only">(required)</span>
                     </label>
                     <textarea
                       id="contact-message"
                       name="message"
                       required
-                      rows={6}
+                      rows={5}
                       value={formData.message}
                       onChange={handleChange}
                       placeholder={t('contact.messagePlaceholder')}
@@ -179,10 +176,9 @@ export const Contact: React.FC = () => {
 
                   <Button
                     type="submit"
-                    size="lg"
-                    className="w-full"
+                    className="w-full mt-2"
                     disabled={isSubmitting}
-                    icon={<Send className="h-5 w-5" aria-hidden="true" />}
+                    icon={<Send className="h-4 w-4" aria-hidden="true" />}
                     aria-busy={isSubmitting}
                   >
                     {isSubmitting ? '...' : t('contact.sendMessageBtn')}
@@ -197,46 +193,46 @@ export const Contact: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="mt-12 lg:mt-0"
+              className="mt-10 lg:mt-0"
             >
-              <div className="space-y-8">
+              <div className="space-y-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('contact.getInTouch')}</h2>
-                  <p className="text-gray-600 dark:text-gray-400 text-lg">{t('contact.getInTouchDesc')}</p>
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('contact.getInTouch')}</h2>
+                  <p className="text-gray-600 dark:text-gray-400 text-base">{t('contact.getInTouchDesc')}</p>
                 </div>
 
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center" aria-hidden="true">
-                      <Mail className="h-6 w-6 text-primary-600 dark:text-primary-400" />
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="flex-shrink-0 w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center" aria-hidden="true">
+                      <Mail className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white">{t('contact.email')}</h3>
-                      <a href={personalInfo.social.email.link} className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 rounded">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white">{t('contact.email')}</h3>
+                      <a href={personalInfo.social.email.link} className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 rounded">
                         {personalInfo.social.email.label}
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center" aria-hidden="true">
-                      <Phone className="h-6 w-6 text-primary-600 dark:text-primary-400" />
+                  <div className="flex items-center space-x-3">
+                    <div className="flex-shrink-0 w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center" aria-hidden="true">
+                      <Phone className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white">{t('contact.phone')}</h3>
-                      <a href={personalInfo.social.phone.link} className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 rounded">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white">{t('contact.phone')}</h3>
+                      <a href={personalInfo.social.phone.link} className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 rounded">
                         {personalInfo.social.phone.label}
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-4">
-                    <div className="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center" aria-hidden="true">
-                      <MapPin className="h-6 w-6 text-primary-600 dark:text-primary-400" />
+                  <div className="flex items-center space-x-3">
+                    <div className="flex-shrink-0 w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center" aria-hidden="true">
+                      <MapPin className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white">{t('contact.location')}</h3>
-                      <p className="text-gray-600 dark:text-gray-400">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white">{t('contact.location')}</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
                         {personalInfo.location[i18n.language as keyof typeof personalInfo.location]}
                       </p>
                     </div>
@@ -244,8 +240,8 @@ export const Contact: React.FC = () => {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-4">{t('contact.followMe')}</h3>
-                  <div className="flex space-x-4" role="list" aria-label="Social media links">
+                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">{t('contact.followMe')}</h3>
+                  <div className="flex space-x-3" role="list" aria-label="Social media links">
                     {[
                       { href: personalInfo.social.github.link, Icon: Github, label: 'GitHub' },
                       { href: personalInfo.social.linkedin.link, Icon: Linkedin, label: 'LinkedIn' },
@@ -259,17 +255,17 @@ export const Contact: React.FC = () => {
                         rel="noopener noreferrer"
                         role="listitem"
                         aria-label={label}
-                        className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 text-gray-700 dark:text-gray-300 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none"
+                        className="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 text-gray-700 dark:text-gray-300 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none"
                       >
-                        <Icon className="h-6 w-6" aria-hidden="true" />
+                        <Icon className="h-5 w-5" aria-hidden="true" />
                       </a>
                     ))}
                   </div>
                 </div>
 
-                <Card className="p-6 bg-gradient-to-r from-primary-50 to-gray-50 dark:from-primary-950/30 dark:to-gray-800">
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{t('contact.quickResponse')}</h3>
-                  <p className="text-gray-600 dark:text-gray-400">{t('contact.quickResponseDesc')}</p>
+                <Card className="p-4 bg-gradient-to-r from-primary-50 to-gray-50 dark:from-primary-950/30 dark:to-gray-800">
+                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">{t('contact.quickResponse')}</h3>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">{t('contact.quickResponseDesc')}</p>
                 </Card>
               </div>
             </motion.div>
@@ -278,7 +274,7 @@ export const Contact: React.FC = () => {
       </section>
 
       {/* Location Banner */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-800">
+      <section className="py-12 bg-gray-50 dark:bg-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -287,10 +283,10 @@ export const Contact: React.FC = () => {
             viewport={{ once: true }}
             className="text-center"
           >
-            <Card className="p-12 bg-gradient-to-br from-primary-700 to-primary-600 text-white" hover={false}>
-              <MapPin className="h-16 w-16 mx-auto mb-6 opacity-80" aria-hidden="true" />
-              <h2 className="text-3xl font-bold mb-4">{t('contact.basedIn')}</h2>
-              <p className="text-xl text-white max-w-2xl mx-auto">{t('contact.basedInDesc')}</p>
+            <Card className="p-8 sm:p-10 bg-gradient-to-br from-primary-700 to-primary-600 text-white" hover={false}>
+              <MapPin className="h-10 w-10 mx-auto mb-4 opacity-80" aria-hidden="true" />
+              <h2 className="text-xl font-bold mb-3">{t('contact.basedIn')}</h2>
+              <p className="text-base text-white max-w-2xl mx-auto">{t('contact.basedInDesc')}</p>
             </Card>
           </motion.div>
         </div>

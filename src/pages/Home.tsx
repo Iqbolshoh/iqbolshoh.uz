@@ -13,7 +13,7 @@ export const Home: React.FC = () => {
   return (
     <div className="pt-16 relative">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 min-h-[calc(100vh-4rem)] flex items-center py-20">
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 min-h-[calc(100vh-4rem)] flex items-center py-16">
         <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-transparent dark:from-primary-500/10"></div>
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
@@ -71,7 +71,7 @@ export const Home: React.FC = () => {
               <div className="relative w-[240px] sm:w-[280px] md:w-[320px] lg:w-[360px] xl:w-[420px]">
                 <div className="aspect-square rounded-full bg-gradient-to-tr from-primary-500 to-primary-400 p-1 shadow-glow-red-lg">
                   <img
-                    src="/images/logos/iqbolshoh-1.jpg"
+                    src="/images/logos/iqbolshoh-1.png"
                     alt={personalInfo.name[i18n.language as keyof typeof personalInfo.name]}
                     className="h-full w-full rounded-full object-cover"
                   />
@@ -113,17 +113,17 @@ export const Home: React.FC = () => {
       </section>
 
       {/* Tech Stack */}
-      <section className="py-16 bg-white dark:bg-gray-900">
+      <section className="py-12 bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-10"
           >
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">{t('home.techStack')}</h2>
-            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">{t('home.technologiesILove')}</p>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">{t('home.techStack')}</h2>
+            <p className="mt-4 text-base text-gray-600 dark:text-gray-400">{t('home.technologiesILove')}</p>
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6" role="list" aria-label="Technology stack">
@@ -138,9 +138,9 @@ export const Home: React.FC = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <Card className="p-6 text-center hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all duration-300 hover:shadow-glow-red group border-0">
-                    <Icon className="h-10 w-10 text-primary-600 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
-                    <h3 className="font-semibold text-gray-900 dark:text-white">{tech.name}</h3>
+                  <Card className="p-4 text-center hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all duration-300 hover:shadow-glow-red group border-0">
+                    <Icon className="h-8 w-8 text-primary-600 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
+                    <h3 className="text-sm font-semibold text-gray-900 dark:text-white">{tech.name}</h3>
                   </Card>
                 </motion.div>
               );
@@ -150,19 +150,19 @@ export const Home: React.FC = () => {
       </section>
 
       {/* Stats */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      <section className="py-12 bg-gray-50 dark:bg-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-10"
           >
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">
               {t('home.journeyTitle')}
             </h2>
-            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
+            <p className="mt-4 text-base text-gray-600 dark:text-gray-400">
               {t('home.journeyDescription')}
             </p>
           </motion.div>
@@ -176,12 +176,12 @@ export const Home: React.FC = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="p-6 text-center hover:shadow-glow-red transition-all duration-300 group border-0">
-                  <stat.icon className="h-8 w-8 text-primary-600 mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
-                  <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2 bg-gradient-to-r from-primary-700 to-primary-600 bg-clip-text text-transparent">
+                <Card className="p-4 text-center hover:shadow-glow-red transition-all duration-300 group border-0">
+                  <stat.icon className="h-6 w-6 text-primary-600 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1 bg-gradient-to-r from-primary-700 to-primary-600 bg-clip-text text-transparent">
                     {stat.value}
                   </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                  <div className="text-xs text-gray-600 dark:text-gray-400">
                     {stat.label[i18n.language as keyof typeof stat.label]}
                   </div>
                 </Card>
@@ -192,19 +192,19 @@ export const Home: React.FC = () => {
       </section>
 
       {/* Featured Projects */}
-      <section className="py-20 bg-white dark:bg-gray-900">
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">
               {t('home.featuredProjects')}
             </h2>
-            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
+            <p className="mt-4 text-base text-gray-600 dark:text-gray-400">
               {t('home.someRecentWork')}
             </p>
           </motion.div>

@@ -140,13 +140,13 @@ export const Services: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="min-h-[50vh] flex items-center py-24 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+      <section className="py-16 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center w-full">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl lg:text-5xl">
               {t('services.title')}
             </h1>
-            <p className="mt-6 text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               {t('services.description')}
             </p>
           </motion.div>
@@ -154,7 +154,7 @@ export const Services: React.FC = () => {
       </section>
 
       {/* Category Filter */}
-      <section className="py-8 bg-white dark:bg-gray-900 sticky top-16 z-10 shadow-sm border-b border-gray-100 dark:border-gray-800">
+      <section className="py-6 bg-white dark:bg-gray-900 sticky top-16 z-10 shadow-sm border-b border-gray-100 dark:border-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div
             className="flex flex-wrap justify-center gap-2"
@@ -182,7 +182,7 @@ export const Services: React.FC = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-white dark:bg-gray-900" aria-live="polite">
+      <section className="py-12 bg-white dark:bg-gray-900" aria-live="polite">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <AnimatePresence mode="wait">
             <motion.div
@@ -204,25 +204,25 @@ export const Services: React.FC = () => {
                     viewport={{ once: true }}
                     whileHover={{ y: -5 }}
                   >
-                    <Card className="p-8 h-full flex flex-col group hover:shadow-lg transition-all duration-300">
-                      <div className="text-center mb-6">
-                        <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4 group-hover:bg-primary-200 dark:group-hover:bg-primary-900/50 transition-colors duration-300">
-                          <Icon className="h-8 w-8 text-primary-600 dark:text-primary-400" aria-hidden="true" />
+                    <Card className="p-6 h-full flex flex-col group hover:shadow-lg transition-all duration-300">
+                      <div className="text-center mb-4">
+                        <div className="inline-flex items-center justify-center w-14 h-14 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-3 group-hover:bg-primary-200 dark:group-hover:bg-primary-900/50 transition-colors duration-300">
+                          <Icon className="h-7 w-7 text-primary-600 dark:text-primary-400" aria-hidden="true" />
                         </div>
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                           {service.title[i18n.language as keyof typeof service.title]}
                         </h3>
-                        <p className="text-gray-600 dark:text-gray-400">
+                        <p className="text-gray-600 dark:text-gray-400 text-sm">
                           {service.description[i18n.language as keyof typeof service.description]}
                         </p>
                       </div>
 
                       <div className="flex-grow">
-                        <ul className="space-y-3 mb-6">
+                        <ul className="space-y-2 mb-4">
                           {(service.features[i18n.language as keyof typeof service.features] || []).map(
                             (feature, idx) => (
-                              <li key={idx} className="flex items-start space-x-3">
-                                <Check className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                              <li key={idx} className="flex items-start space-x-3 text-sm">
+                                <Check className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
                                 <span className="text-gray-700 dark:text-gray-300">{feature}</span>
                               </li>
                             )
@@ -230,9 +230,9 @@ export const Services: React.FC = () => {
                         </ul>
                       </div>
 
-                      <div className="border-t border-gray-100 dark:border-gray-700 pt-6 mt-auto">
-                        <div className="text-center mb-6">
-                          <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">
+                      <div className="border-t border-gray-100 dark:border-gray-700 pt-4 mt-auto">
+                        <div className="text-center mb-4">
+                          <div className="text-xl font-bold text-primary-600 dark:text-primary-400">
                             {t('services.startingFrom')} {service.price}
                           </div>
                         </div>
@@ -388,17 +388,17 @@ export const Services: React.FC = () => {
       </AnimatePresence>
 
       {/* Process Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-800">
+      <section className="py-16 bg-gray-50 dark:bg-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">{t('services.howIWorkTitle')}</h2>
-            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">{t('services.howIWorkTitle')}</h2>
+            <p className="mt-4 text-base text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               {t('services.howIWorkDescription')}
             </p>
           </motion.div>

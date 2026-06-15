@@ -24,13 +24,13 @@ export const Blog: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="min-h-[50vh] flex items-center py-24 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+      <section className="py-16 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center w-full">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl lg:text-5xl">
               {t('blog.title')}
             </h1>
-            <p className="mt-6 text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               {t('blog.description')}
             </p>
           </motion.div>
@@ -39,8 +39,8 @@ export const Blog: React.FC = () => {
 
       {/* Posts */}
       {paginatedPosts.length > 0 && (
-        <section className="py-20 bg-white dark:bg-gray-900">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 space-y-16">
+        <section className="py-12 bg-white dark:bg-gray-900">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 space-y-12">
             {paginatedPosts.map((post, index) => (
               <motion.article
                 key={post.id}
@@ -57,7 +57,7 @@ export const Blog: React.FC = () => {
                       src={post.image}
                       alt=""
                       aria-hidden="true"
-                      className="w-full h-64 lg:h-full object-cover"
+                      className="w-full h-56 lg:h-full object-cover"
                     />
                     {post.featured && (
                       <div className="absolute top-4 left-4">
@@ -69,24 +69,24 @@ export const Blog: React.FC = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="p-8 lg:p-12 flex flex-col justify-center">
-                    <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  <div className="p-6 lg:p-10 flex flex-col justify-center">
+                    <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-3">
                       <div className="flex items-center space-x-1">
                         <Calendar className="h-4 w-4" aria-hidden="true" />
                         <time dateTime={post.date}>{new Date(post.date).toLocaleDateString()}</time>
                       </div>
                     </div>
-                    <h2 id={`post-title-${post.id}`} className="text-2xl font-bold text-gray-900 dark:text-white mb-4 line-clamp-2">
+                    <h2 id={`post-title-${post.id}`} className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2">
                       {getLocalizedContent(post.title, i18n.language)}
                     </h2>
-                    <p className="text-gray-600 dark:text-gray-400 mb-6 line-clamp-2">
+                    <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm line-clamp-2">
                       {getLocalizedContent(post.excerpt, i18n.language)}
                     </p>
                     <div className="flex flex-wrap gap-2 mb-6" aria-label="Tags">
                       {post.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="inline-flex items-center px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm rounded-full"
+                          className="inline-flex items-center px-2 py-1 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 text-xs rounded-full"
                         >
                           <Tag className="h-3 w-3 mr-1" aria-hidden="true" />
                           {tag}
@@ -94,7 +94,7 @@ export const Blog: React.FC = () => {
                       ))}
                     </div>
                     <Link to={`/blog/${post.id}`}>
-                      <Button icon={<ArrowRight className="h-4 w-4" aria-hidden="true" />} className="self-start">
+                      <Button size="sm" icon={<ArrowRight className="h-4 w-4" aria-hidden="true" />} className="self-start">
                         {t('blog.readMore')}
                         <span className="sr-only">: {getLocalizedContent(post.title, i18n.language)}</span>
                       </Button>
@@ -106,7 +106,7 @@ export const Blog: React.FC = () => {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <nav className="flex justify-center items-center gap-2 mt-10 flex-wrap" aria-label="Blog pagination">
+              <nav className="flex justify-center items-center gap-2 mt-8 flex-wrap" aria-label="Blog pagination">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                   <button
                     key={page}

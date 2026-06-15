@@ -40,17 +40,17 @@ export const Portfolio: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="min-h-[50vh] flex items-center py-24 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+      <section className="py-16 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl lg:text-6xl tracking-tight">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl lg:text-5xl tracking-tight">
               {t('portfolio.title')}
             </h1>
-            <p className="mt-6 text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
               {t('portfolio.description')}
             </p>
           </motion.div>
@@ -58,7 +58,7 @@ export const Portfolio: React.FC = () => {
       </section>
 
       {/* Filter Tabs */}
-      <section className="py-8 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+      <section className="py-6 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
             className="overflow-x-auto"
@@ -87,7 +87,7 @@ export const Portfolio: React.FC = () => {
       </section>
 
       {/* Projects Grid */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-800" aria-live="polite" aria-label="Projects list">
+      <section className="py-12 bg-gray-50 dark:bg-gray-800" aria-live="polite" aria-label="Projects list">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <AnimatePresence mode="wait">
             <motion.div
@@ -110,7 +110,7 @@ export const Portfolio: React.FC = () => {
                       <img
                         src={project.image}
                         alt={project.name[i18n.language as keyof typeof project.name]}
-                        className="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                       {project.featured && (
                         <div className="absolute top-4 left-4">
@@ -200,7 +200,7 @@ export const Portfolio: React.FC = () => {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <nav className="flex justify-center items-center gap-3 mt-16 flex-wrap" aria-label="Pagination">
+            <nav className="flex justify-center items-center gap-3 mt-12 flex-wrap" aria-label="Pagination">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                 <button
                   key={page}
@@ -223,7 +223,7 @@ export const Portfolio: React.FC = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-20 bg-white dark:bg-gray-700 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-600 mt-8"
+              className="text-center py-16 bg-white dark:bg-gray-700 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-600 mt-8"
               role="status"
             >
               <Filter className="h-16 w-16 text-gray-300 dark:text-gray-500 mx-auto mb-4" aria-hidden="true" />
