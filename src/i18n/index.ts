@@ -17,6 +17,7 @@ i18n
       uz: { translation: uz },
       tj: { translation: tj },
     },
+    lng: 'uz',
     fallbackLng: 'en',
     debug: false,
     interpolation: {
