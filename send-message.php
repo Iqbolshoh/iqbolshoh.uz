@@ -1,24 +1,24 @@
 <?php
 
-// Qat'iy ruxsat etilgan domenlar ro'yxati (Whitelist)
+// Strict whitelist of allowed origins
 $allowedOrigins = [
     'https://iqbolshoh.uz',
     'http://localhost:5173',
 ];
 
-// So'rov manbasini aniqlash
+// Determine the request origin
 $httpOrigin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 $httpReferer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
 
 $isAllowed = false;
 $matchedOrigin = '';
 
-// 1-qadam: HTTP_ORIGIN ni tekshirish (Browserlar asosan buni yuboradi)
+// Step 1: Check HTTP_ORIGIN (browsers typically send this)
 if (!empty($httpOrigin) && in_array($httpOrigin, $allowedOrigins)) {
     $isAllowed = true;
     $matchedOrigin = $httpOrigin;
 }
-// 2-qadam: Agar Origin bo'lmasa, HTTP_REFERER ni tekshirish
+// Step 2: Fall back to HTTP_REFERER if Origin header is absent
 elseif (!empty($httpReferer)) {
     foreach ($allowedOrigins as $origin) {
         if (strpos($httpReferer, $origin) === 0) {
@@ -29,7 +29,7 @@ elseif (!empty($httpReferer)) {
     }
 }
 
-// Ruxsatsiz manbalarni darhol bloklash
+// Block unauthorized origins immediately
 if (!$isAllowed) {
     http_response_code(403);
     header('Content-Type: application/json');
@@ -37,26 +37,26 @@ if (!$isAllowed) {
     exit();
 }
 
-// Xavfsiz CORS sarlavhalarini (headers) o'rnatish
+// Set secure CORS headers
 header("Access-Control-Allow-Origin: $matchedOrigin");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Accept, X-Requested-With");
 header("Content-Type: application/json; charset=UTF-8");
 
-// Brauzerning pre-flight (OPTIONS) so'roviga javob berish
+// Handle browser preflight OPTIONS request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
 }
 
-// Faqat POST so'rovlarga ruxsat berish
+// Allow only POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     echo json_encode(['success' => false, 'error' => 'Method Not Allowed. Only POST is accepted.']);
     exit();
 }
 
-// Qo'shimcha botlarga qarshi tekshiruv (Application JSON ekanligini tasdiqlash)
+// Extra bot protection: require application/json content type
 $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 if (strpos($contentType, 'application/json') !== 0) {
     http_response_code(406);
@@ -64,12 +64,11 @@ if (strpos($contentType, 'application/json') !== 0) {
     exit();
 }
 
-// Telegram API sozlamalari
+// Telegram API credentials
 $telegramToken = "YOUR_TELEGRAM_BOT_TOKEN";
 $telegramChatId = "YOUR_TELEGRAM_CHAT_ID";
 
-// ... qolgan kodlar o'zgarishsiz qoladi
-
+// Abort if credentials are missing
 if (empty($telegramToken) || empty($telegramChatId)) {
     http_response_code(500);
     echo json_encode(['success' => false, 'error' => 'Internal Server Error: Missing Telegram credentials.']);
