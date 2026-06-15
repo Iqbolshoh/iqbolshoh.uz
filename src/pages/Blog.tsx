@@ -23,18 +23,14 @@ export const Blog: React.FC = () => {
 
   return (
     <div className="pt-16">
-      {/* Title section */}
-      <section className="py-20 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+      {/* Hero Section */}
+      <section className="py-20 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl lg:text-6xl">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
               {t('blog.title')}
             </h1>
-            <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="mt-6 text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               {t('blog.description')}
             </p>
           </motion.div>
@@ -43,22 +39,24 @@ export const Blog: React.FC = () => {
 
       {/* Posts */}
       {paginatedPosts.length > 0 && (
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-gray-900">
           <div className="mx-auto max-w-7xl px-6 lg:px-8 space-y-16">
             {paginatedPosts.map((post, index) => (
-              <motion.div
+              <motion.article
                 key={post.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.05 }}
                 viewport={{ once: true }}
+                aria-labelledby={`post-title-${post.id}`}
               >
                 <Card className="overflow-hidden lg:grid lg:grid-cols-2 lg:gap-0">
                   {/* Image */}
                   <div className="relative">
                     <img
                       src={post.image}
-                      alt={getLocalizedContent(post.title, i18n.language)}
+                      alt=""
+                      aria-hidden="true"
                       className="w-full h-64 lg:h-full object-cover"
                     />
                     {post.featured && (
@@ -72,55 +70,59 @@ export const Blog: React.FC = () => {
 
                   {/* Content */}
                   <div className="p-8 lg:p-12 flex flex-col justify-center">
-                    <div className="flex items-center space-x-4 text-sm text-gray-600 mb-4">
+                    <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
                       <div className="flex items-center space-x-1">
-                        <Calendar className="h-4 w-4" />
-                        <span>{new Date(post.date).toLocaleDateString()}</span>
+                        <Calendar className="h-4 w-4" aria-hidden="true" />
+                        <time dateTime={post.date}>{new Date(post.date).toLocaleDateString()}</time>
                       </div>
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4 line-clamp-2">
+                    <h2 id={`post-title-${post.id}`} className="text-2xl font-bold text-gray-900 dark:text-white mb-4 line-clamp-2">
                       {getLocalizedContent(post.title, i18n.language)}
-                    </h3>
-                    <p className="text-gray-600 mb-6 line-clamp-2">
+                    </h2>
+                    <p className="text-gray-600 dark:text-gray-400 mb-6 line-clamp-2">
                       {getLocalizedContent(post.excerpt, i18n.language)}
                     </p>
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <div className="flex flex-wrap gap-2 mb-6" aria-label="Tags">
                       {post.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="inline-flex items-center px-3 py-1 bg-primary-100 text-primary-800 text-sm rounded-full"
+                          className="inline-flex items-center px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm rounded-full"
                         >
-                          <Tag className="h-3 w-3 mr-1" />
+                          <Tag className="h-3 w-3 mr-1" aria-hidden="true" />
                           {tag}
                         </span>
                       ))}
                     </div>
                     <Link to={`/blog/${post.id}`}>
-                      <Button icon={<ArrowRight className="h-4 w-4" />} className="self-start">
+                      <Button icon={<ArrowRight className="h-4 w-4" aria-hidden="true" />} className="self-start">
                         {t('blog.readMore')}
+                        <span className="sr-only">: {getLocalizedContent(post.title, i18n.language)}</span>
                       </Button>
                     </Link>
                   </div>
                 </Card>
-              </motion.div>
+              </motion.article>
             ))}
 
-            {/* Pagination buttons */}
+            {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex justify-center items-center gap-2 mt-10 flex-wrap">
+              <nav className="flex justify-center items-center gap-2 mt-10 flex-wrap" aria-label="Blog pagination">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={`px-4 py-2 text-sm rounded-full border transition ${page === currentPage
-                      ? 'bg-primary-500 text-white border-primary-500'
-                      : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
-                      }`}
+                    aria-label={`Page ${page}`}
+                    aria-current={page === currentPage ? 'page' : undefined}
+                    className={`px-4 py-2 text-sm rounded-full border transition focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none ${
+                      page === currentPage
+                        ? 'bg-primary-500 text-white border-primary-500'
+                        : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700'
+                    }`}
                   >
                     {page}
                   </button>
                 ))}
-              </div>
+              </nav>
             )}
           </div>
         </section>

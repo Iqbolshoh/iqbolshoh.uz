@@ -6,17 +6,14 @@ import { Card } from '../components/UI/Card';
 import { Button } from '../components/UI/Button';
 import { blogPosts } from '../data/content';
 import { useParams, useNavigate } from 'react-router-dom';
+import SEO from '../components/SEO';
 
-interface BlogDetailsProps {
-  id?: string;
-}
-
-export const BlogDetails: React.FC<BlogDetailsProps> = () => {
+export const BlogDetails: React.FC = () => {
   const { t, i18n } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const post = blogPosts.find((post) => post.id.toString() === id);
+  const post = blogPosts.find((p) => p.id.toString() === id);
 
   const getLocalizedContent = (content: Record<string, string>, language: string) => {
     return content[language] || content.en || '';
@@ -25,13 +22,14 @@ export const BlogDetails: React.FC<BlogDetailsProps> = () => {
   if (!post) {
     return (
       <div className="pt-16">
-        <section className="py-20 bg-white">
+        <SEO title={t('blog.notFound')} noIndex />
+        <section className="py-20 bg-white dark:bg-gray-900">
           <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-gray-900">{t('blog.notFound')}</h2>
-            <p className="mt-4 text-lg text-gray-600">{t('blog.postNotFound')}</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('blog.notFound')}</h1>
+            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">{t('blog.postNotFound')}</p>
             <Button
               onClick={() => navigate('/blog')}
-              icon={<ArrowLeft className="h-4 w-4" />}
+              icon={<ArrowLeft className="h-4 w-4" aria-hidden="true" />}
               className="mt-6"
             >
               {t('blog.backToBlog')}
@@ -42,53 +40,69 @@ export const BlogDetails: React.FC<BlogDetailsProps> = () => {
     );
   }
 
+  const postTitle = getLocalizedContent(post.title, i18n.language);
+  const postExcerpt = getLocalizedContent(post.excerpt, i18n.language);
+
   return (
     <div className="pt-16">
-      <section className="py-20 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+      <SEO
+        title={postTitle}
+        description={postExcerpt}
+        keywords={post.tags.join(', ')}
+        image={post.image}
+        type="article"
+        structuredData="article"
+        articleData={{
+          title: postTitle,
+          description: postExcerpt,
+          datePublished: post.date,
+          image: post.image,
+          tags: post.tags,
+        }}
+      />
+
+      <section className="py-20 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <Button
               variant="outline"
               size="sm"
               onClick={() => navigate('/blog')}
-              icon={<ArrowLeft className="h-4 w-4" />}
+              icon={<ArrowLeft className="h-4 w-4" aria-hidden="true" />}
               className="mb-6"
             >
               {t('blog.backToBlog')}
             </Button>
+
             <Card className="overflow-hidden">
               <img
                 src={post.image}
-                alt={getLocalizedContent(post.title, i18n.language)}
-                className="w-full object-cover"
+                alt={postTitle}
+                className="w-full object-cover max-h-[480px]"
               />
               <div className="p-8 lg:p-12">
-                <div className="flex items-center space-x-4 text-sm text-gray-600 mb-4">
+                <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
                   <div className="flex items-center space-x-1">
-                    <Calendar className="h-4 w-4" />
-                    <span>{new Date(post.date).toLocaleDateString()}</span>
+                    <Calendar className="h-4 w-4" aria-hidden="true" />
+                    <time dateTime={post.date}>{new Date(post.date).toLocaleDateString()}</time>
                   </div>
                 </div>
-                <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                  {getLocalizedContent(post.title, i18n.language)}
+                <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                  {postTitle}
                 </h1>
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-2 mb-6" aria-label="Tags">
                   {post.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="inline-flex items-center px-3 py-1 bg-primary-100 text-primary-800 text-sm rounded-full"
+                      className="inline-flex items-center px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm rounded-full"
                     >
-                      <Tag className="h-3 w-3 mr-1" />
+                      <Tag className="h-3 w-3 mr-1" aria-hidden="true" />
                       {tag}
                     </span>
                   ))}
                 </div>
-                <p className="text-gray-600 leading-relaxed">
-                  {getLocalizedContent(post.excerpt, i18n.language)}
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
+                  {postExcerpt}
                 </p>
               </div>
             </Card>
