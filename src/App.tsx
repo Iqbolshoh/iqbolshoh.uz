@@ -17,6 +17,7 @@ import { Services } from './pages/Services';
 import { Contact } from './pages/Contact';
 import { Blog } from './pages/Blog';
 import { BlogDetails } from './pages/BlogDetails';
+import { NotFound } from './pages/NotFound';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -122,11 +123,7 @@ function App() {
                   title={t('seo.notFound.title')}
                   noIndex={true}
                 />
-                <div className="flex items-center justify-center min-h-[60vh]">
-                  <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                    404 — {t('seo.notFound.title')}
-                  </h1>
-                </div>
+                <NotFound />
               </>
             } />
           </Routes>

@@ -15,8 +15,8 @@ export const About: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="min-h-[60vh] flex items-center py-24 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 w-full">
           <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}

@@ -150,7 +150,12 @@
       "keywords": "dasturchi blogi, dasturlash darsliklari, Laravel maslahatlar, React darsliklar, dasturiy injiniring blogi"
     },
     "notFound": {
-      "title": "Sahifa Topilmadi | Iqbolshoh.uz"
+      "title": "Sahifa Topilmadi | Iqbolshoh.uz",
+      "heading": "Sahifa Topilmadi",
+      "description": "Siz qidirayotgan sahifa mavjud emas yoki yangi manzilga ko'chirilgan.",
+      "goHome": "Bosh sahifaga",
+      "viewPortfolio": "Portfelni ko'rish",
+      "errorCode": "Xato"
     }
   },
   "footer": {

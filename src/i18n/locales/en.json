@@ -150,7 +150,12 @@
       "keywords": "developer blog, programming tutorials, Laravel tips, React tutorials, software engineering blog"
     },
     "notFound": {
-      "title": "Page Not Found | Iqbolshoh.uz"
+      "title": "Page Not Found | Iqbolshoh.uz",
+      "heading": "Page Not Found",
+      "description": "The page you're looking for doesn't exist or has been moved to a new location.",
+      "goHome": "Go Home",
+      "viewPortfolio": "View Portfolio",
+      "errorCode": "Error"
     }
   },
   "footer": {
