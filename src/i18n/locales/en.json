@@ -22,7 +22,40 @@
     "featuredProjects": "Featured Projects",
     "someRecentWork": "Some of My Recent Work",
     "journeyTitle": "By the Numbers",
-    "journeyDescription": "Quick facts about my journey."
+    "journeyDescription": "Quick facts about my journey.",
+    "subtitle": "Building scalable web applications with Laravel, React, and modern cloud infrastructure.",
+    "viewAllBlog": "View All Articles",
+    "trustedSkills": "Trusted Technologies"
+  },
+  "skills": {
+    "title": "Technical Skills",
+    "subtitle": "A diverse set of battle-tested technologies I use daily to ship production-ready applications",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "database": "Database",
+    "devops": "DevOps & Tools"
+  },
+  "testimonials": {
+    "badge": "// client reviews",
+    "title": "What Clients Say",
+    "subtitle": "Real feedback from people I've worked with on real projects"
+  },
+  "templates": {
+    "badge": "// my saas product",
+    "title": "Templates.uz",
+    "subtitle": "A premium web template marketplace built for businesses",
+    "description": "I built Templates.uz from scratch using Laravel and React — a SaaS marketplace where businesses can find and purchase professional, customizable website templates optimized for the Uzbek market.",
+    "cta": "Visit Templates.uz",
+    "stat1": "50+",
+    "stat1label": "Templates",
+    "stat2": "Laravel + React",
+    "stat2label": "Tech Stack",
+    "stat3": "SaaS",
+    "stat3label": "Business Model",
+    "feature1": "Professional template marketplace",
+    "feature2": "Built with Laravel & React from scratch",
+    "feature3": "E-commerce & payment ready",
+    "feature4": "SEO optimized for Uzbek market"
   },
   "about": {
     "title": "About Me",

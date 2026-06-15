@@ -22,7 +22,40 @@
     "featuredProjects": "Лоиҳаҳои интихобшуда",
     "someRecentWork": "Баъзе аз корҳои охирини ман",
     "journeyTitle": "Дар рақамҳо",
-    "journeyDescription": "Далелҳои кӯтоҳ дар бораи роҳи ман."
+    "journeyDescription": "Далелҳои кӯтоҳ дар бораи роҳи ман.",
+    "subtitle": "Барномаҳои веб-масштабшавандаро бо Laravel, React ва инфраструктураи абрии муосир месозам.",
+    "viewAllBlog": "Ҳамаи мақолаҳо",
+    "trustedSkills": "Технологияҳои боэтимод"
+  },
+  "skills": {
+    "title": "Малакаҳои Техникӣ",
+    "subtitle": "Маҷмӯи технологияҳои озмудашуда барои сохтани барномаҳои омодаи истеҳсолӣ",
+    "frontend": "Фронтенд",
+    "backend": "Бэкенд",
+    "database": "Пойгоҳи Маълумот",
+    "devops": "DevOps ва Асбобҳо"
+  },
+  "testimonials": {
+    "badge": "// андешаҳои муштариён",
+    "title": "Муштариён Чӣ Мегӯянд",
+    "subtitle": "Бозхӯрдҳои воқеӣ аз одамоне, ки дар лоиҳаҳои воқеӣ бо онҳо кор кардаам"
+  },
+  "templates": {
+    "badge": "// маҳсулоти saas-и ман",
+    "title": "Templates.uz",
+    "subtitle": "Бозори қолабҳои веб барои тиҷорат",
+    "description": "Templates.uz-ро аз нол бо Laravel ва React сохтаам — платформаи SaaS, ки тиҷоратҳо метавонанд қолабҳои касбии сомонаро барои бозори Ӯзбекистон харанд.",
+    "cta": "Ба Templates.uz гузаштан",
+    "stat1": "50+",
+    "stat1label": "Қолабҳо",
+    "stat2": "Laravel + React",
+    "stat2label": "Stack",
+    "stat3": "SaaS",
+    "stat3label": "Модели тиҷоратӣ",
+    "feature1": "Бозори касбии қолабҳо",
+    "feature2": "Бо Laravel ва React аз нол сохташуда",
+    "feature3": "Барои E-commerce омода",
+    "feature4": "SEO барои бозори Ӯзбекистон оптимал"
   },
   "about": {
     "title": "Дар бораи ман",

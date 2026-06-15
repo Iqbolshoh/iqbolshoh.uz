@@ -22,7 +22,40 @@
     "featuredProjects": "Sara loyihalar",
     "someRecentWork": "Ba'zi so'nggi ishlarim",
     "journeyTitle": "Raqamlarda",
-    "journeyDescription": "Mening yo'lim haqida qisqacha ma'lumot."
+    "journeyDescription": "Mening yo'lim haqida qisqacha ma'lumot.",
+    "subtitle": "Laravel, React va zamonaviy cloud infratuzilmasi yordamida kengaytiriladigan veb-ilovalar yarataman.",
+    "viewAllBlog": "Barcha maqolalar",
+    "trustedSkills": "Ishonchli texnologiyalar"
+  },
+  "skills": {
+    "title": "Texnik Ko'nikmalar",
+    "subtitle": "Har kuni ishlab chiqarish darajasidagi ilovalar yaratish uchun foydalanadigan texnologiyalar",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "database": "Ma'lumotlar Bazasi",
+    "devops": "DevOps va Vositalar"
+  },
+  "testimonials": {
+    "badge": "// mijozlar fikri",
+    "title": "Mijozlar Nima Deydi",
+    "subtitle": "Haqiqiy loyihalarda birga ishlagan odamlarning fikrlari"
+  },
+  "templates": {
+    "badge": "// mening saas mahsulotim",
+    "title": "Templates.uz",
+    "subtitle": "Bizneslar uchun premium veb-shablonlar bozori",
+    "description": "Templates.uz ni Laravel va React yordamida noldan yaratdim — O'zbek bozori uchun optimallashtirilgan professional sayt shablonlarini sotib olish mumkin bo'lgan SaaS platformasi.",
+    "cta": "Templates.uz ga o'tish",
+    "stat1": "50+",
+    "stat1label": "Shablonlar",
+    "stat2": "Laravel + React",
+    "stat2label": "Texnologiya",
+    "stat3": "SaaS",
+    "stat3label": "Biznes modeli",
+    "feature1": "Professional shablon bozori",
+    "feature2": "Laravel va React bilan noldan yaratilgan",
+    "feature3": "E-commerce va to'lov tayyor",
+    "feature4": "O'zbek bozori uchun SEO optimallashtirilgan"
   },
   "about": {
     "title": "Men haqimda",
