@@ -6,6 +6,7 @@ import { Menu, X, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LanguageSwitcher } from '../LanguageSwitcher';
 import { useTheme } from '../../context/ThemeContext';
+import { usePath } from '../../hooks/usePath';
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -14,14 +15,15 @@ export const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const openButtonRef = useRef<HTMLButtonElement>(null);
+  const toPath = usePath();
 
   const navigation = [
-    { name: t('nav.home'), href: '/' },
-    { name: t('nav.about'), href: '/about' },
-    { name: t('nav.portfolio'), href: '/portfolio' },
-    { name: t('nav.services'), href: '/services' },
-    { name: t('nav.blog'), href: '/blog' },
-    { name: t('nav.contact'), href: '/contact' },
+    { name: t('nav.home'),      href: toPath('/') },
+    { name: t('nav.about'),     href: toPath('/about') },
+    { name: t('nav.portfolio'), href: toPath('/portfolio') },
+    { name: t('nav.services'),  href: toPath('/services') },
+    { name: t('nav.blog'),      href: toPath('/blog') },
+    { name: t('nav.contact'),   href: toPath('/contact') },
   ];
 
   // Close on route change
@@ -99,7 +101,7 @@ export const Header: React.FC = () => {
           {/* Logo + mobile controls row */}
           <div className="flex flex-1 items-center justify-between">
             <Link
-              to="/"
+              to={toPath('/')}
               className="flex items-center space-x-2 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-lg"
               aria-label="Iqbolshoh dev — Home"
             >
@@ -166,7 +168,7 @@ export const Header: React.FC = () => {
               </button>
               <LanguageSwitcher />
               <Link
-                to="/portfolio"
+                to={toPath('/portfolio')}
                 className="rounded-md bg-gradient-to-r from-primary-600 to-primary-700 px-5 py-2.5 text-base font-medium text-white shadow-md hover:shadow-lg transition-all focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
               >
                 {t('nav.portfolio')}
@@ -207,7 +209,7 @@ export const Header: React.FC = () => {
                 {/* Panel header */}
                 <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-gray-800 shrink-0">
                   <Link
-                    to="/"
+                    to={toPath('/')}
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center space-x-2 focus-visible:ring-2 focus-visible:ring-primary-500 rounded-lg"
                     aria-label="Iqbolshoh dev — Home"
@@ -268,7 +270,7 @@ export const Header: React.FC = () => {
                     transition={{ delay: 0.38, duration: 0.25 }}
                   >
                     <Link
-                      to="/portfolio"
+                      to={toPath('/portfolio')}
                       onClick={() => setMobileMenuOpen(false)}
                       className="flex items-center justify-center w-full rounded-xl bg-gradient-to-r from-primary-600 to-primary-700 px-5 py-3.5 text-lg font-semibold text-white shadow-md hover:shadow-lg active:scale-[0.98] transition-all focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
                     >

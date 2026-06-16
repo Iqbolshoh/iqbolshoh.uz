@@ -4,9 +4,11 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Home, ArrowRight, Search } from 'lucide-react';
 import { Button } from '../components/UI/Button';
+import { usePath } from '../hooks/usePath';
 
 export const NotFound: React.FC = () => {
   const { t } = useTranslation();
+  const toPath = usePath();
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
@@ -79,7 +81,7 @@ export const NotFound: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.45 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Link to="/">
+          <Link to={toPath('/')}>
             <Button
               size="lg"
               icon={<Home className="h-5 w-5" aria-hidden="true" />}
@@ -88,7 +90,7 @@ export const NotFound: React.FC = () => {
               {t('seo.notFound.goHome')}
             </Button>
           </Link>
-          <Link to="/portfolio">
+          <Link to={toPath('/portfolio')}>
             <Button
               variant="outline"
               size="lg"

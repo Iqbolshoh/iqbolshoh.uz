@@ -6,9 +6,11 @@ import { ArrowRight, Download } from 'lucide-react';
 import { Button } from '../components/UI/Button';
 import { Card } from '../components/UI/Card';
 import { personalInfo, techStack, stats, projects } from '../data/content';
+import { usePath } from '../hooks/usePath';
 
 export const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const toPath = usePath();
 
   return (
     <div className="pt-16 relative">
@@ -62,7 +64,7 @@ export const Home: React.FC = () => {
                 }}
                 className="mt-8 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4"
               >
-                <Link to="/portfolio">
+                <Link to={toPath('/portfolio')}>
                   <Button
                     size="lg"
                     icon={<ArrowRight className="h-5 w-5" aria-hidden="true" />}

@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Github, Linkedin, Instagram, Send, Mail, Phone, MapPin, Laptop } from 'lucide-react';
 import { personalInfo } from '../../data/content';
+import { usePath } from '../../hooks/usePath';
 
 export const Footer: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const toPath = usePath();
 
   return (
     <footer className="bg-gray-900 dark:bg-gray-950 text-gray-100 border-t border-gray-800 dark:border-gray-800/60 transition-colors duration-200">
@@ -56,7 +58,7 @@ export const Footer: React.FC = () => {
                 {['home', 'about', 'portfolio', 'services'].map((item) => (
                   <li key={item}>
                     <Link
-                      to={`/${item === 'home' ? '' : item}`}
+                      to={item === 'home' ? toPath('/') : toPath(`/${item}`)}
                       className="text-sm text-gray-400 hover:text-primary-400 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 rounded"
                     >
                       {t(`nav.${item}`)}
@@ -74,7 +76,7 @@ export const Footer: React.FC = () => {
                 {['blog', 'contact'].map((item) => (
                   <li key={item}>
                     <Link
-                      to={`/${item}`}
+                      to={toPath(`/${item}`)}
                       className="text-sm text-gray-400 hover:text-primary-400 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 rounded"
                     >
                       {t(`nav.${item}`)}

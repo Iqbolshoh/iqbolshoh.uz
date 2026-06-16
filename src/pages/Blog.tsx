@@ -6,9 +6,11 @@ import { Card } from '../components/UI/Card';
 import { Button } from '../components/UI/Button';
 import { blogPosts } from '../data/content';
 import { Link } from 'react-router-dom';
+import { usePath } from '../hooks/usePath';
 
 export const Blog: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const toPath = usePath();
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 3;
 
@@ -114,7 +116,7 @@ export const Blog: React.FC = () => {
                           </span>
                         ))}
                       </div>
-                      <Link to={`/blog/${post.id}`}>
+                      <Link to={toPath(`/blog/${post.id}`)}>
                         <Button size="sm" icon={<ArrowRight className="h-4 w-4" aria-hidden="true" />} className="self-start shadow-md shadow-primary-500/10">
                           {t('blog.readMore')}
                           <span className="sr-only">: {getLocalizedContent(post.title, i18n.language)}</span>

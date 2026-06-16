@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useCurrentLang } from '../hooks/usePath';
 
 const languages = [
   { code: 'en', name: 'English', flagPath: '/images/flags/gb.svg' },
@@ -12,15 +14,21 @@ const languages = [
 
 export const LanguageSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentLang = useCurrentLang();
   const [isOpen, setIsOpen] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
   const switcherRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];
+  const currentLanguage = languages.find(l => l.code === i18n.language) || languages[0];
 
   const handleLanguageChange = (langCode: string) => {
+    // Keep current sub-path, swap language prefix
+    const subPath = location.pathname.replace(`/${currentLang}`, '') || '';
+    navigate(`/${langCode}${subPath}`, { replace: true });
     i18n.changeLanguage(langCode);
     setIsOpen(false);
     setFocusedIndex(-1);
