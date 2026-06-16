@@ -95,7 +95,7 @@ export const Header: React.FC = () => {
     <>
       <header className="fixed w-full top-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 transition-colors duration-200">
         <nav
-          className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8"
+          className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 xl:px-8"
           aria-label="Main navigation"
         >
           {/* Logo + mobile controls row */}
@@ -111,8 +111,8 @@ export const Header: React.FC = () => {
               </span>
             </Link>
 
-            {/* Mobile-only controls */}
-            <div className="flex items-center space-x-1 lg:hidden">
+            {/* Mobile-only controls (shown below xl breakpoint) */}
+            <div className="flex items-center space-x-1 xl:hidden">
               <LanguageSwitcher />
               <button
                 onClick={toggleTheme}
@@ -134,15 +134,15 @@ export const Header: React.FC = () => {
             </div>
           </div>
 
-          {/* Desktop navigation */}
-          <div className="hidden lg:flex lg:items-center lg:space-x-6" role="menubar">
+          {/* Desktop navigation (visible from xl = 1280px+) */}
+          <div className="hidden xl:flex xl:items-center xl:space-x-2" role="menubar">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
                 role="menuitem"
                 aria-current={location.pathname === item.href ? 'page' : undefined}
-                className={`relative px-2 py-3 text-base font-medium transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-md ${
+                className={`relative px-2 py-2.5 text-base font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-md ${
                   location.pathname === item.href
                     ? 'text-primary-600'
                     : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
@@ -158,7 +158,7 @@ export const Header: React.FC = () => {
                 )}
               </Link>
             ))}
-            <div className="flex items-center space-x-4 ml-6">
+            <div className="flex items-center space-x-3 ml-4 shrink-0">
               <button
                 onClick={toggleTheme}
                 className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-primary-500"
@@ -169,7 +169,7 @@ export const Header: React.FC = () => {
               <LanguageSwitcher />
               <Link
                 to={toPath('/portfolio')}
-                className="rounded-md bg-gradient-to-r from-primary-600 to-primary-700 px-5 py-2.5 text-base font-medium text-white shadow-md hover:shadow-lg transition-all focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+                className="rounded-md bg-gradient-to-r from-primary-600 to-primary-700 px-5 py-2.5 text-base font-medium text-white shadow-md hover:shadow-lg transition-all focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 whitespace-nowrap"
               >
                 {t('nav.portfolio')}
               </Link>

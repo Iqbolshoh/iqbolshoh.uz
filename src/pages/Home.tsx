@@ -332,7 +332,7 @@ export const Home: React.FC = () => {
           </div>
 
           <div className="text-center">
-            <Link to="/portfolio">
+            <Link to={toPath('/portfolio')}>
               <Button
                 variant="outline"
                 size="lg"
