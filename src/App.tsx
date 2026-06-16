@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast';
 import { Header } from './components/Layout/Header';
 import { Footer } from './components/Layout/Footer';
 import SEO from './components/SEO';
+import { PageLoader } from './components/UI/PageLoader';
 
 // Pages (lazy loaded for code splitting)
 const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
@@ -44,7 +45,7 @@ function App() {
         <Header />
 
         <main id="main-content" className="flex-grow" tabIndex={-1}>
-          <Suspense fallback={null}>
+          <Suspense fallback={<PageLoader />}>
             <Routes>
             <Route path="/" element={
               <>
