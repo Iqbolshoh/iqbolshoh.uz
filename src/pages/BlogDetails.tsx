@@ -1,12 +1,12 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, Tag, ArrowLeft } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-import { Card } from '../components/UI/Card';
-import { Button } from '../components/UI/Button';
-import { blogPosts } from '../data/content';
-import { useParams, useNavigate } from 'react-router-dom';
-import SEO from '../components/SEO';
+import React from "react";
+import { motion } from "framer-motion";
+import { Calendar, Tag, ArrowLeft } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { Card } from "../components/UI/Card";
+import { Button } from "../components/UI/Button";
+import { blogPosts } from "../data/content";
+import { useParams, useNavigate } from "react-router-dom";
+import SEO from "../components/SEO";
 
 export const BlogDetails: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -15,24 +15,31 @@ export const BlogDetails: React.FC = () => {
 
   const post = blogPosts.find((p) => p.id.toString() === id);
 
-  const getLocalizedContent = (content: Record<string, string>, language: string) => {
-    return content[language] || content.en || '';
+  const getLocalizedContent = (
+    content: Record<string, string>,
+    language: string,
+  ) => {
+    return content[language] || content.en || "";
   };
 
   if (!post) {
     return (
       <div className="pt-16">
-        <SEO title={t('blog.notFound')} noIndex />
+        <SEO title={t("blog.notFound")} noIndex />
         <section className="py-16 bg-white dark:bg-gray-900">
           <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('blog.notFound')}</h1>
-            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">{t('blog.postNotFound')}</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              {t("blog.notFound")}
+            </h1>
+            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
+              {t("blog.postNotFound")}
+            </p>
             <Button
-              onClick={() => navigate('/blog')}
+              onClick={() => navigate("/blog")}
               icon={<ArrowLeft className="h-4 w-4" aria-hidden="true" />}
               className="mt-6"
             >
-              {t('blog.backToBlog')}
+              {t("blog.backToBlog")}
             </Button>
           </div>
         </section>
@@ -48,7 +55,7 @@ export const BlogDetails: React.FC = () => {
       <SEO
         title={postTitle}
         description={postExcerpt}
-        keywords={post.tags.join(', ')}
+        keywords={post.tags.join(", ")}
         image={post.image}
         type="article"
         structuredData="article"
@@ -63,15 +70,19 @@ export const BlogDetails: React.FC = () => {
 
       <section className="min-h-[50vh] py-24 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <Button
               variant="outline"
               size="sm"
-              onClick={() => navigate('/blog')}
+              onClick={() => navigate("/blog")}
               icon={<ArrowLeft className="h-4 w-4" aria-hidden="true" />}
               className="mb-6"
             >
-              {t('blog.backToBlog')}
+              {t("blog.backToBlog")}
             </Button>
 
             <Card className="overflow-hidden">
@@ -84,7 +95,9 @@ export const BlogDetails: React.FC = () => {
                 <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
                   <div className="flex items-center space-x-1">
                     <Calendar className="h-4 w-4" aria-hidden="true" />
-                    <time dateTime={post.date}>{new Date(post.date).toLocaleDateString()}</time>
+                    <time dateTime={post.date}>
+                      {new Date(post.date).toLocaleDateString()}
+                    </time>
                   </div>
                 </div>
                 <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">

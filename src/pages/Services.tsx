@@ -1,15 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Check, ArrowRight, X, ChevronRight } from 'lucide-react';
-import { Card } from '../components/UI/Card';
-import { useTranslation } from 'react-i18next';
-import { Button } from '../components/UI/Button';
-import { services, processSteps } from '../data/content';
-import toast from 'react-hot-toast';
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check, ArrowRight, X, ChevronRight } from "lucide-react";
+import { Card } from "../components/UI/Card";
+import { useTranslation } from "react-i18next";
+import { Button } from "../components/UI/Button";
+import { services, processSteps } from "../data/content";
+import toast from "react-hot-toast";
 
 export const Services: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const [activeCategory, setActiveCategory] = useState<'all' | 'frontend' | 'backend' | 'fullstack' | 'special'>('all');
+  const [activeCategory, setActiveCategory] = useState<
+    "all" | "frontend" | "backend" | "fullstack" | "special"
+  >("all");
   const [isModalOpen, setIsModalOpen] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedService, setSelectedService] = useState<any>(null);
@@ -18,19 +20,19 @@ export const Services: React.FC = () => {
   const openTriggerRef = useRef<HTMLButtonElement>(null);
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-    serviceId: '',
-    serviceName: '',
-    servicePrice: ''
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+    serviceId: "",
+    serviceName: "",
+    servicePrice: "",
   });
 
-  const categories = ['all', 'frontend', 'backend', 'fullstack', 'special'];
+  const categories = ["all", "frontend", "backend", "fullstack", "special"];
 
   const filteredServices =
-    activeCategory === 'all'
+    activeCategory === "all"
       ? services
       : services.filter((service) => service.category === activeCategory);
 
@@ -42,7 +44,7 @@ export const Services: React.FC = () => {
       ...formData,
       serviceId: service.id.toString(),
       serviceName: service.title.en,
-      servicePrice: service.price
+      servicePrice: service.price,
     });
     setIsModalOpen(true);
   };
@@ -50,7 +52,15 @@ export const Services: React.FC = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedService(null);
-    setFormData({ name: '', email: '', phone: '', message: '', serviceId: '', serviceName: '', servicePrice: '' });
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+      serviceId: "",
+      serviceName: "",
+      servicePrice: "",
+    });
     setTimeout(() => openTriggerRef.current?.focus(), 50);
   };
 
@@ -58,7 +68,9 @@ export const Services: React.FC = () => {
   useEffect(() => {
     if (!isModalOpen) return;
     const timeout = setTimeout(() => {
-      const el = modalRef.current?.querySelector<HTMLElement>('button, input, textarea, [tabindex]:not([tabindex="-1"])');
+      const el = modalRef.current?.querySelector<HTMLElement>(
+        'button, input, textarea, [tabindex]:not([tabindex="-1"])',
+      );
       el?.focus();
     }, 100);
     return () => clearTimeout(timeout);
@@ -68,27 +80,35 @@ export const Services: React.FC = () => {
   useEffect(() => {
     if (!isModalOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         handleCloseModal();
         return;
       }
-      if (e.key !== 'Tab' || !modalRef.current) return;
+      if (e.key !== "Tab" || !modalRef.current) return;
       const focusable = modalRef.current.querySelectorAll<HTMLElement>(
-        'a, button:not([disabled]), input, textarea, [tabindex]:not([tabindex="-1"])'
+        'a, button:not([disabled]), input, textarea, [tabindex]:not([tabindex="-1"])',
       );
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
       if (e.shiftKey) {
-        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
       } else {
-        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isModalOpen]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -97,41 +117,74 @@ export const Services: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const API_URL = '/send-message.php';
+    const API_URL = "/send-message.php";
     const lang = i18n.language;
     const messages: Record<string, Record<string, string>> = {
-      en: { success: 'Your request was sent successfully!', error: 'Failed to send. Please try again!', server: 'Server error. Please try again later.' },
-      uz: { success: "So'rovingiz muvaffaqiyatli yuborildi!", error: "Yuborishda xatolik. Qaytadan urinib ko'ring!", server: "Server xatosi. Iltimos, keyinroq urinib ko'ring." },
-      ru: { success: 'Ваш запрос был успешно отправлен!', error: 'Не удалось отправить. Повторите попытку!', server: 'Ошибка сервера. Попробуйте позже.' },
-      tj: { success: 'Дархости шумо бомуваффақият фиристода шуд!', error: 'Натиҷаи фиристодан ноком аст. Бори дигар кӯшиш кунед!', server: 'Хатои сервер. Баъдтар кӯшиш кунед.' },
+      en: {
+        success: "Your request was sent successfully!",
+        error: "Failed to send. Please try again!",
+        server: "Server error. Please try again later.",
+      },
+      uz: {
+        success: "So'rovingiz muvaffaqiyatli yuborildi!",
+        error: "Yuborishda xatolik. Qaytadan urinib ko'ring!",
+        server: "Server xatosi. Iltimos, keyinroq urinib ko'ring.",
+      },
+      ru: {
+        success: "Ваш запрос был успешно отправлен!",
+        error: "Не удалось отправить. Повторите попытку!",
+        server: "Ошибка сервера. Попробуйте позже.",
+      },
+      tj: {
+        success: "Дархости шумо бомуваффақият фиристода шуд!",
+        error: "Натиҷаи фиристодан ноком аст. Бори дигар кӯшиш кунед!",
+        server: "Хатои сервер. Баъдтар кӯшиш кунед.",
+      },
     };
-    const getMessage = (type: 'success' | 'error' | 'server') => messages[lang]?.[type] || messages.en[type];
+    const getMessage = (type: "success" | "error" | "server") =>
+      messages[lang]?.[type] || messages.en[type];
 
     try {
       const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'service', data: formData }),
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "service", data: formData }),
       });
       const result = await response.json();
 
       if (response.ok && result.success) {
-        toast.success(getMessage('success'), {
+        toast.success(getMessage("success"), {
           duration: 3000,
-          style: { fontSize: '18px', padding: '16px 20px', border: '2px solid #22c55e', borderRadius: '12px', background: '#f0fdf4', color: '#166534', boxShadow: '0 4px 12px rgba(34, 197, 94, 0.3)' },
-          iconTheme: { primary: '#22c55e', secondary: '#f0fdf4' },
+          style: {
+            fontSize: "18px",
+            padding: "16px 20px",
+            border: "2px solid #22c55e",
+            borderRadius: "12px",
+            background: "#f0fdf4",
+            color: "#166534",
+            boxShadow: "0 4px 12px rgba(34, 197, 94, 0.3)",
+          },
+          iconTheme: { primary: "#22c55e", secondary: "#f0fdf4" },
         });
         handleCloseModal();
       } else {
-        toast.error(getMessage('error'), {
+        toast.error(getMessage("error"), {
           duration: 3000,
-          style: { fontSize: '18px', padding: '16px 20px', border: '2px solid #ef4444', borderRadius: '12px', background: '#fef2f2', color: '#991b1b', boxShadow: '0 4px 12px rgba(239, 68, 68, 0.3)' },
-          iconTheme: { primary: '#ef4444', secondary: '#fef2f2' },
+          style: {
+            fontSize: "18px",
+            padding: "16px 20px",
+            border: "2px solid #ef4444",
+            borderRadius: "12px",
+            background: "#fef2f2",
+            color: "#991b1b",
+            boxShadow: "0 4px 12px rgba(239, 68, 68, 0.3)",
+          },
+          iconTheme: { primary: "#ef4444", secondary: "#fef2f2" },
         });
       }
     } catch (error) {
-      console.error('API connection failed:', error);
-      toast.error(getMessage('server'));
+      console.error("API connection failed:", error);
+      toast.error(getMessage("server"));
     } finally {
       setIsSubmitting(false);
     }
@@ -142,12 +195,16 @@ export const Services: React.FC = () => {
       {/* Hero Section */}
       <section className="min-h-[45vh] flex items-center py-16 bg-gradient-to-br from-primary-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center w-full">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl lg:text-5xl">
-              {t('services.title')}
+              {t("services.title")}
             </h1>
             <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              {t('services.description')}
+              {t("services.description")}
             </p>
           </motion.div>
         </div>
@@ -171,18 +228,24 @@ export const Services: React.FC = () => {
                   onClick={() => setActiveCategory(category as any)}
                   className={`relative whitespace-nowrap px-6 py-2.5 text-sm font-semibold transition-colors duration-300 rounded-lg cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:outline-none ${
                     activeCategory === category
-                      ? 'text-primary-600 dark:text-primary-400'
-                      : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
+                      ? "text-primary-600 dark:text-primary-400"
+                      : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
                   }`}
                 >
                   {activeCategory === category && (
                     <motion.span
                       layoutId="activeCategory"
                       className="absolute inset-0 bg-white dark:bg-gray-700 rounded-lg shadow-sm"
-                      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 30,
+                      }}
                     />
                   )}
-                  <span className="relative z-10">{t(`services.categories.${category}`)}</span>
+                  <span className="relative z-10">
+                    {t(`services.categories.${category}`)}
+                  </span>
                 </button>
               ))}
             </div>
@@ -204,9 +267,9 @@ export const Services: React.FC = () => {
                 show: {
                   opacity: 1,
                   transition: {
-                    staggerChildren: 0.1
-                  }
-                }
+                    staggerChildren: 0.1,
+                  },
+                },
               }}
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
@@ -217,7 +280,7 @@ export const Services: React.FC = () => {
                     key={service.id}
                     variants={{
                       hidden: { opacity: 0, y: 20 },
-                      show: { opacity: 1, y: 0 }
+                      show: { opacity: 1, y: 0 },
                     }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                     viewport={{ once: true }}
@@ -226,41 +289,72 @@ export const Services: React.FC = () => {
                     <Card className="p-6 h-full flex flex-col group hover:shadow-lg transition-all duration-300">
                       <div className="text-center mb-4">
                         <div className="inline-flex items-center justify-center w-14 h-14 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-3 group-hover:bg-primary-200 dark:group-hover:bg-primary-900/50 transition-colors duration-300">
-                          <Icon className="h-7 w-7 text-primary-600 dark:text-primary-400" aria-hidden="true" />
+                          <Icon
+                            className="h-7 w-7 text-primary-600 dark:text-primary-400"
+                            aria-hidden="true"
+                          />
                         </div>
                         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                          {service.title[i18n.language as keyof typeof service.title]}
+                          {
+                            service.title[
+                              i18n.language as keyof typeof service.title
+                            ]
+                          }
                         </h3>
                         <p className="text-gray-600 dark:text-gray-400 text-sm">
-                          {service.description[i18n.language as keyof typeof service.description]}
+                          {
+                            service.description[
+                              i18n.language as keyof typeof service.description
+                            ]
+                          }
                         </p>
                       </div>
 
                       <div className="flex-grow">
                         <ul className="space-y-2 mb-4">
-                          {(service.features[i18n.language as keyof typeof service.features] || []).map(
-                            (feature, idx) => (
-                              <li key={idx} className="flex items-start space-x-3 text-sm">
-                                <Check className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                                <span className="text-gray-700 dark:text-gray-300">{feature}</span>
-                              </li>
-                            )
-                          )}
+                          {(
+                            service.features[
+                              i18n.language as keyof typeof service.features
+                            ] || []
+                          ).map((feature, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start space-x-3 text-sm"
+                            >
+                              <Check
+                                className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5"
+                                aria-hidden="true"
+                              />
+                              <span className="text-gray-700 dark:text-gray-300">
+                                {feature}
+                              </span>
+                            </li>
+                          ))}
                         </ul>
                       </div>
 
                       <div className="border-t border-gray-100 dark:border-gray-700 pt-4 mt-auto">
                         <div className="text-center mb-4">
                           <div className="text-xl font-bold text-primary-600 dark:text-primary-400">
-                            {t('services.startingFrom')} {service.price}
+                            {t("services.startingFrom")} {service.price}
                           </div>
                         </div>
                         <Button
                           className="w-full group-hover:bg-primary-700 transition-colors duration-300"
-                          icon={<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />}
-                          onClick={(e) => handleOpenModal(service, e.currentTarget as HTMLButtonElement)}
+                          icon={
+                            <ArrowRight
+                              className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                              aria-hidden="true"
+                            />
+                          }
+                          onClick={(e) =>
+                            handleOpenModal(
+                              service,
+                              e.currentTarget as HTMLButtonElement,
+                            )
+                          }
                         >
-                          {t('services.getStarted')}
+                          {t("services.getStarted")}
                         </Button>
                       </div>
                     </Card>
@@ -280,7 +374,9 @@ export const Services: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
-            onClick={(e) => { if (e.target === e.currentTarget) handleCloseModal(); }}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) handleCloseModal();
+            }}
             aria-hidden="true"
           >
             <motion.div
@@ -291,15 +387,18 @@ export const Services: React.FC = () => {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25 }}
+              transition={{ type: "spring", damping: 25 }}
               className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full overflow-hidden"
               onClick={(e) => e.stopPropagation()}
               aria-hidden={false}
             >
               <div className="p-6">
                 <div className="flex justify-between items-center mb-6">
-                  <h2 id="modal-title" className="text-2xl font-bold text-gray-900 dark:text-white">
-                    {t('services.requestService')}
+                  <h2
+                    id="modal-title"
+                    className="text-2xl font-bold text-gray-900 dark:text-white"
+                  >
+                    {t("services.requestService")}
                   </h2>
                   <button
                     onClick={handleCloseModal}
@@ -313,22 +412,35 @@ export const Services: React.FC = () => {
                 {selectedService && (
                   <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <div className="flex items-center space-x-3 mb-2">
-                      <selectedService.icon className="h-5 w-5 text-primary-600 dark:text-primary-400" aria-hidden="true" />
+                      <selectedService.icon
+                        className="h-5 w-5 text-primary-600 dark:text-primary-400"
+                        aria-hidden="true"
+                      />
                       <h3 className="font-semibold text-gray-900 dark:text-white">
-                        {selectedService.title[i18n.language as keyof typeof selectedService.title]}
+                        {
+                          selectedService.title[
+                            i18n.language as keyof typeof selectedService.title
+                          ]
+                        }
                       </h3>
                     </div>
                     <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
-                      <span>{t('services.price')}:</span>
-                      <span className="font-medium">{selectedService.price}</span>
+                      <span>{t("services.price")}:</span>
+                      <span className="font-medium">
+                        {selectedService.price}
+                      </span>
                     </div>
                   </div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                   <div>
-                    <label htmlFor="svc-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('services.form.name')} <span aria-hidden="true">*</span>
+                    <label
+                      htmlFor="svc-name"
+                      className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                    >
+                      {t("services.form.name")}{" "}
+                      <span aria-hidden="true">*</span>
                       <span className="sr-only">(required)</span>
                     </label>
                     <input
@@ -344,8 +456,12 @@ export const Services: React.FC = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="svc-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('services.form.email')} <span aria-hidden="true">*</span>
+                    <label
+                      htmlFor="svc-email"
+                      className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                    >
+                      {t("services.form.email")}{" "}
+                      <span aria-hidden="true">*</span>
                       <span className="sr-only">(required)</span>
                     </label>
                     <input
@@ -361,8 +477,12 @@ export const Services: React.FC = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="svc-phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('services.form.phone')} <span aria-hidden="true">*</span>
+                    <label
+                      htmlFor="svc-phone"
+                      className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                    >
+                      {t("services.form.phone")}{" "}
+                      <span aria-hidden="true">*</span>
                       <span className="sr-only">(required)</span>
                     </label>
                     <input
@@ -378,8 +498,11 @@ export const Services: React.FC = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="svc-message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      {t('services.form.message')}
+                    <label
+                      htmlFor="svc-message"
+                      className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                    >
+                      {t("services.form.message")}
                     </label>
                     <textarea
                       id="svc-message"
@@ -391,12 +514,28 @@ export const Services: React.FC = () => {
                     />
                   </div>
 
-                  <input type="hidden" name="serviceId" value={formData.serviceId} />
-                  <input type="hidden" name="serviceName" value={formData.serviceName} />
-                  <input type="hidden" name="servicePrice" value={formData.servicePrice} />
+                  <input
+                    type="hidden"
+                    name="serviceId"
+                    value={formData.serviceId}
+                  />
+                  <input
+                    type="hidden"
+                    name="serviceName"
+                    value={formData.serviceName}
+                  />
+                  <input
+                    type="hidden"
+                    name="servicePrice"
+                    value={formData.servicePrice}
+                  />
 
-                  <Button type="submit" className="w-full mt-4" disabled={isSubmitting}>
-                    {isSubmitting ? '...' : t('services.form.submit')}
+                  <Button
+                    type="submit"
+                    className="w-full mt-4"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "..." : t("services.form.submit")}
                     <ChevronRight className="h-4 w-4 ml-2" aria-hidden="true" />
                   </Button>
                 </form>
@@ -416,9 +555,11 @@ export const Services: React.FC = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">{t('services.howIWorkTitle')}</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">
+              {t("services.howIWorkTitle")}
+            </h2>
             <p className="mt-4 text-base text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              {t('services.howIWorkDescription')}
+              {t("services.howIWorkDescription")}
             </p>
           </motion.div>
 
@@ -433,14 +574,21 @@ export const Services: React.FC = () => {
                 whileHover={{ y: -5 }}
               >
                 <Card className="p-6 text-center h-full hover:shadow-md transition-shadow">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-600 text-white rounded-full text-lg font-bold mb-4 mx-auto" aria-hidden="true">
+                  <div
+                    className="inline-flex items-center justify-center w-12 h-12 bg-primary-600 text-white rounded-full text-lg font-bold mb-4 mx-auto"
+                    aria-hidden="true"
+                  >
                     {phase.step}
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                     {phase.title[i18n.language as keyof typeof phase.title]}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400">
-                    {phase.description[i18n.language as keyof typeof phase.description]}
+                    {
+                      phase.description[
+                        i18n.language as keyof typeof phase.description
+                      ]
+                    }
                   </p>
                 </Card>
               </motion.div>

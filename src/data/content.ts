@@ -148,7 +148,7 @@ export const projects = [
       ru: "SaaS-платформа для создания профессиональных сайтов с помощью инструментов drag & drop на базе backend Laravel и frontend React.",
       tj: "Платформаи SaaS барои сохтани сомонаҳои касбӣ бо истифодаи абзорҳои drag & drop бо backend-и Laravel ва frontend-и React."
     },
-    image: "images/projects/templatesuz.png",
+    image: "/images/projects/templatesuz.png",
     tech: ["Laravel", "React", "Vite", "MySQL"],
     liveDemo: 'https://templates.uz/',
     github: null,
@@ -169,7 +169,7 @@ export const projects = [
       ru: "Веб-приложение для обмена сообщениями в реальном времени, созданное на чистом PHP и MySQL, с функциями регистрации, авторизации, системой чата и уведомлениями.",
       tj: "Веб-иловаи паёмнависии иҷтимоии воқеӣ, ки бо PHP ва MySQL сохта шудааст ва дорои бақайдгирии корбар, воридшавӣ, системаи чат ва огоҳиномаҳои паёмӣ мебошад."
     },
-    image: "images/projects/php-social-messenger.png",
+    image: "/images/projects/php-social-messenger.png",
     tech: ["PHP", "MySQL", "AJAX", "Bootstrap"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/php-social-messenger",
@@ -190,7 +190,7 @@ export const projects = [
       ru: "Интерактивная игра для изучения словарного запаса, созданная на JavaScript. Включает уровни словаря, динамические вопросы через AJAX, произношение text-to-speech и отслеживание результатов в реальном времени.",
       tj: "Бозии интерактивӣ барои омӯзиши луғат, ки бо JavaScript сохта шудааст. Он дорои сатҳҳои луғат, саволҳои динамикӣ бо AJAX, талаффузи text-to-speech ва пайгирии натиҷаҳо дар вақти воқеӣ мебошад."
     },
-    image: "images/projects/javascript-vocabulary-quiz.png",
+    image: "/images/projects/javascript-vocabulary-quiz.png",
     tech: ["JavaScript", "AJAX", "Bootstrap", "SweetAlert2"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/javascript-vocabulary-quiz",
@@ -211,7 +211,7 @@ export const projects = [
       ru: "Простой настольный калькулятор, созданный на Java с использованием Swing. Поддерживает базовые арифметические операции, удобный графический интерфейс и обработку ошибок.",
       tj: "Калкулятори оддии desktop, ки бо Java ва Swing сохта шудааст. Он амалиётҳои асосии арифметикӣ, интерфейси графикии содда ва идоракунии хатогиҳоро дастгирӣ мекунад."
     },
-    image: "images/projects/java-calculator.png",
+    image: "/images/projects/java-calculator.png",
     tech: ["Java", "Swing", "OOP"],
     liveDemo: null,
     github: "https://github.com/iqbolshoh/java-calculator-app",
@@ -232,7 +232,7 @@ export const projects = [
       ru: "Платформа для тестирования, созданная на Java Swing, с таймером для вопросов, случайным порядком ответов, системой подсчёта баллов и итоговой статистикой.",
       tj: "Платформаи тестӣ, ки бо Java Swing сохта шудааст ва дорои саволҳои бо вақт маҳдуд, ҷавобҳои тасодуфӣ, системаи холгузорӣ ва натиҷаи ниҳоӣ мебошад."
     },
-    image: "images/projects/java-test-platform.png",
+    image: "/images/projects/java-test-platform.png",
     tech: ["Java", "Swing", "AWT", "OOP"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/java-test-platform",
@@ -253,7 +253,7 @@ export const projects = [
       ru: "Простое настольное приложение для управления задачами, созданное на Java Swing. Позволяет добавлять, редактировать, удалять задачи и отмечать их как выполненные.",
       tj: "Барномаи оддии идоракунии вазифаҳо, ки бо Java Swing сохта шудааст. Имкон медиҳад вазифаҳоро илова, таҳрир, нест ва ҳамчун анҷомшуда қайд кард."
     },
-    image: "images/projects/java-todo-list.png",
+    image: "/images/projects/java-todo-list.png",
     tech: ["Java", "Swing", "OOP"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/java-todo-list",
@@ -274,7 +274,7 @@ export const projects = [
       ru: "Android чат-приложение с искусственным интеллектом, созданное на Java с использованием Room Database. Интегрирует Gemini API для генерации ответов в реальном времени.",
       tj: "Барномаи чати Android бо зеҳни сунъӣ, ки бо Java ва Room Database сохта шудааст. Gemini API-ро барои тавлиди ҷавобҳои воқеӣ истифода мебарад."
     },
-    image: "images/projects/java-android-messenger.png",
+    image: "/images/projects/java-android-messenger.png",
     tech: ["Java", "Android", "Room DB", "SQLite", "Gemini API"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/java-android-messenger",
@@ -295,7 +295,7 @@ export const projects = [
       ru: "Безопасная система аутентификации на PHP и MySQL с регистрацией пользователей, входом в систему, управлением сессиями и хешированием паролей.",
       tj: "Системаи бехатари аутентификатсия, ки бо PHP ва MySQL сохта шудааст. Он бақайдгирӣ, воридшавӣ, идоракунии сессия ва ҳешкунии паролро дар бар мегирад."
     },
-    image: "images/projects/php-authentication-system.png",
+    image: "/images/projects/php-authentication-system.png",
     tech: ["PHP", "MySQL", "Sessions", "Security"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/php-authentication-system",
@@ -316,7 +316,7 @@ export const projects = [
       ru: "Современный и адаптивный бизнес-сайт, созданный на PHP, HTML и CSS. Подходит для компаний, которые хотят представить свои услуги, продукты и маркетинговый контент.",
       tj: "Шаблони муосири сомонаи бизнес, ки бо PHP, HTML ва CSS сохта шудааст. Барои ширкатҳо барои муаррифии хизматрасониҳо ва маҳсулот мувофиқ аст."
     },
-    image: "images/projects/php-business-website.png",
+    image: "/images/projects/php-business-website.png",
     tech: ["PHP", "HTML", "CSS", "Bootstrap"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/php-business-website",
@@ -337,7 +337,7 @@ export const projects = [
       ru: "Современный бизнес-сайт на Laravel с административной панелью, управлением портфолио и системой управления контентом.",
       tj: "Сомонаи муосири бизнес, ки бо Laravel сохта шудааст ва дорои панели идоракунӣ ва системаи идоракунии контент мебошад."
     },
-    image: "images/projects/laravel-business-website.png",
+    image: "/images/projects/laravel-business-website.png",
     tech: ["Laravel", "PHP", "MySQL", "Bootstrap"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/laravel-business-website",
@@ -358,7 +358,7 @@ export const projects = [
       ru: "Интеграция платежной системы Click на PHP, позволяющая выполнять безопасные онлайн-платежи через API с этапами prepare и complete.",
       tj: "Интегратсияи системаи пардохти Click бо PHP, ки пардохтҳои онлайнро тавассути API бо марҳилаҳои prepare ва complete амалӣ мекунад."
     },
-    image: "images/projects/php-click-payment.png",
+    image: "/images/projects/php-click-payment.png",
     tech: ["PHP", "MySQL", "Click API", "Payment Integration"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/php-click-payment",
@@ -379,7 +379,7 @@ export const projects = [
       ru: "Система управления пользователями на PHP с ролевым доступом, регистрацией, входом в систему, загрузкой изображений профиля и безопасной авторизацией.",
       tj: "Системаи идоракунии корбарон бо PHP, ки дорои дастрасии вобаста ба нақш, бақайдгирӣ, воридшавӣ ва боркунии аксҳои профил мебошад."
     },
-    image: "images/projects/php-user-role-manager.png",
+    image: "/images/projects/php-user-role-manager.png",
     tech: ["PHP", "MySQL", "RBAC", "Authentication"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/php-user-role-manager",
@@ -400,7 +400,7 @@ export const projects = [
       ru: "Система управления образованием на PHP, позволяющая управлять курсами, студентами, учебными материалами и отслеживать успеваемость через административную панель.",
       tj: "Системаи идоракунии таълим бо PHP, ки имкон медиҳад курсҳо, маълумоти донишҷӯён ва маводҳои таълимиро тавассути панели идоракунӣ идора кард."
     },
-    image: "images/projects/php-education-management.png",
+    image: "/images/projects/php-education-management.png",
     tech: ["PHP", "MySQL", "Admin Panel", "Education System"],
     liveDemo: "https://uzwriter.uz",
     github: "https://github.com/Iqbolshoh/php-education-management",
@@ -421,7 +421,7 @@ export const projects = [
       ru: "Интерактивная платформа тестирования на JavaScript для проверки знаний HTML, CSS и JavaScript с динамической загрузкой вопросов, уведомлениями SweetAlert2 и таймером.",
       tj: "Платформаи интерактивии тестӣ бо JavaScript барои санҷиши донишҳои HTML, CSS ва JavaScript бо саволҳои динамикӣ, SweetAlert2 ва таймер."
     },
-    image: "images/projects/javascript-test-platform.png",
+    image: "/images/projects/javascript-test-platform.png",
     tech: ["JavaScript", "AJAX", "JSON", "SweetAlert2", "Bootstrap"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/javascript-test-platform",
@@ -442,7 +442,7 @@ export const projects = [
       ru: "Легкий и адаптивный слайдер изображений, созданный с использованием HTML, CSS и JavaScript с плавными переходами, навигационными кнопками и автопрокруткой.",
       tj: "Слайдери тасвирҳои сабук ва мутобиқшаванда, ки бо HTML, CSS ва JavaScript сохта шудааст ва дорои гузаришҳои ҳамвор ва autoplay мебошад."
     },
-    image: "images/projects/javascript-dynamic-slider.png",
+    image: "/images/projects/javascript-dynamic-slider.png",
     tech: ["JavaScript", "HTML", "CSS", "Responsive Design"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/javascript-dynamic-slider",
@@ -463,7 +463,7 @@ export const projects = [
       ru: "Простое веб-приложение для шифрования и дешифрования текста с использованием AES. Построено на HTML, CSS и JavaScript.",
       tj: "Барномаи веб барои рамзгузорӣ ва кушодани матн бо истифодаи AES, ки бо HTML, CSS ва JavaScript сохта шудааст."
     },
-    image: "images/projects/javascript-text-encryption.png",
+    image: "/images/projects/javascript-text-encryption.png",
     tech: ["JavaScript", "AES Encryption", "HTML", "CSS"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/javascript-text-encryption",
@@ -484,7 +484,7 @@ export const projects = [
       ru: "Безопасная система аутентификации и управления ролями на PHP с административной панелью, контролем доступа на основе ролей и отслеживанием активных сессий.",
       tj: "Системаи бехатари аутентификатсия ва идоракунии нақшҳо бо PHP, ки дорои панели админ ва назорати дастрасӣ мебошад."
     },
-    image: "images/projects/php-auth-master.png",
+    image: "/images/projects/php-auth-master.png",
     tech: ["PHP", "MySQL", "RBAC", "Security", "Sessions"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/php-auth-master",
@@ -505,7 +505,7 @@ export const projects = [
       ru: "Платформа для изучения английского языка на PHP с функциями словаря, предложений, переводов текстов, упражнений и экспорта в PDF.",
       tj: "Платформаи омӯзиши забони англисӣ бо PHP, ки луғат, ҷумлаҳо, тарҷумаи матн ва машқҳоро дар бар мегирад."
     },
-    image: "images/projects/php-english-platform.png",
+    image: "/images/projects/php-english-platform.png",
     tech: ["PHP", "MySQL", "PDF Export", "Education System"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/php-english-platform",
@@ -526,7 +526,7 @@ export const projects = [
       ru: "Веб-сайт лаборатории искусственного интеллекта Самаркандского государственного университета, разработанный на Laravel для демонстрации исследований, проектов и новостей.",
       tj: "Сомонаи лабораторияи зеҳни сунъии Донишгоҳи давлатии Самарқанд, ки бо Laravel сохта шудааст ва маълумот дар бораи тадқиқотҳо ва лоиҳаҳоро пешниҳод мекунад."
     },
-    image: "images/projects/samsu-ai-lab.png",
+    image: "/images/projects/samsu-ai-lab.png",
     tech: ["Laravel", "PHP", "Blade", "Vite", "MySQL"],
     liveDemo: "https://ai-lab.sampc.uz/",
     github: "https://github.com/Iqbolshoh/samsu-ai-lab-laravel",
@@ -547,7 +547,7 @@ export const projects = [
       ru: "Персональный сайт-портфолио, демонстрирующий мои навыки, опыт и проекты как Full-Stack разработчика.",
       tj: "Сомонаи шахсии портфолио барои нишон додани малакаҳо, таҷриба ва лоиҳаҳои ман ҳамчун Full-Stack developer."
     },
-    image: "images/projects/iqbolshoh-portfolio.png",
+    image: "/images/projects/iqbolshoh-portfolio.png",
     tech: ["React", "TypeScript", "Vite", "TailwindCSS"],
     liveDemo: "https://iqbolshoh.uz",
     github: "https://github.com/Iqbolshoh/iqbolshoh-portfolio",
@@ -568,7 +568,7 @@ export const projects = [
       ru: "Классическая игра Крестики-Нолики, созданная с использованием HTML, CSS и JavaScript с определением победителя и возможностью перезапуска.",
       tj: "Бозии классикии XO, ки бо HTML, CSS ва JavaScript сохта шудааст ва муайянкунии ғолиб ва бозоғозиро дастгирӣ мекунад."
     },
-    image: "images/projects/javascript-xo-game.png",
+    image: "/images/projects/javascript-xo-game.png",
     tech: ["JavaScript", "HTML", "CSS"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/javascript-xo-game",
@@ -589,7 +589,7 @@ export const projects = [
       ru: "Простое и удобное веб-приложение калькулятора на HTML, CSS и JavaScript с поддержкой основных арифметических операций.",
       tj: "Барномаи веб-калкулятор бо HTML, CSS ва JavaScript, ки амалиётҳои асосии арифметикиро дастгирӣ мекунад."
     },
-    image: "images/projects/javascript-calculator-website.png",
+    image: "/images/projects/javascript-calculator-website.png",
     tech: ["JavaScript", "HTML", "CSS"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/javascript-calculator-website",
@@ -610,7 +610,7 @@ export const projects = [
       ru: "Легкая система мультиязычности на JavaScript, позволяющая переключать язык сайта с помощью JSON файлов и сохранять выбор пользователя.",
       tj: "Системаи бисёрзабона бо JavaScript, ки бо истифодаи JSON файлҳо забони сайтро иваз мекунад ва интихоби корбарро нигоҳ медорад."
     },
-    image: "images/projects/javascript-language-switcher.png",
+    image: "/images/projects/javascript-language-switcher.png",
     tech: ["JavaScript", "JSON", "Bootstrap", "localStorage"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/javascript-language-switcher",
@@ -631,7 +631,7 @@ export const projects = [
       ru: "Туристический сайт о Самарканде, предоставляющий информацию о достопримечательностях, музеях, истории и туристических маршрутах.",
       tj: "Сомонаи туристӣ дар бораи Самарқанд, ки маълумот дар бораи ёдгориҳо, музейҳо ва таърихи шаҳр пешниҳод мекунад."
     },
-    image: "images/projects/samarkand-travel-guide.png",
+    image: "/images/projects/samarkand-travel-guide.png",
     tech: ["HTML", "CSS", "JavaScript", "Responsive Design"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/samarkand-travel-guide",
@@ -652,7 +652,7 @@ export const projects = [
       ru: "Простые цифровые часы, созданные с использованием HTML, CSS и JavaScript, отображающие текущее время с обновлением каждую секунду.",
       tj: "Соати рақамӣ бо HTML, CSS ва JavaScript, ки вақтро дар вақти воқеӣ нишон медиҳад ва ҳар сония нав мешавад."
     },
-    image: "images/projects/javascript-digital-clock.png",
+    image: "/images/projects/javascript-digital-clock.png",
     tech: ["JavaScript", "HTML", "CSS"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/javascript-digital-clock",
@@ -673,7 +673,7 @@ export const projects = [
       ru: "Таймер обратного отсчета на HTML, CSS и JavaScript с возможностью паузы, продолжения и уведомлением при завершении времени.",
       tj: "Таймери ҳисобкунии баръакс бо HTML, CSS ва JavaScript бо имкони pause/play ва огоҳӣ ҳангоми ба анҷом расидани вақт."
     },
-    image: "images/projects/javascript-timer.png",
+    image: "/images/projects/javascript-timer.png",
     tech: ["JavaScript", "HTML", "CSS"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/javascript-timer",
@@ -694,7 +694,7 @@ export const projects = [
       ru: "Современная адаптивная форма входа, созданная с использованием HTML и CSS с плавными анимациями и чистым интерфейсом.",
       tj: "Формаи воридшавии замонавӣ бо HTML ва CSS бо тарҳи тоза ва анимацияҳои ҳамвор."
     },
-    image: "images/projects/html-css-login-form.png",
+    image: "/images/projects/html-css-login-form.png",
     tech: ["HTML", "CSS", "Responsive Design", "UI Animation"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/html-css-form",
@@ -715,7 +715,7 @@ export const projects = [
       ru: "Система отправки email на PHP с использованием PHPMailer и SMTP с защитой CSRF, AJAX запросами и уведомлениями SweetAlert2.",
       tj: "Системаи фиристодани email бо PHP бо истифодаи PHPMailer ва SMTP бо муҳофизати CSRF ва AJAX."
     },
-    image: "images/projects/php-send-mail.png",
+    image: "/images/projects/php-send-mail.png",
     tech: ["PHP", "PHPMailer", "SMTP", "Bootstrap", "AJAX"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/php-send-mail",
@@ -736,7 +736,7 @@ export const projects = [
       ru: "Онлайн маркетплейс на PHP и MySQL, позволяющий пользователям размещать товары, искать продукты, добавлять их в корзину и оформлять заказы.",
       tj: "Платформаи marketplace бо PHP ва MySQL, ки имкон медиҳад корбарон маҳсулот илова кунанд, ҷустуҷӯ кунанд ва фармоиш диҳанд."
     },
-    image: "images/projects/php-mysql-marketplace.png",
+    image: "/images/projects/php-mysql-marketplace.png",
     tech: ["PHP", "MySQL", "Bootstrap", "E-commerce"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/php-mysql-marketplace",
@@ -757,7 +757,7 @@ export const projects = [
       ru: "Легкий и безопасный PHP wrapper для работы с базой данных MySQLi с поддержкой prepared statements и управления транзакциями.",
       tj: "Wrapper-и сабук барои идоракунии базаи додаҳо бо PHP ва MySQLi бо дастгирии prepared statements ва transaction."
     },
-    image: "images/projects/php-database-manager.png",
+    image: "/images/projects/php-database-manager.png",
     tech: ["PHP", "MySQLi", "Database Wrapper", "Prepared Statements"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/php-database-manager",
@@ -778,7 +778,7 @@ export const projects = [
       ru: "Мультиплеерная браузерная игра на PHP, где пользователи могут создавать уникальные ссылки и приглашать других игроков для совместной игры.",
       tj: "Бозии multiplayer дар браузер бо PHP, ки корбарон метавонанд линк эҷод кунанд ва дигаронро барои бозӣ даъват намоянд."
     },
-    image: "images/projects/php-ninja-game.png",
+    image: "/images/projects/php-ninja-game.png",
     tech: ["PHP", "JavaScript", "MySQL", "Multiplayer", "Game Logic"],
     liveDemo: null,
     github: "https://github.com/Iqbolshoh/php-ninja-game",
