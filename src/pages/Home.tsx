@@ -5,10 +5,11 @@ import { motion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
 import { Button } from "../components/UI/Button";
 import { Card } from "../components/UI/Card";
-import { personalInfo, techStack, stats, projects } from "../data/content";
+import { useContent } from "../context/ContentContext";
 import { usePath } from "../hooks/usePath";
 
 export const Home: React.FC = () => {
+  const { personalInfo, techStack, stats, projects } = useContent();
   const { t, i18n } = useTranslation();
   const toPath = usePath();
 

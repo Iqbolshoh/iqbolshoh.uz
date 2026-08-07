@@ -4,11 +4,12 @@ import { Calendar, Tag, ArrowLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Card } from "../components/UI/Card";
 import { Button } from "../components/UI/Button";
-import { blogPosts } from "../data/content";
+import { useContent } from "../context/ContentContext";
 import { useParams, useNavigate } from "react-router-dom";
 import SEO from "../components/SEO";
 
 export const BlogDetails: React.FC = () => {
+  const { blogPosts } = useContent();
   const { t, i18n } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -63,7 +64,8 @@ export const BlogDetails: React.FC = () => {
           title: postTitle,
           description: postExcerpt,
           datePublished: post.date,
-          image: post.image,
+          // structured data rasmni majburiy talab qiladi — bo'lmasa umumiy og rasm
+          image: post.image ?? "/images/og-main.png",
           tags: post.tags,
         }}
       />

@@ -3,15 +3,9 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { GraduationCap, MapPin, Calendar, Focus } from "lucide-react";
 import { Card } from "../components/UI/Card";
-import {
-  personalInfo,
-  techStack,
-  journey,
-  highlights,
-  beyond,
-} from "../data/content";
-
+import { useContent } from "../context/ContentContext";
 export const About: React.FC = () => {
+  const { personalInfo, techStack, journey, highlights, beyond } = useContent();
   const { t, i18n } = useTranslation();
 
   const getLocalizedContent = (

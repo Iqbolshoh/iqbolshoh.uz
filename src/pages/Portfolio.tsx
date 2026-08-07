@@ -4,9 +4,9 @@ import { ExternalLink, Github, Filter } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Card } from "../components/UI/Card";
 import { Button } from "../components/UI/Button";
-import { projects } from "../data/content";
-
+import { useContent } from "../context/ContentContext";
 export const Portfolio: React.FC = () => {
+  const { projects } = useContent();
   const { t, i18n } = useTranslation();
   const [activeFilter, setActiveFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);

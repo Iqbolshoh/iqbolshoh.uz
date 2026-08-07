@@ -4,6 +4,7 @@ import App from './App.tsx';
 import './index.css';
 import './i18n';
 import { ThemeProvider } from './context/ThemeContext.tsx';
+import { ContentProvider } from './context/ContentContext.tsx';
 
 if (import.meta.env.PROD) {
   console.log = () => {};
@@ -17,7 +18,9 @@ if (import.meta.env.PROD) {
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <ThemeProvider>
-      <App />
+      <ContentProvider>
+        <App />
+      </ContentProvider>
     </ThemeProvider>
   </BrowserRouter>
 );

@@ -1,0 +1,71 @@
+/* =================================================================
+   THEME — Barcha ranglar shu yerda. Yangi loyihada faqat
+   shu faylni o'zgartiring, butun tizim rangga muvofiq o'zgaradi.
+
+   Palitra: sales.vexa.uz (binafsha / ko'k, dark-first)
+   ================================================================= */
+
+/* ── Dark Mode (default) ── */
+:root {
+    /* Backgrounds */
+    --bg-base:    #05070a;
+    --bg-surface: #0b0e14;
+    --bg-raised:  #11161f;
+    --bg-overlay: #19202b;
+
+    /* Borders */
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-strong: rgba(255, 255, 255, 0.11);
+
+    /* Text */
+    --text-primary:   #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted:     #556070;
+
+    /* Accent — asosiy rang (hozir: binafsha) */
+    --accent:        #8b5cf6;
+    --accent-hover:  #a855f7;
+    --accent-deep:   #6d28d9;
+    --accent-alt:    #3b82f6;
+    --accent-soft:   rgba(139, 92, 246, 0.12);
+    --accent-border: rgba(139, 92, 246, 0.28);
+    --accent-glow:   rgba(139, 92, 246, 0.45);
+
+    /* Status */
+    --success: #34d399;
+    --warning: #fbbf24;
+    --info:    #06b6d4;
+
+    /* Dimensions */
+    --radius-sm: 0.625rem;
+    --radius-md: 0.875rem;
+    --radius-lg: 1.25rem;
+    --sidebar-w: 17.5rem;
+    --header-h:  4.5rem;
+
+    /* Easing */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Light Mode ── */
+html.light {
+    /* Backgrounds */
+    --bg-base:    #f7f8ff;
+    --bg-surface: #eef0ff;
+    --bg-raised:  #ffffff;
+    --bg-overlay: #e5e8ff;
+
+    /* Borders — binafsha tusli */
+    --border-subtle: rgba(99, 76, 231, 0.07);
+    --border-strong: rgba(99, 76, 231, 0.14);
+
+    /* Text */
+    --text-primary:   #0d0c2c;
+    --text-secondary: #3d3a72;
+    --text-muted:     #8a87bb;
+
+    /* Accent — yorug' fonda ham bir xil binafsha, faqat shaffoflik boshqa */
+    --accent-soft:   rgba(139, 92, 246, 0.13);
+    --accent-border: rgba(139, 92, 246, 0.26);
+    --accent-glow:   rgba(139, 92, 246, 0.38);
+}

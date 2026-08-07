@@ -12,10 +12,12 @@ import {
 } from "lucide-react";
 import { Card } from "../components/UI/Card";
 import { Button } from "../components/UI/Button";
-import { personalInfo } from "../data/content";
+import { useContent } from "../context/ContentContext";
+import { sendContact } from "../lib/api";
 import toast from "react-hot-toast";
 
 export const Contact: React.FC = () => {
+  const { personalInfo } = useContent();
   const { t, i18n } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -36,49 +38,63 @@ export const Contact: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const API_URL = "/send-message.php";
+    const successMessages: Record<string, string> = {
+      en: "Message sent successfully!",
+      uz: "Xabar muvaffaqiyatli yuborildi!",
+      ru: "Сообщение успешно отправлено!",
+      tj: "Паём бомуваффақият фиристода шуд!",
+    };
+    const errorMessages: Record<string, string> = {
+      en: "Failed to send message. Please try again.",
+      uz: "Xabar yuborilmadi. Qayta urinib ko'ring.",
+      ru: "Не удалось отправить сообщение. Попробуйте еще раз.",
+      tj: "Паём фиристода нашуд. Лутфан дубора кӯшиш кунед.",
+    };
+
+    const lang = i18n.language;
 
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "contact", data: formData }),
+      await sendContact(formData);
+
+      toast.success(successMessages[lang] || successMessages.en, {
+        duration: 3000,
+        style: {
+          fontSize: "18px",
+          padding: "16px 20px",
+          border: "2px solid #22c55e",
+          borderRadius: "12px",
+          background: "#f0fdf4",
+          color: "#166534",
+          boxShadow: "0 4px 12px rgba(34, 197, 94, 0.3)",
+        },
+        iconTheme: { primary: "#22c55e", secondary: "#f0fdf4" },
       });
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      console.error("Server connection error:", error);
 
-      const result = await response.json();
+      const status = (error as { status?: number }).status;
 
-      const successMessages: Record<string, string> = {
-        en: "Message sent successfully!",
-        uz: "Xabar muvaffaqiyatli yuborildi!",
-        ru: "Сообщение успешно отправлено!",
-        tj: "Паём бомуваффақият фиристода шуд!",
+      // 422 — server validatsiyasi rad etdi, aniq sababni ko'rsatamiz
+      const validation = (error as { body?: { message?: string } }).body?.message;
+
+      const errorLangMessages: Record<string, string> = {
+        en: "Server error. Please try again later.",
+        uz: "Serverda xatolik. Keyinroq urinib ko'ring.",
+        ru: "Ошибка сервера. Попробуйте позже.",
+        tj: "Хатои server. Баъдтар кӯшиш кунед.",
       };
-      const errorMessages: Record<string, string> = {
-        en: "Failed to send message. Please try again.",
-        uz: "Xabar yuborilmadi. Qayta urinib ko'ring.",
-        ru: "Не удалось отправить сообщение. Попробуйте еще раз.",
-        tj: "Паём фиристода нашуд. Лутфан дубора кӯшиш кунед.",
-      };
 
-      const lang = i18n.language;
+      const fallback =
+        errorMessages[i18n.language] || errorMessages.en;
 
-      if (response.ok && result.success) {
-        toast.success(successMessages[lang] || successMessages.en, {
-          duration: 3000,
-          style: {
-            fontSize: "18px",
-            padding: "16px 20px",
-            border: "2px solid #22c55e",
-            borderRadius: "12px",
-            background: "#f0fdf4",
-            color: "#166534",
-            boxShadow: "0 4px 12px rgba(34, 197, 94, 0.3)",
-          },
-          iconTheme: { primary: "#22c55e", secondary: "#f0fdf4" },
-        });
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      } else {
-        toast.error(errorMessages[lang] || errorMessages.en, {
+      toast.error(
+        status === 422 && validation
+          ? validation
+          : status
+            ? fallback
+            : errorLangMessages[i18n.language] || errorLangMessages.en,
+        {
           duration: 3000,
           style: {
             fontSize: "18px",
@@ -90,17 +106,8 @@ export const Contact: React.FC = () => {
             boxShadow: "0 4px 12px rgba(239, 68, 68, 0.3)",
           },
           iconTheme: { primary: "#ef4444", secondary: "#fef2f2" },
-        });
-      }
-    } catch (error) {
-      console.error("Server connection error:", error);
-      const errorLangMessages: Record<string, string> = {
-        en: "Server error. Please try again later.",
-        uz: "Serverda xatolik. Keyinroq urinib ko'ring.",
-        ru: "Ошибка сервера. Попробуйте позже.",
-        tj: "Хатои server. Баъдтар кӯшиш кунед.",
-      };
-      toast.error(errorLangMessages[i18n.language] || errorLangMessages.en);
+        },
+      );
     } finally {
       setIsSubmitting(false);
     }

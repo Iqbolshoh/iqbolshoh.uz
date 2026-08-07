@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Github, Linkedin, Instagram, Send, Mail, Phone, MapPin, Laptop } from 'lucide-react';
-import { personalInfo } from '../../data/content';
+import { useContent } from "../../context/ContentContext";
 import { usePath } from '../../hooks/usePath';
 
 export const Footer: React.FC = () => {
+  const { personalInfo } = useContent();
   const { t, i18n } = useTranslation();
   const toPath = usePath();
 

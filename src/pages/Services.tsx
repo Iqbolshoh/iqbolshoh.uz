@@ -4,10 +4,12 @@ import { Check, ArrowRight, X, ChevronRight } from "lucide-react";
 import { Card } from "../components/UI/Card";
 import { useTranslation } from "react-i18next";
 import { Button } from "../components/UI/Button";
-import { services, processSteps } from "../data/content";
+import { useContent } from "../context/ContentContext";
+import { sendServiceOrder } from "../lib/api";
 import toast from "react-hot-toast";
 
 export const Services: React.FC = () => {
+  const { services, processSteps } = useContent();
   const { t, i18n } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<
     "all" | "frontend" | "backend" | "fullstack" | "special"
@@ -117,7 +119,6 @@ export const Services: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const API_URL = "/send-message.php";
     const lang = i18n.language;
     const messages: Record<string, Record<string, string>> = {
       en: {
@@ -145,30 +146,34 @@ export const Services: React.FC = () => {
       messages[lang]?.[type] || messages.en[type];
 
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "service", data: formData }),
-      });
-      const result = await response.json();
+      await sendServiceOrder(formData);
 
-      if (response.ok && result.success) {
-        toast.success(getMessage("success"), {
-          duration: 3000,
-          style: {
-            fontSize: "18px",
-            padding: "16px 20px",
-            border: "2px solid #22c55e",
-            borderRadius: "12px",
-            background: "#f0fdf4",
-            color: "#166534",
-            boxShadow: "0 4px 12px rgba(34, 197, 94, 0.3)",
-          },
-          iconTheme: { primary: "#22c55e", secondary: "#f0fdf4" },
-        });
-        handleCloseModal();
-      } else {
-        toast.error(getMessage("error"), {
+      toast.success(getMessage("success"), {
+        duration: 3000,
+        style: {
+          fontSize: "18px",
+          padding: "16px 20px",
+          border: "2px solid #22c55e",
+          borderRadius: "12px",
+          background: "#f0fdf4",
+          color: "#166534",
+          boxShadow: "0 4px 12px rgba(34, 197, 94, 0.3)",
+        },
+        iconTheme: { primary: "#22c55e", secondary: "#f0fdf4" },
+      });
+      handleCloseModal();
+    } catch (error) {
+      console.error("API connection failed:", error);
+
+      const status = (error as { status?: number }).status;
+      const validation = (error as { body?: { message?: string } }).body?.message;
+
+      // Serverga yetib bordi, lekin rad etdi -> "error"; umuman yetmadi -> "server"
+      toast.error(
+        status === 422 && validation
+          ? validation
+          : getMessage(status ? "error" : "server"),
+        {
           duration: 3000,
           style: {
             fontSize: "18px",
@@ -180,11 +185,8 @@ export const Services: React.FC = () => {
             boxShadow: "0 4px 12px rgba(239, 68, 68, 0.3)",
           },
           iconTheme: { primary: "#ef4444", secondary: "#fef2f2" },
-        });
-      }
-    } catch (error) {
-      console.error("API connection failed:", error);
-      toast.error(getMessage("server"));
+        },
+      );
     } finally {
       setIsSubmitting(false);
     }

@@ -4,11 +4,12 @@ import { Calendar, ArrowRight, Tag } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Card } from "../components/UI/Card";
 import { Button } from "../components/UI/Button";
-import { blogPosts } from "../data/content";
+import { useContent } from "../context/ContentContext";
 import { Link } from "react-router-dom";
 import { usePath } from "../hooks/usePath";
 
 export const Blog: React.FC = () => {
+  const { blogPosts } = useContent();
   const { t, i18n } = useTranslation();
   const toPath = usePath();
   const [currentPage, setCurrentPage] = useState(1);
