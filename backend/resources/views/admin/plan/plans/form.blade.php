@@ -43,7 +43,7 @@
                     Title <span class="text-[var(--accent)]">*</span>
                 </label>
                 <input type="text" id="title" name="title" value="{{ old('title', $plan->title) }}"
-                    class="input @error('title') border-[var(--accent)] @enderror" placeholder="Laravel API">
+                    class="input @error('title') is-invalid @enderror" placeholder="Laravel API">
                 @error('title')
                 <p class="text-[var(--accent)] text-xs mt-2">{{ $message }}</p>
                 @enderror
@@ -71,7 +71,7 @@
                     </label>
                     <input type="date" id="date" name="date"
                         value="{{ old('date', $plan->date instanceof CarbonInterface ? $plan->date->toDateString() : $plan->date) }}"
-                        class="input @error('date') border-[var(--accent)] @enderror">
+                        class="input @error('date') is-invalid @enderror">
                     @error('date')<p class="text-[var(--accent)] text-xs mt-2">{{ $message }}</p>@enderror
                 </div>
 
@@ -81,7 +81,7 @@
                     </label>
                     <input type="time" id="start_time" name="start_time"
                         value="{{ old('start_time', Str::substr((string) $plan->start_time, 0, 5)) }}"
-                        class="input @error('start_time') border-[var(--accent)] @enderror">
+                        class="input @error('start_time') is-invalid @enderror">
                     @error('start_time')<p class="text-[var(--accent)] text-xs mt-2">{{ $message }}</p>@enderror
                 </div>
 

@@ -277,6 +277,17 @@
             transition: border-color .2s, box-shadow .2s;
         }
 
+        /* The error state needs its own class: a `border-*` utility sets
+           border-color only, and the `border` shorthand above is declared later
+           in the cascade, so the utility silently loses. */
+        .input.is-invalid {
+            border-color: var(--accent);
+        }
+
+        .input.is-invalid:focus {
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
         .input::placeholder {
             color: var(--text-muted);
         }

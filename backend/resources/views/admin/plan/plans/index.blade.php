@@ -11,6 +11,158 @@
 @section('breadcrumb', 'Plan')
 @section('header_title', 'Daily plans')
 
+@push('styles')
+<style>
+    /* A row is laid out as a grid, not a flex chain: the time and the action
+       cluster get fixed tracks, so the title column can never grow into them
+       however long a plan's name is. */
+    .plan-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: .75rem;
+        padding: .9rem 1rem;
+        background: var(--bg-raised);
+        border: 1px solid var(--border-subtle);
+        /* The layout's own `.card` rule is plain CSS loaded after Tailwind, so a
+           utility like `border-l-[3px]` loses to it. Declaring the rail here
+           keeps it visible. */
+        border-left: 3px solid var(--rail, transparent);
+        border-radius: var(--radius-lg);
+        transition: border-color .2s, background .2s;
+    }
+
+    .plan-row:hover {
+        background: var(--bg-overlay);
+    }
+
+    .plan-when {
+        display: flex;
+        align-items: baseline;
+        gap: .55rem;
+    }
+
+    .plan-time {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        line-height: 1.2;
+    }
+
+    .plan-date {
+        font-size: .75rem;
+        color: var(--text-muted);
+        white-space: nowrap;
+    }
+
+    .plan-body {
+        min-width: 0;
+    }
+
+    .plan-title {
+        display: block;
+        font-size: .9375rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+        transition: color .2s;
+    }
+
+    .plan-title:hover {
+        color: var(--accent-hover);
+    }
+
+    .plan-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: .25rem .75rem;
+        margin-top: .3rem;
+        font-size: .75rem;
+        color: var(--text-muted);
+    }
+
+    /* Separators are drawn rather than typed, so no stray "·" is left dangling
+       when a row happens to have only one meta item. */
+    .plan-meta > span + span::before {
+        content: "·";
+        margin-right: .5rem;
+        opacity: .55;
+    }
+
+    .plan-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .75rem;
+        padding-top: .7rem;
+        border-top: 1px solid var(--border-subtle);
+    }
+
+    .plan-tools {
+        display: inline-flex;
+        align-items: center;
+        gap: .15rem;
+    }
+
+    .plan-tool {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.1rem;
+        height: 2.1rem;
+        border-radius: var(--radius-md);
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: color .15s, background .15s;
+    }
+
+    .plan-tool:hover {
+        color: var(--text-primary);
+        background: rgba(148, 163, 184, .12);
+    }
+
+    .plan-tool.is-done:hover {
+        color: #22C55E;
+        background: rgba(34, 197, 94, .12);
+    }
+
+    .plan-tool.is-later:hover {
+        color: #F59E0B;
+        background: rgba(245, 158, 11, .12);
+    }
+
+    .plan-tool.is-fail:hover {
+        color: #EF4444;
+        background: rgba(239, 68, 68, .12);
+    }
+
+    /* From lg the row becomes three tracks. The action column is sized to its
+       content so the buttons never crowd the title, and the divider that
+       separated them on mobile is dropped. */
+    @media (min-width: 1024px) {
+        .plan-row {
+            grid-template-columns: 9.5rem minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .plan-when {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: .1rem;
+        }
+
+        .plan-actions {
+            justify-content: flex-end;
+            padding-top: 0;
+            border-top: 0;
+        }
+    }
+</style>
+@endpush
+
 @section('content')
 <div x-data="{ deleteModalOpen: false, deleteUrl: '', deleteName: '' }">
 
@@ -75,81 +227,73 @@
 
     <div class="space-y-2">
         @forelse($plans as $plan)
-        {{-- The colour rail is the goal's, so a long list stays scannable by
-             project without reading a single label. --}}
-        <div class="card p-4 border-l-[3px]" style="border-left-color: {{ $plan->goal?->color ?? 'transparent' }};">
-            <div class="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-4">
+        {{-- The rail carries the goal's colour, so a long list stays scannable
+             by project without reading a single label. --}}
+        <div class="plan-row" style="--rail: {{ $plan->goal?->color ?? 'transparent' }};">
 
-                <div class="flex items-baseline gap-2.5 lg:w-36 lg:flex-shrink-0">
-                    <span class="font-mono text-lg font-bold text-white leading-none">{{ Str::substr($plan->start_time, 0, 5) }}</span>
-                    <span class="text-xs text-[var(--text-muted)] whitespace-nowrap">{{ $plan->date->format('D, M j') }}</span>
-                    <span class="text-xs font-mono text-[var(--text-muted)] lg:hidden">· {{ Plan::humanMinutes($plan->planned_minutes) }}</span>
+            <div class="plan-when">
+                <span class="plan-time">{{ Str::substr($plan->start_time, 0, 5) }}</span>
+                <span class="plan-date">{{ $plan->date->format('D, M j') }}</span>
+            </div>
+
+            <div class="plan-body">
+                <a href="{{ route('admin.plans.show', $plan) }}" class="plan-title">{{ $plan->title }}</a>
+                <div class="plan-meta">
+                    @if($plan->goal)
+                    <span class="inline-flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full flex-shrink-0" style="background: {{ $plan->goal->color ?? '#8B95A5' }};"></span>
+                        {{ $plan->goal->title }}
+                    </span>
+                    @endif
+                    <span>{{ Plan::humanMinutes($plan->planned_minutes) }} planned</span>
+                    @if($plan->postpone_count > 0)
+                    <span>pushed {{ $plan->postpone_count }}×</span>
+                    @endif
+                    @if($plan->actual_minutes)
+                    <span>took {{ Plan::humanMinutes($plan->actual_minutes) }}</span>
+                    @endif
                 </div>
+            </div>
 
-                <div class="min-w-0 flex-1">
-                    <a href="{{ route('admin.plans.show', $plan) }}" class="font-semibold text-white hover:text-[var(--accent-hover)] transition-colors break-words">
-                        {{ $plan->title }}
-                    </a>
-                    <div class="flex flex-wrap items-center gap-x-2 gap-y-1 mt-1 text-xs text-[var(--text-muted)]">
-                        @if($plan->goal)
-                        <span class="inline-flex items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full flex-shrink-0" style="background: {{ $plan->goal->color ?? '#8B95A5' }};"></span>
-                            {{ $plan->goal->title }}
-                        </span>
-                        @endif
-                        <span class="hidden lg:inline">· {{ Plan::humanMinutes($plan->planned_minutes) }} planned</span>
-                        @if($plan->postpone_count > 0)
-                        <span>· pushed {{ $plan->postpone_count }}×</span>
-                        @endif
-                        @if($plan->actual_minutes)
-                        <span>· took {{ Plan::humanMinutes($plan->actual_minutes) }}</span>
-                        @endif
-                    </div>
-                </div>
+            <div class="plan-actions">
+                <x-status-badge :status="$plan->status" />
 
-                <div class="flex items-center gap-1.5 flex-wrap lg:flex-nowrap lg:justify-end">
-                    <x-status-badge :status="$plan->status" />
-
+                <span class="plan-tools">
                     @can('plans.edit')
                     @unless($plan->status->isClosed())
-                    <form method="POST" action="{{ route('admin.plans.act', [$plan, 'complete']) }}" class="inline">
+                    <form method="POST" action="{{ route('admin.plans.act', [$plan, 'complete']) }}">
                         @csrf
-                        <button type="submit" title="Mark completed"
-                            class="p-2 rounded-lg text-[var(--text-muted)] hover:text-green-400 hover:bg-green-500/10 transition-colors cursor-pointer">
+                        <button type="submit" title="Mark completed" class="plan-tool is-done">
                             <x-lucide-check class="w-4 h-4" />
                         </button>
                     </form>
-                    <form method="POST" action="{{ route('admin.plans.act', [$plan, 'postpone']) }}" class="inline">
+                    <form method="POST" action="{{ route('admin.plans.act', [$plan, 'postpone']) }}">
                         @csrf
                         <input type="hidden" name="minutes" value="30">
-                        <button type="submit" title="Postpone 30 minutes"
-                            class="p-2 rounded-lg text-[var(--text-muted)] hover:text-amber-400 hover:bg-amber-500/10 transition-colors cursor-pointer">
+                        <button type="submit" title="Postpone 30 minutes" class="plan-tool is-later">
                             <x-lucide-clock class="w-4 h-4" />
                         </button>
                     </form>
-                    <form method="POST" action="{{ route('admin.plans.act', [$plan, 'fail']) }}" class="inline">
+                    <form method="POST" action="{{ route('admin.plans.act', [$plan, 'fail']) }}">
                         @csrf
-                        <button type="submit" title="Mark failed"
-                            class="p-2 rounded-lg text-[var(--text-muted)] hover:text-red-400 hover:bg-red-500/10 transition-colors cursor-pointer">
+                        <button type="submit" title="Mark failed" class="plan-tool is-fail">
                             <x-lucide-x class="w-4 h-4" />
                         </button>
                     </form>
                     @endunless
 
-                    <a href="{{ route('admin.plans.edit', $plan) }}" title="Edit"
-                        class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent-hover)] hover:bg-[var(--accent-soft)] transition-colors">
+                    <a href="{{ route('admin.plans.edit', $plan) }}" title="Edit" class="plan-tool">
                         <x-lucide-pencil class="w-4 h-4" />
                     </a>
                     @endcan
 
                     @can('plans.delete')
-                    <button type="button" title="Delete"
-                        @click="deleteUrl = @js(route('admin.plans.destroy', $plan)); deleteName = @js($plan->title); deleteModalOpen = true"
-                        class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[var(--accent-soft)] transition-colors">
+                    <button type="button" title="Delete" class="plan-tool is-fail"
+                        @click="deleteUrl = @js(route('admin.plans.destroy', $plan)); deleteName = @js($plan->title); deleteModalOpen = true">
                         <x-lucide-trash-2 class="w-4 h-4" />
                     </button>
                     @endcan
-                </div>
+                </span>
             </div>
         </div>
         @empty

@@ -36,7 +36,7 @@
                         Full name <span class="text-[var(--accent)]">*</span>
                     </label>
                     <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"
-                           class="input @error('name') border-[var(--accent)] @enderror"
+                           class="input @error('name') is-invalid @enderror"
                            required autocomplete="name">
                     @error('name')
                         <p class="text-[var(--accent)] text-xs mt-2 flex items-center gap-1">
@@ -50,7 +50,7 @@
                         Email manzil <span class="text-[var(--accent)]">*</span>
                     </label>
                     <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}"
-                           class="input @error('email') border-[var(--accent)] @enderror"
+                           class="input @error('email') is-invalid @enderror"
                            required autocomplete="email">
                     @error('email')
                         <p class="text-[var(--accent)] text-xs mt-2 flex items-center gap-1">
@@ -67,7 +67,7 @@
                     </label>
                     <div class="relative">
                         <input :type="show ? 'text' : 'password'" id="password" name="password"
-                               class="input pr-11 @error('password') border-[var(--accent)] @enderror"
+                               class="input pr-11 @error('password') is-invalid @enderror"
                                placeholder="Leave blank to keep the current one" autocomplete="new-password">
                         <button type="button" @click="show = !show"
                                 class="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors">
@@ -103,7 +103,7 @@
                     Role <span class="text-[var(--accent)]">*</span>
                 </label>
                 <select name="role" id="role"
-                        class="input cursor-pointer @error('role') border-[var(--accent)] @enderror" required>
+                        class="input cursor-pointer @error('role') is-invalid @enderror" required>
                     <option value="" disabled>Choose a role</option>
                     @foreach($roles as $role)
                     <option value="{{ $role->name }}"

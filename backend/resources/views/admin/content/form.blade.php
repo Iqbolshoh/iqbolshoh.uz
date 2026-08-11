@@ -122,11 +122,11 @@
                             <div x-show="locale === '{{ $code }}'" @if($code !== $primary) style="display: none;" @endif>
                                 @if(($field['type'] === 'trans_list') || !empty($field['textarea']))
                                 <textarea name="{{ $name }}[{{ $code }}]" rows="{{ $field['rows'] ?? 3 }}"
-                                    class="input @error($name . '.' . $code) border-[var(--accent)] @enderror"
+                                    class="input @error($name . '.' . $code) is-invalid @enderror"
                                     placeholder="{{ $field['label'] }} — {{ $localeName }}">{{ $value[$code] ?? '' }}</textarea>
                                 @else
                                 <input type="text" name="{{ $name }}[{{ $code }}]" value="{{ $value[$code] ?? '' }}"
-                                    class="input @error($name . '.' . $code) border-[var(--accent)] @enderror"
+                                    class="input @error($name . '.' . $code) is-invalid @enderror"
                                     placeholder="{{ $field['label'] }} — {{ $localeName }}">
                                 @endif
 
@@ -295,7 +295,7 @@
                             @break
 
                         @case('select')
-                            <select name="{{ $name }}" class="input cursor-pointer @error($name) border-[var(--accent)] @enderror">
+                            <select name="{{ $name }}" class="input cursor-pointer @error($name) is-invalid @enderror">
                                 @unless($required)
                                 <option value="">— none —</option>
                                 @endunless
@@ -321,7 +321,7 @@
 
                         @case('list')
                             <textarea name="{{ $name }}" rows="{{ $field['rows'] ?? 3 }}"
-                                class="input @error($name) border-[var(--accent)] @enderror"
+                                class="input @error($name) is-invalid @enderror"
                                 placeholder="Laravel&#10;React&#10;MySQL">{{ $value }}</textarea>
                             @break
 
@@ -329,18 +329,18 @@
                             <input type="number" name="{{ $name }}" value="{{ $value ?? 0 }}"
                                 @isset($field['min']) min="{{ $field['min'] }}" @endisset
                                 @isset($field['max']) max="{{ $field['max'] }}" @endisset
-                                class="input max-w-[10rem] @error($name) border-[var(--accent)] @enderror">
+                                class="input max-w-[10rem] @error($name) is-invalid @enderror">
                             @break
 
                         @case('textarea')
                             <textarea name="{{ $name }}" rows="{{ $field['rows'] ?? 3 }}"
-                                class="input @error($name) border-[var(--accent)] @enderror">{{ $value }}</textarea>
+                                class="input @error($name) is-invalid @enderror">{{ $value }}</textarea>
                             @break
 
                         @default
                             <input type="{{ $field['type'] === 'url' ? 'url' : ($field['type'] === 'date' ? 'date' : 'text') }}"
                                 name="{{ $name }}" value="{{ $value }}"
-                                class="input @error($name) border-[var(--accent)] @enderror"
+                                class="input @error($name) is-invalid @enderror"
                                 placeholder="{{ $field['placeholder'] ?? '' }}">
                     @endswitch
 

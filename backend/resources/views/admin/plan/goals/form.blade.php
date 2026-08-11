@@ -42,7 +42,7 @@
                     Title <span class="text-[var(--accent)]">*</span>
                 </label>
                 <input type="text" id="title" name="title" value="{{ old('title', $goal->title) }}"
-                    class="input @error('title') border-[var(--accent)] @enderror" placeholder="English">
+                    class="input @error('title') is-invalid @enderror" placeholder="English">
                 @error('title')
                 <p class="text-[var(--accent)] text-xs mt-2">{{ $message }}</p>
                 @enderror

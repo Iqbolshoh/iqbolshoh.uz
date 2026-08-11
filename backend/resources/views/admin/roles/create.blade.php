@@ -30,7 +30,7 @@
                        id="name"
                        name="name"
                        value="{{ old('name') }}"
-                       class="input @error('name') border-[var(--accent)] @enderror"
+                       class="input @error('name') is-invalid @enderror"
                        placeholder="e.g. Editor, Support"
                        pattern="[A-Za-z0-9_\-]+"
                        maxlength="64"

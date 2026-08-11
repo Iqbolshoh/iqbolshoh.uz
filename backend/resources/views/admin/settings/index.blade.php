@@ -52,7 +52,7 @@
                     <div x-show="locale === '{{ $code }}'" @if($code !== $primary) style="display: none;" @endif>
                         <input type="text" name="{{ $field }}[{{ $code }}]"
                             value="{{ old($field . '.' . $code, $values[$field][$code] ?? '') }}"
-                            class="input @error($field . '.' . $code) border-[var(--accent)] @enderror"
+                            class="input @error($field . '.' . $code) is-invalid @enderror"
                             placeholder="{{ $label }} — {{ $localeName }}">
                         @error($field . '.' . $code)
                         <p class="text-[var(--accent)] text-xs mt-2 flex items-center gap-1">
@@ -89,7 +89,7 @@
                         </label>
                         <input type="text" name="social[{{ $network }}][link]"
                             value="{{ old("social.{$network}.link", $social[$network]['link'] ?? '') }}"
-                            class="input @error("social.{$network}.link") border-[var(--accent)] @enderror"
+                            class="input @error("social.{$network}.link") is-invalid @enderror"
                             placeholder="{{ $meta['placeholder'] }}">
                         @error("social.{$network}.link")
                         <p class="text-[var(--accent)] text-xs mt-2 flex items-center gap-1">
@@ -104,7 +104,7 @@
                         </label>
                         <input type="text" name="social[{{ $network }}][label]"
                             value="{{ old("social.{$network}.label", $social[$network]['label'] ?? '') }}"
-                            class="input @error("social.{$network}.label") border-[var(--accent)] @enderror"
+                            class="input @error("social.{$network}.label") is-invalid @enderror"
                             placeholder="{{ $meta['label'] }}">
                         @error("social.{$network}.label")
                         <p class="text-[var(--accent)] text-xs mt-2 flex items-center gap-1">
