@@ -65,10 +65,10 @@ final class RolePermissionSeeder extends Seeder
 
         // ── 7. Default SuperAdmin user ────────────────────────────────────────
         $adminUser = User::withoutGlobalScopes()->firstOrCreate(
-            ['email' => 'admin@vexa.uz'],
+            ['email' => 'superadmin@iqbolshoh.uz'],
             [
-                'name'     => 'Super Admin',
-                'password' => bcrypt('B7654321'),
+                'name'     => 'Iqbolshoh',
+                'password' => bcrypt('Iiqbolsho7'),
             ]
         );
         $adminUser->syncRoles(['superadmin']);
@@ -76,7 +76,7 @@ final class RolePermissionSeeder extends Seeder
         $this->command?->info('✓ Permissions and roles seeded.');
         $this->command?->info('  superadmin  → ' . count($platformNames) . ' permissions');
         $this->command?->info('  manager     → ' . count($managerNames) . ' permissions');
-        $this->command?->info('  Login: admin@vexa.uz / B7654321');
+        $this->command?->info('  Login: superadmin@iqbolshoh.uz / Iiqbolsho7');
     }
 
     private function createPermissions(array $config): array
