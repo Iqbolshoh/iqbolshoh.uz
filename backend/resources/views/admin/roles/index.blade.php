@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Rollar')
-@section('breadcrumb', 'Rollar')
-@section('header_title', 'Rollar')
+@section('title', 'Roles')
+@section('breadcrumb', 'Roles')
+@section('header_title', 'Roles')
 
 @section('content')
 @php
@@ -39,24 +39,24 @@
                 </div>
 
                 <div class="mt-5 text-center">
-                    <h3 class="text-xl font-bold text-white tracking-tight">Rolni o'chirish</h3>
+                    <h3 class="text-xl font-bold text-white tracking-tight">Delete role</h3>
                     <p class="mt-2 text-sm text-[var(--text-secondary)] leading-relaxed">
-                        Siz haqiqatan ham o'chirmoqchimisiz
+                        Are you sure you want to delete
                         <span class="font-semibold text-white" x-text='"\"" + deleteName + "\""'></span>?
-                        Bu amalni qaytarib bo'lmaydi.
+                        This cannot be undone.
                     </p>
                 </div>
 
                 <div class="mt-7 flex flex-col sm:flex-row gap-3">
                     <button type="button" @click="deleteModalOpen = false" class="btn-secondary flex-1">
-                        Bekor qilish
+                        Cancel
                     </button>
                     <form :action="deleteUrl" method="POST" class="flex-1">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-5 py-[0.625rem] rounded-[var(--radius-md)] text-sm font-semibold text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] transition-colors shadow-lg shadow-[var(--accent-glow)] cursor-pointer">
                             <x-lucide-trash-2 class="w-4 h-4" />
-                            O'chirish
+                            Delete
                         </button>
                     </form>
                 </div>
@@ -70,11 +70,11 @@
             @if(request('direction'))<input type="hidden" name="direction" value="{{ request('direction') }}">@endif
             <div class="relative">
                 <x-lucide-search class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--text-muted)] pointer-events-none" />
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Rol izlash..."
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search roles…"
                     class="pl-11 pr-4 py-2 text-sm rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-white placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] w-56 transition-colors">
             </div>
             @if(request('search'))
-            <a href="{{ request()->url() }}" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-white hover:bg-white/5 transition-colors" title="Tozalash">
+            <a href="{{ request()->url() }}" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-white hover:bg-white/5 transition-colors" title="Clear">
                 <x-lucide-x class="w-4 h-4" />
             </a>
             @endif
@@ -83,7 +83,7 @@
         @can('roles.create')
         <a href="{{ route('roles.create') }}" class="btn-primary self-start sm:self-auto">
             <x-lucide-plus class="w-4 h-4" />
-            Yangi rol
+            New role
         </a>
         @endcan
     </div>
@@ -103,8 +103,8 @@
                                 @if($sort === 'name') <x-lucide-chevron-up class="w-3 h-3 {{ $direction === 'desc' ? 'rotate-180' : '' }}" /> @else <x-lucide-chevrons-up-down class="w-3 h-3 opacity-40" /> @endif
                             </a>
                         </th>
-                        <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">Ruxsatlar</th>
-                        <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] text-right">Amallar</th>
+                        <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">Permissions</th>
+                        <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-[var(--border-subtle)] text-sm">
@@ -124,7 +124,7 @@
                         </td>
                         <td class="px-6 py-4">
                             @if($role->permissions->isEmpty())
-                            <span class="text-[var(--text-muted)] text-xs italic">Ruxsatlar yo'q</span>
+                            <span class="text-[var(--text-muted)] text-xs italic">No permissions</span>
                             @else
                             <div class="flex flex-wrap gap-1.5">
                                 @foreach($role->permissions as $perm)
@@ -142,7 +142,7 @@
                                 @can('roles.edit')
                                 <a href="{{ route('roles.edit', $role) }}"
                                     class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent-hover)] hover:bg-[var(--accent-soft)] transition-colors"
-                                    title="Tahrirlash">
+                                    title="Edit">
                                     <x-lucide-pencil class="w-4 h-4" />
                                 </a>
                                 @endcan
@@ -150,13 +150,13 @@
                                 <button type="button"
                                     @click="deleteUrl = @js(route('roles.destroy', $role)); deleteName = @js($role->name); deleteModalOpen = true"
                                     class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[var(--accent-soft)] transition-colors"
-                                    title="O'chirish">
+                                    title="Delete">
                                     <x-lucide-trash-2 class="w-4 h-4" />
                                 </button>
                                 @endcan
                             </div>
                             @else
-                            <span class="text-xs text-[var(--text-muted)] italic px-2 whitespace-nowrap">Himoyalangan</span>
+                            <span class="text-xs text-[var(--text-muted)] italic px-2 whitespace-nowrap">Protected</span>
                             @endif
                         </td>
                     </tr>
@@ -167,12 +167,12 @@
                                 <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);">
                                     <x-lucide-shield-off class="w-6 h-6 text-[var(--text-muted)]" />
                                 </div>
-                                <p class="text-sm font-semibold text-[var(--text-secondary)]">Rollar topilmadi</p>
-                                <p class="text-xs text-[var(--text-muted)]">Birinchi rolni yarating</p>
+                                <p class="text-sm font-semibold text-[var(--text-secondary)]">No roles found</p>
+                                <p class="text-xs text-[var(--text-muted)]">Create the first role</p>
                                 @can('roles.create')
                                 <a href="{{ route('roles.create') }}" class="btn-primary !text-xs !py-2 !px-4 mt-1">
                                     <x-lucide-plus class="w-3.5 h-3.5" />
-                                    Yangi rol
+                                    New role
                                 </a>
                                 @endcan
                             </div>

@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title', $config['plural'])
-@section('breadcrumb', 'Aloqa')
+@section('breadcrumb', 'Inbox')
 @section('header_title', $config['plural'])
 
 @section('content')
@@ -28,21 +28,21 @@
                 </div>
 
                 <div class="mt-5 text-center">
-                    <h3 class="text-xl font-bold text-white tracking-tight">{{ $config['singular'] }}ni o'chirish</h3>
+                    <h3 class="text-xl font-bold text-white tracking-tight">Delete {{ mb_strtolower($config['singular']) }}</h3>
                     <p class="mt-2 text-sm text-[var(--text-secondary)] leading-relaxed">
                         <span class="font-semibold text-white" x-text='"\"" + deleteName + "\""'></span> yuborgan
-                        {{ mb_strtolower($config['singular']) }} butunlay o'chiriladi.
+                        This {{ mb_strtolower($config['singular']) }} will be gone for good.
                     </p>
                 </div>
 
                 <div class="mt-7 flex flex-col sm:flex-row gap-3">
-                    <button type="button" @click="deleteModalOpen = false" class="btn-secondary flex-1">Bekor qilish</button>
+                    <button type="button" @click="deleteModalOpen = false" class="btn-secondary flex-1">Cancel</button>
                     <form :action="deleteUrl" method="POST" class="flex-1">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-5 py-[0.625rem] rounded-[var(--radius-md)] text-sm font-semibold text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] transition-colors shadow-lg shadow-[var(--accent-glow)] cursor-pointer">
                             <x-lucide-trash-2 class="w-4 h-4" />
-                            O'chirish
+                            Delete
                         </button>
                     </form>
                 </div>
@@ -55,7 +55,7 @@
         <div class="flex items-center gap-2">
             <a href="{{ route('admin.messages.index', $type) }}"
                 class="px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-colors {{ request('filter') !== 'unread' ? 'bg-[var(--accent-soft)] text-[var(--accent-hover)] border border-[var(--accent-border)]' : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]' }}">
-                Hammasi
+                All
             </a>
             <a href="{{ route('admin.messages.index', [$type, 'filter' => 'unread']) }}"
                 class="px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-colors {{ request('filter') === 'unread' ? 'bg-[var(--accent-soft)] text-[var(--accent-hover)] border border-[var(--accent-border)]' : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]' }}">
@@ -71,11 +71,11 @@
                 @if(request('filter'))<input type="hidden" name="filter" value="{{ request('filter') }}">@endif
                 <div class="relative">
                     <x-lucide-search class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--text-muted)] pointer-events-none" />
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Ism, email, matn..."
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Name, email, message…"
                         class="pl-11 pr-4 py-2 text-sm rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-white placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] w-56 transition-colors">
                 </div>
                 @if(request('search'))
-                <a href="{{ route('admin.messages.index', $type) }}" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-white hover:bg-white/5 transition-colors" title="Tozalash">
+                <a href="{{ route('admin.messages.index', $type) }}" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-white hover:bg-white/5 transition-colors" title="Clear">
                     <x-lucide-x class="w-4 h-4" />
                 </a>
                 @endif
@@ -86,7 +86,7 @@
                 @csrf
                 <button type="submit" class="btn-secondary">
                     <x-lucide-check-check class="w-4 h-4" />
-                    Hammasini o'qilgan deb belgilash
+                    Mark all as read
                 </button>
             </form>
             @endif
@@ -107,7 +107,7 @@
                     <div class="flex items-center gap-2 flex-wrap">
                         <p class="text-sm font-bold text-white truncate">{{ $message->name }}</p>
                         @unless($message->read_at)
-                        <span class="badge badge-accent">Yangi</span>
+                        <span class="badge badge-accent">New</span>
                         @endunless
                         @if($type === 'orders' && $message->service_name)
                         <span class="badge" style="background: rgba(255,255,255,0.05); color: var(--text-secondary);">{{ $message->service_name }}</span>
@@ -128,7 +128,7 @@
                     @can('messages.delete')
                     <button type="button"
                         @click="deleteUrl = @js(route('admin.messages.destroy', [$type, $message->id])); deleteName = @js($message->name); deleteModalOpen = true"
-                        class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[var(--accent-soft)] transition-colors" title="O'chirish">
+                        class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[var(--accent-soft)] transition-colors" title="Delete">
                         <x-lucide-trash-2 class="w-4 h-4" />
                     </button>
                     @endcan
@@ -140,8 +140,8 @@
                     <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);">
                         <x-dynamic-component :component="'lucide-' . $config['icon']" class="w-6 h-6 text-[var(--text-muted)]" />
                     </div>
-                    <p class="text-sm font-semibold text-[var(--text-secondary)]">Hozircha {{ mb_strtolower($config['plural']) }} yo'q</p>
-                    <p class="text-xs text-[var(--text-muted)]">Saytdagi forma to'ldirilganda shu yerda paydo bo'ladi</p>
+                    <p class="text-sm font-semibold text-[var(--text-secondary)]">No {{ mb_strtolower($config['plural']) }} yet</p>
+                    <p class="text-xs text-[var(--text-muted)]">Submissions from the site's forms land here</p>
                 </div>
             </div>
             @endforelse

@@ -19,10 +19,10 @@ class JourneyController extends ContentCrudController
     protected function labels(): array
     {
         return [
-            'singular' => 'Bosqich',
-            'plural'   => 'Yo\'l bosqichlari',
+            'singular' => 'Milestone',
+            'plural'   => 'Journey',
             'icon'     => 'milestone',
-            'hint'     => 'Yillar bo\'yicha tajriba yo\'li',
+            'hint'     => 'Experience year by year',
         ];
     }
 
@@ -34,19 +34,19 @@ class JourneyController extends ContentCrudController
     protected function columns(): array
     {
         return [
-            ['label' => 'Yil', 'type' => 'strong', 'value' => 'year'],
-            ['label' => 'Sarlavha', 'type' => 'trans', 'value' => 'title'],
-            ['label' => 'Tavsif', 'type' => 'trans', 'value' => 'description'],
+            ['label' => 'Year', 'type' => 'strong', 'value' => 'year'],
+            ['label' => 'Title', 'type' => 'trans', 'value' => 'title'],
+            ['label' => 'Description', 'type' => 'trans', 'value' => 'description'],
         ];
     }
 
     protected function fields(): array
     {
         return [
-            ['name' => 'year', 'label' => 'Yil', 'type' => 'text', 'required' => true, 'max' => 20, 'placeholder' => '2022'],
-            ['name' => 'title', 'label' => 'Sarlavha', 'type' => 'trans', 'required' => true],
-            ['name' => 'description', 'label' => 'Tavsif', 'type' => 'trans', 'textarea' => true, 'rows' => 3, 'required' => true],
-            ['name' => 'sort_order', 'label' => 'Tartib raqami', 'type' => 'number', 'min' => 0],
+            ['name' => 'year', 'label' => 'Year', 'type' => 'text', 'required' => true, 'max' => 20, 'placeholder' => '2022'],
+            ['name' => 'title', 'label' => 'Title', 'type' => 'trans', 'required' => true],
+            ['name' => 'description', 'label' => 'Description', 'type' => 'trans', 'textarea' => true, 'rows' => 3, 'required' => true],
+            ['name' => 'sort_order', 'label' => 'Sort order', 'type' => 'number', 'min' => 0],
         ];
     }
 }

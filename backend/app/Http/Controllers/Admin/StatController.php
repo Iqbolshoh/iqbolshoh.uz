@@ -19,10 +19,10 @@ class StatController extends ContentCrudController
     protected function labels(): array
     {
         return [
-            'singular' => 'Ko\'rsatkich',
-            'plural'   => 'Ko\'rsatkichlar',
+            'singular' => 'Stat',
+            'plural'   => 'Stats',
             'icon'     => 'bar-chart-3',
-            'hint'     => 'Bosh sahifadagi raqamlar ("4+ yillik tajriba")',
+            'hint'     => 'The numbers on the home page ("4+ years of experience")',
         ];
     }
 
@@ -34,19 +34,19 @@ class StatController extends ContentCrudController
     protected function columns(): array
     {
         return [
-            ['label' => 'Ikonka', 'type' => 'icon', 'value' => 'icon'],
-            ['label' => 'Qiymat', 'type' => 'strong', 'value' => 'value'],
-            ['label' => 'Izoh', 'type' => 'trans', 'value' => 'label'],
+            ['label' => 'Icon', 'type' => 'icon', 'value' => 'icon'],
+            ['label' => 'Value', 'type' => 'strong', 'value' => 'value'],
+            ['label' => 'Caption', 'type' => 'trans', 'value' => 'label'],
         ];
     }
 
     protected function fields(): array
     {
         return [
-            ['name' => 'value', 'label' => 'Qiymat', 'type' => 'text', 'required' => true, 'placeholder' => '4+'],
-            ['name' => 'label', 'label' => 'Izoh', 'type' => 'trans', 'required' => true],
-            ['name' => 'icon', 'label' => 'Ikonka', 'type' => 'icon', 'required' => true],
-            ['name' => 'sort_order', 'label' => 'Tartib raqami', 'type' => 'number', 'min' => 0],
+            ['name' => 'value', 'label' => 'Value', 'type' => 'text', 'required' => true, 'placeholder' => '4+'],
+            ['name' => 'label', 'label' => 'Caption', 'type' => 'trans', 'required' => true],
+            ['name' => 'icon', 'label' => 'Icon', 'type' => 'icon', 'required' => true],
+            ['name' => 'sort_order', 'label' => 'Sort order', 'type' => 'number', 'min' => 0],
         ];
     }
 }

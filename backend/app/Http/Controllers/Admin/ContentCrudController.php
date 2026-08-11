@@ -24,6 +24,7 @@ use Illuminate\Support\Str;
  *   trans       — multilingual text ({"uz":…,"en":…,"ru":…,"tj":…})
  *   trans_list  — multilingual list, one entry per line for each language
  *   list        — plain list (["Laravel","React"])
+ *   tech        — technology picker backed by config/technologies.php
  *   text | textarea | url | number | date | bool | select | icon | image
  */
 abstract class ContentCrudController extends Controller
@@ -37,7 +38,7 @@ abstract class ContentCrudController extends Controller
      */
     abstract protected function key(): string;
 
-    /** ['singular' => 'Loyiha', 'plural' => 'Loyihalar', 'icon' => 'folder-git-2'] */
+    /** ['singular' => 'Project', 'plural' => 'Projects', 'icon' => 'folder-git-2'] */
     abstract protected function labels(): array;
 
     /** Columns rendered in the listing table. */
@@ -98,7 +99,7 @@ abstract class ContentCrudController extends Controller
         SiteContent::flush();
 
         return redirect()->route("admin.{$this->key()}.index")
-            ->with('success', $this->labels()['singular'] . ' qo\'shildi.');
+            ->with('success', $this->labels()['singular'] . ' created.');
     }
 
     public function edit(int $id)
@@ -127,7 +128,7 @@ abstract class ContentCrudController extends Controller
         SiteContent::flush();
 
         return redirect()->route("admin.{$this->key()}.index")
-            ->with('success', $this->labels()['singular'] . ' saqlandi.');
+            ->with('success', $this->labels()['singular'] . ' saved.');
     }
 
     public function destroy(int $id)
@@ -143,7 +144,7 @@ abstract class ContentCrudController extends Controller
         SiteContent::flush();
 
         return redirect()->route("admin.{$this->key()}.index")
-            ->with('success', $this->labels()['singular'] . ' o\'chirildi.');
+            ->with('success', $this->labels()['singular'] . ' deleted.');
     }
 
     // ── Internals ────────────────────────────────────────────────────────────
@@ -231,6 +232,15 @@ abstract class ContentCrudController extends Controller
                     $rules[$name] = [$required ? 'required' : 'nullable', 'string'];
                     break;
 
+                case 'tech':
+                    // Free-form on purpose: the catalogue is a shortcut, not a
+                    // whitelist, so a stack it does not cover yet can still be
+                    // typed in and picked up by the badge fallback.
+                    $rules[$name]        = [$required ? 'required' : 'nullable', 'array'];
+                    $rules["{$name}.*"]  = ['string', 'max:100'];
+                    $attributes["{$name}.*"] = $field['label'];
+                    break;
+
                 default: // text, textarea
                     $rules[$name] = array_merge(
                         [$required ? 'required' : 'nullable', 'string', 'max:' . ($field['max'] ?? 255)],
@@ -262,6 +272,12 @@ abstract class ContentCrudController extends Controller
 
                 case 'list':
                     $data[$name] = $this->splitLines($validated[$name] ?? '');
+                    break;
+
+                case 'tech':
+                    $data[$name] = array_values(array_unique(
+                        array_filter(array_map('trim', $validated[$name] ?? []), fn($tech) => $tech !== '')
+                    ));
                     break;
 
                 case 'bool':

@@ -23,8 +23,8 @@
 
     <title>@yield('title', config('app.name'))</title>
 
-    {{-- Font: Plus Jakarta Sans (UI) + JetBrains Mono (raqam/kod).
-         Ikkalasi ham vite.config.js orqali o'z serverimizda hosting qilinadi. --}}
+    {{-- Fonts: Plus Jakarta Sans for the UI, JetBrains Mono for numbers and
+         code. Both are self-hosted through vite.config.js. --}}
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif

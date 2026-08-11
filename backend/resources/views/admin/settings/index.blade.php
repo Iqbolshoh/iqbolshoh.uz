@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Sayt sozlamalari')
-@section('breadcrumb', 'Sozlamalar')
-@section('header_title', 'Sayt sozlamalari')
+@section('title', 'Site settings')
+@section('breadcrumb', 'Settings')
+@section('header_title', 'Site settings')
 
 @section('content')
 @php
@@ -23,8 +23,8 @@
         <div class="card p-6 sm:p-8 mb-6">
             <div class="mb-7 pb-6 border-b border-[var(--border-subtle)] flex items-start justify-between gap-4">
                 <div>
-                    <h2 class="text-xl font-bold text-white tracking-tight">Shaxsiy ma'lumotlar</h2>
-                    <p class="text-sm text-[var(--text-muted)] mt-1">Saytning barcha sahifalarida ishlatiladi</p>
+                    <h2 class="text-xl font-bold text-white tracking-tight">Personal details</h2>
+                    <p class="text-sm text-[var(--text-muted)] mt-1">Used across every page of the site</p>
                 </div>
                 <div class="w-11 h-11 rounded-xl flex items-center justify-center bg-[var(--accent-soft)] border border-[var(--accent-border)] flex-shrink-0">
                     <x-lucide-user-round class="w-5 h-5 text-[var(--accent-hover)]" />
@@ -70,9 +70,9 @@
         <div class="card p-6 sm:p-8">
             <div class="mb-7 pb-6 border-b border-[var(--border-subtle)] flex items-start justify-between gap-4">
                 <div>
-                    <h2 class="text-xl font-bold text-white tracking-tight">Aloqa va ijtimoiy tarmoqlar</h2>
+                    <h2 class="text-xl font-bold text-white tracking-tight">Contact and social links</h2>
                     <p class="text-sm text-[var(--text-muted)] mt-1">
-                        Havola — bosilganda ochiladigan manzil, matn — ko'rinadigan yozuv
+                        Link is where it points, label is what the visitor reads
                     </p>
                 </div>
                 <div class="w-11 h-11 rounded-xl flex items-center justify-center bg-[var(--accent-soft)] border border-[var(--accent-border)] flex-shrink-0">
@@ -119,7 +119,7 @@
             <div class="flex items-center justify-end gap-3 pt-7 mt-8 border-t border-[var(--border-subtle)]">
                 <button type="submit" class="btn-primary">
                     <x-lucide-save class="w-4 h-4" />
-                    Sozlamalarni saqlash
+                    Save settings
                 </button>
             </div>
         </div>

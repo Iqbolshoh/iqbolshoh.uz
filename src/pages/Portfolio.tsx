@@ -4,6 +4,7 @@ import { ExternalLink, Github, Filter } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Card } from "../components/UI/Card";
 import { Button } from "../components/UI/Button";
+import { TechBadge } from "../components/UI/TechBadge";
 import { useContent } from "../context/ContentContext";
 export const Portfolio: React.FC = () => {
   const { projects } = useContent();
@@ -211,12 +212,7 @@ export const Portfolio: React.FC = () => {
                         aria-label="Technologies"
                       >
                         {project.tech.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-3 py-1 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400 text-xs font-semibold rounded-full border border-primary-100 dark:border-primary-800"
-                          >
-                            {tech}
-                          </span>
+                          <TechBadge key={tech} name={tech} />
                         ))}
                       </div>
 

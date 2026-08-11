@@ -30,8 +30,8 @@
 
     <title>@yield('title', 'Dashboard') · {{ config('app.program_name') }}</title>
 
-    {{-- Font: Plus Jakarta Sans (UI) + JetBrains Mono (raqam/kod).
-         Ikkalasi ham vite.config.js orqali o'z serverimizda hosting qilinadi. --}}
+    {{-- Fonts: Plus Jakarta Sans for the UI, JetBrains Mono for numbers and
+         code. Both are self-hosted through vite.config.js. --}}
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
@@ -801,7 +801,7 @@
                     </div>
 
                     <div class="mt-5 text-center">
-                        <h3 id="logout-title" class="text-xl font-bold text-white tracking-tight">Chiqishni tasdiqlash</h3>
+                        <h3 id="logout-title" class="text-xl font-bold text-white tracking-tight">Log outni tasdiqlash</h3>
                         <p class="mt-2 text-sm text-[var(--text-secondary)] leading-relaxed">
                             Hisobingizdan chiqmoqchimisiz?
                         </p>
@@ -809,7 +809,7 @@
 
                     <div class="mt-7 flex flex-col sm:flex-row gap-3">
                         <button type="button" @click="logoutModalOpen = false" class="btn-secondary flex-1 cursor-pointer">
-                            Bekor qilish
+                            Cancel
                         </button>
                         <form action="{{ route('logout') ?? '#' }}" method="POST" class="flex-1">
                             @csrf
@@ -861,30 +861,55 @@
                 <div>
                     <div class="space-y-1">
                         <a href="{{ route('dashboard.index') }}"
-                            title="Boshqaruv paneli"
+                            title="Dashboard"
                             class="nav-link {{ request()->routeIs('dashboard.*') ? 'active' : '' }}">
                             <x-lucide-layout-dashboard class="nav-icon" />
-                            <span class="sidebar-label">Boshqaruv paneli</span>
+                            <span class="sidebar-label">Dashboard</span>
                         </a>
                     </div>
                 </div>
 
+                {{-- Administration --}}
+                @canany(['roles.view', 'users.view'])
+                <div>
+                    <h3 class="nav-heading">Administration</h3>
+                    <div class="space-y-1">
+                        @can('roles.view')
+                        <a href="{{ route('roles.index') }}"
+                            title="Roles"
+                            class="nav-link {{ request()->routeIs('roles.*') ? 'active' : '' }}">
+                            <x-lucide-shield-check class="nav-icon" />
+                            <span class="sidebar-label">Roles</span>
+                        </a>
+                        @endcan
+                        @can('users.view')
+                        <a href="{{ route('users.index') }}"
+                            title="Users"
+                            class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                            <x-lucide-user-cog class="nav-icon" />
+                            <span class="sidebar-label">Users</span>
+                        </a>
+                        @endcan
+                    </div>
+                </div>
+                @endcanany
+
                 {{-- Site content --}}
                 @php
                     $contentSections = [
-                        'projects'      => ['Loyihalar', 'folder-git-2'],
-                        'services'      => ['Xizmatlar', 'briefcase'],
-                        'tech-stacks'   => ['Texnologiyalar', 'layers'],
-                        'stats'         => ["Ko'rsatkichlar", 'bar-chart-3'],
-                        'highlights'    => ["Ta'kidlar", 'sparkles'],
-                        'journeys'      => ["Yo'l bosqichlari", 'milestone'],
-                        'beyonds'       => ['Dasturlashdan tashqari', 'heart-handshake'],
-                        'process-steps' => ['Ish jarayoni', 'list-checks'],
+                        'projects'      => ['Projects', 'folder-git-2'],
+                        'services'      => ['Services', 'briefcase'],
+                        'tech-stacks'   => ['Technologies', 'layers'],
+                        'stats'         => ["Stats", 'bar-chart-3'],
+                        'highlights'    => ["Highlights", 'sparkles'],
+                        'journeys'      => ["Journey", 'milestone'],
+                        'beyonds'       => ['Beyond code', 'heart-handshake'],
+                        'process-steps' => ['Process', 'list-checks'],
                     ];
                 @endphp
                 @canany(array_map(fn($section) => $section . '.view', array_keys($contentSections)))
                 <div>
-                    <h3 class="nav-heading">Sayt kontenti</h3>
+                    <h3 class="nav-heading">Site content</h3>
                     <div class="space-y-1">
                         @foreach($contentSections as $section => [$label, $icon])
                         @can($section . '.view')
@@ -904,11 +929,11 @@
                 @can('messages.view')
                 @php $unreadCounts = \App\Http\Controllers\Admin\MessageController::unreadCounts(); @endphp
                 <div>
-                    <h3 class="nav-heading">Aloqa</h3>
+                    <h3 class="nav-heading">Contact</h3>
                     <div class="space-y-1">
                         @foreach([
-                            'contact' => ['Aloqa xabarlari', 'mail'],
-                            'orders'  => ['Xizmat buyurtmalari', 'shopping-bag'],
+                            'contact' => ['Contact messages', 'mail'],
+                            'orders'  => ['Service orders', 'shopping-bag'],
                         ] as $inboxType => [$label, $icon])
                         <a href="{{ route('admin.messages.index', $inboxType) }}"
                             title="{{ $label }}"
@@ -927,42 +952,17 @@
                 {{-- Settings --}}
                 @can('settings.view')
                 <div>
-                    <h3 class="nav-heading">Sozlamalar</h3>
+                    <h3 class="nav-heading">Settings</h3>
                     <div class="space-y-1">
                         <a href="{{ route('admin.settings.index') }}"
-                            title="Sayt sozlamalari"
+                            title="Site settings"
                             class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
                             <x-lucide-settings class="nav-icon" />
-                            <span class="sidebar-label">Sayt sozlamalari</span>
+                            <span class="sidebar-label">Site settings</span>
                         </a>
                     </div>
                 </div>
                 @endcan
-
-                {{-- Administration --}}
-                @canany(['roles.view', 'users.view'])
-                <div>
-                    <h3 class="nav-heading">Boshqaruv</h3>
-                    <div class="space-y-1">
-                        @can('roles.view')
-                        <a href="{{ route('roles.index') }}"
-                            title="Rollar"
-                            class="nav-link {{ request()->routeIs('roles.*') ? 'active' : '' }}">
-                            <x-lucide-shield-check class="nav-icon" />
-                            <span class="sidebar-label">Rollar</span>
-                        </a>
-                        @endcan
-                        @can('users.view')
-                        <a href="{{ route('users.index') }}"
-                            title="Foydalanuvchilar"
-                            class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
-                            <x-lucide-user-cog class="nav-icon" />
-                            <span class="sidebar-label">Foydalanuvchilar</span>
-                        </a>
-                        @endcan
-                    </div>
-                </div>
-                @endcanany
 
             </nav>
 
@@ -974,7 +974,7 @@
                     </div>
                     <div class="sidebar-user-info min-w-0 flex-1">
                         <p class="text-sm font-semibold text-white truncate leading-tight">{{ auth()->user()->name ?? 'Admin' }}</p>
-                        <p class="text-xs text-[var(--text-muted)] truncate">{{ auth()->user()->email ?? 'admin@vexa.uz' }}</p>
+                        <p class="text-xs text-[var(--text-muted)] truncate">{{ auth()->user()->email ?? 'superadmin@iqbolshoh.uz' }}</p>
                     </div>
                     <button @click="logoutModalOpen = true" type="button"
                         class="sidebar-logout-btn p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent-hover)] hover:bg-[var(--accent-soft)] transition-colors flex-shrink-0 cursor-pointer"
@@ -1007,7 +1007,7 @@
                     {{-- Desktop: collapse / expand sidebar --}}
                     <button @click="toggleSidebar()"
                         class="hidden md:flex items-center justify-center p-2 rounded-xl text-[var(--text-secondary)] hover:text-white hover:bg-white/5 border border-transparent hover:border-[var(--border-subtle)] transition-colors cursor-pointer flex-shrink-0"
-                        :title="sidebarOpen ? 'Yopish' : 'Ochish'"
+                        :title="sidebarOpen ? 'Collapse' : 'Expand'"
                         aria-label="Toggle sidebar">
                         <x-lucide-menu class="w-5 h-5" />
                     </button>
@@ -1085,12 +1085,12 @@
                                     </div>
                                 </a>
                                 @empty
-                                <p class="px-4 py-8 text-center text-sm text-[var(--text-muted)]">O'qilmagan xabar yo'q</p>
+                                <p class="px-4 py-8 text-center text-sm text-[var(--text-muted)]">No unread messages</p>
                                 @endforelse
                             </div>
 
                             <div class="px-4 py-2.5 border-t border-[var(--border-subtle)] bg-[var(--bg-surface)]">
-                                <a href="{{ route('admin.messages.index', 'contact') }}" class="text-xs font-semibold text-[var(--accent-hover)] hover:text-[var(--accent-alt)] transition-colors cursor-pointer">Barchasini ko'rish</a>
+                                <a href="{{ route('admin.messages.index', 'contact') }}" class="text-xs font-semibold text-[var(--accent-hover)] hover:text-[var(--accent-alt)] transition-colors cursor-pointer">View all</a>
                             </div>
                         </div>
                     </div>
@@ -1104,11 +1104,11 @@
                         <x-lucide-moon class="w-5 h-5 theme-icon-light" />
                     </button>
 
-                    {{-- Profile --}}
+                    {{-- Profilee --}}
                     <div class="relative">
                         <button @click="profileOpen = !profileOpen" @click.away="profileOpen = false"
                             class="flex items-center gap-2.5 p-1.5 pr-2.5 rounded-xl hover:bg-white/5 border border-transparent hover:border-[var(--border-subtle)] transition-colors cursor-pointer"
-                            aria-label="Profile menu">
+                            aria-label="Profilee menu">
                             <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-md" style="background: linear-gradient(135deg, var(--accent-hover), var(--accent-alt));">
                                 {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
                             </div>
@@ -1128,7 +1128,7 @@
 
                             <div class="px-4 py-3 border-b border-[var(--border-subtle)]">
                                 <p class="text-sm font-bold text-white truncate">{{ auth()->user()->name ?? 'Admin' }}</p>
-                                <p class="text-xs text-[var(--text-muted)] truncate mt-0.5">{{ auth()->user()->email ?? 'admin@vexa.uz' }}</p>
+                                <p class="text-xs text-[var(--text-muted)] truncate mt-0.5">{{ auth()->user()->email ?? 'superadmin@iqbolshoh.uz' }}</p>
                             </div>
 
                             <div class="py-1">
@@ -1142,7 +1142,7 @@
                                 <button @click="logoutModalOpen = true; profileOpen = false" type="button"
                                     class="flex items-center gap-3 w-full text-left px-4 py-2.5 text-sm font-semibold text-[var(--accent-hover)] hover:bg-[var(--accent-soft)] transition-colors cursor-pointer">
                                     <x-lucide-log-out class="w-4 h-4" />
-                                    Chiqish
+                                    Log out
                                 </button>
                             </div>
                         </div>

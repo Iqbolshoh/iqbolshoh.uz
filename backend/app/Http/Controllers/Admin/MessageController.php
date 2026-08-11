@@ -19,14 +19,14 @@ class MessageController extends Controller
     private const TYPES = [
         'contact' => [
             'model'    => ContactMessage::class,
-            'singular' => 'Xabar',
-            'plural'   => 'Aloqa xabarlari',
+            'singular' => 'Message',
+            'plural'   => 'Contact messages',
             'icon'     => 'mail',
         ],
         'orders' => [
             'model'    => ServiceOrder::class,
-            'singular' => 'Buyurtma',
-            'plural'   => 'Xizmat buyurtmalari',
+            'singular' => 'Order',
+            'plural'   => 'Service orders',
             'icon'     => 'shopping-bag',
         ],
     ];
@@ -90,7 +90,7 @@ class MessageController extends Controller
         $model::findOrFail($id)->delete();
 
         return redirect()->route('admin.messages.index', $type)
-            ->with('success', $config['singular'] . ' o\'chirildi.');
+            ->with('success', $config['singular'] . ' deleted.');
     }
 
     public function markAllRead(string $type)
@@ -102,7 +102,7 @@ class MessageController extends Controller
         $model::whereNull('read_at')->update(['read_at' => now()]);
 
         return redirect()->route('admin.messages.index', $type)
-            ->with('success', 'Hammasi o\'qilgan deb belgilandi.');
+            ->with('success', 'All marked as read.');
     }
 
     private function config(string $type): array

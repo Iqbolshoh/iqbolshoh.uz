@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Rolni tahrirlash')
-@section('breadcrumb', 'Rollar')
-@section('header_title', 'Rolni tahrirlash')
+@section('title', 'Edit role')
+@section('breadcrumb', 'Roles')
+@section('header_title', 'Edit role')
 
 @section('content')
 <div class="max-w-4xl mx-auto">
@@ -10,13 +10,13 @@
     <a href="{{ route('roles.index') }}"
        class="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors mb-6">
         <x-lucide-arrow-left class="w-4 h-4" />
-        Rollarga qaytish
+        Rolesga qaytish
     </a>
 
     <div class="card p-6 sm:p-8">
         <div class="mb-8 pb-6 border-b border-[var(--border-subtle)] flex items-center gap-4">
             <div class="flex-1">
-                <h2 class="text-xl font-bold text-white tracking-tight">Rolni tahrirlash</h2>
+                <h2 class="text-xl font-bold text-white tracking-tight">Edit role</h2>
                 <p class="text-sm text-[var(--text-muted)] mt-1">
                     Tahrirlanayotgan: <span class="font-semibold text-[var(--text-secondary)]">{{ ucfirst(str_replace(['-', '_'], ' ', $role->name)) }}</span>
                 </p>
@@ -39,7 +39,7 @@
                        name="name"
                        value="{{ old('name', $role->name) }}"
                        class="input @error('name') border-[var(--accent)] @enderror"
-                       placeholder="masalan: Muharrir, Qo'llab-quvvatlash"
+                       placeholder="e.g. Editor, Support"
                        pattern="[A-Za-z0-9_\-]+"
                        maxlength="64"
                        required
@@ -90,7 +90,7 @@
                                        class="group-checkbox h-3.5 w-3.5 rounded cursor-pointer appearance-none border border-[var(--border-strong)] bg-[var(--bg-raised)] checked:bg-[var(--accent)] checked:border-[var(--accent)] transition-colors"
                                        @if($groupAll) checked @endif
                                        @change="toggleGroup($event, '{{ $groupName }}')">
-                                <span class="text-[0.68rem] font-medium text-[var(--text-muted)] group-hover:text-[var(--text-secondary)] transition-colors">Hammasi</span>
+                                <span class="text-[0.68rem] font-medium text-[var(--text-muted)] group-hover:text-[var(--text-secondary)] transition-colors">All</span>
                             </label>
                         </div>
 
@@ -126,7 +126,7 @@
 
             <div class="flex items-center justify-end gap-3 pt-6 border-t border-[var(--border-subtle)]">
                 <a href="{{ route('roles.index') }}" class="btn-secondary">
-                    Bekor qilish
+                    Cancel
                 </a>
                 <button type="submit" class="btn-primary">
                     <x-lucide-save class="w-4 h-4" />

@@ -19,10 +19,10 @@ class BeyondController extends ContentCrudController
     protected function labels(): array
     {
         return [
-            'singular' => 'Faoliyat',
-            'plural'   => 'Dasturlashdan tashqari',
+            'singular' => 'Activity',
+            'plural'   => 'Beyond code',
             'icon'     => 'heart-handshake',
-            'hint'     => 'Ustozlik, ijtimoiy faoliyat va boshqa qiziqishlar',
+            'hint'     => 'Mentoring, community work and other interests',
         ];
     }
 
@@ -34,19 +34,19 @@ class BeyondController extends ContentCrudController
     protected function columns(): array
     {
         return [
-            ['label' => 'Ikonka', 'type' => 'icon', 'value' => 'icon'],
-            ['label' => 'Sarlavha', 'type' => 'trans', 'value' => 'title'],
-            ['label' => 'Tavsif', 'type' => 'trans', 'value' => 'description'],
+            ['label' => 'Icon', 'type' => 'icon', 'value' => 'icon'],
+            ['label' => 'Title', 'type' => 'trans', 'value' => 'title'],
+            ['label' => 'Description', 'type' => 'trans', 'value' => 'description'],
         ];
     }
 
     protected function fields(): array
     {
         return [
-            ['name' => 'title', 'label' => 'Sarlavha', 'type' => 'trans', 'required' => true],
-            ['name' => 'description', 'label' => 'Tavsif', 'type' => 'trans', 'textarea' => true, 'rows' => 4, 'required' => true],
-            ['name' => 'icon', 'label' => 'Ikonka', 'type' => 'icon', 'required' => true],
-            ['name' => 'sort_order', 'label' => 'Tartib raqami', 'type' => 'number', 'min' => 0],
+            ['name' => 'title', 'label' => 'Title', 'type' => 'trans', 'required' => true],
+            ['name' => 'description', 'label' => 'Description', 'type' => 'trans', 'textarea' => true, 'rows' => 4, 'required' => true],
+            ['name' => 'icon', 'label' => 'Icon', 'type' => 'icon', 'required' => true],
+            ['name' => 'sort_order', 'label' => 'Sort order', 'type' => 'number', 'min' => 0],
         ];
     }
 }

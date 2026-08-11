@@ -19,10 +19,10 @@ class ProjectController extends ContentCrudController
     protected function labels(): array
     {
         return [
-            'singular' => 'Loyiha',
-            'plural'   => 'Loyihalar',
+            'singular' => 'Project',
+            'plural'   => 'Projects',
             'icon'     => 'folder-git-2',
-            'hint'     => 'Portfolio sahifasidagi ishlar',
+            'hint'     => 'The work shown on the Portfolio page',
         ];
     }
 
@@ -34,22 +34,22 @@ class ProjectController extends ContentCrudController
     protected function columns(): array
     {
         return [
-            ['label' => 'Rasm', 'type' => 'image', 'value' => 'image'],
-            ['label' => 'Nomi', 'type' => 'trans', 'value' => 'name'],
-            ['label' => 'Kategoriya', 'type' => 'badge', 'value' => 'category'],
-            ['label' => 'Texnologiyalar', 'type' => 'list', 'value' => 'tech'],
-            ['label' => 'Tanlangan', 'type' => 'bool', 'value' => 'featured'],
+            ['label' => 'Image', 'type' => 'image', 'value' => 'image'],
+            ['label' => 'Name', 'type' => 'trans', 'value' => 'name'],
+            ['label' => 'Category', 'type' => 'badge', 'value' => 'category'],
+            ['label' => 'Technologies', 'type' => 'tech', 'value' => 'tech'],
+            ['label' => 'Featured', 'type' => 'bool', 'value' => 'featured'],
         ];
     }
 
     protected function fields(): array
     {
         return [
-            ['name' => 'name', 'label' => 'Nomi', 'type' => 'trans', 'required' => true],
-            ['name' => 'description', 'label' => 'Tavsif', 'type' => 'trans', 'textarea' => true, 'rows' => 4, 'required' => true],
-            ['name' => 'image', 'label' => 'Rasm', 'type' => 'image', 'help' => 'Tavsiya etilgan o\'lcham: 1200×800px'],
+            ['name' => 'name', 'label' => 'Name', 'type' => 'trans', 'required' => true],
+            ['name' => 'description', 'label' => 'Description', 'type' => 'trans', 'textarea' => true, 'rows' => 4, 'required' => true],
+            ['name' => 'image', 'label' => 'Image', 'type' => 'image', 'help' => 'Recommended size: 1200×800px'],
             [
-                'name' => 'category', 'label' => 'Kategoriya', 'type' => 'select', 'required' => true,
+                'name' => 'category', 'label' => 'Category', 'type' => 'select', 'required' => true,
                 'options' => [
                     'Full-Stack' => 'Full-Stack',
                     'Frontend'   => 'Frontend',
@@ -58,11 +58,11 @@ class ProjectController extends ContentCrudController
                     'Desktop'    => 'Desktop',
                 ],
             ],
-            ['name' => 'tech', 'label' => 'Texnologiyalar', 'type' => 'list', 'required' => true, 'help' => 'Har birini vergul yoki yangi qatorda yozing'],
-            ['name' => 'live_demo', 'label' => 'Jonli havola', 'type' => 'url', 'placeholder' => 'https://example.uz'],
-            ['name' => 'github', 'label' => 'GitHub havolasi', 'type' => 'url', 'placeholder' => 'https://github.com/…'],
-            ['name' => 'featured', 'label' => 'Tanlangan loyiha', 'type' => 'bool', 'help' => 'Bosh sahifada birinchi bo\'lib ko\'rsatiladi'],
-            ['name' => 'sort_order', 'label' => 'Tartib raqami', 'type' => 'number', 'min' => 0, 'help' => 'Kichik raqam yuqorida turadi'],
+            ['name' => 'tech', 'label' => 'Technologies', 'type' => 'tech', 'required' => true, 'help' => 'Pick from the catalogue or type a new one'],
+            ['name' => 'live_demo', 'label' => 'Live demo', 'type' => 'url', 'placeholder' => 'https://example.uz'],
+            ['name' => 'github', 'label' => 'GitHub link', 'type' => 'url', 'placeholder' => 'https://github.com/…'],
+            ['name' => 'featured', 'label' => 'Featured project', 'type' => 'bool', 'help' => 'Shown first on the home page'],
+            ['name' => 'sort_order', 'label' => 'Sort order', 'type' => 'number', 'min' => 0, 'help' => 'Lower numbers come first'],
         ];
     }
 }

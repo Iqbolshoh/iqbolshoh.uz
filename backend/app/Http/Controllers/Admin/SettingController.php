@@ -20,7 +20,7 @@ class SettingController extends Controller
 {
     private const SOCIAL = [
         'email'     => ['label' => 'Email', 'placeholder' => 'mailto:siz@example.com'],
-        'phone'     => ['label' => 'Telefon', 'placeholder' => 'tel:+998901234567'],
+        'phone'     => ['label' => 'Phone', 'placeholder' => 'tel:+998901234567'],
         'github'    => ['label' => 'GitHub', 'placeholder' => 'https://github.com/…'],
         'linkedin'  => ['label' => 'LinkedIn', 'placeholder' => 'https://linkedin.com/in/…'],
         'telegram'  => ['label' => 'Telegram', 'placeholder' => 'https://t.me/…'],
@@ -82,7 +82,7 @@ class SettingController extends Controller
         SiteContent::flush();
 
         return redirect()->route('admin.settings.index')
-            ->with('success', 'Sozlamalar saqlandi.');
+            ->with('success', 'Settings saved.');
     }
 
     private function save(string $key, array $value): void

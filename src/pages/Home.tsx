@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
 import { Button } from "../components/UI/Button";
 import { Card } from "../components/UI/Card";
+import { TechBadge } from "../components/UI/TechBadge";
 import { useContent } from "../context/ContentContext";
 import { usePath } from "../hooks/usePath";
 
@@ -346,12 +347,7 @@ export const Home: React.FC = () => {
                         aria-label="Technologies used"
                       >
                         {project.tech.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300 text-sm rounded-full"
-                          >
-                            {tech}
-                          </span>
+                          <TechBadge key={tech} name={tech} size="md" />
                         ))}
                       </div>
                       <div className="flex space-x-4">

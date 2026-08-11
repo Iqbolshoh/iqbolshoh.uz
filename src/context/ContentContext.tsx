@@ -4,7 +4,7 @@ import { getContent } from '../lib/api';
 import { withIcons } from '../lib/icons';
 import { PageLoader } from '../components/UI/PageLoader';
 
-/** Ko'p tilli matn: {"en":..,"uz":..,"ru":..,"tj":..} */
+/** Multilingual text: {"en":…,"uz":…,"ru":…,"tj":…} */
 export type Translated = Record<string, string>;
 
 export interface SocialLink {
@@ -41,6 +41,12 @@ export interface Service {
   features: Record<string, string[]>;
 }
 
+/** Badge styling for one technology name, served by the API. */
+export interface TechMeta {
+  icon: string | null;
+  color: string;
+}
+
 export interface SiteContent {
   personalInfo: PersonalInfo;
   techStack: { name: string; icon: LucideIcon; level: number }[];
@@ -51,15 +57,16 @@ export interface SiteContent {
   beyond: { icon: LucideIcon; title: Translated; description: Translated }[];
   services: Service[];
   processSteps: { step: string; title: Translated; description: Translated }[];
+  technologies: Record<string, TechMeta>;
 }
 
 const ContentContext = createContext<SiteContent | null>(null);
 
-/** JSON'da bo'sh rasm `null` bo'ladi, komponentlar esa `undefined` kutadi. */
+/** An empty image is `null` in JSON, but components expect `undefined`. */
 const withImage = <T extends { image?: string | null }>(items: T[] | undefined) =>
   (items ?? []).map((item) => ({ ...item, image: item.image ?? undefined }));
 
-/** API javobidagi ikonka matnlarini komponentga aylantiradi. */
+/** Turns the icon names in the API response into components. */
 function normalize(raw: any): SiteContent {
   return {
     personalInfo: raw.personalInfo,
@@ -71,6 +78,7 @@ function normalize(raw: any): SiteContent {
     beyond: withIcons(raw.beyond),
     services: withIcons(raw.services),
     processSteps: raw.processSteps ?? [],
+    technologies: raw.technologies ?? {},
   } as SiteContent;
 }
 
@@ -123,14 +131,14 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({
 };
 
 /**
- * Sayt kontenti. Provider ma'lumot yuklanmaguncha children'ni render qilmaydi,
- * shuning uchun bu yerda qiymat doim mavjud.
+ * The site content. The provider renders no children until the payload has
+ * loaded, so the value here is always present.
  */
 export function useContent(): SiteContent {
   const value = useContext(ContentContext);
 
   if (!value) {
-    throw new Error('useContent faqat <ContentProvider> ichida ishlatiladi');
+    throw new Error('useContent must be used inside <ContentProvider>');
   }
 
   return value;

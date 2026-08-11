@@ -31,9 +31,9 @@
         </div>
     </div>
 
-    {{-- Profil ma'lumotlari --}}
+    {{-- Profile details --}}
     <div class="card p-6">
-        <h3 class="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)] mb-5">Profil ma'lumotlari</h3>
+        <h3 class="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)] mb-5">Profile details</h3>
         <form action="{{ route('profile.update') }}" method="POST" class="space-y-4">
             @csrf
             @method('PUT')
@@ -52,39 +52,39 @@
 
             <div class="pt-2">
                 <button type="submit" class="btn-primary">
-                    <x-lucide-save class="w-4 h-4" /> Saqlash
+                    <x-lucide-save class="w-4 h-4" /> Save
                 </button>
             </div>
         </form>
     </div>
 
-    {{-- Parol o'zgartirish --}}
+    {{-- Change password --}}
     <div class="card p-6">
-        <h3 class="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)] mb-5">Parol o'zgartirish</h3>
+        <h3 class="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)] mb-5">Change password</h3>
         <form action="{{ route('profile.password') }}" method="POST" class="space-y-4">
             @csrf
             @method('PUT')
 
             <div>
-                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Joriy parol</label>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Current password</label>
                 <input name="current_password" type="password" class="input @error('current_password') border-red-500/60 @enderror" placeholder="••••••••">
                 @error('current_password')<p class="text-xs text-red-400 mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div>
-                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Yangi parol</label>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">New password</label>
                 <input name="password" type="password" class="input @error('password') border-red-500/60 @enderror" placeholder="Kamida 6 belgi">
                 @error('password')<p class="text-xs text-red-400 mt-1">{{ $message }}</p>@enderror
             </div>
 
             <div>
-                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Yangi parolni tasdiqlang</label>
+                <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5 uppercase tracking-wide">Confirm new password</label>
                 <input name="password_confirmation" type="password" class="input" placeholder="••••••••">
             </div>
 
             <div class="pt-2">
                 <button type="submit" class="btn-secondary">
-                    <x-lucide-lock class="w-4 h-4" /> Parolni o'zgartirish
+                    <x-lucide-lock class="w-4 h-4" /> Change password
                 </button>
             </div>
         </form>
@@ -94,7 +94,7 @@
     <div class="card p-4">
         <div class="flex flex-wrap gap-x-6 gap-y-2 text-xs text-[var(--text-muted)] font-mono">
             <span>ID: #{{ $user->id }}</span>
-            <span>Ro'yxatdan o'tgan: {{ $user->created_at->format('d.m.Y') }}</span>
+            <span>Joined {{ $user->created_at->format('d.m.Y') }}</span>
         </div>
     </div>
 

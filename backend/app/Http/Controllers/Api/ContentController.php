@@ -12,20 +12,21 @@ use App\Models\Service;
 use App\Models\SiteSetting;
 use App\Models\Stat;
 use App\Models\TechStack;
+use App\Support\SiteTech;
 use Illuminate\Support\Facades\Cache;
 
 /**
- * Sayt kontenti API.
+ * The site content API.
  *
- * Javob shakli eski `src/data/content.ts` bilan bir xil saqlangan,
- * shuning uchun frontend komponentlari o'zgarishsiz ishlaydi.
+ * The response keeps the exact shape of the old `src/data/content.ts`, so the
+ * frontend components read it without a single change.
  */
 class ContentController extends Controller
 {
     private const CACHE_KEY = 'site.content';
     private const CACHE_TTL = 60;
 
-    /** Butun kontent bitta so'rovda. */
+    /** The whole payload in one request. */
     public function index()
     {
         return response()->json(
@@ -44,9 +45,9 @@ class ContentController extends Controller
     }
 
     /**
-     * DIQQAT: bu yerda faqat oddiy massiv qaytarilishi shart.
-     * Eloquent modellari kesh'ga serialize qilinganda `__PHP_Incomplete_Class`
-     * bo'lib qaytadi, shuning uchun hamma joyda `toArray()` ishlatilgan.
+     * Must return plain arrays only. Eloquent models come back out of the cache
+     * as `__PHP_Incomplete_Class` once serialized, which is why every branch
+     * here ends in `toArray()`.
      */
     private function payload(): array
     {
@@ -72,7 +73,25 @@ class ContentController extends Controller
             'processSteps' => ProcessStep::orderBy('sort_order')
                 ->get(['step', 'title', 'description'])
                 ->toArray(),
+            'technologies' => SiteTech::map($this->techNamesInUse()),
         ];
+    }
+
+    /**
+     * Technology names stored on projects and services. Records written before
+     * a name joined the catalogue still get a badge colour this way, instead of
+     * disappearing from the map the site looks them up in.
+     *
+     * @return list<string>
+     */
+    private function techNamesInUse(): array
+    {
+        $names = [
+            ...Project::pluck('tech')->flatten(),
+            ...Service::pluck('tech')->flatten(),
+        ];
+
+        return array_values(array_unique(array_filter($names)));
     }
 
     private function projectList(): array

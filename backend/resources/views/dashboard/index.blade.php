@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Boshqaruv paneli')
-@section('header_title', 'Boshqaruv paneli')
+@section('title', 'Dashboard')
+@section('header_title', 'Dashboard')
 
 @section('header_actions')
 <a href="{{ url('/') }}" target="_blank" rel="noopener" class="btn-secondary">
@@ -18,9 +18,9 @@
         'projects'      => ['Loyihalar', 'folder-git-2'],
         'services'      => ['Xizmatlar', 'briefcase'],
         'tech-stacks'   => ['Texnologiyalar', 'layers'],
-        'stats'         => ["Ko'rsatkichlar", 'bar-chart-3'],
+        'stats'         => ['Stats', 'bar-chart-3'],
         'highlights'    => ["Ta'kidlar", 'sparkles'],
-        'journeys'      => ["Yo'l bosqichlari", 'milestone'],
+        'journeys'      => ['Journey', 'milestone'],
         'beyonds'       => ['Dasturlashdan tashqari', 'heart-handshake'],
         'process-steps' => ['Ish jarayoni', 'list-checks'],
     ];
@@ -28,14 +28,14 @@
 
 <div class="mb-8">
     <h2 class="text-2xl font-bold text-white tracking-tight">Assalomu alaykum, {{ $user->name }}</h2>
-    <p class="text-sm text-[var(--text-muted)] mt-1">iqbolshoh.uz kontentini shu yerdan boshqarasiz.</p>
+    <p class="text-sm text-[var(--text-muted)] mt-1">Manage every piece of iqbolshoh.uz content from here.</p>
 </div>
 
 {{-- Inbox --}}
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
     @foreach([
         'contact' => ['Aloqa xabarlari', 'mail'],
-        'orders'  => ['Xizmat buyurtmalari', 'shopping-bag'],
+        'orders'  => ['Service orders', 'shopping-bag'],
     ] as $type => [$label, $icon])
     <a href="{{ route('admin.messages.index', $type) }}" class="card card-hover p-6 flex items-center gap-5">
         <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-[var(--accent-soft)] border border-[var(--accent-border)] flex-shrink-0">
@@ -70,9 +70,9 @@
 {{-- Latest submissions --}}
 <div class="card overflow-hidden">
     <div class="px-6 py-4 border-b border-[var(--border-subtle)] flex items-center justify-between gap-4">
-        <h3 class="text-sm font-bold text-white">So'nggi murojaatlar</h3>
+        <h3 class="text-sm font-bold text-white">Latest enquiries</h3>
         <a href="{{ route('admin.messages.index', 'contact') }}" class="text-xs font-semibold text-[var(--accent-hover)] hover:text-[var(--accent-alt)] transition-colors">
-            Hammasi
+            All
         </a>
     </div>
 
@@ -90,10 +90,10 @@
                 <div class="flex items-center gap-2 flex-wrap">
                     <p class="text-sm font-semibold text-white truncate">{{ $entry['name'] }}</p>
                     <span class="badge" style="background: rgba(255,255,255,0.05); color: var(--text-secondary);">
-                        {{ $entry['type'] === 'contact' ? 'Xabar' : 'Buyurtma' }}
+                        {{ $entry['type'] === 'contact' ? 'Message' : 'Order' }}
                     </span>
                     @if($entry['unread'])
-                    <span class="badge badge-accent">Yangi</span>
+                    <span class="badge badge-accent">New</span>
                     @endif
                 </div>
                 <p class="text-xs text-[var(--text-muted)] mt-1 truncate">{{ \Illuminate\Support\Str::limit($entry['summary'], 90) }}</p>
@@ -109,7 +109,7 @@
                 <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);">
                     <x-lucide-inbox class="w-6 h-6 text-[var(--text-muted)]" />
                 </div>
-                <p class="text-sm font-semibold text-[var(--text-secondary)]">Hozircha murojaat yo'q</p>
+                <p class="text-sm font-semibold text-[var(--text-secondary)]">No enquiries yet</p>
             </div>
         </div>
         @endforelse

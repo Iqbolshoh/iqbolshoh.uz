@@ -19,10 +19,10 @@ class TechStackController extends ContentCrudController
     protected function labels(): array
     {
         return [
-            'singular' => 'Texnologiya',
-            'plural'   => 'Texnologiyalar',
+            'singular' => 'Technology',
+            'plural'   => 'Technologies',
             'icon'     => 'layers',
-            'hint'     => 'Ko\'nikmalar bo\'limidagi daraja ko\'rsatkichlari',
+            'hint'     => 'The skill meters in the Skills section',
         ];
     }
 
@@ -34,19 +34,19 @@ class TechStackController extends ContentCrudController
     protected function columns(): array
     {
         return [
-            ['label' => 'Ikonka', 'type' => 'icon', 'value' => 'icon'],
-            ['label' => 'Nomi', 'type' => 'text', 'value' => 'name'],
-            ['label' => 'Daraja', 'type' => 'meter', 'value' => 'level'],
+            ['label' => 'Icon', 'type' => 'icon', 'value' => 'icon'],
+            ['label' => 'Name', 'type' => 'text', 'value' => 'name'],
+            ['label' => 'Level', 'type' => 'meter', 'value' => 'level'],
         ];
     }
 
     protected function fields(): array
     {
         return [
-            ['name' => 'name', 'label' => 'Nomi', 'type' => 'text', 'required' => true, 'placeholder' => 'Laravel'],
-            ['name' => 'icon', 'label' => 'Ikonka', 'type' => 'icon', 'required' => true],
-            ['name' => 'level', 'label' => 'Daraja (%)', 'type' => 'number', 'required' => true, 'min' => 0, 'max' => 100],
-            ['name' => 'sort_order', 'label' => 'Tartib raqami', 'type' => 'number', 'min' => 0],
+            ['name' => 'name', 'label' => 'Name', 'type' => 'text', 'required' => true, 'placeholder' => 'Laravel'],
+            ['name' => 'icon', 'label' => 'Icon', 'type' => 'icon', 'required' => true],
+            ['name' => 'level', 'label' => 'Level (%)', 'type' => 'number', 'required' => true, 'min' => 0, 'max' => 100],
+            ['name' => 'sort_order', 'label' => 'Sort order', 'type' => 'number', 'min' => 0],
         ];
     }
 }

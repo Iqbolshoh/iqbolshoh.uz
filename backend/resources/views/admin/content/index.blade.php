@@ -5,7 +5,7 @@
 @extends('layouts.dashboard')
 
 @section('title', $labels['plural'])
-@section('breadcrumb', 'Sayt kontenti')
+@section('breadcrumb', 'Site content')
 @section('header_title', $labels['plural'])
 
 @section('content')
@@ -58,22 +58,22 @@
                 </div>
 
                 <div class="mt-5 text-center">
-                    <h3 class="text-xl font-bold text-white tracking-tight">{{ $labels['singular'] }}ni o'chirish</h3>
+                    <h3 class="text-xl font-bold text-white tracking-tight">Delete {{ mb_strtolower($labels['singular']) }}</h3>
                     <p class="mt-2 text-sm text-[var(--text-secondary)] leading-relaxed">
-                        Siz haqiqatan ham o'chirmoqchimisiz
+                        Are you sure you want to delete
                         <span class="font-semibold text-white" x-text='"\"" + deleteName + "\""'></span>?
-                        Bu amalni qaytarib bo'lmaydi.
+                        This cannot be undone.
                     </p>
                 </div>
 
                 <div class="mt-7 flex flex-col sm:flex-row gap-3">
-                    <button type="button" @click="deleteModalOpen = false" class="btn-secondary flex-1">Bekor qilish</button>
+                    <button type="button" @click="deleteModalOpen = false" class="btn-secondary flex-1">Cancel</button>
                     <form :action="deleteUrl" method="POST" class="flex-1">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-5 py-[0.625rem] rounded-[var(--radius-md)] text-sm font-semibold text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] transition-colors shadow-lg shadow-[var(--accent-glow)] cursor-pointer">
                             <x-lucide-trash-2 class="w-4 h-4" />
-                            O'chirish
+                            Delete
                         </button>
                     </form>
                 </div>
@@ -93,11 +93,11 @@
             <form method="GET" action="{{ request()->url() }}" class="flex items-center gap-2">
                 <div class="relative">
                     <x-lucide-search class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--text-muted)] pointer-events-none" />
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Qidirish..."
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search…"
                         class="pl-11 pr-4 py-2 text-sm rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-white placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] w-56 transition-colors">
                 </div>
                 @if(request('search'))
-                <a href="{{ request()->url() }}" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-white hover:bg-white/5 transition-colors" title="Tozalash">
+                <a href="{{ request()->url() }}" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-white hover:bg-white/5 transition-colors" title="Clear">
                     <x-lucide-x class="w-4 h-4" />
                 </a>
                 @endif
@@ -106,13 +106,65 @@
             @can($key . '.create')
             <a href="{{ route('admin.' . $key . '.create') }}" class="btn-primary">
                 <x-lucide-plus class="w-4 h-4" />
-                Yangi {{ mb_strtolower($labels['singular']) }}
+                New {{ mb_strtolower($labels['singular']) }}
             </a>
             @endcan
         </div>
     </div>
 
-    <div class="card overflow-hidden">
+    {{-- Stacked cards below md: a nine-column table cannot be read on a phone,
+         and horizontal scrolling hides the row actions off-screen. --}}
+    <div class="md:hidden space-y-3">
+        @forelse($items as $item)
+        <div class="card p-4">
+            <div class="flex items-start justify-between gap-3">
+                <div class="min-w-0 flex-1 space-y-2.5">
+                    @foreach($columns as $column)
+                    <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)] w-20 flex-shrink-0">{{ $column['label'] }}</span>
+                        <div class="min-w-0">
+                            @include('admin.content.cell', ['column' => $column, 'value' => $item->{$column['value']}])
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+
+                <div class="flex flex-col gap-1 flex-shrink-0">
+                    @can($key . '.edit')
+                    <a href="{{ route('admin.' . $key . '.edit', $item->id) }}"
+                        class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent-hover)] hover:bg-[var(--accent-soft)] transition-colors" title="Edit">
+                        <x-lucide-pencil class="w-4 h-4" />
+                    </a>
+                    @endcan
+                    @can($key . '.delete')
+                    <button type="button"
+                        @click="deleteUrl = @js(route('admin.' . $key . '.destroy', $item->id)); deleteName = @js($rowName($item)); deleteModalOpen = true"
+                        class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[var(--accent-soft)] transition-colors" title="Delete">
+                        <x-lucide-trash-2 class="w-4 h-4" />
+                    </button>
+                    @endcan
+                </div>
+            </div>
+        </div>
+        @empty
+        <div class="card px-6 py-12 text-center">
+            <div class="flex flex-col items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);">
+                    <x-dynamic-component :component="'lucide-' . $labels['icon']" class="w-6 h-6 text-[var(--text-muted)]" />
+                </div>
+                <p class="text-sm font-semibold text-[var(--text-secondary)]">No {{ mb_strtolower($labels['plural']) }} yet</p>
+                @can($key . '.create')
+                <a href="{{ route('admin.' . $key . '.create') }}" class="btn-primary !text-xs !py-2 !px-4 mt-1">
+                    <x-lucide-plus class="w-3.5 h-3.5" />
+                    New {{ mb_strtolower($labels['singular']) }}
+                </a>
+                @endcan
+            </div>
+        </div>
+        @endforelse
+    </div>
+
+    <div class="card overflow-hidden hidden md:block">
         <div class="overflow-x-auto scroll-area">
             <table class="w-full text-left border-collapse">
                 <thead>
@@ -121,7 +173,7 @@
                         @foreach($columns as $column)
                         <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">{{ $column['label'] }}</th>
                         @endforeach
-                        <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] text-right">Amallar</th>
+                        <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-[var(--border-subtle)] text-sm">
@@ -130,69 +182,8 @@
                         <td class="px-6 py-4 text-[var(--text-muted)] font-mono text-xs">{{ $item->sort_order }}</td>
 
                         @foreach($columns as $column)
-                        @php $value = $item->{$column['value']}; @endphp
                         <td class="px-6 py-4 align-middle">
-                            @switch($column['type'])
-                                @case('image')
-                                    @if($value)
-                                    <img src="{{ $value }}" alt="" loading="lazy"
-                                        class="w-16 h-11 object-cover rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)]">
-                                    @else
-                                    <div class="w-16 h-11 rounded-lg border border-[var(--border-subtle)] flex items-center justify-center" style="background: rgba(255,255,255,0.03);">
-                                        <x-lucide-image class="w-4 h-4 text-[var(--text-muted)]" />
-                                    </div>
-                                    @endif
-                                    @break
-
-                                @case('icon')
-                                    <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-[var(--accent-soft)] border border-[var(--accent-border)]">
-                                        <x-dynamic-component :component="\App\Support\SiteIcons::component($value)" class="w-4 h-4 text-[var(--accent-hover)]" />
-                                    </div>
-                                    @break
-
-                                @case('trans')
-                                    <p class="text-white font-medium max-w-md truncate">{{ $plain($value) }}</p>
-                                    @break
-
-                                @case('badge')
-                                    <span class="badge badge-accent">{{ $value }}</span>
-                                    @break
-
-                                @case('list')
-                                    <div class="flex flex-wrap gap-1 max-w-xs">
-                                        @foreach(array_slice((array) $value, 0, 3) as $entry)
-                                        <span class="badge" style="background: rgba(255,255,255,0.05); color: var(--text-secondary);">{{ $entry }}</span>
-                                        @endforeach
-                                        @if(count((array) $value) > 3)
-                                        <span class="text-xs text-[var(--text-muted)]">+{{ count((array) $value) - 3 }}</span>
-                                        @endif
-                                    </div>
-                                    @break
-
-                                @case('bool')
-                                    @if($value)
-                                    <span class="badge badge-success"><x-lucide-check class="w-3 h-3" /> Ha</span>
-                                    @else
-                                    <span class="text-xs text-[var(--text-muted)]">—</span>
-                                    @endif
-                                    @break
-
-                                @case('meter')
-                                    <div class="flex items-center gap-3 min-w-[9rem]">
-                                        <div class="flex-1 h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.07);">
-                                            <div class="h-full rounded-full" style="width: {{ (int) $value }}%; background: linear-gradient(90deg, var(--accent-hover), var(--accent-alt));"></div>
-                                        </div>
-                                        <span class="font-mono text-xs text-[var(--text-secondary)]">{{ $value }}%</span>
-                                    </div>
-                                    @break
-
-                                @case('strong')
-                                    <span class="font-mono font-bold text-white">{{ $value }}</span>
-                                    @break
-
-                                @default
-                                    <span class="text-[var(--text-secondary)]">{{ $value ?: '—' }}</span>
-                            @endswitch
+                            @include('admin.content.cell', ['column' => $column, 'value' => $item->{$column['value']}])
                         </td>
                         @endforeach
 
@@ -200,14 +191,14 @@
                             <div class="inline-flex items-center gap-1">
                                 @can($key . '.edit')
                                 <a href="{{ route('admin.' . $key . '.edit', $item->id) }}"
-                                    class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent-hover)] hover:bg-[var(--accent-soft)] transition-colors" title="Tahrirlash">
+                                    class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent-hover)] hover:bg-[var(--accent-soft)] transition-colors" title="Edit">
                                     <x-lucide-pencil class="w-4 h-4" />
                                 </a>
                                 @endcan
                                 @can($key . '.delete')
                                 <button type="button"
                                     @click="deleteUrl = @js(route('admin.' . $key . '.destroy', $item->id)); deleteName = @js($rowName($item)); deleteModalOpen = true"
-                                    class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[var(--accent-soft)] transition-colors" title="O'chirish">
+                                    class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[var(--accent-soft)] transition-colors" title="Delete">
                                     <x-lucide-trash-2 class="w-4 h-4" />
                                 </button>
                                 @endcan
@@ -221,11 +212,11 @@
                                 <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);">
                                     <x-dynamic-component :component="'lucide-' . $labels['icon']" class="w-6 h-6 text-[var(--text-muted)]" />
                                 </div>
-                                <p class="text-sm font-semibold text-[var(--text-secondary)]">{{ $labels['plural'] }} topilmadi</p>
+                                <p class="text-sm font-semibold text-[var(--text-secondary)]">No {{ mb_strtolower($labels['plural']) }} yet</p>
                                 @can($key . '.create')
                                 <a href="{{ route('admin.' . $key . '.create') }}" class="btn-primary !text-xs !py-2 !px-4 mt-1">
                                     <x-lucide-plus class="w-3.5 h-3.5" />
-                                    Yangi {{ mb_strtolower($labels['singular']) }}
+                                    New {{ mb_strtolower($labels['singular']) }}
                                 </a>
                                 @endcan
                             </div>

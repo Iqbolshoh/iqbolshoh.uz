@@ -1,2 +1,8 @@
 *
 !.gitignore
+
+# The media library is content, not a cache: the portfolio images the seeder
+# points at and the technology icons the badges load both live here. Ignoring
+# them would leave a fresh clone with a site full of broken images.
+!media/
+!media/**

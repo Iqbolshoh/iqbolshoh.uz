@@ -19,10 +19,10 @@ class HighlightController extends ContentCrudController
     protected function labels(): array
     {
         return [
-            'singular' => 'Ta\'kid',
-            'plural'   => 'Ta\'kidlar',
+            'singular' => 'Highlight',
+            'plural'   => 'Highlights',
             'icon'     => 'sparkles',
-            'hint'     => '"Men haqimda" sahifasidagi qisqa faktlar',
+            'hint'     => 'Short facts on the About page',
         ];
     }
 
@@ -34,17 +34,17 @@ class HighlightController extends ContentCrudController
     protected function columns(): array
     {
         return [
-            ['label' => 'Ikonka', 'type' => 'icon', 'value' => 'icon'],
-            ['label' => 'Matn', 'type' => 'trans', 'value' => 'text'],
+            ['label' => 'Icon', 'type' => 'icon', 'value' => 'icon'],
+            ['label' => 'Text', 'type' => 'trans', 'value' => 'text'],
         ];
     }
 
     protected function fields(): array
     {
         return [
-            ['name' => 'text', 'label' => 'Matn', 'type' => 'trans', 'textarea' => true, 'rows' => 3, 'required' => true],
-            ['name' => 'icon', 'label' => 'Ikonka', 'type' => 'icon', 'required' => true],
-            ['name' => 'sort_order', 'label' => 'Tartib raqami', 'type' => 'number', 'min' => 0],
+            ['name' => 'text', 'label' => 'Text', 'type' => 'trans', 'textarea' => true, 'rows' => 3, 'required' => true],
+            ['name' => 'icon', 'label' => 'Icon', 'type' => 'icon', 'required' => true],
+            ['name' => 'sort_order', 'label' => 'Sort order', 'type' => 'number', 'min' => 0],
         ];
     }
 }

@@ -49,7 +49,7 @@
 
             <div x-data="{ showPassword: false }">
                 <label for="password" class="block text-sm font-semibold text-[var(--text-primary)] mb-1.5">
-                    Parol
+                    Password
                 </label>
                 <div class="relative">
                     <input id="password" name="password"

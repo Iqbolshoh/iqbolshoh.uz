@@ -37,18 +37,18 @@
                 </div>
 
                 <div class="mt-5 text-center">
-                    <h3 class="text-xl font-bold text-white tracking-tight">{{ $config['singular'] }}ni o'chirish</h3>
-                    <p class="mt-2 text-sm text-[var(--text-secondary)]">Bu amalni qaytarib bo'lmaydi.</p>
+                    <h3 class="text-xl font-bold text-white tracking-tight">Delete {{ mb_strtolower($config['singular']) }}</h3>
+                    <p class="mt-2 text-sm text-[var(--text-secondary)]">This cannot be undone.</p>
                 </div>
 
                 <div class="mt-7 flex flex-col sm:flex-row gap-3">
-                    <button type="button" @click="deleteModalOpen = false" class="btn-secondary flex-1">Bekor qilish</button>
+                    <button type="button" @click="deleteModalOpen = false" class="btn-secondary flex-1">Cancel</button>
                     <form action="{{ route('admin.messages.destroy', [$type, $message->id]) }}" method="POST" class="flex-1">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-5 py-[0.625rem] rounded-[var(--radius-md)] text-sm font-semibold text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] transition-colors shadow-lg shadow-[var(--accent-glow)] cursor-pointer">
                             <x-lucide-trash-2 class="w-4 h-4" />
-                            O'chirish
+                            Delete
                         </button>
                     </form>
                 </div>
@@ -66,7 +66,7 @@
         @can('messages.delete')
         <button type="button" @click="deleteModalOpen = true" class="btn-ghost !text-[var(--accent-hover)]">
             <x-lucide-trash-2 class="w-4 h-4" />
-            O'chirish
+            Delete
         </button>
         @endcan
     </div>
@@ -112,7 +112,7 @@
 
         @if($message->message)
         <div class="mb-6">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-2">Xabar matni</h3>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)] mb-2">Message</h3>
             <div class="rounded-[var(--radius-md)] border border-[var(--border-subtle)] p-4 text-sm text-[var(--text-secondary)] leading-relaxed whitespace-pre-line"
                 style="background: rgba(255,255,255,0.02);">{{ $message->message }}</div>
         </div>
@@ -135,7 +135,7 @@
             @if($type === 'orders' && $message->phone)
             <a href="tel:{{ $message->phone }}" class="btn-secondary">
                 <x-lucide-phone class="w-4 h-4" />
-                Qo'ng'iroq qilish
+                Call
             </a>
             @endif
         </div>
