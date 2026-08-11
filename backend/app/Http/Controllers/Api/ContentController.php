@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Beyond;
-use App\Models\BlogPost;
 use App\Models\Highlight;
 use App\Models\Journey;
 use App\Models\ProcessStep;
@@ -44,18 +43,6 @@ class ContentController extends Controller
         return response()->json($this->serviceList());
     }
 
-    public function blog()
-    {
-        return response()->json($this->blogList());
-    }
-
-    public function blogPost(string $slug)
-    {
-        $post = BlogPost::where('slug', $slug)->firstOrFail();
-
-        return response()->json($this->formatPost($post));
-    }
-
     /**
      * DIQQAT: bu yerda faqat oddiy massiv qaytarilishi shart.
      * Eloquent modellari kesh'ga serialize qilinganda `__PHP_Incomplete_Class`
@@ -85,7 +72,6 @@ class ContentController extends Controller
             'processSteps' => ProcessStep::orderBy('sort_order')
                 ->get(['step', 'title', 'description'])
                 ->toArray(),
-            'blogPosts'    => $this->blogList(),
         ];
     }
 
@@ -118,25 +104,4 @@ class ContentController extends Controller
         ])->all();
     }
 
-    private function blogList(): array
-    {
-        return BlogPost::orderBy('sort_order')
-            ->get()
-            ->map(fn(BlogPost $p) => $this->formatPost($p))
-            ->all();
-    }
-
-    private function formatPost(BlogPost $p): array
-    {
-        return [
-            'id'       => $p->id,
-            'slug'     => $p->slug,
-            'title'    => $p->title,
-            'excerpt'  => $p->excerpt,
-            'image'    => $p->image,
-            'date'     => $p->date->format('Y-m-d'),
-            'tags'     => $p->tags,
-            'featured' => $p->featured,
-        ];
-    }
 }

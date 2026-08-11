@@ -16,17 +16,44 @@ final class RolePermissionSeeder extends Seeder
         'users'         => ['view', 'create', 'edit', 'delete'],
     ];
 
-    // ── Manager: full access except delete ────────────────────────────────────
+    // ── Site content: one permission set per section of iqbolshoh.uz ──────────
+    private const CONTENT_PERMISSIONS = [
+        'projects'      => ['view', 'create', 'edit', 'delete'],
+        'services'      => ['view', 'create', 'edit', 'delete'],
+        'tech-stacks'   => ['view', 'create', 'edit', 'delete'],
+        'stats'         => ['view', 'create', 'edit', 'delete'],
+        'highlights'    => ['view', 'create', 'edit', 'delete'],
+        'journeys'      => ['view', 'create', 'edit', 'delete'],
+        'beyonds'       => ['view', 'create', 'edit', 'delete'],
+        'process-steps' => ['view', 'create', 'edit', 'delete'],
+        'settings'      => ['view', 'edit'],
+        'messages'      => ['view', 'delete'],
+    ];
+
+    // ── Manager: edits the site content, but cannot delete or touch accounts ──
     private const MANAGER_PERMISSIONS = [
-        'dashboard'  => ['view'],
+        'dashboard'     => ['view'],
+        'projects'      => ['view', 'create', 'edit'],
+        'services'      => ['view', 'create', 'edit'],
+        'tech-stacks'   => ['view', 'create', 'edit'],
+        'stats'         => ['view', 'create', 'edit'],
+        'highlights'    => ['view', 'create', 'edit'],
+        'journeys'      => ['view', 'create', 'edit'],
+        'beyonds'       => ['view', 'create', 'edit'],
+        'process-steps' => ['view', 'create', 'edit'],
+        'settings'      => ['view', 'edit'],
+        'messages'      => ['view'],
     ];
 
     public function run(): void
     {
         app()['cache']->forget(config('permission.cache.key'));
 
-        // ── 1. Platform permissions → SuperAdmin ──────────────────────────────
-        $platformNames = $this->createPermissions(self::PLATFORM_PERMISSIONS);
+        // ── 1. Platform + content permissions → SuperAdmin ─────────────────────
+        $platformNames = array_merge(
+            $this->createPermissions(self::PLATFORM_PERMISSIONS),
+            $this->createPermissions(self::CONTENT_PERMISSIONS),
+        );
 
         $superadmin = Role::firstOrCreate(['name' => 'superadmin', 'guard_name' => 'web']);
         $superadmin->syncPermissions($platformNames);

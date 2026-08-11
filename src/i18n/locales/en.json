@@ -4,7 +4,6 @@
     "about": "About",
     "portfolio": "Portfolio",
     "services": "Services",
-    "blog": "Blog",
     "contact": "Contact",
     "hireMe": "Hire Me"
   },
@@ -24,7 +23,6 @@
     "journeyTitle": "By the Numbers",
     "journeyDescription": "Quick facts about my journey.",
     "subtitle": "Building scalable web applications with Laravel, React, and modern cloud infrastructure.",
-    "viewAllBlog": "View All Articles",
     "trustedSkills": "Trusted Technologies"
   },
   "skills": {
@@ -120,13 +118,6 @@
       "error": "Oops! Something went wrong. Please try again."
     }
   },
-  "blog": {
-    "title": "My Blog",
-    "description": "Sharing what I learn, build, and believe in. From technical tutorials to career insights and personal reflections on the developer journey.",
-    "featured": "Featured",
-    "readMore": "Read More",
-    "backToBlog": "Back to Blog"
-  },
   "contact": {
     "title": "Let's Work Together",
     "description": "Got a project in mind or just want to say Salaam? I'd love to hear from you. Let's create something amazing together.",
@@ -176,11 +167,6 @@
       "title": "Contact Me | Hire a Full-Stack Developer",
       "description": "Looking to build a digital product? Get in touch with Iqbolshoh to discuss your next web development project. Available for remote work.",
       "keywords": "hire developer, contact software engineer, freelance web developer Uzbekistan, remote full-stack developer"
-    },
-    "blog": {
-      "title": "Developer Blog | Tech Insights & Tutorials by Iqbolshoh",
-      "description": "Read articles, tutorials, and insights on full-stack development, software engineering, and tech life by Iqbolshoh Ilhomjonov.",
-      "keywords": "developer blog, programming tutorials, Laravel tips, React tutorials, software engineering blog"
     },
     "notFound": {
       "title": "Page Not Found | Iqbolshoh.uz",

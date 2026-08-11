@@ -41,17 +41,6 @@ export interface Service {
   features: Record<string, string[]>;
 }
 
-export interface BlogPost {
-  id: number;
-  slug: string;
-  title: Translated;
-  excerpt: Translated;
-  image?: string;
-  date: string;
-  tags: string[];
-  featured: boolean;
-}
-
 export interface SiteContent {
   personalInfo: PersonalInfo;
   techStack: { name: string; icon: LucideIcon; level: number }[];
@@ -62,7 +51,6 @@ export interface SiteContent {
   beyond: { icon: LucideIcon; title: Translated; description: Translated }[];
   services: Service[];
   processSteps: { step: string; title: Translated; description: Translated }[];
-  blogPosts: BlogPost[];
 }
 
 const ContentContext = createContext<SiteContent | null>(null);
@@ -83,7 +71,6 @@ function normalize(raw: any): SiteContent {
     beyond: withIcons(raw.beyond),
     services: withIcons(raw.services),
     processSteps: raw.processSteps ?? [],
-    blogPosts: withImage(raw.blogPosts),
   } as SiteContent;
 }
 

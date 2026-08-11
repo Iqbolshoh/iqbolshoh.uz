@@ -26,3 +26,6 @@ dist-ssr
 
 # Claude Code sozlamalari
 .claude
+
+# Build-time HOME for the deploy user (npm cache lives here)
+tmp

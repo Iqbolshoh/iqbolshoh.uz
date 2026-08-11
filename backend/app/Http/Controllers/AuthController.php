@@ -26,8 +26,15 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        // Check if user wants to be remembered
+        // The checkbox is ticked by default on the form, so this is normally
+        // true; unticking it on a shared computer still opts out.
         $rememberUser = $request->boolean('remember');
+
+        // Laravel's own default is 576000 minutes (400 days), which is far
+        // longer than anyone intends. 30 days: long enough that nobody
+        // re-types a password during ordinary use, short enough that a
+        // session forgotten on someone else's machine dies within a month.
+        Auth::guard('web')->setRememberDuration(60 * 24 * 30);
 
         // Attempt to authenticate the user
         if (Auth::attempt($credentials, $rememberUser)) {

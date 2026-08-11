@@ -74,7 +74,7 @@ export const Footer: React.FC = () => {
                 {t('footer.resources')}
               </h3>
               <ul className="space-y-3">
-                {['blog', 'contact'].map((item) => (
+                {['contact'].map((item) => (
                   <li key={item}>
                     <Link
                       to={toPath(`/${item}`)}

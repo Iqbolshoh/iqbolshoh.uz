@@ -4,7 +4,6 @@
     "about": "Men haqimda",
     "portfolio": "Portfel",
     "services": "Xizmatlar",
-    "blog": "Blog",
     "contact": "Aloqa",
     "hireMe": "Meni yollash"
   },
@@ -24,7 +23,6 @@
     "journeyTitle": "Raqamlarda",
     "journeyDescription": "Mening yo'lim haqida qisqacha ma'lumot.",
     "subtitle": "Laravel, React va zamonaviy cloud infratuzilmasi yordamida kengaytiriladigan veb-ilovalar yarataman.",
-    "viewAllBlog": "Barcha maqolalar",
     "trustedSkills": "Ishonchli texnologiyalar"
   },
   "skills": {
@@ -120,13 +118,6 @@
       "error": "Obbo! Nimadir xato ketdi. Iltimos, qaytadan urinib ko'ring."
     }
   },
-  "blog": {
-    "title": "Mening Blogim",
-    "description": "O'rganganlarim, yaratganlarim va ishongan narsalarim bilan o'rtoqlashaman. Texnik qo'llanmalardan tortib, kariyera tushunchalari va dasturchi yo'lidagi shaxsiy mulohazalargacha.",
-    "featured": "Tavsiya etilgan",
-    "readMore": "Ko'proq o'qish",
-    "backToBlog": "Blogga qaytish"
-  },
   "contact": {
     "title": "Keling, birga ishlaymiz",
     "description": "Loyiha haqida o'ylayapsizmi yoki shunchaki Salom demoqchimisiz? Sizdan eshitishdan xursand bo'laman. Keling, birgalikda ajoyib narsa yaratamiz.",
@@ -176,11 +167,6 @@
       "title": "Bog'lanish | Full-Stack Dasturchini Yollash",
       "description": "Raqamli mahsulot yaratmoqchimisiz? Keyingi veb-loyiha haqida gaplashish uchun Iqbolshoh bilan bog'laning. Masofaviy ishlash uchun ham tayyor.",
       "keywords": "dasturchi yollash, dasturiy injiner bilan bog'lanish, frilans veb dasturchi O'zbekiston, masofaviy full-stack dasturchi"
-    },
-    "blog": {
-      "title": "Dasturchi Blogi | Iqbolshohdan IT Maqolalar va Darsliklar",
-      "description": "Iqbolshoh Ilhomjonovning full-stack dasturlash, dasturiy injiniring va IT hayoti haqidagi maqolalari, darsliklari va fikr-mulohazalarini o'qing.",
-      "keywords": "dasturchi blogi, dasturlash darsliklari, Laravel maslahatlar, React darsliklar, dasturiy injiniring blogi"
     },
     "notFound": {
       "title": "Sahifa Topilmadi | Iqbolshoh.uz",

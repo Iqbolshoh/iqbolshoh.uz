@@ -1,112 +1,118 @@
 @extends('layouts.dashboard')
 
 @section('title', 'Boshqaruv paneli')
-@section('breadcrumb', 'Laravel Default')
 @section('header_title', 'Boshqaruv paneli')
 
+@section('header_actions')
+<a href="{{ url('/') }}" target="_blank" rel="noopener" class="btn-secondary">
+    <x-lucide-external-link class="w-4 h-4" />
+    Saytni ochish
+</a>
+@endsection
+
 @section('content')
-<div class="space-y-8">
+@php
+    // Section key → sidebar label and icon, so the tiles link straight to the
+    // page that edits them.
+    $sections = [
+        'projects'      => ['Loyihalar', 'folder-git-2'],
+        'services'      => ['Xizmatlar', 'briefcase'],
+        'tech-stacks'   => ['Texnologiyalar', 'layers'],
+        'stats'         => ["Ko'rsatkichlar", 'bar-chart-3'],
+        'highlights'    => ["Ta'kidlar", 'sparkles'],
+        'journeys'      => ["Yo'l bosqichlari", 'milestone'],
+        'beyonds'       => ['Dasturlashdan tashqari', 'heart-handshake'],
+        'process-steps' => ['Ish jarayoni', 'list-checks'],
+    ];
+@endphp
 
-    {{-- Welcome card --}}
-    <div class="card p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-5">
-        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl flex-shrink-0 shadow-lg"
-             style="background: linear-gradient(135deg, var(--accent-hover), var(--accent-alt));">
-            {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
+<div class="mb-8">
+    <h2 class="text-2xl font-bold text-white tracking-tight">Assalomu alaykum, {{ $user->name }}</h2>
+    <p class="text-sm text-[var(--text-muted)] mt-1">iqbolshoh.uz kontentini shu yerdan boshqarasiz.</p>
+</div>
+
+{{-- Inbox --}}
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
+    @foreach([
+        'contact' => ['Aloqa xabarlari', 'mail'],
+        'orders'  => ['Xizmat buyurtmalari', 'shopping-bag'],
+    ] as $type => [$label, $icon])
+    <a href="{{ route('admin.messages.index', $type) }}" class="card card-hover p-6 flex items-center gap-5">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-[var(--accent-soft)] border border-[var(--accent-border)] flex-shrink-0">
+            <x-dynamic-component :component="'lucide-' . $icon" class="w-5 h-5 text-[var(--accent-hover)]" />
         </div>
-        <div class="flex-1 min-w-0">
-            <h2 class="text-xl font-bold text-white leading-tight">
-                Xush kelibsiz, {{ auth()->user()->name ?? 'Admin' }}
-            </h2>
-            <p class="mt-1 text-sm text-[var(--text-secondary)]">
-                {{ auth()->user()->email ?? '' }}
-                @if(auth()->user()->getRoleNames()->isNotEmpty())
-                <span class="ml-2 badge badge-accent">{{ auth()->user()->getRoleNames()->first() }}</span>
-                @endif
-            </p>
+        <div class="min-w-0 flex-1">
+            <p class="text-sm font-semibold text-[var(--text-secondary)]">{{ $label }}</p>
+            <p class="text-3xl font-extrabold text-white leading-tight mt-0.5 font-mono">{{ $inbox[$type]['total'] }}</p>
         </div>
-        <div class="text-right flex-shrink-0">
-            <p class="text-xs text-[var(--text-muted)] font-mono">{{ now()->format('d M Y') }}</p>
-            <p class="text-xs text-[var(--text-muted)] font-mono mt-0.5">{{ now()->format('H:i') }}</p>
+        @if($inbox[$type]['unread'] > 0)
+        <span class="badge badge-accent flex-shrink-0">{{ $inbox[$type]['unread'] }} yangi</span>
+        @endif
+    </a>
+    @endforeach
+</div>
+
+{{-- Content sections --}}
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+    @foreach($sections as $key => [$label, $icon])
+    <a href="{{ route('admin.' . $key . '.index') }}" class="card card-hover p-5">
+        <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);">
+                <x-dynamic-component :component="'lucide-' . $icon" class="w-4 h-4 text-[var(--text-secondary)]" />
+            </div>
+            <span class="text-2xl font-extrabold text-white font-mono leading-none">{{ $counts[$key] }}</span>
         </div>
+        <p class="text-sm font-semibold text-[var(--text-secondary)] truncate">{{ $label }}</p>
+    </a>
+    @endforeach
+</div>
+
+{{-- Latest submissions --}}
+<div class="card overflow-hidden">
+    <div class="px-6 py-4 border-b border-[var(--border-subtle)] flex items-center justify-between gap-4">
+        <h3 class="text-sm font-bold text-white">So'nggi murojaatlar</h3>
+        <a href="{{ route('admin.messages.index', 'contact') }}" class="text-xs font-semibold text-[var(--accent-hover)] hover:text-[var(--accent-alt)] transition-colors">
+            Hammasi
+        </a>
     </div>
 
-    {{-- Platform stats --}}
-    @canany(['users.view', 'roles.view'])
-    <div>
-        <h3 class="text-xs font-bold text-[var(--text-muted)] uppercase tracking-widest mb-3">Statistika</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="divide-y divide-[var(--border-subtle)]">
+        @forelse($recent as $entry)
+        <a href="{{ route('admin.messages.show', [$entry['type'], $entry['id']]) }}"
+            class="flex items-start gap-4 px-6 py-4 hover:bg-white/[0.02] transition-colors">
 
-            @can('users.view')
-            <div class="card card-hover p-5">
-                <div class="flex items-start justify-between">
-                    <div>
-                        <p class="text-xs font-semibold uppercase tracking-widest text-[var(--text-muted)]">Foydalanuvchilar</p>
-                        <p class="mt-2 text-3xl font-extrabold text-white">{{ \App\Models\User::count() }}</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: var(--accent-soft); border: 1px solid var(--accent-border);">
-                        <x-lucide-user-cog class="w-5 h-5" style="color: var(--accent-hover);" />
-                    </div>
-                </div>
-                <a href="{{ route('users.index') }}" class="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--accent-hover)] hover:text-[var(--accent-alt)] transition-colors">
-                    Barchasini ko'rish <x-lucide-arrow-right class="w-3.5 h-3.5" />
-                </a>
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0 text-white"
+                style="background: linear-gradient(135deg, var(--accent-hover), var(--accent-alt));">
+                {{ mb_strtoupper(mb_substr($entry['name'], 0, 1)) }}
             </div>
-            @endcan
 
-            @can('roles.view')
-            <div class="card card-hover p-5">
-                <div class="flex items-start justify-between">
-                    <div>
-                        <p class="text-xs font-semibold uppercase tracking-widest text-[var(--text-muted)]">Rollar</p>
-                        <p class="mt-2 text-3xl font-extrabold text-white">{{ \Spatie\Permission\Models\Role::count() }}</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: rgba(59,130,246,0.10); border: 1px solid rgba(59,130,246,0.25);">
-                        <x-lucide-shield-check class="w-5 h-5 text-blue-400" />
-                    </div>
+            <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-2 flex-wrap">
+                    <p class="text-sm font-semibold text-white truncate">{{ $entry['name'] }}</p>
+                    <span class="badge" style="background: rgba(255,255,255,0.05); color: var(--text-secondary);">
+                        {{ $entry['type'] === 'contact' ? 'Xabar' : 'Buyurtma' }}
+                    </span>
+                    @if($entry['unread'])
+                    <span class="badge badge-accent">Yangi</span>
+                    @endif
                 </div>
-                <a href="{{ route('roles.index') }}" class="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--accent-hover)] hover:text-[var(--accent-alt)] transition-colors">
-                    Barchasini ko'rish <x-lucide-arrow-right class="w-3.5 h-3.5" />
-                </a>
+                <p class="text-xs text-[var(--text-muted)] mt-1 truncate">{{ \Illuminate\Support\Str::limit($entry['summary'], 90) }}</p>
             </div>
-            @endcan
 
-            <div class="card p-5">
-                <div class="flex items-start justify-between">
-                    <div>
-                        <p class="text-xs font-semibold uppercase tracking-widest text-[var(--text-muted)]">Laravel Default</p>
-                        <p class="mt-2 text-lg font-extrabold text-white">v1.0</p>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden border border-[var(--border-strong)] bg-white/5 p-1">
-                        <img src="{{ asset('/images/logo.png') }}" alt="Laravel Default" class="w-full h-full object-contain">
-                    </div>
+            <span class="text-[0.68rem] text-[var(--text-muted)] font-mono whitespace-nowrap flex-shrink-0">
+                {{ $entry['date']->format('d.m.Y') }}
+            </span>
+        </a>
+        @empty
+        <div class="px-6 py-14 text-center">
+            <div class="flex flex-col items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);">
+                    <x-lucide-inbox class="w-6 h-6 text-[var(--text-muted)]" />
                 </div>
-                <p class="mt-4 text-xs text-[var(--text-muted)]">Laravel {{ app()->version() }}</p>
+                <p class="text-sm font-semibold text-[var(--text-secondary)]">Hozircha murojaat yo'q</p>
             </div>
         </div>
-
-        {{-- Quick actions --}}
-        <div class="card p-6 mt-4">
-            <h3 class="text-sm font-bold text-white mb-4 uppercase tracking-wider">Tezkor amallar</h3>
-            <div class="flex flex-wrap gap-3">
-                @can('users.create')
-                <a href="{{ route('users.create') }}" class="btn-primary">
-                    <x-lucide-user-plus class="w-4 h-4" /> Foydalanuvchi +
-                </a>
-                @endcan
-                @can('roles.create')
-                <a href="{{ route('roles.create') }}" class="btn-secondary">
-                    <x-lucide-shield-plus class="w-4 h-4" /> Rol +
-                </a>
-                @endcan
-                @can('roles.view')
-                <a href="{{ route('roles.index') }}" class="btn-ghost">
-                    <x-lucide-shield-check class="w-4 h-4" /> Rollar
-                </a>
-                @endcan
-            </div>
-        </div>
+        @endforelse
     </div>
-    @endcanany
-
 </div>
 @endsection

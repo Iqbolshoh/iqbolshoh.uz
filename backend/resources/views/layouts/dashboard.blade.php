@@ -18,10 +18,17 @@
                     if (m) m.content = '#f7f8ff';
                 });
             }
+            // Pre-collapse the sidebar before first paint, for the same
+            // reason as the theme above: Alpine only reads this after its
+            // deferred script loads, so the sidebar would render expanded
+            // and then visibly snap shut on every page load.
+            if (localStorage.getItem('laravel_default_sidebar') === 'closed') {
+                document.documentElement.classList.add('sidebar-pre-init');
+            }
         })();
     </script>
 
-    <title>@yield('title', 'Dashboard') · Laravel Default</title>
+    <title>@yield('title', 'Dashboard') · {{ config('app.program_name') }}</title>
 
     {{-- Font: Plus Jakarta Sans (UI) + JetBrains Mono (raqam/kod).
          Ikkalasi ham vite.config.js orqali o'z serverimizda hosting qilinadi. --}}
@@ -149,10 +156,16 @@
             padding: 0 0.875rem;
             margin-bottom: 0.625rem;
             font-size: 0.65rem;
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: var(--text-muted);
+            color: var(--accent-hover);
+        }
+
+        /* Light mode needs the deeper shade: --accent-hover is tuned for a dark
+           sidebar and washes out against a pale one. */
+        html.light .nav-heading {
+            color: var(--accent-deep);
         }
 
         /* ---------- Reusable components ---------- */
@@ -274,17 +287,96 @@
         @keyframes page-enter {
             from {
                 opacity: 0;
-                transform: translateY(8px);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
             }
         }
 
         .page-enter {
-            animation: page-enter .45s var(--ease-out) both;
+            /* Opacity only, and short. A translateY here slid the whole content
+               column on every single navigation, which is what people report as
+               the page jumping; a long fade reads as a flash for the same reason. */
+            animation: page-enter .18s var(--ease-out) both;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-enter {
+                animation: none;
+            }
+        }
+
+        /* Sidebar count bubble. Plain CSS on purpose, not Tailwind utilities:
+           these layouts get edited without re-running the asset build, and an
+           arbitrary utility that was never scanned simply is not in the compiled
+           CSS — which is how the same badge on other sites lost its min-width
+           and padding and collapsed from a circle into a sliver. */
+        .nav-badge {
+            margin-left: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 1.25rem;
+            height: 1.25rem;
+            padding: 0 0.25rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            line-height: 1;
+            background: var(--accent-soft);
+            color: var(--accent-hover);
+            border: 1px solid var(--accent-border);
+        }
+
+        /* Sidebar state applied before first paint. Alpine reads localStorage only
+           after its deferred script loads, so without this the sidebar renders
+           expanded and then snaps shut on every page load. x-init removes the
+           class once Alpine has mounted and taken over. */
+        @media (min-width: 768px) {
+            html.sidebar-pre-init aside {
+                width: 4rem;
+                overflow: hidden;
+                transition: none !important;
+            }
+
+            html.sidebar-pre-init aside .sidebar-label,
+            html.sidebar-pre-init aside .nav-heading,
+            html.sidebar-pre-init aside .sidebar-logo-text,
+            html.sidebar-pre-init aside .sidebar-user-info,
+            html.sidebar-pre-init aside .sidebar-logout-btn {
+                display: none;
+            }
+
+            html.sidebar-pre-init aside .nav-link {
+                justify-content: center;
+                padding: 0.65rem;
+            }
+
+            html.sidebar-pre-init aside .nav-link.active::before {
+                left: 0;
+            }
+
+            html.sidebar-pre-init aside .sidebar-logo-container {
+                padding-left: 0;
+                padding-right: 0;
+                justify-content: center;
+            }
+
+            html.sidebar-pre-init aside .sidebar-logo-link {
+                gap: 0;
+                justify-content: center;
+            }
+
+            html.sidebar-pre-init aside .sidebar-user-card-inner {
+                gap: 0;
+                justify-content: center;
+                padding: 0.5rem;
+            }
+
+            html.sidebar-pre-init aside .sidebar-user-section {
+                padding: 0.5rem;
+            }
         }
 
         @keyframes toast-in {
@@ -681,6 +773,7 @@
                 localStorage.setItem('laravel_default_sidebar', this.sidebarOpen ? 'open' : 'closed');
             }
         }"
+        x-init="$nextTick(() => document.documentElement.classList.remove('sidebar-pre-init'))"
         class="flex h-dvh w-full relative"
         @keydown.escape.window="mobileMenuOpen = false; logoutModalOpen = false; notificationsOpen = false; profileOpen = false">
 
@@ -750,10 +843,10 @@
             <div class="sidebar-logo-container h-[var(--header-h)] flex items-center px-5 border-b border-[var(--border-subtle)] flex-shrink-0 transition-all duration-300">
                 <a href="{{ route('dashboard.index') }}" class="sidebar-logo-link flex items-center gap-3 group min-w-0 cursor-pointer transition-all duration-300">
                     <div class="w-9 h-9 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 overflow-hidden flex-shrink-0 border border-[var(--border-strong)] rounded-xl bg-white/5 p-0.5 shadow-sm">
-                        <img src="{{ asset('/images/logo.png') }}" alt="Laravel Default Logo" class="w-full h-full object-contain">
+                        <img src="{{ asset('/images/logo.png') }}" alt="{{ config('app.program_name') }}" class="w-full h-full object-contain">
                     </div>
                     <span class="sidebar-logo-text font-extrabold text-lg tracking-tight truncate" style="background: linear-gradient(135deg, var(--accent-hover), var(--accent-alt)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
-                        Laravel Default
+                        {{ config('app.program_name') }}
                     </span>
                 </a>
                 <button @click="mobileMenuOpen = false" class="md:hidden ml-auto text-[var(--text-muted)] hover:text-white p-2 rounded-lg hover:bg-white/5 transition-colors cursor-pointer" aria-label="Close menu">
@@ -775,6 +868,76 @@
                         </a>
                     </div>
                 </div>
+
+                {{-- Site content --}}
+                @php
+                    $contentSections = [
+                        'projects'      => ['Loyihalar', 'folder-git-2'],
+                        'services'      => ['Xizmatlar', 'briefcase'],
+                        'tech-stacks'   => ['Texnologiyalar', 'layers'],
+                        'stats'         => ["Ko'rsatkichlar", 'bar-chart-3'],
+                        'highlights'    => ["Ta'kidlar", 'sparkles'],
+                        'journeys'      => ["Yo'l bosqichlari", 'milestone'],
+                        'beyonds'       => ['Dasturlashdan tashqari', 'heart-handshake'],
+                        'process-steps' => ['Ish jarayoni', 'list-checks'],
+                    ];
+                @endphp
+                @canany(array_map(fn($section) => $section . '.view', array_keys($contentSections)))
+                <div>
+                    <h3 class="nav-heading">Sayt kontenti</h3>
+                    <div class="space-y-1">
+                        @foreach($contentSections as $section => [$label, $icon])
+                        @can($section . '.view')
+                        <a href="{{ route('admin.' . $section . '.index') }}"
+                            title="{{ $label }}"
+                            class="nav-link {{ request()->routeIs('admin.' . $section . '.*') ? 'active' : '' }}">
+                            <x-dynamic-component :component="'lucide-' . $icon" class="nav-icon" />
+                            <span class="sidebar-label">{{ $label }}</span>
+                        </a>
+                        @endcan
+                        @endforeach
+                    </div>
+                </div>
+                @endcanany
+
+                {{-- Inbox --}}
+                @can('messages.view')
+                @php $unreadCounts = \App\Http\Controllers\Admin\MessageController::unreadCounts(); @endphp
+                <div>
+                    <h3 class="nav-heading">Aloqa</h3>
+                    <div class="space-y-1">
+                        @foreach([
+                            'contact' => ['Aloqa xabarlari', 'mail'],
+                            'orders'  => ['Xizmat buyurtmalari', 'shopping-bag'],
+                        ] as $inboxType => [$label, $icon])
+                        <a href="{{ route('admin.messages.index', $inboxType) }}"
+                            title="{{ $label }}"
+                            class="nav-link {{ request()->routeIs('admin.messages.*') && request()->route('type') === $inboxType ? 'active' : '' }}">
+                            <x-dynamic-component :component="'lucide-' . $icon" class="nav-icon" />
+                            <span class="sidebar-label">{{ $label }}</span>
+                            @if($unreadCounts[$inboxType] > 0)
+                            <span class="nav-badge sidebar-label">{{ $unreadCounts[$inboxType] }}</span>
+                            @endif
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+                @endcan
+
+                {{-- Settings --}}
+                @can('settings.view')
+                <div>
+                    <h3 class="nav-heading">Sozlamalar</h3>
+                    <div class="space-y-1">
+                        <a href="{{ route('admin.settings.index') }}"
+                            title="Sayt sozlamalari"
+                            class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                            <x-lucide-settings class="nav-icon" />
+                            <span class="sidebar-label">Sayt sozlamalari</span>
+                        </a>
+                    </div>
+                </div>
+                @endcan
 
                 {{-- Administration --}}
                 @canany(['roles.view', 'users.view'])
@@ -869,16 +1032,22 @@
                         @yield('header_actions')
                     </div>
 
-                    {{-- Notifications --}}
+                    {{-- Notifications: unread submissions from the site's forms --}}
+                    @php
+                        $bellItems = \App\Http\Controllers\Admin\MessageController::latestUnread();
+                        $bellCount = array_sum(\App\Http\Controllers\Admin\MessageController::unreadCounts());
+                    @endphp
                     <div class="relative">
                         <button @click="notificationsOpen = !notificationsOpen" @click.away="notificationsOpen = false"
                             class="relative p-2.5 text-[var(--text-secondary)] hover:text-white hover:bg-white/5 rounded-xl border border-transparent hover:border-[var(--border-subtle)] transition-colors cursor-pointer"
                             aria-label="Notifications">
                             <x-lucide-bell class="w-5 h-5" />
+                            @if($bellCount > 0)
                             <span class="absolute top-2 right-2 flex h-2 w-2">
                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60" style="background: var(--accent-alt);"></span>
                                 <span class="relative inline-flex rounded-full h-2 w-2 ring-2 ring-[var(--bg-base)]" style="background: var(--accent-alt);"></span>
                             </span>
+                            @endif
                         </button>
 
                         <div x-show="notificationsOpen" x-cloak
@@ -893,34 +1062,35 @@
 
                             <div class="px-4 py-3.5 border-b border-[var(--border-subtle)] flex justify-between items-center">
                                 <h3 class="text-sm font-bold text-white">Bildirishnomalar</h3>
-                                <span class="badge badge-accent cursor-pointer">2 yangi</span>
+                                @if($bellCount > 0)
+                                <span class="badge badge-accent">{{ $bellCount }} yangi</span>
+                                @endif
                             </div>
 
                             <div class="max-h-80 overflow-y-auto scroll-area">
-                                <a href="#" class="flex items-start gap-3 px-4 py-3.5 hover:bg-white/[0.03] transition-colors border-b border-[var(--border-subtle)] group cursor-pointer">
-                                    <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center flex-shrink-0">
-                                        <x-lucide-check-circle class="w-4 h-4 text-emerald-400" />
-                                    </div>
-                                    <div class="min-w-0">
-                                        <p class="text-sm text-gray-200 font-medium group-hover:text-white transition-colors">Domen muvaffaqiyatli ulandi</p>
-                                        <p class="text-xs text-[var(--text-muted)] mt-1">Yangi domen sozlamalari faollashtirildi.</p>
-                                        <p class="text-[0.68rem] text-[var(--text-muted)] mt-1.5 font-mono">5 daqiqa oldin</p>
-                                    </div>
-                                </a>
-                                <a href="#" class="flex items-start gap-3 px-4 py-3.5 hover:bg-white/[0.03] transition-colors group cursor-pointer">
+                                @forelse($bellItems as $bellItem)
+                                <a href="{{ route('admin.messages.show', [$bellItem['type'], $bellItem['id']]) }}"
+                                    class="flex items-start gap-3 px-4 py-3.5 hover:bg-white/[0.03] transition-colors border-b border-[var(--border-subtle)] group cursor-pointer">
                                     <div class="w-9 h-9 rounded-xl border flex items-center justify-center flex-shrink-0" style="background: var(--accent-soft); border-color: var(--accent-border);">
-                                        <x-lucide-info class="w-4 h-4" style="color: var(--accent-alt);" />
+                                        <x-dynamic-component :component="$bellItem['type'] === 'contact' ? 'lucide-mail' : 'lucide-shopping-bag'" class="w-4 h-4" style="color: var(--accent-alt);" />
                                     </div>
                                     <div class="min-w-0">
-                                        <p class="text-sm text-gray-200 font-medium group-hover:text-white transition-colors">Tizim yangilanishi mavjud</p>
-                                        <p class="text-xs text-[var(--text-muted)] mt-1">Yangi versiya: v1.0 — o'zgarishlarni ko'ring.</p>
-                                        <p class="text-[0.68rem] text-[var(--text-muted)] mt-1.5 font-mono">1 soat oldin</p>
+                                        <p class="text-sm text-gray-200 font-medium group-hover:text-white transition-colors truncate">
+                                            {{ $bellItem['title'] }}
+                                        </p>
+                                        <p class="text-xs text-[var(--text-muted)] mt-1">
+                                            {{ \Illuminate\Support\Str::limit($bellItem['summary'], 60) }}
+                                        </p>
+                                        <p class="text-[0.68rem] text-[var(--text-muted)] mt-1.5 font-mono">{{ $bellItem['date']->diffForHumans() }}</p>
                                     </div>
                                 </a>
+                                @empty
+                                <p class="px-4 py-8 text-center text-sm text-[var(--text-muted)]">O'qilmagan xabar yo'q</p>
+                                @endforelse
                             </div>
 
                             <div class="px-4 py-2.5 border-t border-[var(--border-subtle)] bg-[var(--bg-surface)]">
-                                <a href="#" class="text-xs font-semibold text-[var(--accent-hover)] hover:text-[var(--accent-alt)] transition-colors cursor-pointer">Barchasini ko'rish</a>
+                                <a href="{{ route('admin.messages.index', 'contact') }}" class="text-xs font-semibold text-[var(--accent-hover)] hover:text-[var(--accent-alt)] transition-colors cursor-pointer">Barchasini ko'rish</a>
                             </div>
                         </div>
                     </div>
@@ -1067,7 +1237,7 @@
 
                 <footer class="px-4 sm:px-8 pb-6 pt-2">
                     <div class="max-w-[100rem] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[var(--text-muted)] border-t border-[var(--border-subtle)] pt-4 cursor-default">
-                        <p>© {{ date('Y') }} Laravel Default — Barcha huquqlar himoyalangan.</p>
+                        <p>© {{ date('Y') }} {{ config('app.program_name') }} — Barcha huquqlar himoyalangan.</p>
                         <p class="font-mono">v1.0</p>
                     </div>
                 </footer>

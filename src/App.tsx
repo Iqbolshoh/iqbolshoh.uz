@@ -17,9 +17,17 @@ const About       = lazy(() => import('./pages/About').then(m => ({ default: m.A
 const Portfolio   = lazy(() => import('./pages/Portfolio').then(m => ({ default: m.Portfolio })));
 const Services    = lazy(() => import('./pages/Services').then(m => ({ default: m.Services })));
 const Contact     = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
-const Blog        = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })));
-const BlogDetails = lazy(() => import('./pages/BlogDetails').then(m => ({ default: m.BlogDetails })));
-const NotFound    = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
+
+/**
+ * Unknown paths are the server's business: nginx hands anything outside the
+ * known page list to Laravel, which renders the shared 404 page. Reaching
+ * this component means a client-side navigation produced such a path, so the
+ * URL is handed back to the server instead of being rendered here.
+ */
+function ServerHandled() {
+  useEffect(() => { window.location.reload(); }, []);
+  return <PageLoader />;
+}
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -106,19 +114,10 @@ function App() {
                   <Contact />
                 </>} />
 
-                <Route path="blog" element={<>
-                  <SEO title={t('seo.blog.title')} description={t('seo.blog.description')} keywords={t('seo.blog.keywords')} />
-                  <Blog />
-                </>} />
-
-                <Route path="blog/:id" element={<BlogDetails />} />
               </Route>
 
-              {/* 404 */}
-              <Route path="*" element={<>
-                <SEO title={t('seo.notFound.title')} noIndex={true} />
-                <NotFound />
-              </>} />
+              {/* 404 — rendered by Laravel, not here */}
+              <Route path="*" element={<ServerHandled />} />
             </Routes>
           </Suspense>
         </main>

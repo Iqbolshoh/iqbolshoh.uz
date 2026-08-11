@@ -54,18 +54,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://iqbolshoh.uz/services"/>
   </url>
 
-  <!-- Blog Page -->
-  <url>
-    <loc>https://iqbolshoh.uz/blog</loc>
-    <lastmod>2025-06-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://iqbolshoh.uz/blog"/>
-    <xhtml:link rel="alternate" hreflang="uz" href="https://iqbolshoh.uz/blog"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://iqbolshoh.uz/blog"/>
-    <xhtml:link rel="alternate" hreflang="tj" href="https://iqbolshoh.uz/blog"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://iqbolshoh.uz/blog"/>
-  </url>
 
   <!-- Contact Page -->
   <url>

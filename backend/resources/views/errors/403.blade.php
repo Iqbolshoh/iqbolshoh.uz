@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '403 · Laravel Default')
+@section('title', '403 · ' . config('app.program_name'))
 
 @section('content')
 <div class="min-h-screen w-full flex items-center justify-center relative overflow-hidden" style="background: var(--bg-base);">
@@ -27,7 +27,7 @@
             <button onclick="history.back()" class="btn-secondary w-full sm:w-auto">
                 <x-lucide-arrow-left class="w-5 h-5" /> Orqaga
             </button>
-            <a href="{{ route('home') }}" class="btn-primary w-full sm:w-auto">
+            <a href="{{ url('/') }}" class="btn-primary w-full sm:w-auto">
                 <x-lucide-home class="w-5 h-5" /> Bosh sahifa
             </a>
         </div>

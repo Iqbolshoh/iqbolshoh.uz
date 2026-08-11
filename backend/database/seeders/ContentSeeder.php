@@ -1816,32 +1816,6 @@ class ContentSeeder extends Seeder
             ],
         ]);
 
-        $this->insert('blog_posts', ['title', 'excerpt', 'tags'], [
-            [
-                'slug' => 'new-design-iqbolshoh-uz',
-                'title' => [
-                    'en' => 'The New Look of iqbolshoh.uz – A Digital Masterpiece',
-                    'uz' => 'Yangi iqbolshoh.uz – Raqamli san’at asari',
-                    'ru' => 'Новый iqbolshoh.uz – Цифровой шедевр',
-                    'tj' => 'iqbolshoh.uz-и нав – Шоҳкори рақамӣ',
-                ],
-                'excerpt' => [
-                    'en' => 'Today, iqbolshoh.uz got a stunning redesign! A clean UI, elegant layout, powerful multilingual support, and vibrant animations make it a must-see portfolio for developers and clients alike. From the moment you land on the homepage, you are greeted with fluid transitions, clear sections, and intuitive navigation. It reflects not just the skills of a developer, but the vision of a brand. Designed with React and Laravel, it balances beauty with functionality, bringing every element to life. Whether you\'re a potential client or a curious coder, this site will leave you inspired and impressed.',
-                    'uz' => 'Bugun iqbolshoh.uz sayti hayratlanarli darajada yangilandi! Toza interfeys, nafis tuzilma, kuchli ko‘p tilli qo‘llab-quvvatlash va jonli animatsiyalar uni har qanday dasturchi va mijoz uchun ko‘rishga arzigulik portfelga aylantiradi. Bosh sahifaga kirgan zahoti, silliq o‘tishlar, aniq bo‘limlar va tushunarli navigatsiya ko‘zingizga tashlanadi. Bu nafaqat dasturchi mahoratini, balki shaxsiy brend qarashini ham aks ettiradi. React va Laravel asosida ishlab chiqilgan bu sayt funksionallik va estetikani uyg‘unlashtirib, har bir elementni jonlantiradi. Siz mijoz bo‘lasizmi yoki shunchaki o‘rganayotgan dasturchi — bu sayt sizni ilhomlantiradi va qoyil qoldiradi.',
-                    'ru' => 'Сегодня сайт iqbolshoh.uz получил потрясающий редизайн! Чистый пользовательский интерфейс, элегантная структура, мощная многоязычная поддержка и яркие анимации делают его портфолио, которое обязательно стоит увидеть как разработчикам, так и клиентам. С первой секунды на главной странице вас встречают плавные переходы, логично структурированные блоки и интуитивная навигация. Этот сайт отражает не только технические навыки разработчика, но и стратегическое видение личного бренда. Построенный на базе React и Laravel, он гармонично сочетает красоту с функциональностью. Будь вы клиент или программист — вы обязательно вдохновитесь этим шедевром.',
-                    'tj' => 'Имрӯз сомонаи iqbolshoh.uz бо намуди нави аҷиб навсозӣ гардид! Интерфейси тоза, тарҳи зебо, дастгирии пурқуввати бисёрзабона ва аниматсияҳои рангин онро ба як портфолои воқеан арзандаи дидан барои ҳам барномасозон ва ҳам муштариён табдил додаанд. Аз лаҳзаи аввал, ки ба саҳифаи асосӣ ворид мешавед, гузаришҳои мулоим, қисмҳои возеҳ ва роҳнамоии фаҳмост. Ин сомона на танҳо маҳоратҳои техникии барномасозро нишон медиҳад, балки диди равшани шахсии ӯро низ. Бо истифода аз React ва Laravel сохта шудааст ва зебоӣ ва функсионалиятро ба таври мутавозин муттаҳид мекунад. Новобаста аз он ки шумо муштарӣ ҳастед ё шогирди ҳаваскор — ин сомона шуморо илҳом мебахшад ва дар таассур мегузорад.',
-                ],
-                'image' => '/images/blogs/blog-1.png',
-                'date' => '2025-06-26',
-                'tags' => [
-                    'Portfolio',
-                    'Design',
-                    'Branding',
-                ],
-                'featured' => false,
-                'sort_order' => 0,
-            ],
-        ]);
 
         Schema::enableForeignKeyConstraints();
     }

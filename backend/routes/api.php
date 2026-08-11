@@ -16,8 +16,6 @@ Route::get('/content', [ContentController::class, 'index']);
 
 Route::get('/projects', [ContentController::class, 'projects']);
 Route::get('/services', [ContentController::class, 'services']);
-Route::get('/blog', [ContentController::class, 'blog']);
-Route::get('/blog/{slug}', [ContentController::class, 'blogPost']);
 
 // Formalar — spam'ga qarshi daqiqada 5 ta so'rov
 Route::middleware('throttle:5,1')->group(function () {

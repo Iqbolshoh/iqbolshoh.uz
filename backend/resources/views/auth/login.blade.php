@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('has_nav', 'yes')
-@section('title', 'Kirish · Laravel Default')
+@section('title', 'Kirish · ' . config('app.program_name'))
 
 @section('content')
 <div class="min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden bg-[var(--bg-base)]">
@@ -15,14 +15,14 @@
 
         <div class="text-center flex flex-col items-center">
             <a href="{{ route('home') }}" class="w-14 h-14 flex items-center justify-center rounded-2xl bg-white/5 border border-[var(--border-strong)] shadow-sm transition-transform duration-300 hover:scale-105 overflow-hidden">
-                <img src="{{ asset('/images/logo.png') }}" alt="Laravel Default Logo" class="w-full h-full object-contain p-1.5">
+                <img src="{{ asset('/images/logo.png') }}" alt="{{ config('app.program_name') }}" class="w-full h-full object-contain p-1.5">
             </a>
 
             <h2 class="mt-5 text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
                 Qaytib keldingiz
             </h2>
             <p class="mt-2 text-sm text-[var(--text-secondary)]">
-                Laravel Default hisobingizga kiring
+                {{ config('app.program_name') }} hisobingizga kiring
             </p>
         </div>
 
@@ -70,7 +70,7 @@
 
             <div class="flex items-center justify-between text-sm pt-1">
                 <label class="flex items-center gap-2.5 cursor-pointer group">
-                    <input type="checkbox" name="remember"
+                    <input type="checkbox" name="remember" checked
                         class="w-4 h-4 rounded border-[var(--border-strong)] bg-[var(--bg-surface)] text-[var(--accent)] focus:ring-[var(--accent)] focus:ring-offset-0 focus:ring-offset-transparent cursor-pointer transition-colors">
                     <span class="text-[var(--text-secondary)] group-hover:text-white transition-colors">
                         Eslab qolish

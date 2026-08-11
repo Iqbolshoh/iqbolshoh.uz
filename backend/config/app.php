@@ -17,6 +17,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Program Name
+    |--------------------------------------------------------------------------
+    |
+    | The name of the software itself, as shown in the UI and the copyright
+    | line. This is deliberately separate from APP_NAME: several deployments
+    | run the same program under their own domain (stroyprokat.uz and
+    | prokatsam.uz are both the rent.vexa.uz program), and the customer's
+    | domain is not the product's name.
+    |
+    | APP_NAME cannot carry this, because config/session.php derives the
+    | session cookie name from it — changing APP_NAME would rename the cookie
+    | and sign every user out. Defaults to APP_NAME where the two are the same.
+    |
+    */
+
+    'program_name' => env('APP_PROGRAM_NAME', env('APP_NAME', 'Laravel')),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |
