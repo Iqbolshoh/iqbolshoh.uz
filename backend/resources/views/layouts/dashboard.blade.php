@@ -1,3 +1,7 @@
+@php
+    use App\Http\Controllers\Admin\MessageController;
+    use Illuminate\Support\Str;
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
 
@@ -894,6 +898,35 @@
                 </div>
                 @endcanany
 
+                {{-- Plan --}}
+                @canany(['goals.view', 'plans.view', 'calendar.view', 'analytics.view', 'forecast.view', 'notifications.view'])
+                @php
+                    $planSections = [
+                        'goals'         => ['Goals', 'target', 'goals.view'],
+                        'plans'         => ['Daily plans', 'list-checks', 'plans.view'],
+                        'calendar'      => ['Calendar', 'calendar-days', 'calendar.view'],
+                        'analytics'     => ['Analytics', 'bar-chart-3', 'analytics.view'],
+                        'forecast'      => ['Forecast', 'trending-up', 'forecast.view'],
+                        'notifications' => ['Notifications', 'bell', 'notifications.view'],
+                    ];
+                @endphp
+                <div>
+                    <h3 class="nav-heading">Plan</h3>
+                    <div class="space-y-1">
+                        @foreach($planSections as $section => [$label, $icon, $permission])
+                        @can($permission)
+                        <a href="{{ route('admin.' . $section . '.index') }}"
+                            title="{{ $label }}"
+                            class="nav-link {{ request()->routeIs('admin.' . $section . '.*') ? 'active' : '' }}">
+                            <x-dynamic-component :component="'lucide-' . $icon" class="nav-icon" />
+                            <span class="sidebar-label">{{ $label }}</span>
+                        </a>
+                        @endcan
+                        @endforeach
+                    </div>
+                </div>
+                @endcanany
+
                 {{-- Site content --}}
                 @php
                     $contentSections = [
@@ -927,7 +960,7 @@
 
                 {{-- Inbox --}}
                 @can('messages.view')
-                @php $unreadCounts = \App\Http\Controllers\Admin\MessageController::unreadCounts(); @endphp
+                @php $unreadCounts = MessageController::unreadCounts(); @endphp
                 <div>
                     <h3 class="nav-heading">Contact</h3>
                     <div class="space-y-1">
@@ -1034,8 +1067,8 @@
 
                     {{-- Notifications: unread submissions from the site's forms --}}
                     @php
-                        $bellItems = \App\Http\Controllers\Admin\MessageController::latestUnread();
-                        $bellCount = array_sum(\App\Http\Controllers\Admin\MessageController::unreadCounts());
+                        $bellItems = MessageController::latestUnread();
+                        $bellCount = array_sum(MessageController::unreadCounts());
                     @endphp
                     <div class="relative">
                         <button @click="notificationsOpen = !notificationsOpen" @click.away="notificationsOpen = false"
@@ -1079,7 +1112,7 @@
                                             {{ $bellItem['title'] }}
                                         </p>
                                         <p class="text-xs text-[var(--text-muted)] mt-1">
-                                            {{ \Illuminate\Support\Str::limit($bellItem['summary'], 60) }}
+                                            {{ Str::limit($bellItem['summary'], 60) }}
                                         </p>
                                         <p class="text-[0.68rem] text-[var(--text-muted)] mt-1.5 font-mono">{{ $bellItem['date']->diffForHumans() }}</p>
                                     </div>

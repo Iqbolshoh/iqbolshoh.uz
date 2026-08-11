@@ -7,6 +7,11 @@
     @param mixed  $value
     @param callable $plain   Picks the primary language out of a translation.
 --}}
+@php
+    use App\Support\SiteIcons;
+    use App\Support\SiteTech;
+@endphp
+
 @switch($column['type'])
     @case('image')
         @if($value)
@@ -21,7 +26,7 @@
 
     @case('icon')
         <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-[var(--accent-soft)] border border-[var(--accent-border)]">
-            <x-dynamic-component :component="\App\Support\SiteIcons::component($value)" class="w-4 h-4 text-[var(--accent-hover)]" />
+            <x-dynamic-component :component="SiteIcons::component($value)" class="w-4 h-4 text-[var(--accent-hover)]" />
         </div>
         @break
 
@@ -36,7 +41,7 @@
     @case('tech')
         <div class="flex flex-wrap items-center gap-1.5 md:max-w-xs">
             @foreach(array_slice((array) $value, 0, 4) as $tech)
-            @php $color = \App\Support\SiteTech::color($tech); $icon = \App\Support\SiteTech::iconUrl($tech); @endphp
+            @php $color = SiteTech::color($tech); $icon = SiteTech::iconUrl($tech); @endphp
             <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-[11px] font-semibold border"
                 style="color: {{ $color }}; border-color: {{ $color }}59; background: {{ $color }}1f;">
                 @if($icon)

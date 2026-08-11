@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -12,7 +13,7 @@ class RoleController extends Controller
 {
     public function index(Request $request)
     {
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = Auth::user();
         abort_unless($user->hasPermissionTo('roles.view'), 403);
 
@@ -31,7 +32,7 @@ class RoleController extends Controller
 
     public function create()
     {
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = Auth::user();
         abort_unless($user->hasPermissionTo('roles.create'), 403);
 
@@ -44,7 +45,7 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = Auth::user();
         abort_unless($user->hasPermissionTo('roles.create'), 403);
 
@@ -77,7 +78,7 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = Auth::user();
         abort_unless($user->hasPermissionTo('roles.edit'), 403);
 
@@ -97,7 +98,7 @@ class RoleController extends Controller
 
     public function update(Request $request, Role $role)
     {
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = Auth::user();
         abort_unless($user->hasPermissionTo('roles.edit'), 403);
 
@@ -131,7 +132,7 @@ class RoleController extends Controller
 
     public function destroy(Role $role)
     {
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = Auth::user();
         abort_unless($user->hasPermissionTo('roles.delete'), 403);
 

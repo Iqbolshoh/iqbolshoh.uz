@@ -12,10 +12,18 @@ class SiteContent
     /** Cache key holding the whole `/api/content` payload. */
     public const CACHE_KEY = 'site.content';
 
-    /** Languages the site text is stored in. The first one is the admin form's default tab. */
+    /**
+     * Languages the site text is stored in.
+     *
+     * The first entry is the primary one: it is the tab the admin form opens
+     * on, the language the listings show, and the one every other language is
+     * filled from when left blank. The panel runs in English, so English leads
+     * — the site itself still serves Uzbek first, which is an unrelated setting
+     * in the React app's i18n config.
+     */
     public const LOCALES = [
-        'uz' => "O'zbekcha",
         'en' => 'English',
+        'uz' => "O'zbekcha",
         'ru' => 'Русский',
         'tj' => 'Тоҷикӣ',
     ];

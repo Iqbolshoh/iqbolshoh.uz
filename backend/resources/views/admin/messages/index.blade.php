@@ -5,6 +5,10 @@
 @section('header_title', $config['plural'])
 
 @section('content')
+@php
+    use Illuminate\Support\Str;
+@endphp
+
 <div x-data="{ deleteModalOpen: false, deleteUrl: '', deleteName: '' }">
 
     {{-- Delete confirmation --}}
@@ -117,7 +121,7 @@
                     <p class="text-xs text-[var(--text-muted)] mt-0.5 truncate">{{ $message->email }}</p>
 
                     <p class="text-sm text-[var(--text-secondary)] mt-1.5 line-clamp-2">
-                        {{ \Illuminate\Support\Str::limit($type === 'contact' ? ($message->subject ? $message->subject . ' — ' . $message->message : $message->message) : ($message->message ?: '—'), 140) }}
+                        {{ Str::limit($type === 'contact' ? ($message->subject ? $message->subject . ' — ' . $message->message : $message->message) : ($message->message ?: '—'), 140) }}
                     </p>
                 </a>
 

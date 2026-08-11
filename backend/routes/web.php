@@ -10,10 +10,17 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StatController;
 use App\Http\Controllers\Admin\TechStackController;
+use App\Http\Controllers\Admin\Plan\AnalyticsController;
+use App\Http\Controllers\Admin\Plan\CalendarController;
+use App\Http\Controllers\Admin\Plan\ForecastController;
+use App\Http\Controllers\Admin\Plan\GoalController;
+use App\Http\Controllers\Admin\Plan\NotificationController;
+use App\Http\Controllers\Admin\Plan\PlanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\Telegram\WebhookController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -73,6 +80,30 @@ Route::prefix('admin')->group(function () {
             Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
             Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
 
+            // ── Plan: goals, daily plans and everything measured from them ──
+            Route::resource('goals', GoalController::class)->except(['show']);
+
+            Route::resource('plans', PlanController::class);
+            Route::post('plans/{plan}/{action}', [PlanController::class, 'act'])
+                ->whereIn('action', ['complete', 'fail', 'postpone'])
+                ->name('plans.act');
+
+            Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.index');
+
+            Route::prefix('analytics')->name('analytics.')->group(function () {
+                Route::get('/', [AnalyticsController::class, 'monthly'])->name('index');
+                Route::get('/daily', [AnalyticsController::class, 'daily'])->name('daily');
+                Route::get('/weekly', [AnalyticsController::class, 'weekly'])->name('weekly');
+                Route::get('/monthly', [AnalyticsController::class, 'monthly'])->name('monthly');
+            });
+
+            Route::get('/forecast', [ForecastController::class, 'index'])->name('forecast.index');
+            Route::post('/forecast', [ForecastController::class, 'store'])->name('forecast.store');
+
+            Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+            Route::post('/notifications/{notification}/retry', [NotificationController::class, 'retry'])->name('notifications.retry');
+            Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+
             // Inbox: contact messages and service orders
             Route::prefix('messages/{type}')->name('messages.')->group(function () {
                 Route::get('/', [MessageController::class, 'index'])->name('index');
@@ -83,3 +114,13 @@ Route::prefix('admin')->group(function () {
         });
     });
 });
+
+/*
+|--------------------------------------------------------------------------
+| Telegram webhook
+|--------------------------------------------------------------------------
+| Outside the admin group and outside any auth: Telegram authenticates itself
+| with a secret header, which the controller checks before anything else.
+*/
+
+Route::post('/telegram/webhook', WebhookController::class)->name('telegram.webhook');

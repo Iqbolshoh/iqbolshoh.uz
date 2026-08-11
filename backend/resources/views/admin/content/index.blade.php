@@ -12,6 +12,7 @@
 @php
     use App\Support\SiteContent;
     use App\Support\SiteIcons;
+    use Illuminate\Support\Str;
 
     $primary = array_key_first(SiteContent::LOCALES);
 
@@ -29,7 +30,7 @@
     $titleColumn = collect($columns)->firstWhere(fn($column) => in_array($column['type'], ['trans', 'text', 'strong']))
         ?? $columns[0];
 
-    $rowName = fn($item) => \Illuminate\Support\Str::limit((string) $plain($item->{$titleColumn['value']}), 60);
+    $rowName = fn($item) => Str::limit((string) $plain($item->{$titleColumn['value']}), 60);
 @endphp
 
 <div x-data="{ deleteModalOpen: false, deleteUrl: '', deleteName: '' }">

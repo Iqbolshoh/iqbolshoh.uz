@@ -6,6 +6,8 @@
 
 @section('content')
 @php
+    use Illuminate\Support\Str;
+
     // The rows are read-only, so the detail view is just a labelled dump of
     // what the visitor submitted plus the request metadata kept with it.
     $details = $type === 'contact'
@@ -123,7 +125,7 @@
             <span class="font-mono">IP: {{ $message->ip }}</span>
             @endif
             @if($message->user_agent)
-            <span class="truncate max-w-full">{{ \Illuminate\Support\Str::limit($message->user_agent, 90) }}</span>
+            <span class="truncate max-w-full">{{ Str::limit($message->user_agent, 90) }}</span>
             @endif
         </div>
 

@@ -30,6 +30,18 @@ final class RolePermissionSeeder extends Seeder
         'messages'      => ['view', 'delete'],
     ];
 
+    // ── Plan: the personal planning system, owner only ────────────────────────
+    private const PLAN_PERMISSIONS = [
+        'goals'         => ['view', 'create', 'edit', 'delete'],
+        'plans'         => ['view', 'create', 'edit', 'delete'],
+        'calendar'      => ['view'],
+        'analytics'     => ['view'],
+        'forecast'      => ['view'],
+        'interruptions' => ['view', 'create', 'edit', 'delete'],
+        'notifications' => ['view', 'delete', 'retry'],
+        'plan-settings' => ['view', 'edit'],
+    ];
+
     // ── Manager: edits the site content, but cannot delete or touch accounts ──
     private const MANAGER_PERMISSIONS = [
         'dashboard'     => ['view'],
@@ -53,6 +65,7 @@ final class RolePermissionSeeder extends Seeder
         $platformNames = array_merge(
             $this->createPermissions(self::PLATFORM_PERMISSIONS),
             $this->createPermissions(self::CONTENT_PERMISSIONS),
+            $this->createPermissions(self::PLAN_PERMISSIONS),
         );
 
         $superadmin = Role::firstOrCreate(['name' => 'superadmin', 'guard_name' => 'web']);

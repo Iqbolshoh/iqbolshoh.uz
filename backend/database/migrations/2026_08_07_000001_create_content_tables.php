@@ -103,18 +103,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('blog_posts', function (Blueprint $table) {
-            $table->id();
-            $table->string('slug')->unique();
-            $table->json('title');
-            $table->json('excerpt');
-            $table->string('image')->nullable();
-            $table->date('date');
-            $table->json('tags');
-            $table->boolean('featured')->default(false);
-            $table->unsignedInteger('sort_order')->default(0);
-            $table->timestamps();
-        });
 
         // Xizmat buyurtmalari (Services sahifasidagi modal forma)
         Schema::create('service_orders', function (Blueprint $table) {
@@ -151,7 +139,6 @@ return new class extends Migration
         foreach ([
             'contact_messages',
             'service_orders',
-            'blog_posts',
             'process_steps',
             'services',
             'beyonds',

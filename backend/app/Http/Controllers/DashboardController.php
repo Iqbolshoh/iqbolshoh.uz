@@ -12,6 +12,9 @@ use App\Models\Service;
 use App\Models\ServiceOrder;
 use App\Models\Stat;
 use App\Models\TechStack;
+use App\Models\Plan;
+use App\Services\PlanStats;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -19,6 +22,27 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
+
+        // Plan's own numbers sit above the content counts: the panel is opened
+        // in the morning to see the day, not to count portfolio entries.
+        $stats = new PlanStats((int) $user->id);
+        $today = CarbonImmutable::today($user->timezone ?? config('app.timezone'));
+
+        $plan = [
+            'today' => $stats->summary($today, $today),
+            'month' => $stats->summary($today->startOfMonth(), $today->endOfMonth()),
+            'trend' => $stats->dailyTrend(14),
+            'goals' => $stats->byGoal($today),
+            'upcoming' => Plan::query()
+                ->where('user_id', $user->id)
+                ->open()
+                ->where('date', '>=', $today->toDateString())
+                ->with('goal:id,title,color')
+                ->orderBy('date')
+                ->orderBy('start_time')
+                ->take(5)
+                ->get(),
+        ];
 
         $counts = [
             'projects'      => Project::count(),
@@ -71,6 +95,6 @@ class DashboardController extends Controller
             ->take(6)
             ->values();
 
-        return view('dashboard.index', compact('user', 'counts', 'inbox', 'recent'));
+        return view('dashboard.index', compact('user', 'counts', 'inbox', 'recent', 'plan'));
     }
 }

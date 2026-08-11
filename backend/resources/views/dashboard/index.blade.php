@@ -6,29 +6,93 @@
 @section('header_actions')
 <a href="{{ url('/') }}" target="_blank" rel="noopener" class="btn-secondary">
     <x-lucide-external-link class="w-4 h-4" />
-    Saytni ochish
+    Open the site
 </a>
 @endsection
 
 @section('content')
 @php
+    use App\Models\Plan;
+    use Illuminate\Support\Js;
+    use Illuminate\Support\Str;
+
     // Section key → sidebar label and icon, so the tiles link straight to the
     // page that edits them.
     $sections = [
-        'projects'      => ['Loyihalar', 'folder-git-2'],
-        'services'      => ['Xizmatlar', 'briefcase'],
-        'tech-stacks'   => ['Texnologiyalar', 'layers'],
+        'projects'      => ['Projects', 'folder-git-2'],
+        'services'      => ['Services', 'briefcase'],
+        'tech-stacks'   => ['Technologies', 'layers'],
         'stats'         => ['Stats', 'bar-chart-3'],
-        'highlights'    => ["Ta'kidlar", 'sparkles'],
+        'highlights'    => ['Highlights', 'sparkles'],
         'journeys'      => ['Journey', 'milestone'],
-        'beyonds'       => ['Dasturlashdan tashqari', 'heart-handshake'],
-        'process-steps' => ['Ish jarayoni', 'list-checks'],
+        'beyonds'       => ['Beyond code', 'heart-handshake'],
+        'process-steps' => ['Process', 'list-checks'],
     ];
 @endphp
 
 <div class="mb-8">
-    <h2 class="text-2xl font-bold text-white tracking-tight">Assalomu alaykum, {{ $user->name }}</h2>
+    <h2 class="text-2xl font-bold text-white tracking-tight">Hello, {{ $user->name }}</h2>
     <p class="text-sm text-[var(--text-muted)] mt-1">Manage every piece of iqbolshoh.uz content from here.</p>
+</div>
+
+{{-- Today, from Plan --}}
+@php
+    $today = $plan['today'];
+    $month = $plan['month'];
+@endphp
+
+<div class="grid gap-4 grid-cols-2 lg:grid-cols-4 mb-6">
+    @foreach([
+        ['Today', $today['total'] . ' plans', 'list-checks', null, route('admin.plans.index', ['date' => now()->toDateString()])],
+        ['Completed', $today['completed'], 'check-check', '#22C55E', null],
+        ['Completion', $today['raw_rate'] . '%', 'percent', null, null],
+        ['This month', $month['raw_rate'] . '%', 'trending-up', '#0EA5E9', route('admin.analytics.monthly')],
+    ] as [$label, $value, $icon, $color, $href])
+    <a @if($href) href="{{ $href }}" @endif class="card p-5 {{ $href ? 'card-hover' : '' }}">
+        <div class="flex items-center justify-between">
+            <p class="text-[11px] font-bold uppercase tracking-wider text-[var(--text-muted)]">{{ $label }}</p>
+            <x-dynamic-component :component="'lucide-' . $icon" class="w-4 h-4 text-[var(--text-muted)]" />
+        </div>
+        <p class="text-2xl font-bold font-mono mt-2" style="color: {{ $color ?? 'var(--text-primary)' }};">{{ $value }}</p>
+    </a>
+    @endforeach
+</div>
+
+<div class="grid gap-5 lg:grid-cols-3 mb-6">
+    <div class="card p-6 lg:col-span-2">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-[var(--text-muted)]">Last 14 days</h3>
+            <a href="{{ route('admin.analytics.monthly') }}" class="text-xs font-semibold text-[var(--accent-hover)] hover:text-[var(--accent-alt)] transition-colors">Analytics →</a>
+        </div>
+        <div class="h-48"><canvas id="dashboardTrend"></canvas></div>
+        <p class="text-xs text-[var(--text-muted)] mt-3">
+            ⏱ Planned {{ Plan::humanMinutes($month['planned_minutes']) }}
+            · Actual {{ Plan::humanMinutes($month['actual_minutes']) }} this month
+        </p>
+    </div>
+
+    <div class="card p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-[var(--text-muted)]">Coming up</h3>
+            <a href="{{ route('admin.plans.index') }}" class="text-xs font-semibold text-[var(--accent-hover)] hover:text-[var(--accent-alt)] transition-colors">All →</a>
+        </div>
+
+        @forelse($plan['upcoming'] as $upcoming)
+        <a href="{{ route('admin.plans.show', $upcoming) }}"
+            class="flex items-center gap-3 py-2.5 border-b border-[var(--border-subtle)] last:border-0 group">
+            <span class="font-mono text-sm font-bold text-white flex-shrink-0">{{ Str::substr($upcoming->start_time, 0, 5) }}</span>
+            <span class="min-w-0 flex-1">
+                <span class="block text-sm text-[var(--text-secondary)] group-hover:text-white transition-colors truncate">{{ $upcoming->title }}</span>
+                <span class="block text-[11px] text-[var(--text-muted)]">{{ $upcoming->date->format('D, j M') }}</span>
+            </span>
+            @if($upcoming->goal)
+            <span class="w-2 h-2 rounded-full flex-shrink-0" style="background: {{ $upcoming->goal->color ?? '#8B95A5' }};"></span>
+            @endif
+        </a>
+        @empty
+        <p class="text-sm text-[var(--text-muted)] py-6 text-center">Nothing scheduled.</p>
+        @endforelse
+    </div>
 </div>
 
 {{-- Inbox --}}
@@ -96,7 +160,7 @@
                     <span class="badge badge-accent">New</span>
                     @endif
                 </div>
-                <p class="text-xs text-[var(--text-muted)] mt-1 truncate">{{ \Illuminate\Support\Str::limit($entry['summary'], 90) }}</p>
+                <p class="text-xs text-[var(--text-muted)] mt-1 truncate">{{ Str::limit($entry['summary'], 90) }}</p>
             </div>
 
             <span class="text-[0.68rem] text-[var(--text-muted)] font-mono whitespace-nowrap flex-shrink-0">
@@ -116,3 +180,44 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+    (function () {
+        const trend = {!! Js::from($plan['trend']) !!};
+        const grid = 'rgba(148, 163, 184, 0.12)';
+
+        Chart.defaults.color = getComputedStyle(document.documentElement)
+            .getPropertyValue('--text-muted').trim() || '#8B95A5';
+        Chart.defaults.font.family = "'Plus Jakarta Sans', system-ui, sans-serif";
+
+        new Chart(document.getElementById('dashboardTrend'), {
+            type: 'line',
+            data: {
+                labels: trend.map((point) => point.label),
+                datasets: [{
+                    label: 'Completion %',
+                    data: trend.map((point) => point.rate),
+                    borderColor: '#6366F1',
+                    backgroundColor: 'rgba(99, 102, 241, 0.14)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.35,
+                    pointRadius: 0,
+                    pointHoverRadius: 4,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { min: 0, max: 100, grid: { color: grid }, ticks: { callback: (value) => value + '%' } },
+                    x: { grid: { display: false }, ticks: { maxTicksLimit: 7 } },
+                },
+            },
+        });
+    })();
+</script>
+@endpush
