@@ -43,7 +43,7 @@
             </div>
 
             <div class="space-y-6">
-                @foreach(['name' => 'To\'liq ism', 'location' => 'Manzil'] as $field => $label)
+                @foreach(['name' => 'Full name', 'location' => 'Location'] as $field => $label)
                 <div>
                     <label class="block text-sm font-semibold text-[var(--text-secondary)] mb-2">
                         {{ $label }} <span class="text-[var(--accent)]">*</span>

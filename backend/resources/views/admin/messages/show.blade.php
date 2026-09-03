@@ -86,7 +86,7 @@
             </div>
             <span class="badge badge-success flex-shrink-0">
                 <x-lucide-check class="w-3 h-3" />
-                O'qilgan
+                Read
             </span>
         </div>
 

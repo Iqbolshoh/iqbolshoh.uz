@@ -10,6 +10,10 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StatController;
 use App\Http\Controllers\Admin\TechStackController;
+use App\Http\Controllers\Admin\Finance\CategoryController as FinanceCategoryController;
+use App\Http\Controllers\Admin\Finance\OverviewController as FinanceOverviewController;
+use App\Http\Controllers\Admin\Finance\SettingController as FinanceSettingController;
+use App\Http\Controllers\Admin\Finance\TransactionController;
 use App\Http\Controllers\Admin\Plan\AnalyticsController;
 use App\Http\Controllers\Admin\Plan\CalendarController;
 use App\Http\Controllers\Admin\Plan\ForecastController;
@@ -103,6 +107,21 @@ Route::prefix('admin')->group(function () {
             Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
             Route::post('/notifications/{notification}/retry', [NotificationController::class, 'retry'])->name('notifications.retry');
             Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+
+            // ── Finance: what came in, what went out, and the limits ──
+            Route::get('/finance', [FinanceOverviewController::class, 'index'])->name('finance.index');
+
+            // Declared before the resource so `/transactions/export` can never
+            // be read as a transaction id.
+            Route::get('/transactions/export', [TransactionController::class, 'export'])->name('transactions.export');
+            Route::resource('transactions', TransactionController::class)->except(['show']);
+
+            Route::post('/finance-categories/restore-defaults', [FinanceCategoryController::class, 'restoreDefaults'])
+                ->name('finance-categories.restore');
+            Route::resource('finance-categories', FinanceCategoryController::class)->except(['show']);
+
+            Route::get('/finance-settings', [FinanceSettingController::class, 'index'])->name('finance-settings.index');
+            Route::put('/finance-settings', [FinanceSettingController::class, 'update'])->name('finance-settings.update');
 
             // Inbox: contact messages and service orders
             Route::prefix('messages/{type}')->name('messages.')->group(function () {

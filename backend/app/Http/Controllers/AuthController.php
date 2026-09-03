@@ -42,7 +42,7 @@ class AuthController extends Controller
 
             return redirect()
                 ->route('dashboard.index')
-                ->with('success', 'Muvaffaqiyatli kirdingiz!');
+                ->with('success', 'Signed in.');
         }
 
         return back()->withErrors([
@@ -61,6 +61,6 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         // Redirect with translated logout message
-        return redirect('/')->with('success', 'Tizimdan muvaffaqiyatli chiqdingiz.');
+        return redirect('/')->with('success', 'Signed out.');
     }
 }

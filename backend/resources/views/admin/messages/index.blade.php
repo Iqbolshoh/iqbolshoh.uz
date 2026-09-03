@@ -63,7 +63,7 @@
             </a>
             <a href="{{ route('admin.messages.index', [$type, 'filter' => 'unread']) }}"
                 class="px-3.5 py-1.5 rounded-lg text-sm font-semibold transition-colors {{ request('filter') === 'unread' ? 'bg-[var(--accent-soft)] text-[var(--accent-hover)] border border-[var(--accent-border)]' : 'text-[var(--text-muted)] hover:text-[var(--text-secondary)]' }}">
-                O'qilmagan
+                Unread
                 @if($unread > 0)
                 <span class="nav-badge" style="margin-left: 0.375rem;">{{ $unread }}</span>
                 @endif

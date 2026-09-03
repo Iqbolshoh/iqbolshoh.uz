@@ -55,7 +55,7 @@
                     </label>
                     <button type="button" @click="toggleAll"
                             class="btn-ghost !text-xs !py-1.5 !px-3">
-                        <span x-text="allSelected() ? 'Barchasini olib tashlash' : 'Barchasini tanlash'"></span>
+                        <span x-text="allSelected() ? 'Clear all' : 'Select all'"></span>
                     </button>
                 </div>
 

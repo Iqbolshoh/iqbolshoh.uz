@@ -24,7 +24,7 @@ class ProfileController extends Controller
 
         $user->update($data);
 
-        return back()->with('success', 'Profil muvaffaqiyatli yangilandi.');
+        return back()->with('success', 'Profile updated.');
     }
 
     public function updatePassword(Request $request)
@@ -42,6 +42,6 @@ class ProfileController extends Controller
 
         $user->update(['password' => Hash::make($request->password)]);
 
-        return back()->with('success', 'Parol muvaffaqiyatli o\'zgartirildi.');
+        return back()->with('success', 'Password changed.');
     }
 }

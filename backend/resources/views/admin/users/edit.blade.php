@@ -123,7 +123,7 @@
                 <a href="{{ route('users.index') }}" class="btn-secondary">Cancel</a>
                 <button type="submit" class="btn-primary">
                     <x-lucide-save class="w-4 h-4" />
-                    O'zgarishlarni saqlash
+                    Save changes
                 </button>
             </div>
         </form>

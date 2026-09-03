@@ -98,7 +98,7 @@
 {{-- Inbox --}}
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
     @foreach([
-        'contact' => ['Aloqa xabarlari', 'mail'],
+        'contact' => ['Contact messages', 'mail'],
         'orders'  => ['Service orders', 'shopping-bag'],
     ] as $type => [$label, $icon])
     <a href="{{ route('admin.messages.index', $type) }}" class="card card-hover p-6 flex items-center gap-5">
@@ -110,7 +110,7 @@
             <p class="text-3xl font-extrabold text-white leading-tight mt-0.5 font-mono">{{ $inbox[$type]['total'] }}</p>
         </div>
         @if($inbox[$type]['unread'] > 0)
-        <span class="badge badge-accent flex-shrink-0">{{ $inbox[$type]['unread'] }} yangi</span>
+        <span class="badge badge-accent flex-shrink-0">{{ $inbox[$type]['unread'] }} new</span>
         @endif
     </a>
     @endforeach

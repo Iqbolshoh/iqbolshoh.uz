@@ -6,12 +6,15 @@ use App\Enums\FailReason;
 use App\Enums\InterruptionType;
 use App\Enums\PlanStatus;
 use App\Enums\PostponeReason;
+use App\Enums\TransactionKind;
 use App\Models\Interruption;
 use App\Models\Plan;
 use App\Models\TelegramAccount;
+use App\Models\Transaction;
 use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 /**
@@ -26,6 +29,7 @@ class TelegramBot
     public function __construct(
         private readonly TelegramClient $client,
         private readonly PlanService $plans,
+        private readonly FinanceBot $finance,
     ) {}
 
     /** @param  array<string, mixed>  $message */
@@ -37,10 +41,15 @@ class TelegramBot
         $account = $this->account($chatId);
 
         if ($account === null) {
-            $this->client->sendMessage($chatId, "This bot is private.\n\nYour Telegram ID is <code>{$chatId}</code>.");
+            // An unlinked chat is answered in whatever language its client
+            // reports, since there is no stored preference to honour yet.
+            $this->useLocale($message['from']['language_code'] ?? null);
+            $this->client->sendMessage($chatId, __('bot.private', ['id' => $chatId]));
 
             return;
         }
+
+        $this->useLocale($account->locale);
 
         $command = Str::of($text)->lower()->before(' ')->trim()->toString();
 
@@ -50,8 +59,27 @@ class TelegramBot
             '/tomorrow' => $this->sendDay($chatId, $account->user, CarbonImmutable::tomorrow($account->user->timezone)),
             '/status' => $this->sendInterruptionMenu($chatId),
             '/stats' => $this->sendStats($chatId, $account->user),
-            default => $this->sendWelcome($chatId, $account->user),
+            '/money', '/pul' => $this->finance->sendMenu($chatId, $account->user),
+            '/language', '/til' => $this->sendLanguageMenu($chatId),
+            default => $this->handleFreeText($chatId, $account->user, $text),
         };
+    }
+
+    /**
+     * Anything that is not a command.
+     *
+     * Money comes first because that is what most messages here are: a line
+     * like "ovqat 25000" must be one thing to type and nothing to confirm. Only
+     * when no amount can be found does the bot fall back to showing the menu,
+     * so a greeting still gets a useful answer instead of an error.
+     */
+    private function handleFreeText(int $chatId, User $user, string $text): void
+    {
+        if ($text !== '' && $this->finance->handleText($chatId, $user, $text)) {
+            return;
+        }
+
+        $this->sendWelcome($chatId, $user);
     }
 
     /**
@@ -72,14 +100,72 @@ class TelegramBot
             return;
         }
 
+        $this->useLocale($account->locale);
+
         $parts = explode(':', $data);
 
         match ($parts[0] ?? '') {
             'p' => $this->handlePlanAction($chatId, $messageId, $account->user, $parts),
             'i' => $this->handleInterruptionAction($chatId, $messageId, $account->user, $parts),
             'nav' => $this->handleNavigation($chatId, $messageId, $account->user, $parts),
+            'f' => $this->finance->handleCallback($chatId, $messageId, $account->user, $parts),
+            'lang' => $this->setLanguage($chatId, $messageId, $account, $parts[1] ?? ''),
             default => null,
         };
+    }
+
+    /**
+     * Point the translator at the right language for this one update.
+     *
+     * Set on every update rather than once at boot: the queue worker is a long
+     * running process, so a locale left over from the previous chat would
+     * answer the next one in the wrong language — and on a single-owner bot
+     * that bug is invisible until someone else writes in.
+     */
+    private function useLocale(?string $locale): void
+    {
+        App::setLocale($this->resolveLocale($locale));
+    }
+
+    /** Telegram sends "ru-RU" and knows Tajik as "tg"; this bot's files say "tj". */
+    private function resolveLocale(?string $locale): string
+    {
+        $short = Str::of((string) $locale)->lower()->before('-')->toString();
+
+        return match ($short) {
+            'uz', 'ru', 'en' => $short,
+            'tj', 'tg' => 'tj',
+            default => config('app.locale'),
+        };
+    }
+
+    private function sendLanguageMenu(int $chatId, ?int $messageId = null): void
+    {
+        $keyboard = TelegramClient::keyboard([
+            [
+                TelegramClient::button("🇺🇿 O'zbekcha", 'lang:uz'),
+                TelegramClient::button('🇷🇺 Русский', 'lang:ru'),
+            ],
+            [
+                TelegramClient::button('🇬🇧 English', 'lang:en'),
+                TelegramClient::button('🇹🇯 Тоҷикӣ', 'lang:tj'),
+            ],
+        ]);
+
+        $messageId === null
+            ? $this->client->sendMessage($chatId, __('bot.lang.ask'), $keyboard)
+            : $this->client->editMessage($chatId, $messageId, __('bot.lang.ask'), $keyboard);
+    }
+
+    private function setLanguage(int $chatId, int $messageId, TelegramAccount $account, string $locale): void
+    {
+        $resolved = $this->resolveLocale($locale);
+
+        $account->update(['locale' => $resolved]);
+        App::setLocale($resolved);
+
+        $this->client->editMessage($chatId, $messageId, __('bot.lang.set'));
+        $this->sendWelcome($chatId, $account->user);
     }
 
     /** The card a reminder sends, and the one every action edits in place. */
@@ -97,11 +183,11 @@ class TelegramBot
         }
 
         if ($plan->postpone_count > 0) {
-            $lines[] = "↩️ Pushed {$plan->postpone_count}×";
+            $lines[] = __('bot.plan.pushed', ['count' => $plan->postpone_count]);
         }
 
         $lines[] = '';
-        $lines[] = '<i>Status: ' . $plan->status->label() . '</i>';
+        $lines[] = __('bot.plan.status', ['status' => $this->statusLabel($plan->status)]);
 
         return implode("\n", $lines);
     }
@@ -111,22 +197,22 @@ class TelegramBot
     {
         if ($plan->status->isClosed()) {
             return TelegramClient::keyboard([
-                [TelegramClient::button('📋 Today', 'nav:today')],
+                [TelegramClient::button(__('bot.btn.today'), 'nav:today')],
             ]);
         }
 
         return TelegramClient::keyboard([
             [
-                TelegramClient::button('✅ Done', "p:{$plan->id}:done"),
-                TelegramClient::button('❌ Not done', "p:{$plan->id}:fail"),
+                TelegramClient::button(__('bot.btn.done'), "p:{$plan->id}:done"),
+                TelegramClient::button(__('bot.btn.not_done'), "p:{$plan->id}:fail"),
             ],
             [
-                TelegramClient::button('⏱ +10 min', "p:{$plan->id}:pp:10"),
-                TelegramClient::button('⏱ +30 min', "p:{$plan->id}:pp:30"),
+                TelegramClient::button(__('bot.btn.minutes', ['count' => 10]), "p:{$plan->id}:pp:10"),
+                TelegramClient::button(__('bot.btn.minutes', ['count' => 30]), "p:{$plan->id}:pp:30"),
             ],
             [
-                TelegramClient::button('⏭ Later', "p:{$plan->id}:later"),
-                TelegramClient::button('📋 Today', 'nav:today'),
+                TelegramClient::button(__('bot.btn.later'), "p:{$plan->id}:later"),
+                TelegramClient::button(__('bot.btn.today'), 'nav:today'),
             ],
         ]);
     }
@@ -137,22 +223,35 @@ class TelegramBot
         $plans = $this->plansFor($user, $today);
         $done = $plans->where('status', PlanStatus::Completed)->count();
 
+        $spentToday = (int) Transaction::query()
+            ->where('user_id', $user->id)
+            ->ofKind(TransactionKind::Expense)
+            ->between($today, $today)
+            ->sum('amount');
+
         $text = implode("\n", [
-            '👋 <b>Plan</b>',
+            __('bot.welcome.title'),
             '',
-            "Today: {$plans->count()} plans, {$done} done.",
+            __('bot.welcome.plans', ['total' => $plans->count(), 'done' => $done]),
+            __('bot.welcome.spent', ['amount' => Transaction::money($spentToday)]),
             '',
-            'What would you like to do?',
+            __('bot.welcome.ask'),
+            '',
+            '<i>' . __('bot.welcome.hint') . '</i>',
         ]);
 
         $this->client->sendMessage($chatId, $text, TelegramClient::keyboard([
             [
-                TelegramClient::button("📋 Today's plans", 'nav:today'),
-                TelegramClient::button('📅 Tomorrow', 'nav:tomorrow'),
+                TelegramClient::button(__('bot.btn.today'), 'nav:today'),
+                TelegramClient::button(__('bot.btn.tomorrow'), 'nav:tomorrow'),
             ],
             [
-                TelegramClient::button('📊 Stats', 'nav:stats'),
-                TelegramClient::button('🚨 Set status', 'nav:status'),
+                TelegramClient::button(__('bot.btn.money'), 'f:menu'),
+                TelegramClient::button(__('bot.btn.stats'), 'nav:stats'),
+            ],
+            [
+                TelegramClient::button(__('bot.btn.status'), 'nav:status'),
+                TelegramClient::button(__('bot.btn.language'), 'nav:language'),
             ],
         ]));
     }
@@ -162,8 +261,8 @@ class TelegramBot
         $plans = $this->plansFor($user, $date);
 
         if ($plans->isEmpty()) {
-            $text = '📋 <b>' . $date->format('l, j F') . "</b>\n\nNothing scheduled.";
-            $keyboard = TelegramClient::keyboard([[TelegramClient::button('📅 Tomorrow', 'nav:tomorrow')]]);
+            $text = '📋 <b>' . $date->translatedFormat('l, j F') . '</b>' . "\n\n" . __('bot.day.empty');
+            $keyboard = TelegramClient::keyboard([[TelegramClient::button(__('bot.btn.tomorrow'), 'nav:tomorrow')]]);
 
             $editMessageId
                 ? $this->client->editMessage($chatId, $editMessageId, $text, $keyboard)
@@ -172,7 +271,7 @@ class TelegramBot
             return;
         }
 
-        $lines = ['📋 <b>' . $date->format('l, j F') . '</b>', ''];
+        $lines = ['📋 <b>' . $date->translatedFormat('l, j F') . '</b>', ''];
         $rows = [];
 
         foreach ($plans as $plan) {
@@ -189,12 +288,16 @@ class TelegramBot
 
         $lines[] = '';
         $lines[] = $settled > 0
-            ? "✅ {$done}/{$settled} done · " . round($done / max(1, $settled) * 100) . '%'
-            : 'Nothing settled yet.';
+            ? __('bot.day.settled', [
+                'done' => $done,
+                'settled' => $settled,
+                'rate' => round($done / max(1, $settled) * 100),
+            ])
+            : __('bot.day.nothing_settled');
 
         $rows[] = [
-            TelegramClient::button('🔄 Refresh', 'nav:today'),
-            TelegramClient::button('🚨 Set status', 'nav:status'),
+            TelegramClient::button(__('bot.btn.refresh'), 'nav:today'),
+            TelegramClient::button(__('bot.btn.money'), 'f:menu'),
         ];
 
         $text = implode("\n", $lines);
@@ -214,21 +317,23 @@ class TelegramBot
         $month = $stats->summary($today->startOfMonth(), $today->endOfMonth());
 
         $text = implode("\n", [
-            '📊 <b>Your numbers</b>',
+            __('bot.stats.title'),
             '',
-            '<b>This week</b>',
-            "Plans: {$week['total']} · Completed: {$week['completed']}",
-            "Rate: {$week['raw_rate']}% (true {$week['true_rate']}%)",
+            __('bot.stats.week'),
+            __('bot.stats.plans', ['total' => $week['total'], 'completed' => $week['completed']]),
+            __('bot.stats.rate', ['raw' => $week['raw_rate'], 'true' => $week['true_rate']]),
             '',
-            '<b>This month</b>',
-            "Plans: {$month['total']} · Completed: {$month['completed']}",
-            "Rate: {$month['raw_rate']}% (true {$month['true_rate']}%)",
+            __('bot.stats.month'),
+            __('bot.stats.plans', ['total' => $month['total'], 'completed' => $month['completed']]),
+            __('bot.stats.rate', ['raw' => $month['raw_rate'], 'true' => $month['true_rate']]),
             '',
-            '⏱ Planned ' . Plan::humanMinutes($month['planned_minutes'])
-                . ' · Actual ' . Plan::humanMinutes($month['actual_minutes']),
+            __('bot.stats.time', [
+                'planned' => Plan::humanMinutes($month['planned_minutes']),
+                'actual' => Plan::humanMinutes($month['actual_minutes']),
+            ]),
         ]);
 
-        $keyboard = TelegramClient::keyboard([[TelegramClient::button('📋 Today', 'nav:today')]]);
+        $keyboard = TelegramClient::keyboard([[TelegramClient::button(__('bot.btn.today'), 'nav:today')]]);
 
         $editMessageId
             ? $this->client->editMessage($chatId, $editMessageId, $text, $keyboard)
@@ -237,13 +342,13 @@ class TelegramBot
 
     private function sendInterruptionMenu(int $chatId, ?int $editMessageId = null): void
     {
-        $text = "🚨 <b>Set your status</b>\n\nWhile you are busy, reminders stay quiet.";
+        $text = __('bot.interrupt.title') . "\n\n" . __('bot.interrupt.hint');
 
         $rows = [];
         $buttons = [];
 
         foreach (InterruptionType::cases() as $type) {
-            $buttons[] = TelegramClient::button($type->emoji() . ' ' . $type->label(), "i:start:{$type->value}");
+            $buttons[] = TelegramClient::button($type->emoji() . ' ' . $this->interruptLabel($type), "i:start:{$type->value}");
 
             if (count($buttons) === 2) {
                 $rows[] = $buttons;
@@ -255,7 +360,7 @@ class TelegramBot
             $rows[] = $buttons;
         }
 
-        $rows[] = [TelegramClient::button('📋 Back to today', 'nav:today')];
+        $rows[] = [TelegramClient::button(__('bot.btn.today'), 'nav:today')];
 
         $keyboard = TelegramClient::keyboard($rows);
 
@@ -270,7 +375,7 @@ class TelegramBot
         $plan = Plan::query()->where('user_id', $user->id)->find((int) ($parts[1] ?? 0));
 
         if ($plan === null) {
-            $this->client->editMessage($chatId, $messageId, '⚠️ That plan no longer exists.');
+            $this->client->editMessage($chatId, $messageId, __('bot.plan.gone'));
 
             return;
         }
@@ -301,7 +406,7 @@ class TelegramBot
         $buttons = [];
 
         foreach (FailReason::cases() as $reason) {
-            $buttons[] = TelegramClient::button($reason->emoji() . ' ' . $reason->label(), "p:{$plan->id}:fail:{$reason->value}");
+            $buttons[] = TelegramClient::button($reason->emoji() . ' ' . $this->failLabel($reason), "p:{$plan->id}:fail:{$reason->value}");
 
             if (count($buttons) === 2) {
                 $rows[] = $buttons;
@@ -313,12 +418,12 @@ class TelegramBot
             $rows[] = $buttons;
         }
 
-        $rows[] = [TelegramClient::button('← Back', "p:{$plan->id}:open")];
+        $rows[] = [TelegramClient::button(__('bot.btn.back'), "p:{$plan->id}:open")];
 
         $this->client->editMessage(
             $chatId,
             $messageId,
-            '❌ <b>' . e($plan->title) . "</b>\n\nWhat got in the way?",
+            '❌ <b>' . e($plan->title) . '</b>' . "\n\n" . __('bot.plan.fail_question'),
             TelegramClient::keyboard($rows)
         );
     }
@@ -328,17 +433,17 @@ class TelegramBot
         $this->client->editMessage(
             $chatId,
             $messageId,
-            '⏭ <b>' . e($plan->title) . "</b>\n\nWhen should it come back?",
+            '⏭ <b>' . e($plan->title) . '</b>' . "\n\n" . __('bot.plan.later_question'),
             TelegramClient::keyboard([
                 [
-                    TelegramClient::button('+30 min', "p:{$plan->id}:pp:30"),
-                    TelegramClient::button('+1 hour', "p:{$plan->id}:pp:60"),
+                    TelegramClient::button(__('bot.btn.minutes', ['count' => 30]), "p:{$plan->id}:pp:30"),
+                    TelegramClient::button(__('bot.btn.hour'), "p:{$plan->id}:pp:60"),
                 ],
                 [
-                    TelegramClient::button('🌙 This evening', "p:{$plan->id}:pp:" . $this->minutesUntilEvening($plan)),
-                    TelegramClient::button('📅 Tomorrow', "p:{$plan->id}:pp:1440"),
+                    TelegramClient::button(__('bot.btn.evening'), "p:{$plan->id}:pp:" . $this->minutesUntilEvening($plan)),
+                    TelegramClient::button(__('bot.btn.tomorrow_short'), "p:{$plan->id}:pp:1440"),
                 ],
-                [TelegramClient::button('← Back', "p:{$plan->id}:open")],
+                [TelegramClient::button(__('bot.btn.back'), "p:{$plan->id}:open")],
             ])
         );
     }
@@ -379,17 +484,17 @@ class TelegramBot
         $this->client->editMessage(
             $chatId,
             $messageId,
-            $type->emoji() . ' <b>' . $type->label() . "</b>\n\nHow long will you be busy?",
+            $type->emoji() . ' <b>' . $this->interruptLabel($type) . '</b>' . "\n\n" . __('bot.interrupt.how_long'),
             TelegramClient::keyboard([
                 [
-                    TelegramClient::button('30 min', "i:for:{$type->value}:30"),
-                    TelegramClient::button('1 hour', "i:for:{$type->value}:60"),
+                    TelegramClient::button(__('bot.btn.minutes', ['count' => 30]), "i:for:{$type->value}:30"),
+                    TelegramClient::button(__('bot.btn.hour'), "i:for:{$type->value}:60"),
                 ],
                 [
-                    TelegramClient::button('2 hours', "i:for:{$type->value}:120"),
-                    TelegramClient::button('Rest of the day', "i:for:{$type->value}:600"),
+                    TelegramClient::button(__('bot.btn.minutes', ['count' => 120]), "i:for:{$type->value}:120"),
+                    TelegramClient::button(__('bot.btn.rest_of_day'), "i:for:{$type->value}:600"),
                 ],
-                [TelegramClient::button('← Back', 'nav:status')],
+                [TelegramClient::button(__('bot.btn.back'), 'nav:status')],
             ])
         );
     }
@@ -431,15 +536,15 @@ class TelegramBot
             $interruption->update(['affected_plans' => $affected]);
         }
 
-        $text = $type->emoji() . ' <b>' . $type->label() . "</b>\n\n"
-            . 'Until ' . $startedAt->addMinutes($minutes)->format('H:i') . ". Reminders are paused.\n\n"
+        $text = $type->emoji() . ' <b>' . $this->interruptLabel($type) . '</b>' . "\n\n"
+            . __('bot.interrupt.until', ['time' => $startedAt->addMinutes($minutes)->format('H:i')]) . "\n\n"
             . ($type->movesPlansAutomatically()
-                ? ($affected > 0 ? "{$affected} plans moved out of the way." : 'Nothing needed moving.')
-                : 'Your remaining plans are untouched — decide what to do with them when you are back.');
+                ? ($affected > 0 ? __('bot.interrupt.moved', ['count' => $affected]) : __('bot.interrupt.nothing_moved'))
+                : __('bot.interrupt.untouched'));
 
         $this->client->editMessage($chatId, $messageId, $text, TelegramClient::keyboard([
-            [TelegramClient::button("✅ I'm free again", "i:end:{$interruption->id}")],
-            [TelegramClient::button('📋 Today', 'nav:today')],
+            [TelegramClient::button(__('bot.btn.free_again'), "i:end:{$interruption->id}")],
+            [TelegramClient::button(__('bot.btn.today'), 'nav:today')],
         ]));
     }
 
@@ -453,8 +558,31 @@ class TelegramBot
             'tomorrow' => $this->sendDay($chatId, $user, $today->addDay(), $messageId),
             'stats' => $this->sendStats($chatId, $user, $messageId),
             'status' => $this->sendInterruptionMenu($chatId, $messageId),
+            'language' => $this->sendLanguageMenu($chatId, $messageId),
             default => null,
         };
+    }
+
+    /**
+     * Enum labels, in the language of the chat.
+     *
+     * The enums keep their English `label()` for the admin panel, which is
+     * English only; these read the same case through the bot's translation
+     * files instead of duplicating the words in two places.
+     */
+    private function statusLabel(PlanStatus $status): string
+    {
+        return __('bot.plan_status.' . $status->value);
+    }
+
+    private function failLabel(FailReason $reason): string
+    {
+        return __('bot.fail_reason.' . $reason->value);
+    }
+
+    private function interruptLabel(InterruptionType $type): string
+    {
+        return __('bot.interrupt_type.' . $type->value);
     }
 
     /** @return Collection<int, Plan> */

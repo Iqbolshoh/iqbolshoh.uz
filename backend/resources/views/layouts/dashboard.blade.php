@@ -816,9 +816,9 @@
                     </div>
 
                     <div class="mt-5 text-center">
-                        <h3 id="logout-title" class="text-xl font-bold text-white tracking-tight">Log outni tasdiqlash</h3>
+                        <h3 id="logout-title" class="text-xl font-bold text-white tracking-tight">Confirm sign out</h3>
                         <p class="mt-2 text-sm text-[var(--text-secondary)] leading-relaxed">
-                            Hisobingizdan chiqmoqchimisiz?
+                            Do you want to sign out of your account?
                         </p>
                     </div>
 
@@ -925,6 +925,33 @@
                     <h3 class="nav-heading">Plan</h3>
                     <div class="space-y-1">
                         @foreach($planSections as $section => [$label, $icon, $permission])
+                        @can($permission)
+                        <a href="{{ route('admin.' . $section . '.index') }}"
+                            title="{{ $label }}"
+                            class="nav-link {{ request()->routeIs('admin.' . $section . '.*') ? 'active' : '' }}">
+                            <x-dynamic-component :component="'lucide-' . $icon" class="nav-icon" />
+                            <span class="sidebar-label">{{ $label }}</span>
+                        </a>
+                        @endcan
+                        @endforeach
+                    </div>
+                </div>
+                @endcanany
+
+                {{-- Finance --}}
+                @canany(['finance.view', 'transactions.view', 'finance-categories.view', 'finance-settings.view'])
+                @php
+                    $financeSections = [
+                        'finance'            => ['Overview', 'wallet', 'finance.view'],
+                        'transactions'       => ['Transactions', 'arrow-left-right', 'transactions.view'],
+                        'finance-categories' => ['Categories', 'tags', 'finance-categories.view'],
+                        'finance-settings'   => ['Budget & alerts', 'sliders-horizontal', 'finance-settings.view'],
+                    ];
+                @endphp
+                <div>
+                    <h3 class="nav-heading">Finance</h3>
+                    <div class="space-y-1">
+                        @foreach($financeSections as $section => [$label, $icon, $permission])
                         @can($permission)
                         <a href="{{ route('admin.' . $section . '.index') }}"
                             title="{{ $label }}"
@@ -1105,9 +1132,9 @@
                             style="display: none;">
 
                             <div class="px-4 py-3.5 border-b border-[var(--border-subtle)] flex justify-between items-center">
-                                <h3 class="text-sm font-bold text-white">Bildirishnomalar</h3>
+                                <h3 class="text-sm font-bold text-white">Notifications</h3>
                                 @if($bellCount > 0)
-                                <span class="badge badge-accent">{{ $bellCount }} yangi</span>
+                                <span class="badge badge-accent">{{ $bellCount }} new</span>
                                 @endif
                             </div>
 
@@ -1281,7 +1308,7 @@
 
                 <footer class="px-4 sm:px-8 pb-6 pt-2">
                     <div class="max-w-[100rem] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[var(--text-muted)] border-t border-[var(--border-subtle)] pt-4 cursor-default">
-                        <p>© {{ date('Y') }} {{ config('app.program_name') }} — Barcha huquqlar himoyalangan.</p>
+                        <p>© {{ date('Y') }} {{ config('app.program_name') }} — All rights reserved.</p>
                         <p class="font-mono">v1.0</p>
                     </div>
                 </footer>

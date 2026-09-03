@@ -7,7 +7,7 @@
 @section('content')
 <div x-data="{ deleteModalOpen: false, deleteUrl: '', deleteName: '' }">
 
-    @include('admin.plan.partials.delete-modal', ['what' => 'notification'])
+    @include('admin.partials.delete-modal', ['what' => 'notification'])
 
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <p class="text-sm text-[var(--text-muted)]">

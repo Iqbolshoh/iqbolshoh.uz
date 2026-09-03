@@ -7,7 +7,7 @@
 @section('content')
 <div x-data="{ deleteModalOpen: false, deleteUrl: '', deleteName: '' }">
 
-    @include('admin.plan.partials.delete-modal', ['what' => 'goal'])
+    @include('admin.partials.delete-modal', ['what' => 'goal'])
 
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div class="min-w-0">

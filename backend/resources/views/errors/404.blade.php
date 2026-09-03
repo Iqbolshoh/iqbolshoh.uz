@@ -20,7 +20,7 @@
         <h2 class="text-2xl sm:text-3xl font-extrabold mb-3 tracking-tight" style="color: var(--text-primary);">Sahifa topilmadi</h2>
 
         <p class="text-base mb-8 font-medium" style="color: var(--text-secondary);">
-            Siz qidirayotgan sahifa mavjud emas yoki o'chirilgan.
+            The page you are looking for does not exist, or has been removed.
         </p>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">

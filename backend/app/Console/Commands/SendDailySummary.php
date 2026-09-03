@@ -6,11 +6,14 @@ use App\Enums\NotificationKind;
 use App\Models\Notification;
 use App\Models\Plan;
 use App\Models\PlanSetting;
+use App\Models\TelegramAccount;
+use App\Models\Transaction;
 use App\Services\PlanStats;
 use App\Services\TelegramClient;
 use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\App;
 
 /**
  * The evening wrap-up, sent once per account at the hour it asked for.
@@ -57,7 +60,7 @@ class SendDailySummary extends Command
                 continue;
             }
 
-            $this->send($user->id, $now);
+            $this->send($user, $now);
         }
 
         return self::SUCCESS;
@@ -72,43 +75,68 @@ class SendDailySummary extends Command
             ->exists();
     }
 
-    private function send(int $userId, CarbonImmutable $today): void
+    private function send(\App\Models\User $user, CarbonImmutable $today): void
     {
-        $stats = new PlanStats($userId);
+        $stats = new PlanStats($user->id);
         $summary = $stats->summary($today->startOfDay(), $today->endOfDay());
 
-        if ($summary['total'] === 0) {
+        $spent = (int) Transaction::query()
+            ->where('user_id', $user->id)
+            ->ofKind(\App\Enums\TransactionKind::Expense)
+            ->whereDate('date', $today->toDateString())
+            ->sum('amount');
+
+        // A day with neither a plan nor a som spent has nothing to report.
+        if ($summary['total'] === 0 && $spent === 0) {
             return;
         }
 
+        $account = TelegramAccount::query()
+            ->where('user_id', $user->id)
+            ->where('is_active', true)
+            ->first();
+
+        $chatId = $account?->telegram_id ?? config('services.telegram.chat_id') ?: null;
+
+        if ($chatId === null) {
+            return;
+        }
+
+        App::setLocale($account?->locale ?? config('app.locale'));
+
         $body = implode("\n", array_filter([
-            "📋 {$summary['total']} plans",
-            "✅ {$summary['completed']} completed",
-            $summary['failed'] > 0 ? "❌ {$summary['failed']} failed" : null,
-            $summary['interrupted'] > 0 ? "🏢 {$summary['interrupted']} interrupted" : null,
-            $summary['no_response'] > 0 ? "⚠️ {$summary['no_response']} no response" : null,
-            '',
-            "📊 {$summary['raw_rate']}% completion",
-            '⏱ Planned ' . Plan::humanMinutes($summary['planned_minutes'])
-                . ' · Actual ' . Plan::humanMinutes($summary['actual_minutes']),
+            $summary['total'] > 0
+                ? __('bot.summary.plans_line', [
+                    'total' => $summary['total'],
+                    'completed' => $summary['completed'],
+                    'rate' => $summary['raw_rate'],
+                ])
+                : null,
+            $summary['total'] > 0
+                ? __('bot.stats.time', [
+                    'planned' => Plan::humanMinutes($summary['planned_minutes']),
+                    'actual' => Plan::humanMinutes($summary['actual_minutes']),
+                ])
+                : null,
+            $spent > 0 ? __('bot.summary.money_line', ['amount' => Transaction::money($spent)]) : null,
         ]));
 
         try {
             $notification = Notification::query()->create([
-                'user_id' => $userId,
+                'user_id' => $user->id,
                 'kind' => NotificationKind::DailySummary,
                 'sequence' => 0,
                 'title' => 'Daily summary — ' . $today->format('j F'),
                 'body' => $body,
-                'chat_id' => config('services.telegram.chat_id') ?: null,
+                'chat_id' => $chatId,
             ]);
         } catch (QueryException) {
             return;
         }
 
         $response = $this->client->sendMessage(
-            $notification->chat_id,
-            '<b>' . e($notification->title) . "</b>\n\n" . e($body)
+            $chatId,
+            __('bot.summary.daily', ['date' => $today->translatedFormat('j F')]) . "\n\n" . $body
         );
 
         $response?->json('ok') === true

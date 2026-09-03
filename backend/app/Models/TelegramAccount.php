@@ -20,6 +20,7 @@ class TelegramAccount extends Model
         'username',
         'first_name',
         'is_active',
+        'locale',
         'linked_at',
     ];
 

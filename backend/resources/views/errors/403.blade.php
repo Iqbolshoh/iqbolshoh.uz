@@ -17,10 +17,10 @@
             403
         </h1>
 
-        <h2 class="text-2xl sm:text-3xl font-extrabold mb-3 tracking-tight" style="color: var(--text-primary);">Ruxsat yo'q</h2>
+        <h2 class="text-2xl sm:text-3xl font-extrabold mb-3 tracking-tight" style="color: var(--text-primary);">No access</h2>
 
         <p class="text-base mb-8 font-medium" style="color: var(--text-secondary);">
-            Bu sahifaga kirish huquqingiz yo'q.
+            You do not have permission to open this page.
         </p>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">

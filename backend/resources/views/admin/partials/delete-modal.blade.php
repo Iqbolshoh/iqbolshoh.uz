@@ -1,4 +1,4 @@
-{{-- Shared confirmation for every Plan listing. The caller sets `deleteUrl`,
+{{-- Shared confirmation for every admin listing. The caller sets `deleteUrl`,
      `deleteName` and `deleteModalOpen` on its own Alpine scope. --}}
 <div x-show="deleteModalOpen" x-cloak class="fixed inset-0 z-[60]" role="dialog" aria-modal="true" style="display:none;">
     <div x-show="deleteModalOpen"

@@ -166,7 +166,7 @@
 @section('content')
 <div x-data="{ deleteModalOpen: false, deleteUrl: '', deleteName: '' }">
 
-    @include('admin.plan.partials.delete-modal', ['what' => 'plan'])
+    @include('admin.partials.delete-modal', ['what' => 'plan'])
 
     {{-- Filters --}}
     <form method="GET" class="card p-4 mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
