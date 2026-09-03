@@ -30,7 +30,11 @@ class ForecastReport extends Model
     protected function casts(): array
     {
         return [
-            'month' => 'date',
+            // Pinned, not a bare `date`: that cast writes back a midnight
+            // timestamp, which MySQL truncates into its DATE column and SQLite
+            // keeps whole — so an exact match on the column finds nothing and a
+            // range misses its own last day, in the test suite only.
+            'month' => 'date:Y-m-d',
             'raw_rate' => 'float',
             'true_rate' => 'float',
             'projection' => 'array',

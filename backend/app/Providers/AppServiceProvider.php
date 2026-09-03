@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\LocaleUpdated;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
@@ -17,6 +18,17 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // Loud everywhere except production.
+        //
+        // A relation loaded inside a loop and an attribute filled under a name
+        // the model does not have are both invisible at runtime: the page still
+        // renders, and the only evidence is a query count nobody is reading.
+        // Failing on them in the test suite is what keeps them out; failing on
+        // them in front of the owner would not be an improvement, so production
+        // keeps its current forgiving behaviour.
+        Model::preventLazyLoading(! $this->app->isProduction());
+        Model::preventSilentlyDiscardingAttributes(! $this->app->isProduction());
+
         // Carbon does not speak this app's locale codes.
         //
         // Plain "uz" is Cyrillic Uzbek to Carbon, so a bot answering in Latin

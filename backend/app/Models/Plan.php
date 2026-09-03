@@ -50,7 +50,11 @@ class Plan extends Model
     protected function casts(): array
     {
         return [
-            'date' => 'date',
+            // Pinned, not a bare `date`: that cast writes back a midnight
+            // timestamp, which MySQL truncates into its DATE column and SQLite
+            // keeps whole — so an exact match on the column finds nothing and a
+            // range misses its own last day, in the test suite only.
+            'date' => 'date:Y-m-d',
             'status' => PlanStatus::class,
             'priority' => Priority::class,
             'postpone_reason' => PostponeReason::class,

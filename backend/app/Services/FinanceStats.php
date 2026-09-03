@@ -156,8 +156,11 @@ class FinanceStats
                 continue;
             }
 
+            // `->value`, because the model casts `kind` to an enum and an
+            // enum cannot be an array key — the page 500s the moment the month
+            // has a single row in it, and renders perfectly while it has none.
             $day = $series->get($key);
-            $day[$row->kind] = (int) $row->total;
+            $day[$row->kind->value] = (int) $row->total;
             $series->put($key, $day);
         }
 
@@ -189,8 +192,11 @@ class FinanceStats
             $key = $cursor->format('Y-m');
             $group = $rows->get($key, collect());
 
-            $income = (int) ($group->firstWhere('kind', TransactionKind::Income->value)->total ?? 0);
-            $expense = (int) ($group->firstWhere('kind', TransactionKind::Expense->value)->total ?? 0);
+            // Matched against the enum, not against its value: `kind` is cast,
+            // so comparing it to the string never holds and every month came
+            // back as a confident zero.
+            $income = (int) ($group->firstWhere('kind', TransactionKind::Income)->total ?? 0);
+            $expense = (int) ($group->firstWhere('kind', TransactionKind::Expense)->total ?? 0);
 
             $series->put($key, [
                 'income' => $income,
