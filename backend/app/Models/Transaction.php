@@ -34,7 +34,12 @@ class Transaction extends Model
     protected function casts(): array
     {
         return [
-            'date' => 'date',
+            // The format matters, not just the type. A bare `date` cast writes
+            // back "2026-09-03 00:00:00", which MySQL truncates into its DATE
+            // column and SQLite stores whole — so a `whereBetween` on the day
+            // silently sums to zero in the test suite and to the right number
+            // in production. Pinning the format makes both agree.
+            'date' => 'date:Y-m-d',
             'kind' => TransactionKind::class,
             'method' => PaymentMethod::class,
             'source' => TransactionSource::class,

@@ -90,6 +90,29 @@ class TelegramClient
         return ['text' => $label, 'callback_data' => $callbackData];
     }
 
+    /**
+     * The buttons that sit under the text box, always in reach.
+     *
+     * Different in kind from an inline keyboard: these are not attached to a
+     * message and cannot be edited away, and pressing one sends its own label
+     * as an ordinary message. Everything put here therefore has to be
+     * recognised again on the way in — see TelegramBot::shortcut().
+     *
+     * @param  list<list<string>>  $rows
+     * @return array<string, mixed>
+     */
+    public static function replyKeyboard(array $rows): array
+    {
+        return [
+            'keyboard' => array_map(
+                fn (array $row): array => array_map(fn (string $label): array => ['text' => $label], $row),
+                $rows
+            ),
+            'resize_keyboard' => true,
+            'is_persistent' => true,
+        ];
+    }
+
     public function setWebhook(string $url, string $secret): ?Response
     {
         return $this->call('setWebhook', [

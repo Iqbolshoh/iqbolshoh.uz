@@ -13,6 +13,7 @@ use App\Models\TelegramAccount;
 use App\Models\Transaction;
 use App\Models\User;
 use Carbon\CarbonImmutable;
+use Carbon\Exceptions\InvalidFormatException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
@@ -26,6 +27,25 @@ use Illuminate\Support\Str;
  */
 class TelegramBot
 {
+    /** The languages a bottom-keyboard label could have been drawn in. */
+    private const LOCALES = ['uz', 'ru', 'en', 'tj'];
+
+    /**
+     * Bottom-keyboard label => the command it stands for.
+     *
+     * A reply keyboard sends its label as ordinary text, so every button on it
+     * has to be readable back into the command it means.
+     */
+    private const SHORTCUTS = [
+        'today' => '/today',
+        'tomorrow' => '/tomorrow',
+        'money' => '/money',
+        'stats' => '/stats',
+        'status' => '/status',
+        'language' => '/language',
+        'home' => '/menu',
+    ];
+
     public function __construct(
         private readonly TelegramClient $client,
         private readonly PlanService $plans,
@@ -51,10 +71,14 @@ class TelegramBot
 
         $this->useLocale($account->locale);
 
-        $command = Str::of($text)->lower()->before(' ')->trim()->toString();
+        // A bottom-keyboard press arrives as plain text, so it is resolved to
+        // the command it stands for before anything else looks at the message.
+        $command = $this->shortcut($text)
+            ?? Str::of($text)->lower()->before(' ')->trim()->toString();
 
         match ($command) {
-            '/start', '/menu' => $this->sendWelcome($chatId, $account->user),
+            '/start' => $this->sendWelcome($chatId, $account->user, withKeyboard: true),
+            '/menu' => $this->sendWelcome($chatId, $account->user),
             '/today' => $this->sendDay($chatId, $account->user, CarbonImmutable::today($account->user->timezone)),
             '/tomorrow' => $this->sendDay($chatId, $account->user, CarbonImmutable::tomorrow($account->user->timezone)),
             '/status' => $this->sendInterruptionMenu($chatId),
@@ -63,6 +87,42 @@ class TelegramBot
             '/language', '/til' => $this->sendLanguageMenu($chatId),
             default => $this->handleFreeText($chatId, $account->user, $text),
         };
+    }
+
+    /**
+     * Read a bottom-keyboard label back into the command it stands for.
+     *
+     * Every language is checked rather than only the current one: the keyboard
+     * on the person's screen was drawn in whatever language was in force when
+     * it was sent, and Telegram never redraws it on its own — so a label from
+     * the previous language has to keep working.
+     */
+    private function shortcut(string $text): ?string
+    {
+        $needle = Str::of($text)->trim()->toString();
+
+        if ($needle === '') {
+            return null;
+        }
+
+        foreach (self::LOCALES as $locale) {
+            foreach (self::SHORTCUTS as $key => $command) {
+                if (__("bot.btn.{$key}", [], $locale) === $needle) {
+                    return $command;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /** The buttons under the text box. Sent on /start and on a language change. */
+    private function homeKeyboard(): array
+    {
+        return TelegramClient::replyKeyboard([
+            [__('bot.btn.today'), __('bot.btn.money')],
+            [__('bot.btn.stats'), __('bot.btn.status')],
+        ]);
     }
 
     /**
@@ -150,6 +210,7 @@ class TelegramBot
                 TelegramClient::button('🇬🇧 English', 'lang:en'),
                 TelegramClient::button('🇹🇯 Тоҷикӣ', 'lang:tj'),
             ],
+            [TelegramClient::button(__('bot.btn.home'), 'nav:menu')],
         ]);
 
         $messageId === null
@@ -164,8 +225,10 @@ class TelegramBot
         $account->update(['locale' => $resolved]);
         App::setLocale($resolved);
 
-        $this->client->editMessage($chatId, $messageId, __('bot.lang.set'));
-        $this->sendWelcome($chatId, $account->user);
+        // The bottom keyboard keeps the words it was drawn with, so a language
+        // change has to replace it — the screen above it is only edited.
+        $this->client->sendMessage($chatId, __('bot.lang.set'), $this->homeKeyboard());
+        $this->sendWelcome($chatId, $account->user, $messageId);
     }
 
     /** The card a reminder sends, and the one every action edits in place. */
@@ -196,11 +259,14 @@ class TelegramBot
     public function planKeyboard(Plan $plan): array
     {
         if ($plan->status->isClosed()) {
-            return TelegramClient::keyboard([
-                [TelegramClient::button(__('bot.btn.today'), 'nav:today')],
-            ]);
+            return TelegramClient::keyboard([[
+                TelegramClient::button(__('bot.btn.today'), 'nav:today'),
+                TelegramClient::button(__('bot.btn.home'), 'nav:menu'),
+            ]]);
         }
 
+        // The two answers the card actually asks for come first and alone, so
+        // neither is ever a mis-tap away from a postponement.
         return TelegramClient::keyboard([
             [
                 TelegramClient::button(__('bot.btn.done'), "p:{$plan->id}:done"),
@@ -209,15 +275,23 @@ class TelegramBot
             [
                 TelegramClient::button(__('bot.btn.minutes', ['count' => 10]), "p:{$plan->id}:pp:10"),
                 TelegramClient::button(__('bot.btn.minutes', ['count' => 30]), "p:{$plan->id}:pp:30"),
+                TelegramClient::button(__('bot.btn.later'), "p:{$plan->id}:later"),
             ],
             [
-                TelegramClient::button(__('bot.btn.later'), "p:{$plan->id}:later"),
                 TelegramClient::button(__('bot.btn.today'), 'nav:today'),
+                TelegramClient::button(__('bot.btn.home'), 'nav:menu'),
             ],
         ]);
     }
 
-    private function sendWelcome(int $chatId, User $user): void
+    /**
+     * The home screen.
+     *
+     * `withKeyboard` is only true for /start, because a message carries one
+     * reply markup and not two: the bottom keyboard is established once and
+     * persists on its own, and every screen after it uses inline buttons.
+     */
+    private function sendWelcome(int $chatId, User $user, ?int $editMessageId = null, bool $withKeyboard = false): void
     {
         $today = CarbonImmutable::today($user->timezone);
         $plans = $this->plansFor($user, $today);
@@ -240,7 +314,13 @@ class TelegramBot
             '<i>' . __('bot.welcome.hint') . '</i>',
         ]);
 
-        $this->client->sendMessage($chatId, $text, TelegramClient::keyboard([
+        if ($withKeyboard) {
+            $this->client->sendMessage($chatId, $text, $this->homeKeyboard());
+
+            return;
+        }
+
+        $keyboard = TelegramClient::keyboard([
             [
                 TelegramClient::button(__('bot.btn.today'), 'nav:today'),
                 TelegramClient::button(__('bot.btn.tomorrow'), 'nav:tomorrow'),
@@ -253,25 +333,33 @@ class TelegramBot
                 TelegramClient::button(__('bot.btn.status'), 'nav:status'),
                 TelegramClient::button(__('bot.btn.language'), 'nav:language'),
             ],
-        ]));
+        ]);
+
+        $this->deliver($chatId, $editMessageId, $text, $keyboard);
+    }
+
+    /** Send, or replace the message a button was pressed on. */
+    private function deliver(int $chatId, ?int $messageId, string $text, array $keyboard): void
+    {
+        $messageId === null
+            ? $this->client->sendMessage($chatId, $text, $keyboard)
+            : $this->client->editMessage($chatId, $messageId, $text, $keyboard);
     }
 
     private function sendDay(int $chatId, User $user, CarbonImmutable $date, ?int $editMessageId = null): void
     {
+        $today = CarbonImmutable::today($user->timezone);
         $plans = $this->plansFor($user, $date);
 
         if ($plans->isEmpty()) {
-            $text = '📋 <b>' . $date->translatedFormat('l, j F') . '</b>' . "\n\n" . __('bot.day.empty');
-            $keyboard = TelegramClient::keyboard([[TelegramClient::button(__('bot.btn.tomorrow'), 'nav:tomorrow')]]);
+            $text = $this->dayHeading($date) . "\n\n" . __('bot.day.empty');
 
-            $editMessageId
-                ? $this->client->editMessage($chatId, $editMessageId, $text, $keyboard)
-                : $this->client->sendMessage($chatId, $text, $keyboard);
+            $this->deliver($chatId, $editMessageId, $text, TelegramClient::keyboard($this->dayFooter($date, $today)));
 
             return;
         }
 
-        $lines = ['📋 <b>' . $date->translatedFormat('l, j F') . '</b>', ''];
+        $lines = [$this->dayHeading($date), ''];
         $rows = [];
 
         foreach ($plans as $plan) {
@@ -295,17 +383,44 @@ class TelegramBot
             ])
             : __('bot.day.nothing_settled');
 
-        $rows[] = [
-            TelegramClient::button(__('bot.btn.refresh'), 'nav:today'),
-            TelegramClient::button(__('bot.btn.money'), 'f:menu'),
+        $rows = array_merge($rows, $this->dayFooter($date, $today));
+
+        $this->deliver($chatId, $editMessageId, implode("\n", $lines), TelegramClient::keyboard($rows));
+    }
+
+    private function dayHeading(CarbonImmutable $date): string
+    {
+        return '📋 <b>' . Str::ucfirst($date->translatedFormat('l, j F')) . '</b>';
+    }
+
+    /**
+     * Moving between days, then out.
+     *
+     * The arrows carry the date they lead to rather than "yesterday" and
+     * "tomorrow", so walking three days forward keeps working instead of
+     * bouncing off today. The middle button is the one that changes: on today
+     * there is nothing to go back to, so it refreshes; anywhere else it is the
+     * single press home to today.
+     *
+     * @return list<list<array<string, string>>>
+     */
+    private function dayFooter(CarbonImmutable $date, CarbonImmutable $today): array
+    {
+        $middle = $date->isSameDay($today)
+            ? TelegramClient::button(__('bot.btn.refresh'), 'nav:day:' . $today->toDateString())
+            : TelegramClient::button(__('bot.btn.today'), 'nav:day:' . $today->toDateString());
+
+        return [
+            [
+                TelegramClient::button(__('bot.btn.prev'), 'nav:day:' . $date->subDay()->toDateString()),
+                $middle,
+                TelegramClient::button(__('bot.btn.next'), 'nav:day:' . $date->addDay()->toDateString()),
+            ],
+            [
+                TelegramClient::button(__('bot.btn.money'), 'f:menu'),
+                TelegramClient::button(__('bot.btn.home'), 'nav:menu'),
+            ],
         ];
-
-        $text = implode("\n", $lines);
-        $keyboard = TelegramClient::keyboard($rows);
-
-        $editMessageId
-            ? $this->client->editMessage($chatId, $editMessageId, $text, $keyboard)
-            : $this->client->sendMessage($chatId, $text, $keyboard);
     }
 
     private function sendStats(int $chatId, User $user, ?int $editMessageId = null): void
@@ -333,11 +448,15 @@ class TelegramBot
             ]),
         ]);
 
-        $keyboard = TelegramClient::keyboard([[TelegramClient::button(__('bot.btn.today'), 'nav:today')]]);
+        $keyboard = TelegramClient::keyboard([
+            [
+                TelegramClient::button(__('bot.btn.today'), 'nav:today'),
+                TelegramClient::button(__('bot.btn.money'), 'f:menu'),
+            ],
+            [TelegramClient::button(__('bot.btn.home'), 'nav:menu')],
+        ]);
 
-        $editMessageId
-            ? $this->client->editMessage($chatId, $editMessageId, $text, $keyboard)
-            : $this->client->sendMessage($chatId, $text, $keyboard);
+        $this->deliver($chatId, $editMessageId, $text, $keyboard);
     }
 
     private function sendInterruptionMenu(int $chatId, ?int $editMessageId = null): void
@@ -360,13 +479,12 @@ class TelegramBot
             $rows[] = $buttons;
         }
 
-        $rows[] = [TelegramClient::button(__('bot.btn.today'), 'nav:today')];
+        $rows[] = [
+            TelegramClient::button(__('bot.btn.today'), 'nav:today'),
+            TelegramClient::button(__('bot.btn.home'), 'nav:menu'),
+        ];
 
-        $keyboard = TelegramClient::keyboard($rows);
-
-        $editMessageId
-            ? $this->client->editMessage($chatId, $editMessageId, $text, $keyboard)
-            : $this->client->sendMessage($chatId, $text, $keyboard);
+        $this->deliver($chatId, $editMessageId, $text, TelegramClient::keyboard($rows));
     }
 
     /** @param  list<string>  $parts */
@@ -441,7 +559,7 @@ class TelegramBot
                 ],
                 [
                     TelegramClient::button(__('bot.btn.evening'), "p:{$plan->id}:pp:" . $this->minutesUntilEvening($plan)),
-                    TelegramClient::button(__('bot.btn.tomorrow_short'), "p:{$plan->id}:pp:1440"),
+                    TelegramClient::button(__('bot.btn.tomorrow'), "p:{$plan->id}:pp:1440"),
                 ],
                 [TelegramClient::button(__('bot.btn.back'), "p:{$plan->id}:open")],
             ])
@@ -544,7 +662,10 @@ class TelegramBot
 
         $this->client->editMessage($chatId, $messageId, $text, TelegramClient::keyboard([
             [TelegramClient::button(__('bot.btn.free_again'), "i:end:{$interruption->id}")],
-            [TelegramClient::button(__('bot.btn.today'), 'nav:today')],
+            [
+                TelegramClient::button(__('bot.btn.today'), 'nav:today'),
+                TelegramClient::button(__('bot.btn.home'), 'nav:menu'),
+            ],
         ]));
     }
 
@@ -554,6 +675,8 @@ class TelegramBot
         $today = CarbonImmutable::today($user->timezone);
 
         match ($parts[1] ?? '') {
+            'menu' => $this->sendWelcome($chatId, $user, $messageId),
+            'day' => $this->sendDay($chatId, $user, $this->dateFrom($parts[2] ?? '', $today), $messageId),
             'today' => $this->sendDay($chatId, $user, $today, $messageId),
             'tomorrow' => $this->sendDay($chatId, $user, $today->addDay(), $messageId),
             'stats' => $this->sendStats($chatId, $user, $messageId),
@@ -605,15 +728,42 @@ class TelegramBot
             ->first();
     }
 
+    /**
+     * A date out of a callback, or today when it is not one.
+     *
+     * The value has been round-tripped through Telegram, so it is read back
+     * strictly rather than parsed: a loose parse would turn a mangled button
+     * into some arbitrary day rather than into today.
+     *
+     * Carbon does not answer a bad format with `false` — under strict mode it
+     * throws, which on a callback means the whole update dies and the button
+     * simply never responds. Hence the shape check first and the catch behind
+     * it for the dates that are the right shape and still impossible.
+     */
+    private function dateFrom(string $value, CarbonImmutable $fallback): CarbonImmutable
+    {
+        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $value) !== 1) {
+            return $fallback;
+        }
+
+        try {
+            // The leading "!" zeroes the time, so the day starts at midnight
+            // rather than at whatever o'clock it happens to be now.
+            return CarbonImmutable::createFromFormat('!Y-m-d', $value, $fallback->timezone);
+        } catch (InvalidFormatException $e) {
+            return $fallback;
+        }
+    }
+
     private function statusEmoji(PlanStatus $status): string
     {
         return match ($status) {
             PlanStatus::Completed => '✅',
             PlanStatus::Failed => '❌',
-            PlanStatus::Postponed => '⏭',
-            PlanStatus::Interrupted => '🏢',
+            PlanStatus::Postponed => '⏳',
+            PlanStatus::Interrupted => '🚧',
             PlanStatus::NoResponse => '⚠️',
-            PlanStatus::Cancelled => '🚫',
+            PlanStatus::Cancelled => '🗑',
             default => '⬜',
         };
     }

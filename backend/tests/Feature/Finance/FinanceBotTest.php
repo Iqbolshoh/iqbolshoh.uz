@@ -66,6 +66,30 @@ class FinanceBotTest extends TestCase
         );
     }
 
+    /**
+     * The day's own total, which is the number on nearly every screen.
+     *
+     * It is a `whereBetween` on the date column, and a `date` cast that writes
+     * back a midnight timestamp makes that comparison miss every row — the
+     * screens then read a confident zero rather than failing.
+     */
+    public function test_a_row_written_today_counts_towards_today(): void
+    {
+        $this->bot->handleText(self::CHAT_ID, $this->user, 'ovqat 25000');
+
+        Http::assertSent(fn ($request) => str_contains(
+            (string) ($request->data()['text'] ?? ''),
+            Transaction::money(25000)
+        ));
+
+        $today = \Carbon\CarbonImmutable::today($this->user->timezone);
+
+        $this->assertSame(
+            25000,
+            (int) Transaction::query()->where('user_id', $this->user->id)->between($today, $today)->sum('amount')
+        );
+    }
+
     public function test_text_without_an_amount_is_left_to_the_caller(): void
     {
         $this->assertFalse($this->bot->handleText(self::CHAT_ID, $this->user, 'salom'));

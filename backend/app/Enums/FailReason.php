@@ -25,8 +25,8 @@ enum FailReason: string
     {
         return match ($this) {
             self::NoTime => '⏰',
-            self::Forgot => '😴',
-            self::Overloaded => '📋',
+            self::Forgot => '💭',
+            self::Overloaded => '🗂',
             self::NotImportant => '🚫',
             self::Other => '✍️',
         };
