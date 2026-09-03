@@ -25,6 +25,16 @@ class TelegramClient
 
     private const CALL_TIMEOUT = 15;
 
+    /**
+     * Refusals that mean "there was nothing to do", not "something broke".
+     *
+     * Telegram rejects an edit that would leave the message exactly as it is,
+     * which happens on every refresh of a screen that has not changed and on
+     * every second press of the button already showing. Nothing is wrong: the
+     * screen is current. Logging it as an API error buries the real ones.
+     */
+    private const BENIGN = ['message is not modified'];
+
     public function isConfigured(): bool
     {
         return (bool) config('services.telegram.token');
@@ -227,7 +237,7 @@ class TelegramClient
         try {
             $response = Http::timeout(self::CALL_TIMEOUT)->asForm()->post($this->url($method), $payload);
 
-            if ($response->failed()) {
+            if ($response->failed() && ! $this->benign($response->json('description'))) {
                 Log::warning('Telegram API error', [
                     'method' => $method,
                     'status' => $response->status(),
@@ -241,6 +251,17 @@ class TelegramClient
 
             return null;
         }
+    }
+
+    private function benign(?string $description): bool
+    {
+        foreach (self::BENIGN as $needle) {
+            if ($description !== null && str_contains($description, $needle)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function url(string $method): string

@@ -43,6 +43,7 @@ return [
         'empty' => 'Reja yo\'q.',
         'settled' => '✅ :done/:settled bajarildi · :rate%',
         'nothing_settled' => 'Hali hech narsa yakunlanmadi.',
+        'updated' => '<i>🕐 Yangilangan: :time</i>',
     ],
 
     'stats' => [

@@ -43,6 +43,7 @@ return [
         'empty' => 'Ничего не запланировано.',
         'settled' => '✅ :done/:settled выполнено · :rate%',
         'nothing_settled' => 'Пока ничего не закрыто.',
+        'updated' => '<i>🕐 Обновлено: :time</i>',
     ],
 
     'stats' => [

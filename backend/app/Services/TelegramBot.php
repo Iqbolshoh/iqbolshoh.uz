@@ -383,6 +383,12 @@ class TelegramBot
             ])
             : __('bot.day.nothing_settled');
 
+        // A refresh of a day that has not changed would otherwise redraw the
+        // identical message, which Telegram refuses and which reads to the
+        // person pressing it as a button that does nothing.
+        $lines[] = '';
+        $lines[] = __('bot.day.updated', ['time' => CarbonImmutable::now($user->timezone)->format('H:i')]);
+
         $rows = array_merge($rows, $this->dayFooter($date, $today));
 
         $this->deliver($chatId, $editMessageId, implode("\n", $lines), TelegramClient::keyboard($rows));

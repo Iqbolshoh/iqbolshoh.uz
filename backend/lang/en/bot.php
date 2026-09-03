@@ -53,6 +53,7 @@ return [
         'empty' => 'Nothing scheduled.',
         'settled' => '✅ :done/:settled done · :rate%',
         'nothing_settled' => 'Nothing settled yet.',
+        'updated' => '<i>🕐 Updated: :time</i>',
     ],
 
     'stats' => [

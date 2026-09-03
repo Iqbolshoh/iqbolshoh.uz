@@ -36,9 +36,7 @@ class BotNavigationTest extends TestCase
 
         config(['services.telegram.token' => 'test-token']);
 
-        Http::fake([
-            'api.telegram.org/*' => Http::response(['ok' => true, 'result' => ['message_id' => 1]]),
-        ]);
+        $this->fakeTelegram();
 
         $this->user = User::factory()->create(['timezone' => 'Asia/Samarkand']);
 
@@ -134,9 +132,7 @@ class BotNavigationTest extends TestCase
     {
         foreach (['uz', 'ru', 'en', 'tj'] as $locale) {
             foreach (['today', 'money', 'stats', 'status'] as $key) {
-                Http::fake([
-                    'api.telegram.org/*' => Http::response(['ok' => true, 'result' => ['message_id' => 1]]),
-                ]);
+                $this->fakeTelegram();
 
                 $this->message((string) __("bot.btn.{$key}", [], $locale));
 
@@ -227,6 +223,77 @@ class BotNavigationTest extends TestCase
                 "a {$locale} screen would be headed by the wrong alphabet"
             );
         }
+    }
+
+    /**
+     * Refreshing a screen that has not changed is not a failure.
+     *
+     * Telegram refuses an edit that would leave the message exactly as it is.
+     * Nothing is wrong — the screen is current — but logged as an API error it
+     * arrives once per press and buries the refusals that do matter.
+     */
+    public function test_an_unchanged_screen_is_not_logged_as_a_failure(): void
+    {
+        $logged = $this->captureWarnings();
+
+        $this->fakeTelegram([
+            'ok' => false,
+            'description' => 'Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message',
+        ], 400);
+
+        $this->press('nav:day:' . now($this->user->timezone)->toDateString());
+
+        $this->assertSame([], $logged->all(), 'an unchanged screen was logged as an API error');
+    }
+
+    /** The refusals that do matter still reach the log. */
+    public function test_a_real_refusal_is_still_logged(): void
+    {
+        $logged = $this->captureWarnings();
+
+        $this->fakeTelegram(['ok' => false, 'description' => 'Bad Request: chat not found'], 400);
+
+        $this->press('nav:day:' . now($this->user->timezone)->toDateString());
+
+        $this->assertNotSame([], $logged->all(), 'a real refusal went unlogged');
+    }
+
+    /**
+     * Point every Telegram call at one canned answer, replacing whatever was
+     * faked before.
+     *
+     * The reset matters: `Http::fake` appends, and stubs match in registration
+     * order, so a per-test stub added behind the one from `setUp` never runs —
+     * the test then passes on the setUp response and proves nothing. Forgetting
+     * the factory first is what actually replaces it.
+     *
+     * @param  array<string, mixed>|null  $body
+     */
+    private function fakeTelegram(?array $body = null, int $status = 200): void
+    {
+        $this->app->forgetInstance(\Illuminate\Http\Client\Factory::class);
+        Http::clearResolvedInstances();
+
+        Http::fake([
+            'api.telegram.org/*' => Http::response(
+                $body ?? ['ok' => true, 'result' => ['message_id' => 1]],
+                $status
+            ),
+        ]);
+    }
+
+    /** @return \Illuminate\Support\Collection<int, string> */
+    private function captureWarnings(): \Illuminate\Support\Collection
+    {
+        $logged = collect();
+
+        \Illuminate\Support\Facades\Log::listen(function ($event) use ($logged): void {
+            if ($event->level === 'warning' && str_contains($event->message, 'Telegram API error')) {
+                $logged->push($event->message);
+            }
+        });
+
+        return $logged;
     }
 
     private function message(string $text): void

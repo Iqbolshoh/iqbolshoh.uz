@@ -43,6 +43,7 @@ return [
         'empty' => 'Нақша нест.',
         'settled' => '✅ :done/:settled иҷро шуд · :rate%',
         'nothing_settled' => 'Ҳанӯз чизе анҷом наёфт.',
+        'updated' => '<i>🕐 Навсозӣ: :time</i>',
     ],
 
     'stats' => [
