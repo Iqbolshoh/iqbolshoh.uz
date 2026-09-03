@@ -15,6 +15,7 @@ use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 /**
  * Runs every minute and sends the reminders that are due.
@@ -73,7 +74,7 @@ class SendPlanReminders extends Command
         }
 
         if ($sent > 0) {
-            $this->info("Sent {$sent} reminders.");
+            $this->info("Sent {$sent} " . Str::plural('reminder', $sent) . '.');
         }
 
         return self::SUCCESS;

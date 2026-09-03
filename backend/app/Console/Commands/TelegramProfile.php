@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Services\TelegramClient;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 /**
  * Push the bot's public face to Telegram.
@@ -92,7 +93,7 @@ class TelegramProfile extends Command
     private function push(string $code, string $locale, string $label): bool
     {
         $commands = $this->commands($locale);
-        $this->line("<info>{$label}</info> — " . count($commands) . ' commands');
+        $this->line("<info>{$label}</info> — " . count($commands) . ' ' . Str::plural('command', $commands));
 
         if ($this->option('dry-run')) {
             foreach ($commands as $command) {

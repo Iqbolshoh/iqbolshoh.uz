@@ -13,6 +13,7 @@ use App\Services\TelegramClient;
 use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 
 /**
  * The evening nudge: "what did today cost?".
@@ -98,7 +99,7 @@ class SendFinancePrompt extends Command
         }
 
         if ($sent > 0) {
-            $this->info("Asked {$sent} accounts.");
+            $this->info("Asked {$sent} " . Str::plural('account', $sent) . '.');
         }
 
         return self::SUCCESS;
