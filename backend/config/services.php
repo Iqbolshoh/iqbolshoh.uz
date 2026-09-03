@@ -40,6 +40,11 @@ return [
         'chat_id' => env('TELEGRAM_CHAT_ID'),
         'bot_username' => env('TELEGRAM_BOT_USERNAME'),
         'webhook_secret' => env('TELEGRAM_WEBHOOK_SECRET'),
+
+        // The name on the chat header. Not a translated line: it is one name
+        // in every language, and Telegram would otherwise need a separate
+        // value per language code. Pushed by `telegram:profile`.
+        'bot_name' => env('TELEGRAM_BOT_NAME', 'Iqbolshoh - Shaxsiy bot'),
     ],
 
 ];

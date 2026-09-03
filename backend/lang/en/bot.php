@@ -142,4 +142,29 @@ return [
         'ask' => '🌐 Choose your language:',
         'set' => '✅ Language set to English.',
     ],
+
+    /*
+    | What Telegram itself shows about the bot — the name on the chat header,
+    | the text on an empty chat, and the "/" menu. None of it lives in the
+    | repository until `telegram:profile` pushes it, so this is the source.
+    | Plain text only: Telegram does not read HTML in a bot description.
+    */
+    'profile' => [
+        'short' => "Plans, spending and reminders — all in one place.",
+        'description' => "Iqbolshoh's private bot: plans, spending and reminders in one place.
+
+I remind you of a plan on time, and read spending straight from one line: write \"lunch 25000\" and it is filed. In the evening I ask what the day cost.
+
+The bot is closed: it talks to its owner only.",
+    ],
+
+    'cmd' => [
+        'menu' => 'Home screen',
+        'today' => "Today's plans",
+        'tomorrow' => "Tomorrow's plans",
+        'status' => 'Say you are busy or free',
+        'stats' => 'How the week went',
+        'money' => 'Money: today and this month',
+        'language' => 'Change language',
+    ],
 ];

@@ -110,6 +110,88 @@ class TelegramClient
         return $this->call('getMe', []);
     }
 
+    /**
+     * The "/" menu, for one language.
+     *
+     * `$languageCode` is Telegram's own code, not this app's: it knows Tajik
+     * as "tg". An empty string means the default scope — the list every client
+     * whose language has no list of its own falls back to, which is why it can
+     * never be skipped.
+     *
+     * @param  list<array{command: string, description: string}>  $commands
+     */
+    public function setMyCommands(array $commands, string $languageCode = ''): ?Response
+    {
+        return $this->call('setMyCommands', array_filter([
+            'commands' => json_encode(array_values($commands)),
+            'language_code' => $languageCode,
+        ]));
+    }
+
+    public function setMyName(string $name, string $languageCode = ''): ?Response
+    {
+        return $this->call('setMyName', array_filter([
+            'name' => $name,
+            'language_code' => $languageCode,
+        ]));
+    }
+
+    /** The text on an empty chat, before the first message. Plain text only. */
+    public function setMyDescription(string $description, string $languageCode = ''): ?Response
+    {
+        return $this->call('setMyDescription', array_filter([
+            'description' => $description,
+            'language_code' => $languageCode,
+        ]));
+    }
+
+    /** The line under the bot's name in search and on its profile. */
+    public function setMyShortDescription(string $description, string $languageCode = ''): ?Response
+    {
+        return $this->call('setMyShortDescription', array_filter([
+            'short_description' => $description,
+            'language_code' => $languageCode,
+        ]));
+    }
+
+    /**
+     * The bot's avatar.
+     *
+     * The odd one out: it is not stored per language, and the file has to be
+     * attached rather than form-encoded, so it does not go through `call()`.
+     * `photo` is a JSON descriptor pointing at the attachment by name.
+     */
+    public function setMyProfilePhoto(string $path): ?Response
+    {
+        if (! $this->isConfigured()) {
+            Log::warning('Telegram called without a token', ['method' => 'setMyProfilePhoto']);
+
+            return null;
+        }
+
+        try {
+            $response = Http::timeout(self::CALL_TIMEOUT)
+                ->attach('avatar', file_get_contents($path), basename($path))
+                ->post($this->url('setMyProfilePhoto'), [
+                    'photo' => json_encode(['type' => 'static', 'photo' => 'attach://avatar']),
+                ]);
+
+            if ($response->failed()) {
+                Log::warning('Telegram API error', [
+                    'method' => 'setMyProfilePhoto',
+                    'status' => $response->status(),
+                    'description' => $response->json('description'),
+                ]);
+            }
+
+            return $response;
+        } catch (Throwable $e) {
+            Log::warning('Telegram request failed', ['method' => 'setMyProfilePhoto', 'error' => $e->getMessage()]);
+
+            return null;
+        }
+    }
+
     /** @param  array<string, mixed>  $payload */
     private function call(string $method, array $payload): ?Response
     {

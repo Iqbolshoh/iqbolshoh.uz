@@ -132,4 +132,29 @@ return [
         'ask' => '🌐 Забонро интихоб кунед:',
         'set' => '✅ Забон ба тоҷикӣ иваз шуд.',
     ],
+
+    /*
+    | What Telegram itself shows about the bot — the name on the chat header,
+    | the text on an empty chat, and the "/" menu. None of it lives in the
+    | repository until `telegram:profile` pushes it, so this is the source.
+    | Plain text only: Telegram does not read HTML in a bot description.
+    */
+    'profile' => [
+        'short' => "Нақшаҳо, хароҷот ва ёдоварӣ — ҳама дар як ҷо.",
+        'description' => "Боти шахсии Иқболшоҳ: нақшаҳо, хароҷот ва ёдоварӣ дар як ҷо.
+
+Нақшаро сари вақт ба ёдатон меорам, хароҷотро аз як сатр мефаҳмам: \"хӯрок 25000\" нависед, сабт мешавад. Бегоҳӣ худам мепурсам, ки рӯз чанд пул арзид.
+
+Бот пӯшида аст: танҳо бо соҳибаш сӯҳбат мекунад.",
+    ],
+
+    'cmd' => [
+        'menu' => 'Саҳифаи асосӣ',
+        'today' => 'Нақшаҳои имрӯз',
+        'tomorrow' => 'Нақшаҳои пагоҳ',
+        'status' => 'Гуфтан, ки банд ё озодед',
+        'stats' => 'Ҳафта чӣ гуна гузашт',
+        'money' => 'Пул: имрӯз ва ин моҳ',
+        'language' => 'Иваз кардани забон',
+    ],
 ];

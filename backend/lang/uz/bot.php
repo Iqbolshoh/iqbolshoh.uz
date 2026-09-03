@@ -132,4 +132,29 @@ return [
         'ask' => '🌐 Tilni tanlang:',
         'set' => '✅ Til o\'zbekchaga o\'zgartirildi.',
     ],
+
+    /*
+    | What Telegram itself shows about the bot — the name on the chat header,
+    | the text on an empty chat, and the "/" menu. None of it lives in the
+    | repository until `telegram:profile` pushes it, so this is the source.
+    | Plain text only: Telegram does not read HTML in a bot description.
+    */
+    'profile' => [
+        'short' => "Rejalar, xarajatlar va eslatmalar — hammasi bitta joyda.",
+        'description' => "Iqbolshohning shaxsiy boti: rejalar, xarajatlar va eslatmalar bir joyda.
+
+Rejani vaqtida eslataman, xarajatni esa bir qator matndan tushunaman: \"ovqat 25000\" deb yozsangiz, yozib qo'yaman. Kun oxirida nima sarflanganini o'zim so'rayman.
+
+Bot yopiq: faqat egasi bilan gaplashadi.",
+    ],
+
+    'cmd' => [
+        'menu' => 'Bosh sahifa',
+        'today' => 'Bugungi rejalar',
+        'tomorrow' => 'Ertangi rejalar',
+        'status' => "Bandman yoki bo'shman deyish",
+        'stats' => "Hafta qanday o'tdi",
+        'money' => 'Pul: bugun va shu oy',
+        'language' => 'Tilni almashtirish',
+    ],
 ];
