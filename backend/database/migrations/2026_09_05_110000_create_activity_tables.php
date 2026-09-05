@@ -77,10 +77,12 @@ return new class extends Migration
 
             $table->date('date');
 
-            // When it started, if the owner said. Optional because most of
-            // these are written down afterwards: "8 soat uxladim" carries a
-            // duration and no clock reading at all.
-            $table->time('started_at_time')->nullable();
+            // No start time, on purpose — see decision 1 above. It was here for
+            // one afternoon, nothing ever wrote to it, and a column the code
+            // does not fill is a column the next reader has to work out the
+            // meaning of. Dropped by
+            // 2026_09_05_120000_drop_activity_entry_start_time for the install
+            // that already had it.
 
             $table->string('note', 255)->nullable();
 

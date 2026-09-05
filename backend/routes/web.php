@@ -10,6 +10,9 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StatController;
 use App\Http\Controllers\Admin\TechStackController;
+use App\Http\Controllers\Admin\Activity\CategoryController as ActivityCategoryController;
+use App\Http\Controllers\Admin\Activity\EntryController as ActivityEntryController;
+use App\Http\Controllers\Admin\Activity\OverviewController as ActivityOverviewController;
 use App\Http\Controllers\Admin\Finance\CategoryController as FinanceCategoryController;
 use App\Http\Controllers\Admin\Finance\OverviewController as FinanceOverviewController;
 use App\Http\Controllers\Admin\Finance\SettingController as FinanceSettingController;
@@ -122,6 +125,15 @@ Route::prefix('admin')->group(function () {
 
             Route::get('/finance-settings', [FinanceSettingController::class, 'index'])->name('finance-settings.index');
             Route::put('/finance-settings', [FinanceSettingController::class, 'update'])->name('finance-settings.update');
+
+            // ── Time: where the day went ──
+            Route::get('/activities', [ActivityOverviewController::class, 'index'])->name('activities.index');
+
+            Route::resource('activities-entries', ActivityEntryController::class)->except(['show']);
+
+            Route::post('/activities-categories/restore-defaults', [ActivityCategoryController::class, 'restoreDefaults'])
+                ->name('activities-categories.restore');
+            Route::resource('activities-categories', ActivityCategoryController::class)->except(['show']);
 
             // Inbox: contact messages and service orders
             Route::prefix('messages/{type}')->name('messages.')->group(function () {

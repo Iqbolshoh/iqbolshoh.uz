@@ -47,8 +47,17 @@ return new class extends Migration
 
             // Words the bot matches free text against, comma separated and
             // lower case: "ovqat,eda,food,хӯрок". Filled for seeded categories,
-            // and the owner can extend it.
-            $table->string('keywords', 255)->nullable();
+            // the owner can extend it, and the bot appends to it whenever a
+            // guess is corrected.
+            //
+            // TEXT, not a VARCHAR: this started at 255 and the fine-grained
+            // catalogue blew through it on the first sync. There is no length
+            // that is obviously right, the column is never indexed or sorted
+            // on, and running out again means a failed write in the middle of
+            // a deploy. Installs made before that are widened by
+            // 2026_09_05_100000_widen_finance_category_keywords, which is a
+            // no-op here.
+            $table->text('keywords')->nullable();
 
             // Per-category ceiling for one month, in so'm. Null = no ceiling.
             $table->unsignedBigInteger('monthly_limit')->nullable();

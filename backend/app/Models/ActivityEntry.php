@@ -23,7 +23,6 @@ class ActivityEntry extends Model
         'category_id',
         'minutes',
         'date',
-        'started_at_time',
         'note',
         'source',
         'interruption_id',

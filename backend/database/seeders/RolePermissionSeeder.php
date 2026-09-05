@@ -50,6 +50,13 @@ final class RolePermissionSeeder extends Seeder
         'finance-settings'   => ['view', 'edit'],
     ];
 
+    // ── Time: where the owner's own day went, owner only ──────────────────────
+    private const ACTIVITY_PERMISSIONS = [
+        'activities'            => ['view'],
+        'activities-entries'    => ['view', 'create', 'edit', 'delete'],
+        'activities-categories' => ['view', 'create', 'edit', 'delete'],
+    ];
+
     // ── Manager: edits the site content, but cannot delete or touch accounts ──
     private const MANAGER_PERMISSIONS = [
         'dashboard'     => ['view'],
@@ -75,6 +82,7 @@ final class RolePermissionSeeder extends Seeder
             $this->createPermissions(self::CONTENT_PERMISSIONS),
             $this->createPermissions(self::PLAN_PERMISSIONS),
             $this->createPermissions(self::FINANCE_PERMISSIONS),
+            $this->createPermissions(self::ACTIVITY_PERMISSIONS),
         );
 
         $superadmin = Role::firstOrCreate(['name' => 'superadmin', 'guard_name' => 'web']);

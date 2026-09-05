@@ -10,6 +10,7 @@ use App\Enums\TransactionKind;
 use App\Models\Interruption;
 use App\Models\Plan;
 use App\Models\TelegramAccount;
+use App\Models\ActivityEntry;
 use App\Models\Transaction;
 use App\Models\User;
 use Carbon\CarbonImmutable;
@@ -489,40 +490,185 @@ class TelegramBot
         ];
     }
 
-    private function sendStats(int $chatId, User $user, ?int $editMessageId = null): void
+    /**
+     * One screen with the whole picture: tasks, money and time for one period.
+     *
+     * Three separate screens is three trips to find out how a day went, and
+     * nobody makes the third. The sections are always in the same order and
+     * always present — an empty one says "nothing recorded" rather than
+     * vanishing, because a section that disappears reads as a broken feature
+     * and hides the fact that there is nothing there to see.
+     *
+     * Each section leads with a bar rather than a number. Three bars can be
+     * compared at a glance on a phone; three percentages have to be read.
+     */
+    private function sendStats(int $chatId, User $user, string $period = 'today', ?int $editMessageId = null): void
     {
-        $stats = new PlanStats($user->id);
         $today = CarbonImmutable::today($user->timezone);
 
-        $week = $stats->summary($today->startOfWeek(), $today->endOfWeek());
-        $month = $stats->summary($today->startOfMonth(), $today->endOfMonth());
+        [$start, $end, $title] = match ($period) {
+            'week' => [$today->startOfWeek(), $today->endOfWeek(), __('bot.report.title_week')],
+            'month' => [$today->startOfMonth(), $today->endOfMonth(), __('bot.report.title_month')],
+            default => [$today, $today, __('bot.report.title_today')],
+        };
 
-        $text = implode("\n", [
-            __('bot.stats.title'),
+        $lines = [
+            $title,
+            __('bot.report.when', ['range' => $this->rangeLabel($start, $end)]),
             '',
-            __('bot.stats.week'),
-            __('bot.stats.plans', ['total' => $week['total'], 'completed' => $week['completed']]),
-            __('bot.stats.rate', ['raw' => $week['raw_rate'], 'true' => $week['true_rate']]),
+            ...$this->taskSection($user, $start, $end),
             '',
-            __('bot.stats.month'),
-            __('bot.stats.plans', ['total' => $month['total'], 'completed' => $month['completed']]),
-            __('bot.stats.rate', ['raw' => $month['raw_rate'], 'true' => $month['true_rate']]),
+            ...$this->moneySection($user, $start, $end),
             '',
-            __('bot.stats.time', [
-                'planned' => Plan::humanMinutes($month['planned_minutes']),
-                'actual' => Plan::humanMinutes($month['actual_minutes']),
-            ]),
-        ]);
+            ...$this->timeSection($user, $start, $end),
+        ];
 
-        $keyboard = TelegramClient::keyboard([
+        $others = array_values(array_diff(['today', 'week', 'month'], [$period]));
+
+        $this->deliver($chatId, $editMessageId, implode("\n", $lines), TelegramClient::keyboard([
+            array_map(fn (string $other): array => TelegramClient::button(
+                __("bot.btn.stats_{$other}"),
+                "nav:stats:{$other}"
+            ), $others),
             [
-                TelegramClient::button(__('bot.btn.today'), 'nav:today'),
+                TelegramClient::button(__('bot.btn.tasks'), 'nav:today'),
                 TelegramClient::button(__('bot.btn.money'), 'f:menu'),
+                TelegramClient::button(__('bot.btn.time'), 't:menu'),
             ],
             [TelegramClient::button(__('bot.btn.home'), 'nav:menu')],
+        ]));
+    }
+
+    /**
+     * The tasks section: how many of the settled plans came off.
+     *
+     * Pending plans are counted separately rather than dragged into the rate,
+     * because a plan whose time has not come yet is not a failure and would
+     * otherwise pull the morning's number to the floor.
+     *
+     * @return list<string>
+     */
+    private function taskSection(User $user, CarbonImmutable $start, CarbonImmutable $end): array
+    {
+        $summary = (new PlanStats($user->id))->summary($start, $end);
+        $lines = [__('bot.report.tasks')];
+
+        if ($summary['total'] === 0) {
+            $lines[] = __('bot.report.tasks_none');
+
+            return $lines;
+        }
+
+        $settled = $summary['total'] - $summary['pending'];
+
+        $lines[] = __('bot.report.tasks_line', [
+            'bar' => $this->bar((float) $summary['raw_rate']),
+            'done' => $summary['completed'],
+            'settled' => max($settled, $summary['completed']),
+            'rate' => $summary['raw_rate'],
         ]);
 
-        $this->deliver($chatId, $editMessageId, $text, $keyboard);
+        if ($summary['pending'] > 0) {
+            $lines[] = __('bot.report.tasks_pending', ['count' => $summary['pending']]);
+        }
+
+        return $lines;
+    }
+
+    /** @return list<string> */
+    private function moneySection(User $user, CarbonImmutable $start, CarbonImmutable $end): array
+    {
+        $stats = new FinanceStats($user->id, $user->timezone);
+        $summary = $stats->summary($start, $end);
+
+        $lines = [__('bot.report.money')];
+
+        if ($summary['count'] === 0) {
+            $lines[] = __('bot.report.money_none');
+
+            return $lines;
+        }
+
+        $lines[] = __('bot.report.money_out', ['amount' => Transaction::money($summary['expense'])]);
+
+        // Income only earns a line when there is some: a permanent "0 so'm"
+        // teaches the eye to skip the block it sits in.
+        if ($summary['income'] > 0) {
+            $lines[] = __('bot.report.money_in', ['amount' => Transaction::money($summary['income'])]);
+        }
+
+        $top = $stats->byCategory($start, $end)
+            ->take(3)
+            ->map(fn (array $row): string => ($row['category']?->label() ?? '—')
+                . ' ' . Transaction::money($row['total']));
+
+        if ($top->isNotEmpty()) {
+            $lines[] = $top->implode(' · ');
+        }
+
+        return $lines;
+    }
+
+    /** @return list<string> */
+    private function timeSection(User $user, CarbonImmutable $start, CarbonImmutable $end): array
+    {
+        $stats = new ActivityStats($user->id, $user->timezone);
+        $summary = $stats->summary($start, $end);
+
+        $lines = [__('bot.report.time')];
+
+        if ($summary['count'] === 0) {
+            $lines[] = __('bot.report.time_none');
+
+            return $lines;
+        }
+
+        $lines[] = __('bot.report.time_line', [
+            'bar' => $this->bar((float) $summary['covered']),
+            'duration' => ActivityEntry::duration($summary['minutes']),
+            'percent' => $summary['covered'],
+        ]);
+
+        $rows = $stats->byCategory($start, $end);
+
+        $top = $rows->take(3)->map(fn (array $row): string => ($row['category']?->label() ?? '—')
+            . ' ' . ActivityEntry::duration($row['minutes']));
+
+        if ($top->isNotEmpty()) {
+            $lines[] = $top->implode(' · ');
+        }
+
+        $good = (int) $rows->filter(fn (array $row): bool => $row['category']?->is_good ?? true)->sum('minutes');
+        $bad = (int) $rows->sum('minutes') - $good;
+
+        if ($bad > 0) {
+            $lines[] = __('bot.report.time_balance', [
+                'good' => ActivityEntry::duration($good),
+                'bad' => ActivityEntry::duration($bad),
+            ]);
+        }
+
+        return $lines;
+    }
+
+    /** The dates a report covers, written the short way for one day. */
+    private function rangeLabel(CarbonImmutable $start, CarbonImmutable $end): string
+    {
+        return $start->isSameDay($end)
+            ? $start->translatedFormat('l, j F')
+            : $start->translatedFormat('j F') . ' — ' . $end->translatedFormat('j F');
+    }
+
+    /**
+     * A share as a bar, so three sections can be compared as shapes instead of
+     * as three percentages read one after the other. Eight cells: wide enough
+     * to be a shape, narrow enough not to wrap on a phone.
+     */
+    private function bar(float $share): string
+    {
+        $filled = max(0, min(8, (int) round($share / 100 * 8)));
+
+        return str_repeat('▓', $filled) . str_repeat('░', 8 - $filled);
     }
 
     private function sendInterruptionMenu(int $chatId, ?int $editMessageId = null): void
@@ -754,7 +900,7 @@ class TelegramBot
             'day' => $this->sendDay($chatId, $user, $this->dateFrom($parts[2] ?? '', $today), $messageId),
             'today' => $this->sendDay($chatId, $user, $today, $messageId),
             'tomorrow' => $this->sendDay($chatId, $user, $today->addDay(), $messageId),
-            'stats' => $this->sendStats($chatId, $user, $messageId),
+            'stats' => $this->sendStats($chatId, $user, $parts[2] ?? 'today', $messageId),
             'status' => $this->sendInterruptionMenu($chatId, $messageId),
             'language' => $this->sendLanguageMenu($chatId, $messageId),
             'help' => $this->sendHelp($chatId, $messageId),

@@ -12,7 +12,9 @@
 
 @section('content')
 @php
+    use App\Models\ActivityEntry;
     use App\Models\Plan;
+    use App\Models\Transaction;
     use Illuminate\Support\Js;
     use Illuminate\Support\Str;
 
@@ -91,6 +93,103 @@
         </a>
         @empty
         <p class="text-sm text-[var(--text-muted)] py-6 text-center">Nothing scheduled.</p>
+        @endforelse
+    </div>
+</div>
+
+{{-- Money and time, beside the plans: the panel is opened to ask how it is
+     going, and that question has three halves. --}}
+<div class="grid gap-5 lg:grid-cols-2 mb-6">
+
+    <div class="card p-6">
+        <div class="flex items-center justify-between mb-5">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-[var(--text-muted)]">Money · {{ now()->format('F') }}</h3>
+            <a href="{{ route('admin.finance.index') }}" class="text-xs font-semibold text-[var(--accent-hover)] hover:text-[var(--accent-alt)] transition-colors">Details →</a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 mb-5">
+            @foreach([
+                ['Today', Transaction::money($money['today']['expense']), null],
+                ['Spent', Transaction::money($money['month']['expense']), '#EF4444'],
+                ['Received', Transaction::money($money['month']['income']), '#22C55E'],
+            ] as [$label, $value, $color])
+            <div>
+                <p class="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">{{ $label }}</p>
+                <p class="text-base font-bold tracking-tight mt-1" style="color: {{ $color ?? 'var(--text-primary)' }};">{{ $value }}</p>
+            </div>
+            @endforeach
+        </div>
+
+        @if($money['budget']['budget'] !== null)
+        @php $used = min(100, round(($money['month']['expense']) / max(1, $money['budget']['budget']) * 100, 1)); @endphp
+        <div class="mb-5">
+            <div class="flex items-center justify-between text-xs mb-1.5">
+                <span class="text-[var(--text-muted)]">
+                    {{ Transaction::money($money['budget']['budget']) }} budget
+                </span>
+                <span class="font-mono font-bold" style="color: {{ $used >= 100 ? '#EF4444' : ($used >= 80 ? '#F59E0B' : '#22C55E') }};">{{ $used }}%</span>
+            </div>
+            <div class="h-2 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.07);">
+                <div class="h-full rounded-full" style="width: {{ $used }}%; background: {{ $used >= 100 ? '#EF4444' : ($used >= 80 ? '#F59E0B' : '#22C55E') }};"></div>
+            </div>
+        </div>
+        @endif
+
+        @forelse($money['top'] as $row)
+        <div class="flex items-center justify-between gap-3 py-2 border-b border-[var(--border-subtle)] last:border-0">
+            <span class="flex items-center gap-2 min-w-0">
+                <span class="w-2 h-2 rounded-full flex-shrink-0" style="background: {{ $row['category']?->color ?? '#8B95A5' }};"></span>
+                <span class="text-sm text-[var(--text-secondary)] truncate">{{ $row['category']?->label() ?? 'Uncategorised' }}</span>
+            </span>
+            <span class="font-mono text-xs font-semibold text-white flex-shrink-0">{{ Transaction::money($row['total']) }}</span>
+        </div>
+        @empty
+        <p class="text-sm text-[var(--text-muted)] py-6 text-center">Nothing recorded this month.</p>
+        @endforelse
+    </div>
+
+    <div class="card p-6">
+        <div class="flex items-center justify-between mb-5">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-[var(--text-muted)]">Time · {{ now()->format('F') }}</h3>
+            <a href="{{ route('admin.activities.index') }}" class="text-xs font-semibold text-[var(--accent-hover)] hover:text-[var(--accent-alt)] transition-colors">Details →</a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 mb-5">
+            @foreach([
+                ['Today', ActivityEntry::duration($time['today']['minutes']), null],
+                ['This month', ActivityEntry::duration($time['month']['minutes']), null],
+                ['Accounted', $time['month']['covered'] . '%', $time['month']['covered'] >= 70 ? '#22C55E' : '#F59E0B'],
+            ] as [$label, $value, $color])
+            <div>
+                <p class="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">{{ $label }}</p>
+                <p class="text-base font-bold tracking-tight mt-1" style="color: {{ $color ?? 'var(--text-primary)' }};">{{ $value }}</p>
+            </div>
+            @endforeach
+        </div>
+
+        @if($time['good'] + $time['bad'] > 0)
+        @php $logged = max(1, $time['good'] + $time['bad']); @endphp
+        <div class="mb-5">
+            <div class="flex h-2 rounded-full overflow-hidden mb-1.5">
+                <div style="width: {{ round($time['good'] / $logged * 100) }}%; background: #22C55E;"></div>
+                <div style="width: {{ round($time['bad'] / $logged * 100) }}%; background: #F59E0B;"></div>
+            </div>
+            <p class="text-xs text-[var(--text-muted)]">
+                Useful {{ ActivityEntry::duration($time['good']) }} · wasted {{ ActivityEntry::duration($time['bad']) }}
+            </p>
+        </div>
+        @endif
+
+        @forelse($time['top'] as $row)
+        <div class="flex items-center justify-between gap-3 py-2 border-b border-[var(--border-subtle)] last:border-0">
+            <span class="flex items-center gap-2 min-w-0">
+                <span class="w-2 h-2 rounded-full flex-shrink-0" style="background: {{ $row['category']?->color ?? '#8B95A5' }};"></span>
+                <span class="text-sm text-[var(--text-secondary)] truncate">{{ $row['category']?->label() ?? 'Uncategorised' }}</span>
+            </span>
+            <span class="font-mono text-xs font-semibold text-white flex-shrink-0">{{ ActivityEntry::duration($row['minutes']) }}</span>
+        </div>
+        @empty
+        <p class="text-sm text-[var(--text-muted)] py-6 text-center">Nothing logged this month.</p>
         @endforelse
     </div>
 </div>

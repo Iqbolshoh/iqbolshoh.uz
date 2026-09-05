@@ -965,6 +965,32 @@
                 </div>
                 @endcanany
 
+                {{-- Time --}}
+                @canany(['activities.view', 'activities-entries.view', 'activities-categories.view'])
+                @php
+                    $activitySections = [
+                        'activities'            => ['Overview', 'hourglass', 'activities.view'],
+                        'activities-entries'    => ['Time log', 'timer', 'activities-entries.view'],
+                        'activities-categories' => ['Activities', 'shapes', 'activities-categories.view'],
+                    ];
+                @endphp
+                <div>
+                    <h3 class="nav-heading">Time</h3>
+                    <div class="space-y-1">
+                        @foreach($activitySections as $section => [$label, $icon, $permission])
+                        @can($permission)
+                        <a href="{{ route('admin.' . $section . '.index') }}"
+                            title="{{ $label }}"
+                            class="nav-link {{ request()->routeIs('admin.' . $section . '.*') ? 'active' : '' }}">
+                            <x-dynamic-component :component="'lucide-' . $icon" class="nav-icon" />
+                            <span class="sidebar-label">{{ $label }}</span>
+                        </a>
+                        @endcan
+                        @endforeach
+                    </div>
+                </div>
+                @endcanany
+
                 {{-- Site content --}}
                 @php
                     $contentSections = [

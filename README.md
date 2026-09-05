@@ -46,6 +46,7 @@ xaritadan chiziladi).
 - **Kontent** — loyihalar, xizmatlar, sozlamalar, kelgan xabarlar.
 - **Reja** — rejalar, maqsadlar, kalendar, tahlil, prognoz, bildirishnomalar.
 - **Moliya** — kirim/chiqim daftari, kategoriyalar, byudjet va ogohlantirishlar.
+- **Vaqt** — umumiy ko'rinish, vaqt daftari, mashg'ulotlar va kunlik maqsadlar.
 
 ### Kategoriyalar
 
@@ -115,6 +116,10 @@ pul modulining aynan o'zi shaklida. Yozuvda **faqat davomiylik** saqlanadi
 yoziladi, va soxta boshlanish vaqti keyin javob berib bo'lmaydigan ustma-ust
 tushish savollarini keltirib chiqaradi.
 
+Panelda uchta sahifa: umumiy ko'rinish (oy bo'yicha, qamrov bilan), vaqt
+daftari (filtr + tahrir — holatdan olingan yozuvni faqat shu yerdan
+tuzatasiz, bot ularga tegmaydi) va mashg'ulotlar ro'yxati.
+
 Botda: `⏱ Vaqt` → `➕ Vaqt yozish` → mashg'ulot → davomiylik. Yoki bir qatorda:
 `8 soat uxladim`, `2 soat dars`, `1 soat 30 daq telefonda`. Hisobot kun,
 hafta va oy kesimida; har birida **qamrov** ko'rsatiladi — sutkaning necha
@@ -137,6 +142,17 @@ Ikki tahlilchi bir-birining matnini o'g'irlamasligi uchun **vaqt birinchi
 o'qiladi**: davomiylik o'z birligini doim aytadi, summa esa hech qachon
 aytmaydi. Teskari tartibda `120 daqiqa dars` 120 so'mlik xarajat bo'lib
 yozilib qolardi.
+
+## Yagona hisobot
+
+`/stats` — vazifa, pul va vaqt bitta ekranda, kun/hafta/oy tugmalari bilan.
+Uchta bo'lim doim bir xil tartibda va **doim bor**: bo'sh bo'lsa "yozuv yo'q"
+deb turadi, yo'qolib qolmaydi — yo'qolgan bo'lim buzuq funksiya bo'lib
+o'qiladi va ko'rsatadigan narsa yo'qligini yashiradi. Har bir bo'lim raqamdan
+oldin chiziqcha (bar) ko'rsatadi: telefonda uchta chiziqni bir qarashda
+solishtirish mumkin, uchta foizni esa o'qib chiqish kerak.
+
+Panel bosh sahifasi ham xuddi shunday: rejalar, pul va vaqt yonma-yon.
 
 ## Rejalashtirilgan ishlar
 

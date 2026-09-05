@@ -4,11 +4,14 @@ namespace Tests\Feature;
 
 use App\Enums\TransactionKind;
 use App\Enums\NotificationKind;
+use App\Enums\ActivitySource;
+use App\Models\ActivityCategory;
 use App\Models\FinanceCategory;
 use App\Models\Goal;
 use App\Models\Notification;
 use App\Models\Plan;
 use App\Models\User;
+use App\Services\ActivityService;
 use App\Services\FinanceService;
 use Carbon\CarbonImmutable;
 use Database\Seeders\RolePermissionSeeder;
@@ -104,6 +107,7 @@ class PanelPagesTest extends TestCase
         $today = CarbonImmutable::today($this->owner->timezone);
 
         app(FinanceService::class)->ensureDefaults($this->owner);
+        app(ActivityService::class)->ensureDefaults($this->owner);
 
         $goal = Goal::query()->create([
             'user_id' => $this->owner->id,
@@ -133,6 +137,26 @@ class PanelPagesTest extends TestCase
                 category: FinanceCategory::query()->where('user_id', $this->owner->id)->where('key', $key)->first(),
             );
         }
+
+        // The time pages have two shapes worth rendering: an entry the owner
+        // typed, and one the bot took from a status — the second carries a
+        // label the first does not.
+        $activities = app(ActivityService::class);
+
+        foreach ([['sleep', 480], ['work', 180], ['scrolling', 90]] as [$key, $minutes]) {
+            $activities->record(
+                user: $this->owner,
+                minutes: $minutes,
+                category: ActivityCategory::query()->where('user_id', $this->owner->id)->where('key', $key)->first(),
+            );
+        }
+
+        $activities->record(
+            user: $this->owner,
+            minutes: 60,
+            category: ActivityCategory::query()->where('user_id', $this->owner->id)->where('key', 'study')->first(),
+            source: ActivitySource::Status,
+        );
 
         Notification::query()->create([
             'user_id' => $this->owner->id,
