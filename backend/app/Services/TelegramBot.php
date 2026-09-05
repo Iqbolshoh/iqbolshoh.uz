@@ -42,6 +42,7 @@ class TelegramBot
         'money' => '/money',
         'stats' => '/stats',
         'status' => '/status',
+        'help' => '/help',
         'language' => '/language',
         'home' => '/menu',
     ];
@@ -84,6 +85,7 @@ class TelegramBot
             '/status' => $this->sendInterruptionMenu($chatId),
             '/stats' => $this->sendStats($chatId, $account->user),
             '/money', '/pul' => $this->finance->sendMenu($chatId, $account->user),
+            '/help' => $this->sendHelp($chatId),
             '/language', '/til' => $this->sendLanguageMenu($chatId),
             default => $this->handleFreeText($chatId, $account->user, $text),
         };
@@ -122,6 +124,7 @@ class TelegramBot
         return TelegramClient::replyKeyboard([
             [__('bot.btn.today'), __('bot.btn.money')],
             [__('bot.btn.stats'), __('bot.btn.status')],
+            [__('bot.btn.help')],
         ]);
     }
 
@@ -139,7 +142,36 @@ class TelegramBot
             return;
         }
 
-        $this->sendWelcome($chatId, $user);
+        // Showing the menu and nothing else was the old answer, and it read as
+        // the bot ignoring the message. Saying what was missing — an amount —
+        // turns a dead end into the one instruction that makes the next
+        // message work.
+        $this->client->sendMessage($chatId, __('bot.unknown'), $this->homeInlineKeyboard());
+    }
+
+    /** How the bot works, for the person who has just met it. */
+    private function sendHelp(int $chatId, ?int $editMessageId = null): void
+    {
+        $this->deliver($chatId, $editMessageId, implode("\n", [
+            __('bot.help.title'),
+            '',
+            __('bot.help.money_title'),
+            __('bot.help.money'),
+            '',
+            __('bot.help.category_title'),
+            __('bot.help.category'),
+            '',
+            __('bot.help.plans_title'),
+            __('bot.help.plans'),
+            '',
+            __('bot.help.careful'),
+        ]), TelegramClient::keyboard([
+            [
+                TelegramClient::button(__('bot.btn.money'), 'f:menu'),
+                TelegramClient::button(__('bot.btn.today'), 'nav:today'),
+            ],
+            [TelegramClient::button(__('bot.btn.home'), 'nav:menu')],
+        ]));
     }
 
     /**
@@ -320,7 +352,19 @@ class TelegramBot
             return;
         }
 
-        $keyboard = TelegramClient::keyboard([
+        $this->deliver($chatId, $editMessageId, $text, $this->homeInlineKeyboard());
+    }
+
+    /**
+     * Everything the bot can do, on one screen.
+     *
+     * Also what an unrecognised message is answered with, so a person who
+     * typed something the bot could not use is left looking at the way out
+     * rather than at a refusal.
+     */
+    private function homeInlineKeyboard(): array
+    {
+        return TelegramClient::keyboard([
             [
                 TelegramClient::button(__('bot.btn.today'), 'nav:today'),
                 TelegramClient::button(__('bot.btn.tomorrow'), 'nav:tomorrow'),
@@ -333,9 +377,8 @@ class TelegramBot
                 TelegramClient::button(__('bot.btn.status'), 'nav:status'),
                 TelegramClient::button(__('bot.btn.language'), 'nav:language'),
             ],
+            [TelegramClient::button(__('bot.btn.help'), 'nav:help')],
         ]);
-
-        $this->deliver($chatId, $editMessageId, $text, $keyboard);
     }
 
     /** Send, or replace the message a button was pressed on. */
@@ -688,6 +731,7 @@ class TelegramBot
             'stats' => $this->sendStats($chatId, $user, $messageId),
             'status' => $this->sendInterruptionMenu($chatId, $messageId),
             'language' => $this->sendLanguageMenu($chatId, $messageId),
+            'help' => $this->sendHelp($chatId, $messageId),
             default => null,
         };
     }

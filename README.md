@@ -47,15 +47,35 @@ xaritadan chiziladi).
 - **Reja** — rejalar, maqsadlar, kalendar, tahlil, prognoz, bildirishnomalar.
 - **Moliya** — kirim/chiqim daftari, kategoriyalar, byudjet va ogohlantirishlar.
 
+### Kategoriyalar
+
+Bitta darajali, lekin mayda: `Taksi`, `Jamoat transporti`, `Yoqilg'i` — bittalik
+`Transport` bir oydan keyin hech nima aytmaydi. Ro'yxat
+`FinanceService::DEFAULT_CATEGORIES` da, nomlari to'rt tilda
+`lang/<til>/finance.php` da. Ikkita qoida testlar bilan qo'riqlanadi: bir xil
+tur ichida bitta so'z ikkita kategoriyaga tegishli bo'la olmaydi, va har bir
+kalitning to'rt tilda nomi bo'lishi shart.
+
+Ro'yxat o'zgarganda mavjud hisob `php artisan finance:sync-categories` bilan
+tenglashtiriladi (panelda ham tugmasi bor): yetishmagani qo'shiladi, kalit
+so'zlar yangilanadi, bo'lingan eski kategoriya **o'chirilmaydi — faqat
+o'chiriladi (is_active=false)**, chunki uning qatorlari haqiqiy tarix.
+
 ## Telegram bot
 
 Bot `@ilhomjonov_777_bot`, webhook `POST /telegram/webhook`,
 `TELEGRAM_WEBHOOK_SECRET` sarlavhasisiz 403 qaytaradi.
 
 Buyruqlar: `/menu`, `/today`, `/tomorrow`, `/status`, `/stats`, `/money`
-(`/pul`), `/language` (`/til`). Buyruq bo'lmagan har qanday matn avval pul deb
-o'qiladi: `ovqat 25000` bitta xarajat qatori bo'lib yoziladi, summa topilmasa
-bot menyuni ko'rsatadi.
+(`/pul`), `/help`, `/language` (`/til`). Buyruq bo'lmagan har qanday matn avval
+pul deb o'qiladi: `ovqat 25000` bitta xarajat qatori bo'lib yoziladi. Summa
+topilmasa bot **nima yetishmaganini aytadi** — jimgina menyu ko'rsatib qo'ymaydi.
+
+Summa deb nima olinadi: ko'paytirgichi bor son (`12k`, `5 mln`, `350 ming`) yoki
+kamida uch xonali son. Ikki xonali son summa emas — `ertalab 8 da yugurish`
+reja, xarajat emas, va ilgari bu jumla 8 so'mlik qator bo'lib yozilib qolar edi.
+Soat (`9:30`) hech qachon summa bo'lmaydi, lekin `8 da taksi 12000` da 12 000
+topiladi.
 
 Til hisob bo'yicha saqlanadi (`telegram_accounts.locale`) va har bir yangilanish
 uchun alohida o'rnatiladi — queue worker uzoq yashaydigan jarayon, oldingi
@@ -121,6 +141,7 @@ git pull
 npm ci && npm run build
 cd backend && composer install --no-dev --optimize-autoloader
 php artisan migrate --force
+php artisan finance:sync-categories   # yangi kategoriyalar va kalit so'zlar
 php artisan route:cache
 php artisan queue:restart          # worker eski kod va tarjimani ushlab turadi
 ```

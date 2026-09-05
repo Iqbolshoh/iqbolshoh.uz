@@ -2,7 +2,23 @@
 
 return [
     'private' => "Bu bot shaxsiy.\n\nSizning Telegram ID: <code>:id</code>.",
-    'unknown' => "Tushunmadim.\n\nPul yozish uchun shunday yozing: <code>ovqat 25000</code>. Yoki quyidagi tugmalardan foydalaning.",
+    'unknown' => "Bunda summa ko'rinmadi.
+
+Pul yozish uchun <b>bir qatorda</b> nima va qancha ekanini yozing:
+<code>ovqat 25000</code> · <code>taksi 12k</code> · <code>+oylik 5 mln</code>
+
+Quyidagi tugmalar ham ishlaydi.",
+
+    'help' => [
+        'title' => '❓ <b>Bot qanday ishlaydi</b>',
+        'money_title' => '<b>1. Pulni yozish</b>',
+        'money' => "Bir qatorda nima va qancha ekanini yozing — tugma bosish shart emas:\n<code>ovqat 25000</code>\n<code>taksi 12k</code>\n<code>kommunal 350 ming</code>\n\nKirim uchun oldiga <b>+</b> qo'ying yoki “oylik”, “daromad” deb yozing:\n<code>+oylik 5 mln</code>",
+        'category_title' => '<b>2. Turkumlar</b>',
+        'category' => 'So\'zdan turkumni o\'zim topaman. Topa olmasam so\'rayman — javobingizni yodda tutib, keyingi safar o\'zim bilaman. Noto\'g\'ri tushunsam <b>🏷 Turkumni almashtirish</b> tugmasi bor.',
+        'plans_title' => '<b>3. Rejalar</b>',
+        'plans' => 'Rejalar panelda yoziladi, bot esa vaqti kelganda eslatadi va <b>📋 Bugun</b> da ko\'rsatadi. Band bo\'lsangiz <b>🚦 Holat</b> ni belgilang — eslatmalar jim turadi.',
+        'careful' => '<i>Ikki xonali son summa deb olinmaydi: “ertalab 8 da yugurish” pul emas, reja.</i>',
+    ],
 
     'btn' => [
         'today' => '📋 Bugun',
@@ -25,8 +41,11 @@ return [
         'week' => '🗓 Shu hafta',
         'month' => '📆 Shu oy',
         'recent' => '🧾 Oxirgi yozuvlar',
-        'undo' => '↩️ Bekor qilish',
+        'undo' => '🗑 O\'chirish',
         'skip' => "⏭ O'tkazib yuborish",
+        'change_category' => '🏷 Turkumni almashtirish',
+        'all_categories' => '🗂 Barcha turkumlar',
+        'help' => '❓ Yordam',
         'language' => '🌐 Til',
         'home' => '🏠 Bosh sahifa',
     ],
@@ -132,6 +151,10 @@ return [
         'empty_week' => "Bu hafta hali hech narsa yozilmadi.",
         'entries' => ':count ta yozuv',
         'pace' => 'Shu tezlikda oy oxirida: <b>:amount</b>',
+        'uncategorised' => 'Turkumsiz',
+        'pick_category' => 'Qaysi turkumga qo\'yay?',
+        'note_line' => '<i>:note</i>',
+        'category_changed' => '🏷 Turkum almashtirildi.',
     ],
 
     'summary' => [
@@ -168,5 +191,6 @@ Bot yopiq: faqat egasi bilan gaplashadi.",
         'stats' => "Hafta qanday o'tdi",
         'money' => 'Pul: bugun va shu oy',
         'language' => 'Tilni almashtirish',
+        'help' => 'Bot qanday ishlaydi',
     ],
 ];

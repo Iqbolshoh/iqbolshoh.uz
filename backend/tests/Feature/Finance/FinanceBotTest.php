@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Finance;
 
+use App\Enums\TransactionKind;
 use App\Enums\TransactionSource;
 use App\Models\FinanceCategory;
 use App\Models\Transaction;
@@ -140,6 +141,88 @@ class FinanceBotTest extends TestCase
         $this->bot->handleText(self::CHAT_ID, $this->user, 'qandolat 5000');
 
         $this->assertSame($food->id, Transaction::query()->latest('id')->first()->category_id);
+    }
+
+    /**
+     * The picker offers a shortlist, not the whole catalogue.
+     *
+     * There are three dozen categories. Drawing all of them is not a choice
+     * offered to somebody standing at a counter — it is a wall to scroll past,
+     * and the fastest way to make them stop using the bot.
+     */
+    public function test_the_picker_offers_a_shortlist_and_a_way_to_the_rest(): void
+    {
+        $this->bot->handleText(self::CHAT_ID, $this->user, 'qandolat 18000');
+
+        $transaction = Transaction::query()->firstOrFail();
+        $offered = $this->buttonsOfLastMessage();
+
+        $categoryButtons = array_filter($offered, fn (string $data): bool => str_starts_with($data, 'f:cat:'));
+
+        $this->assertCount(8, $categoryButtons);
+        $this->assertContains("f:pick:{$transaction->id}:all", $offered);
+
+        // ...and the way to the rest really does reach the rest.
+        $this->bot->handleCallback(self::CHAT_ID, 10, $this->user, ['f', 'pick', (string) $transaction->id, 'all']);
+
+        $all = array_filter($this->buttonsOfLastMessage(), fn (string $data): bool => str_starts_with($data, 'f:cat:'));
+
+        $this->assertCount(
+            app(FinanceService::class)->categoriesByUse($this->user, TransactionKind::Expense)->count(),
+            $all
+        );
+    }
+
+    /**
+     * A guess that went to the wrong bucket can be moved.
+     *
+     * Without this the only repair was to delete the row and type the line
+     * again — which is why a wrong guess used to cost more than no guess.
+     */
+    public function test_a_categorised_row_can_be_moved_to_another_category(): void
+    {
+        $this->bot->handleText(self::CHAT_ID, $this->user, 'ovqat 25000');
+
+        $transaction = Transaction::query()->firstOrFail();
+        $this->assertSame('food', $transaction->category->key);
+
+        $this->bot->handleCallback(self::CHAT_ID, 10, $this->user, ['f', 'pick', (string) $transaction->id]);
+
+        $this->assertContains("f:cat:{$transaction->id}:", array_map(
+            fn (string $data): string => substr($data, 0, strrpos($data, ':') + 1),
+            $this->buttonsOfLastMessage()
+        ));
+
+        $cafe = FinanceCategory::query()->where('key', 'cafe')->firstOrFail();
+
+        $this->bot->handleCallback(self::CHAT_ID, 11, $this->user, ['f', 'cat', (string) $transaction->id, (string) $cafe->id]);
+
+        $this->assertSame($cafe->id, $transaction->fresh()->category_id);
+    }
+
+    /**
+     * Whatever else was typed on the line comes back on the screen.
+     *
+     * A row that reads "40 000 · Uncategorised" a week later cannot be placed
+     * by anyone; the same row with "oldirdim" under it can.
+     */
+    public function test_the_note_is_shown_back(): void
+    {
+        $this->bot->handleText(self::CHAT_ID, $this->user, 'taksi 12000 aeroportgacha');
+
+        Http::assertSent(fn ($request) => str_contains($request->url(), 'sendMessage')
+            && str_contains((string) $request['text'], 'aeroportgacha'));
+    }
+
+    /** The buttons on the message the bot sent last, as callback data. */
+    private function buttonsOfLastMessage(): array
+    {
+        $markup = json_decode((string) Http::recorded()->last()[0]['reply_markup'], true);
+
+        return array_merge(...array_map(
+            fn (array $row): array => array_column($row, 'callback_data'),
+            $markup['inline_keyboard'] ?? []
+        ));
     }
 
     public function test_undo_removes_a_row_the_bot_added(): void

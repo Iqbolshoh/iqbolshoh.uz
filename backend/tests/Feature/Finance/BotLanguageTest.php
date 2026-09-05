@@ -93,6 +93,86 @@ class BotLanguageTest extends TestCase
         }
     }
 
+    /**
+     * No block may define the same key twice.
+     *
+     * PHP keeps the last one and says nothing, so the earlier line is simply
+     * gone: the button that read it goes blank, or worse, quietly starts
+     * showing the other value. Nothing downstream can see it — the array that
+     * reaches Lang has already lost the duplicate, so key counts and the
+     * coverage tests above all pass. Only the source can be asked.
+     */
+    public function test_no_language_file_defines_a_key_twice(): void
+    {
+        foreach (self::LOCALES as $locale) {
+            foreach (['bot', 'finance'] as $file) {
+                $path = lang_path("{$locale}/{$file}.php");
+
+                $this->assertSame(
+                    [],
+                    $this->duplicateKeysIn($path),
+                    "lang/{$locale}/{$file}.php defines a key twice in one block"
+                );
+            }
+        }
+    }
+
+    /**
+     * Walk the file's tokens and collect every key defined twice inside the
+     * same pair of brackets.
+     *
+     * A stack rather than a depth counter, because two sibling blocks are at
+     * the same depth and are allowed to share key names — 'title' belongs to
+     * several of them.
+     *
+     * @return list<string>
+     */
+    private function duplicateKeysIn(string $path): array
+    {
+        $tokens = array_values(array_filter(
+            token_get_all(file_get_contents($path)),
+            fn ($token): bool => ! is_array($token) || ! in_array($token[0], [T_WHITESPACE, T_COMMENT, T_DOC_COMMENT], true)
+        ));
+
+        $stack = [];
+        $duplicates = [];
+
+        foreach ($tokens as $index => $token) {
+            if ($token === '[') {
+                $stack[] = [];
+
+                continue;
+            }
+
+            if ($token === ']') {
+                array_pop($stack);
+
+                continue;
+            }
+
+            $next = $tokens[$index + 1] ?? null;
+
+            if (! is_array($token)
+                || $token[0] !== T_CONSTANT_ENCAPSED_STRING
+                || ! is_array($next)
+                || $next[0] !== T_DOUBLE_ARROW
+                || $stack === []) {
+                continue;
+            }
+
+            $key = trim($token[1], "'\"");
+            $top = array_key_last($stack);
+
+            if (isset($stack[$top][$key])) {
+                $duplicates[] = $key;
+            }
+
+            $stack[$top][$key] = true;
+        }
+
+        return $duplicates;
+    }
+
     public function test_the_language_button_switches_the_chat(): void
     {
         config(['services.telegram.token' => 'test-token']);

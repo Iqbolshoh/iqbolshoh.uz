@@ -101,13 +101,36 @@ class MoneyTextParser
         $text = mb_strtolower(trim($text));
         $text = preg_replace('/[\x{00A0}\x{202F}\x{2009}\x{2007}]/u', ' ', $text) ?? $text;
         $text = str_replace(['’', '‘', '`'], "'", $text);
+        $text = preg_replace('/\s+/u', ' ', $text) ?? $text;
 
-        return preg_replace('/\s+/u', ' ', $text) ?? $text;
+        // The sign has already been read off the raw text by explicitKind, and
+        // leaving it here costs the category: a keyword only counts at the
+        // start of a word, so "+oylik 5 mln" — the example the help screen
+        // gives — matched nothing at all and landed as uncategorised income.
+        return ltrim($text, '+- ');
     }
 
     /**
-     * The first amount in the string, with its multiplier applied. Whatever is
-     * left of the sentence comes back in `$remainder` for the category match.
+     * The smallest number this bot will believe is money, when nothing scales
+     * it.
+     *
+     * Below this the number is almost always part of a sentence rather than a
+     * price: "ertalab 8 da yugurish" is a plan, and reading it as 8 so'm did
+     * not just answer the wrong question — it wrote a row into the ledger and
+     * moved the day's total. Nothing in this country costs two digits, so the
+     * floor costs nothing real and stops the whole class of mistake. A number
+     * that carries a multiplier ("8k", "8 ming") is exempt: it says outright
+     * that it is an amount.
+     */
+    private const MIN_BARE_AMOUNT = 100;
+
+    /**
+     * The first amount in the string, with its multiplier applied.
+     *
+     * Every number is tried in turn rather than only the first, so a sentence
+     * that opens with a time still gives up its price: "8 da taksi 12000" is
+     * twelve thousand som, not eight. Whatever is left of the sentence comes
+     * back in `$remainder` for the category match.
      */
     private function extractAmount(string $text, ?string &$remainder): ?int
     {
@@ -115,37 +138,58 @@ class MoneyTextParser
         // number. Trying it the other way round would match just the "25".
         $pattern = "/(\d{1,3}(?:[ ',.]\d{3})+|\d+(?:[.,]\d+)?)\s*([a-zа-яёғқҳў]{1,7})?/u";
 
-        if (! preg_match($pattern, $text, $match, PREG_OFFSET_CAPTURE)) {
+        if (! preg_match_all($pattern, $text, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
             $remainder = $text;
 
             return null;
         }
 
-        [$rawNumber, $numberOffset] = $match[1];
-        $suffix = $match[2][0] ?? '';
+        foreach ($matches as $match) {
+            [$rawNumber, $numberOffset] = $match[1];
+            $suffix = $match[2][0] ?? '';
 
-        $multiplier = self::MULTIPLIERS[$suffix] ?? null;
+            $multiplier = self::MULTIPLIERS[$suffix] ?? null;
 
-        $amount = $this->toNumber($rawNumber);
+            $amount = $this->toNumber($rawNumber);
 
-        if ($amount === null) {
-            $remainder = $text;
+            if ($amount === null || $this->isClockTime($text, $rawNumber, $numberOffset)) {
+                continue;
+            }
 
-            return null;
+            // The suffix is only eaten when it really was a multiplier: in
+            // "25000 taksi" the word is the category, not a scale.
+            $consumed = $numberOffset + strlen($rawNumber);
+
+            if ($multiplier !== null) {
+                $amount *= $multiplier;
+                $consumed = $match[2][1] + strlen($suffix);
+            } elseif ($amount < self::MIN_BARE_AMOUNT) {
+                continue;
+            }
+
+            $remainder = trim(substr($text, 0, $numberOffset) . ' ' . substr($text, $consumed));
+
+            return (int) round($amount);
         }
 
-        // The suffix is only eaten when it really was a multiplier: in
-        // "25000 taksi" the word is the category, not a scale.
-        $consumed = $numberOffset + strlen($rawNumber);
+        $remainder = $text;
 
-        if ($multiplier !== null) {
-            $amount *= $multiplier;
-            $consumed = $match[2][1] + strlen($suffix);
-        }
+        return null;
+    }
 
-        $remainder = trim(substr($text, 0, $numberOffset) . ' ' . substr($text, $consumed));
+    /**
+     * Whether this number is one half of a clock reading.
+     *
+     * "8:30" survives the floor above as 830 once the colon is stripped, so it
+     * has to be recognised where it still has its punctuation: a number with a
+     * colon on either side of it is a time, and a time is never a price.
+     */
+    private function isClockTime(string $text, string $rawNumber, int $offset): bool
+    {
+        $before = $offset > 0 ? substr($text, $offset - 1, 1) : '';
+        $after = substr($text, $offset + strlen($rawNumber), 1);
 
-        return (int) round($amount);
+        return $before === ':' || $after === ':';
     }
 
     /** "25 000" and "1,5" both become a number; the separators mean different things. */

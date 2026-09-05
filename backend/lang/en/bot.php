@@ -12,7 +12,23 @@
  */
 return [
     'private' => "This bot is private.\n\nYour Telegram ID is <code>:id</code>.",
-    'unknown' => "I did not understand that.\n\nTo record money, write it like <code>ovqat 25000</code>. Or use the buttons below.",
+    'unknown' => "There is no amount in that.
+
+To record money, write what and how much <b>on one line</b>:
+<code>ovqat 25000</code> · <code>taksi 12k</code> · <code>+salary 5 mln</code>
+
+The buttons below work too.",
+
+    'help' => [
+        'title' => '❓ <b>How the bot works</b>',
+        'money_title' => '<b>1. Recording money</b>',
+        'money' => "Write what and how much on one line — no buttons involved:\n<code>ovqat 25000</code>\n<code>taksi 12k</code>\n<code>kommunal 350 ming</code>\n\nFor income put a <b>+</b> in front, or say “salary”, “income”:\n<code>+salary 5 mln</code>",
+        'category_title' => '<b>2. Categories</b>',
+        'category' => 'The category comes from the words you used. When I cannot tell, I ask — and I remember your answer, so next time I know. When I get it wrong there is a <b>🏷 Change category</b> button.',
+        'plans_title' => '<b>3. Plans</b>',
+        'plans' => 'Plans are written in the panel; the bot reminds you on time and shows them under <b>📋 Today</b>. When you are busy, set <b>🚦 Status</b> and the reminders go quiet.',
+        'careful' => '<i>A two-digit number is not treated as money: “ertalab 8 da yugurish” is a plan, not a payment.</i>',
+    ],
 
     'btn' => [
         'today' => '📋 Today',
@@ -35,8 +51,11 @@ return [
         'week' => '🗓 This week',
         'month' => '📆 This month',
         'recent' => '🧾 Recent entries',
-        'undo' => '↩️ Undo',
+        'undo' => '🗑 Delete',
         'skip' => '⏭ Skip',
+        'change_category' => '🏷 Change category',
+        'all_categories' => '🗂 All categories',
+        'help' => '❓ Help',
         'language' => '🌐 Language',
         'home' => '🏠 Home',
     ],
@@ -142,6 +161,10 @@ return [
         'empty_week' => 'Nothing recorded this week yet.',
         'entries' => ':count entries',
         'pace' => 'At this pace, by month end: <b>:amount</b>',
+        'uncategorised' => 'Uncategorised',
+        'pick_category' => 'Which category should this go to?',
+        'note_line' => '<i>:note</i>',
+        'category_changed' => '🏷 Category changed.',
     ],
 
     'summary' => [
@@ -178,5 +201,6 @@ The bot is closed: it talks to its owner only.",
         'stats' => 'How the week went',
         'money' => 'Money: today and this month',
         'language' => 'Change language',
+        'help' => 'How the bot works',
     ],
 ];

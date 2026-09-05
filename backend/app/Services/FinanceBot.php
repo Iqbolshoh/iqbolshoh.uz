@@ -75,7 +75,7 @@ class FinanceBot
         // No category recognised: ask, rather than file it somewhere plausible.
         // The answer also teaches the parser the word that was not recognised.
         $keyboard = $parsed['category'] === null
-            ? $this->categoryPicker($transaction, $categories->where('kind', $parsed['kind']))
+            ? $this->categoryPicker($transaction, $user)
             : $this->afterSaveKeyboard($transaction);
 
         if ($parsed['category'] === null) {
@@ -97,6 +97,7 @@ class FinanceBot
     {
         match ($parts[1] ?? '') {
             'cat' => $this->assignCategory($chatId, $messageId, $user, (int) ($parts[2] ?? 0), (int) ($parts[3] ?? 0)),
+            'pick' => $this->offerCategories($chatId, $messageId, $user, (int) ($parts[2] ?? 0), ($parts[3] ?? '') === 'all'),
             'skip' => $this->skipCategory($chatId, $messageId, $user, (int) ($parts[2] ?? 0)),
             'undo' => $this->undo($chatId, $messageId, $user, (int) ($parts[2] ?? 0)),
             'menu' => $this->sendMenu($chatId, $user, $messageId),
@@ -227,7 +228,7 @@ class FinanceBot
             $lines[] = sprintf(
                 '<code>%s</code> %s · <b>%s</b>',
                 $this->bar((float) $row['share']),
-                $row['category']?->label() ?? '—',
+                $this->categoryLabel($row['category']),
                 Transaction::money($row['total'])
             );
         }
@@ -276,8 +277,15 @@ class FinanceBot
                 '<code>%s</code>  %s · %s',
                 $transaction->date->format('d.m'),
                 $transaction->formattedAmount(),
-                $transaction->category?->label() ?? '—'
+                $this->categoryLabel($transaction->category)
             );
+
+            // Indented under its own row rather than appended to it: the
+            // amounts stay in one readable column, which is what the list is
+            // for, and the note is still there for the row that needs it.
+            if ($transaction->note !== null) {
+                $lines[] = '        <i>' . e($transaction->note) . '</i>';
+            }
         }
 
         $buttons = [];
@@ -334,7 +342,13 @@ class FinanceBot
             ->where('user_id', $user->id)
             ->find($categoryId);
 
+        // The row can be gone by the time this arrives — deleted from the
+        // panel, or undone from the message above this one. Returning silently
+        // left the button looking broken; saying so is the whole difference
+        // between "nothing happened" and "there is nothing left to file".
         if ($transaction === null || $category === null) {
+            $this->client->editMessage($chatId, $messageId, __('bot.fin.nothing_to_undo'));
+
             return;
         }
 
@@ -428,7 +442,7 @@ class FinanceBot
             return;
         }
 
-        $label = $transaction->category?->label() ?? __('finance.kind.' . $transaction->kind->value);
+        $label = $this->categoryLabel($transaction->category);
         $amount = Transaction::money($transaction->amount);
 
         $transaction->delete();
@@ -443,22 +457,68 @@ class FinanceBot
         ]]));
     }
 
+    /**
+     * The "saved" line, plus whatever else was typed on it.
+     *
+     * The note used to be dropped from the reply, which is how a row could
+     * come back a week later reading "40 000 · Uncategorised" with no way left
+     * to remember it was a haircut. If the person bothered to type it, it goes
+     * back on the screen.
+     */
     private function confirmation(Transaction $transaction): string
     {
         $amount = Transaction::money($transaction->amount);
 
-        return $transaction->category === null
+        $line = $transaction->category === null
             ? __('bot.fin.saved_uncategorised', ['amount' => $amount])
             : __('bot.fin.saved', ['amount' => $amount, 'category' => $transaction->category->label()]);
+
+        return $transaction->note === null
+            ? $line
+            : $line . "\n" . __('bot.fin.note_line', ['note' => e($transaction->note)]);
     }
 
-    /** @param  \Illuminate\Support\Collection<int, FinanceCategory>  $categories */
-    private function categoryPicker(Transaction $transaction, $categories): array
+    /**
+     * What to call a row's bucket on screen.
+     *
+     * A bare dash for "no category" reads as a rendering fault rather than as
+     * a state, and it is a state the owner can act on — so it says so.
+     */
+    private function categoryLabel(?FinanceCategory $category): string
     {
+        return $category?->label() ?? __('bot.fin.uncategorised');
+    }
+
+    /**
+     * How many categories a picker shows before it offers the rest behind a
+     * button.
+     *
+     * There are three dozen categories now, and thirty-six buttons is not a
+     * choice — it is a wall to scroll past while the shop assistant waits. The
+     * ones actually used come first, so in practice the answer is on the first
+     * screen and the full list is one tap away for the rare row.
+     */
+    private const PICKER_SHORTLIST = 8;
+
+    /**
+     * The category buttons for one transaction.
+     *
+     * Ordered by how often each category has been used, so the list arranges
+     * itself around how this person actually spends instead of around the
+     * order the installer happened to seed.
+     */
+    private function categoryPicker(Transaction $transaction, User $user, bool $all = false): array
+    {
+        $categories = $this->finance->categoriesByUse($user, $transaction->kind);
+
+        // Hiding two buttons behind a button that reveals them is worse than
+        // showing them, so the shortlist only kicks in once it saves something.
+        $shorten = ! $all && $categories->count() > self::PICKER_SHORTLIST + 2;
+
         $rows = [];
         $buttons = [];
 
-        foreach ($categories as $category) {
+        foreach ($shorten ? $categories->take(self::PICKER_SHORTLIST) : $categories as $category) {
             $buttons[] = TelegramClient::button($category->label(), "f:cat:{$transaction->id}:{$category->id}");
 
             if (count($buttons) === 2) {
@@ -471,6 +531,10 @@ class FinanceBot
             $rows[] = $buttons;
         }
 
+        if ($shorten) {
+            $rows[] = [TelegramClient::button(__('bot.btn.all_categories'), "f:pick:{$transaction->id}:all")];
+        }
+
         // Two ways out, because neither is the same answer: skip keeps the
         // amount and leaves it uncategorised, undo says the row was a mistake.
         $rows[] = [
@@ -481,9 +545,40 @@ class FinanceBot
         return TelegramClient::keyboard($rows);
     }
 
+    /**
+     * Reopen the picker on a row that already has an answer.
+     *
+     * Reachable two ways, and both matter: from "change category" when the
+     * guess was wrong, and from "all categories" when the shortlist did not
+     * hold the right one. Without it a misread row could only be fixed by
+     * deleting it and typing the whole line again.
+     */
+    private function offerCategories(int $chatId, int $messageId, User $user, int $transactionId, bool $all): void
+    {
+        $transaction = Transaction::query()
+            ->where('user_id', $user->id)
+            ->with('category')
+            ->find($transactionId);
+
+        if ($transaction === null) {
+            $this->client->editMessage($chatId, $messageId, __('bot.fin.nothing_to_undo'));
+
+            return;
+        }
+
+        $this->client->editMessage($chatId, $messageId, implode("\n", [
+            $this->confirmation($transaction),
+            '',
+            __('bot.fin.pick_category'),
+        ]), $this->categoryPicker($transaction, $user, $all));
+    }
+
     private function afterSaveKeyboard(Transaction $transaction): array
     {
         return TelegramClient::keyboard([
+            [
+                TelegramClient::button(__('bot.btn.change_category'), "f:pick:{$transaction->id}"),
+            ],
             [
                 TelegramClient::button(__('bot.btn.undo'), "f:undo:{$transaction->id}"),
                 TelegramClient::button(__('bot.btn.recent'), 'f:recent'),

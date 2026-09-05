@@ -70,9 +70,14 @@ class BotNavigationTest extends TestCase
      */
     public function test_no_button_leads_nowhere(): void
     {
-        foreach (['/start', '/menu', '/today', '/money', '/stats', '/status', '/language'] as $command) {
+        foreach (['/start', '/menu', '/today', '/money', '/stats', '/status', '/help', '/language'] as $command) {
             $this->message($command);
         }
+
+        // A recorded row is the only thing that draws the buttons hanging off
+        // one — "change category", "delete this" — so the walk has to have
+        // written something before it can reach them.
+        $this->message('ovqat 25000');
 
         $pressed = [];
         $queue = $this->offeredCallbacks();

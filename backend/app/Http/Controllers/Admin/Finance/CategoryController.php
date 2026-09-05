@@ -113,16 +113,31 @@ class CategoryController extends Controller
             ->with('success', 'Category deleted. Its transactions are kept as uncategorised.');
     }
 
-    /** Top the account up with any starter category it does not have yet. */
+    /**
+     * Bring the account in line with the shipped catalogue.
+     *
+     * More than a top-up: a release can also move a keyword to a category that
+     * did not exist before, or retire a bucket that has been split in two. The
+     * message says which of the three actually happened, because "nothing to
+     * do" and "twelve categories rewritten" deserve different reactions.
+     */
     public function restoreDefaults(): RedirectResponse
     {
         $this->authorizeAction('create');
 
-        $created = $this->finance->ensureDefaults(Auth::user());
+        $result = $this->finance->syncDefaults(Auth::user());
+
+        $parts = array_filter([
+            $result['created'] ? "added {$result['created']}" : null,
+            $result['updated'] ? "refreshed {$result['updated']}" : null,
+            $result['retired'] ? "switched off {$result['retired']}" : null,
+        ]);
 
         return redirect()->route('admin.finance-categories.index')->with(
             'success',
-            $created === 0 ? 'Every default category is already here.' : "Added {$created} default categories."
+            $parts === []
+                ? 'Categories are already in step with the shipped list.'
+                : 'Categories synced — ' . implode(', ', $parts) . '.'
         );
     }
 
@@ -134,7 +149,7 @@ class CategoryController extends Controller
             'name' => ['required', 'string', 'max:60'],
             'icon' => ['nullable', 'string', 'max:16'],
             'color' => ['nullable', 'string', 'regex:/^#[0-9A-Fa-f]{6}$/'],
-            'keywords' => ['nullable', 'string', 'max:255'],
+            'keywords' => ['nullable', 'string', 'max:2000'],
             'monthly_limit' => ['nullable', 'integer', 'min:0', 'max:999999999999'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['nullable', 'boolean'],
