@@ -40,6 +40,7 @@ class TelegramBot
         'today' => '/today',
         'tomorrow' => '/tomorrow',
         'money' => '/money',
+        'time' => '/time',
         'stats' => '/stats',
         'status' => '/status',
         'help' => '/help',
@@ -51,6 +52,8 @@ class TelegramBot
         private readonly TelegramClient $client,
         private readonly PlanService $plans,
         private readonly FinanceBot $finance,
+        private readonly ActivityBot $activities,
+        private readonly ActivityService $activityLog,
     ) {}
 
     /** @param  array<string, mixed>  $message */
@@ -85,6 +88,7 @@ class TelegramBot
             '/status' => $this->sendInterruptionMenu($chatId),
             '/stats' => $this->sendStats($chatId, $account->user),
             '/money', '/pul' => $this->finance->sendMenu($chatId, $account->user),
+            '/time', '/vaqt' => $this->activities->sendMenu($chatId, $account->user),
             '/help' => $this->sendHelp($chatId),
             '/language', '/til' => $this->sendLanguageMenu($chatId),
             default => $this->handleFreeText($chatId, $account->user, $text),
@@ -123,8 +127,8 @@ class TelegramBot
     {
         return TelegramClient::replyKeyboard([
             [__('bot.btn.today'), __('bot.btn.money')],
-            [__('bot.btn.stats'), __('bot.btn.status')],
-            [__('bot.btn.help')],
+            [__('bot.btn.time'), __('bot.btn.stats')],
+            [__('bot.btn.status'), __('bot.btn.help')],
         ]);
     }
 
@@ -138,6 +142,15 @@ class TelegramBot
      */
     private function handleFreeText(int $chatId, User $user, string $text): void
     {
+        // Time is tried before money, and the order is not a preference. A
+        // duration always names its unit and an amount never does, so time can
+        // recognise its own lines with certainty — while money, asked first,
+        // would read "120 daqiqa dars" as a hundred and twenty som and file it
+        // before time ever saw it.
+        if ($text !== '' && $this->activities->handleText($chatId, $user, $text)) {
+            return;
+        }
+
         if ($text !== '' && $this->finance->handleText($chatId, $user, $text)) {
             return;
         }
@@ -201,6 +214,7 @@ class TelegramBot
             'i' => $this->handleInterruptionAction($chatId, $messageId, $account->user, $parts),
             'nav' => $this->handleNavigation($chatId, $messageId, $account->user, $parts),
             'f' => $this->finance->handleCallback($chatId, $messageId, $account->user, $parts),
+            't' => $this->activities->handleCallback($chatId, $messageId, $account->user, $parts),
             'lang' => $this->setLanguage($chatId, $messageId, $account, $parts[1] ?? ''),
             default => null,
         };
@@ -371,13 +385,16 @@ class TelegramBot
             ],
             [
                 TelegramClient::button(__('bot.btn.money'), 'f:menu'),
-                TelegramClient::button(__('bot.btn.stats'), 'nav:stats'),
+                TelegramClient::button(__('bot.btn.time'), 't:menu'),
             ],
             [
+                TelegramClient::button(__('bot.btn.stats'), 'nav:stats'),
                 TelegramClient::button(__('bot.btn.status'), 'nav:status'),
+            ],
+            [
+                TelegramClient::button(__('bot.btn.help'), 'nav:help'),
                 TelegramClient::button(__('bot.btn.language'), 'nav:language'),
             ],
-            [TelegramClient::button(__('bot.btn.help'), 'nav:help')],
         ]);
     }
 
@@ -639,7 +656,16 @@ class TelegramBot
             $interruption = Interruption::query()->where('user_id', $user->id)->find((int) ($parts[2] ?? 0));
 
             if ($interruption !== null) {
-                $interruption->update(['ended_at' => now()]);
+                // `duration_minutes` was the length the owner *said* they would
+                // be busy for. Coming back early or late makes that a guess,
+                // and the time log has no use for a guess when the real figure
+                // is right here — so it is replaced before the hours are kept.
+                $endedAt = now();
+                $elapsed = max(1, (int) round($interruption->started_at->diffInMinutes($endedAt)));
+
+                $interruption->update(['ended_at' => $endedAt, 'duration_minutes' => $elapsed]);
+
+                $this->activityLog->recordInterruption($interruption->fresh());
             }
 
             $this->sendDay($chatId, $user, CarbonImmutable::today($user->timezone), $messageId);

@@ -4,7 +4,7 @@ Bitta domenda uchta narsa yashaydi:
 
 1. **Portfolio sayti** — React SPA, kontenti bazadan olinadi.
 2. **Admin panel** — Laravel Blade, sayt kontenti + shaxsiy reja va pul hisobi.
-3. **Telegram bot** — o'sha reja va pulning cho'ntakdagi ko'rinishi.
+3. **Telegram bot** — reja, pul va vaqtning cho'ntakdagi ko'rinishi.
 
 ## Tuzilma
 
@@ -56,7 +56,7 @@ Bitta darajali, lekin mayda: `Taksi`, `Jamoat transporti`, `Yoqilg'i` — bittal
 tur ichida bitta so'z ikkita kategoriyaga tegishli bo'la olmaydi, va har bir
 kalitning to'rt tilda nomi bo'lishi shart.
 
-Ro'yxat o'zgarganda mavjud hisob `php artisan finance:sync-categories` bilan
+Ro'yxat o'zgarganda mavjud hisob `php artisan categories:sync` bilan
 tenglashtiriladi (panelda ham tugmasi bor): yetishmagani qo'shiladi, kalit
 so'zlar yangilanadi, bo'lingan eski kategoriya **o'chirilmaydi — faqat
 o'chiriladi (is_active=false)**, chunki uning qatorlari haqiqiy tarix.
@@ -67,7 +67,7 @@ Bot `@ilhomjonov_777_bot`, webhook `POST /telegram/webhook`,
 `TELEGRAM_WEBHOOK_SECRET` sarlavhasisiz 403 qaytaradi.
 
 Buyruqlar: `/menu`, `/today`, `/tomorrow`, `/status`, `/stats`, `/money`
-(`/pul`), `/help`, `/language` (`/til`). Buyruq bo'lmagan har qanday matn avval
+(`/pul`), `/time` (`/vaqt`), `/help`, `/language` (`/til`). Buyruq bo'lmagan har qanday matn avval
 pul deb o'qiladi: `ovqat 25000` bitta xarajat qatori bo'lib yoziladi. Summa
 topilmasa bot **nima yetishmaganini aytadi** — jimgina menyu ko'rsatib qo'ymaydi.
 
@@ -107,6 +107,37 @@ Ikkita qoida: standart (default) doira ham yuborilishi shart, aks holda
 ro'yxati yo'q tildagi mijoz hech nima ko'rmaydi; va Telegram tojikchani `tg`
 deb yuritadi, bu yerdagi `tj` emas.
 
+## Vaqt hisobi
+
+Uchinchi narsa: kun qayerga ketdi. `activity_categories` + `activity_entries`,
+pul modulining aynan o'zi shaklida. Yozuvda **faqat davomiylik** saqlanadi
+(boshlanish/tugash juftligi emas) — chunki "3 soat ish" odatda ish tugagach
+yoziladi, va soxta boshlanish vaqti keyin javob berib bo'lmaydigan ustma-ust
+tushish savollarini keltirib chiqaradi.
+
+Botda: `⏱ Vaqt` → `➕ Vaqt yozish` → mashg'ulot → davomiylik. Yoki bir qatorda:
+`8 soat uxladim`, `2 soat dars`, `1 soat 30 daq telefonda`. Hisobot kun,
+hafta va oy kesimida; har birida **qamrov** ko'rsatiladi — sutkaning necha
+foizi umuman yozib olingani. Usiz "12 soat ish" degan qator nimani anglatishi
+noma'lum bo'lib qoladi.
+
+Har bir mashg'ulotda `is_good` bayrog'i bor (sport — foydali, lenta aylantirish
+— yo'q), va shu sababli hisobot "foydali / behuda" degan yagona xulosani
+chiqara oladi. `daily_target_minutes` esa kunlik maqsad; hafta uchun u yettiga
+ko'paytiriladi.
+
+**Holat bilan bog'lanishi.** `🚦 Holat` da "2 soat darsdaman" desangiz, o'sha
+soatlar allaqachon aytilgan — qaytadan yozish shart emas. Holat yopilganda
+(tugmadan yoki `interruptions:close` jadval buyrug'i bilan) u vaqt yozuviga
+aylanadi, `source=status` deb belgilanadi va `interruption_id` ustidagi unique
+kalit uni ikki marta yozilishidan saqlaydi. Tugmadan yopilsa **haqiqiy**
+o'tgan vaqt olinadi, aytilgani emas.
+
+Ikki tahlilchi bir-birining matnini o'g'irlamasligi uchun **vaqt birinchi
+o'qiladi**: davomiylik o'z birligini doim aytadi, summa esa hech qachon
+aytmaydi. Teskari tartibda `120 daqiqa dars` 120 so'mlik xarajat bo'lib
+yozilib qolardi.
+
 ## Rejalashtirilgan ishlar
 
 Hech biri `iqbolshoh-schedule` supervisor jarayonisiz ishlamaydi — eslatma
@@ -118,6 +149,7 @@ kelmasa, birinchi shu tekshiriladi.
 | `plans:daily-summary` | har soat, har hisob o'z soatida |
 | `finance:prompt` | har soat — "bugun nimaga ketdi?" |
 | `finance:report` | har soat — haftalik/oylik moliya hisoboti |
+| `interruptions:close` | har 15 daqiqada — muddati o'tgan holatni yopadi va vaqtini yozadi |
 
 Bot jim turishi odatiy holat: ochiq reja bo'lmasa `plans:remind` gapirmaydi,
 kun bo'sh bo'lsa `plans:daily-summary` ham. Sabab qidirishdan oldin ochiq
@@ -147,7 +179,7 @@ git pull
 npm ci && npm run build
 cd backend && composer install --no-dev --optimize-autoloader
 php artisan migrate --force
-php artisan finance:sync-categories   # yangi kategoriyalar va kalit so'zlar
+php artisan categories:sync           # yangi kategoriya va mashg'ulotlar
 php artisan route:cache
 php artisan queue:restart          # worker eski kod va tarjimani ushlab turadi
 ```

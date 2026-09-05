@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\CloseFinishedInterruptions;
 use App\Console\Commands\SendDailySummary;
 use App\Console\Commands\SendFinancePrompt;
 use App\Console\Commands\SendFinanceReport;
@@ -33,4 +34,11 @@ Schedule::command(SendFinancePrompt::class)
 
 Schedule::command(SendFinanceReport::class)
     ->hourly()
+    ->withoutOverlapping(10);
+
+// A status the owner set and never came back from still took the time it said
+// it would. Every quarter hour is close enough for something measured in
+// halves and wholes of an hour, and it keeps the time log filling itself.
+Schedule::command(CloseFinishedInterruptions::class)
+    ->everyFifteenMinutes()
     ->withoutOverlapping(10);

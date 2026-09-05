@@ -42,7 +42,7 @@ class TelegramProfile extends Command
      * menu is a list to pick from, and offering the same action twice under
      * two names makes it read as two different things.
      */
-    private const COMMANDS = ['menu', 'today', 'tomorrow', 'status', 'stats', 'money', 'help', 'language'];
+    private const COMMANDS = ['menu', 'today', 'tomorrow', 'status', 'stats', 'money', 'time', 'help', 'language'];
 
     /** Telegram's own limits. Over any of them the whole call is rejected. */
     private const LIMITS = ['name' => 64, 'short' => 120, 'description' => 512];

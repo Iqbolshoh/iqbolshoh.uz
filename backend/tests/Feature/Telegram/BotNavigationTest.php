@@ -5,6 +5,7 @@ namespace Tests\Feature\Telegram;
 use App\Models\Plan;
 use App\Models\TelegramAccount;
 use App\Models\User;
+use App\Services\ActivityService;
 use App\Services\FinanceService;
 use App\Services\TelegramBot;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -48,6 +49,7 @@ class BotNavigationTest extends TestCase
         ]);
 
         app(FinanceService::class)->ensureDefaults($this->user);
+        app(ActivityService::class)->ensureDefaults($this->user);
 
         Plan::query()->create([
             'user_id' => $this->user->id,
@@ -70,7 +72,7 @@ class BotNavigationTest extends TestCase
      */
     public function test_no_button_leads_nowhere(): void
     {
-        foreach (['/start', '/menu', '/today', '/money', '/stats', '/status', '/help', '/language'] as $command) {
+        foreach (['/start', '/menu', '/today', '/money', '/time', '/stats', '/status', '/help', '/language'] as $command) {
             $this->message($command);
         }
 
@@ -78,6 +80,7 @@ class BotNavigationTest extends TestCase
         // one — "change category", "delete this" — so the walk has to have
         // written something before it can reach them.
         $this->message('ovqat 25000');
+        $this->message('2 soat ish');
 
         $pressed = [];
         $queue = $this->offeredCallbacks();
@@ -85,7 +88,7 @@ class BotNavigationTest extends TestCase
         // Bounded by shape rather than by value: the day arrows carry a date,
         // so pressing "next" forever is an infinite walk into the future and
         // one date proves as much as a thousand.
-        while ($queue !== [] && count($pressed) < 60) {
+        while ($queue !== [] && count($pressed) < 150) {
             $shape = $this->shapeOf(array_shift($queue));
 
             if (isset($pressed[$shape['key']])) {
@@ -109,7 +112,7 @@ class BotNavigationTest extends TestCase
             $queue = array_merge($queue, $this->offeredCallbacks());
         }
 
-        $this->assertGreaterThan(15, count($pressed), 'the walk did not reach most of the bot');
+        $this->assertGreaterThan(40, count($pressed), 'the walk did not reach most of the bot');
     }
 
     /**

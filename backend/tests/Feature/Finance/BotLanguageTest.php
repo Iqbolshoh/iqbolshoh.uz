@@ -30,13 +30,17 @@ class BotLanguageTest extends TestCase
      *
      * "so'm" is the currency's own name, not a word to translate — English
      * prose about Uzbek money writes it exactly the same way, and forcing a
-     * difference here would mean inventing a wrong one.
+     * difference here would mean inventing a wrong one. "Telegram" is a
+     * product, and every one of these languages calls it that.
      */
-    private const SHARED_BY_DESIGN = ['currency'];
+    private const SHARED_BY_DESIGN = ['currency', 'source.telegram'];
+
+    /** Every language file the bot reads from. */
+    private const FILES = ['bot', 'finance', 'activity'];
 
     public function test_every_locale_carries_every_line(): void
     {
-        foreach (['bot', 'finance'] as $file) {
+        foreach (self::FILES as $file) {
             $reference = $this->flatten(Lang::get($file, [], 'en'));
 
             foreach (self::LOCALES as $locale) {
@@ -66,7 +70,7 @@ class BotLanguageTest extends TestCase
      */
     public function test_no_locale_is_a_copy_of_another(): void
     {
-        foreach (['bot', 'finance'] as $file) {
+        foreach (self::FILES as $file) {
             foreach (self::LOCALES as $locale) {
                 foreach (self::LOCALES as $other) {
                     if ($locale >= $other) {
@@ -105,7 +109,7 @@ class BotLanguageTest extends TestCase
     public function test_no_language_file_defines_a_key_twice(): void
     {
         foreach (self::LOCALES as $locale) {
-            foreach (['bot', 'finance'] as $file) {
+            foreach (self::FILES as $file) {
                 $path = lang_path("{$locale}/{$file}.php");
 
                 $this->assertSame(
