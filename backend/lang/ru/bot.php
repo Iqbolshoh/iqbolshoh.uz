@@ -45,6 +45,9 @@ return [
         'skip' => '⏭ Пропустить',
         'change_category' => '🏷 Сменить категорию',
         'all_categories' => '🗂 Все категории',
+        'add_expense' => '➕ Расход',
+        'add_income' => '➕ Приход',
+        'today_money' => '📅 Сегодня по деньгам',
         'help' => '❓ Помощь',
         'language' => '🌐 Язык',
         'home' => '🏠 Главная',
@@ -155,6 +158,12 @@ return [
         'pick_category' => 'В какую категорию записать?',
         'note_line' => '<i>:note</i>',
         'category_changed' => '🏷 Категория изменена.',
+        'how_to_add' => '<i>Запишите кнопкой или одной строкой: <code>обед 25000</code></i>',
+        'pick_for_expense' => 'На что потратили?',
+        'pick_for_income' => 'Откуда приход?',
+        'ask_amount' => "<b>:category</b> — сколько?\n\nНапишите только число: <code>25000</code>, <code>12k</code> или <code>350 тыс</code>.",
+        'day_title' => '📅 <b>Сегодня</b>',
+        'empty_day' => 'Сегодня пока ничего не записано.',
     ],
 
     'summary' => [

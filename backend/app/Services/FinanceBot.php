@@ -8,6 +8,7 @@ use App\Models\FinanceCategory;
 use App\Models\Transaction;
 use App\Models\User;
 use Carbon\CarbonImmutable;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 /**
@@ -41,9 +42,28 @@ class FinanceBot
         $categories = $this->finance->categories($user);
 
         $parsed = $this->parser->parse($text, $categories);
+        $pending = $this->pendingCategory($chatId, $user);
+
+        // The bot has just asked "how much?" about a category the person
+        // tapped, so a bare number is an answer to that question rather than a
+        // stray one — and the floor that stops "ertalab 8 da" becoming money
+        // has nothing to protect here.
+        if ($pending !== null && $parsed === null && ($amount = $this->parser->amountOnly($text)) !== null) {
+            $parsed = ['amount' => $amount, 'kind' => $pending->kind, 'category' => $pending, 'note' => null];
+        }
 
         if ($parsed === null) {
             return false;
+        }
+
+        // A line that names its own category outranks the pending one: the
+        // person changed their mind while typing, and the words they used are
+        // the better evidence of what they meant.
+        if ($pending !== null) {
+            $parsed['category'] ??= $pending;
+            $parsed['kind'] = $parsed['category']->kind;
+
+            $this->forgetPending($chatId);
         }
 
         $result = $this->finance->record(
@@ -95,9 +115,16 @@ class FinanceBot
      */
     public function handleCallback(int $chatId, int $messageId, User $user, array $parts): void
     {
+        if (! in_array($parts[1] ?? '', ['add', 'new'], true)) {
+            $this->forgetPending($chatId);
+        }
+
         match ($parts[1] ?? '') {
             'cat' => $this->assignCategory($chatId, $messageId, $user, (int) ($parts[2] ?? 0), (int) ($parts[3] ?? 0)),
             'pick' => $this->offerCategories($chatId, $messageId, $user, (int) ($parts[2] ?? 0), ($parts[3] ?? '') === 'all'),
+            'add' => $this->startEntry($chatId, $messageId, $user, $parts[2] ?? '', ($parts[3] ?? '') === 'all'),
+            'new' => $this->askAmount($chatId, $messageId, $user, (int) ($parts[2] ?? 0)),
+            'today' => $this->sendPeriod($chatId, $user, 'today', $messageId),
             'skip' => $this->skipCategory($chatId, $messageId, $user, (int) ($parts[2] ?? 0)),
             'undo' => $this->undo($chatId, $messageId, $user, (int) ($parts[2] ?? 0)),
             'menu' => $this->sendMenu($chatId, $user, $messageId),
@@ -134,6 +161,9 @@ class FinanceBot
             $lines[] = __('bot.fin.pace', ['amount' => Transaction::money((int) $budget['projected'])]);
         }
 
+        $lines[] = '';
+        $lines[] = __('bot.fin.how_to_add');
+
         $this->deliver($chatId, $editMessageId, implode("\n", $lines), TelegramClient::keyboard(
             $this->menuRows($user, $month['count'])
         ));
@@ -151,7 +181,14 @@ class FinanceBot
      */
     private function menuRows(User $user, int $monthCount): array
     {
+        // The two ways in come first, because writing money down is what
+        // this screen is for. Reading it back is the second thing, and used to
+        // be the only thing on offer.
         $rows = [[
+            TelegramClient::button(__('bot.btn.add_expense'), 'f:add:expense'),
+            TelegramClient::button(__('bot.btn.add_income'), 'f:add:income'),
+        ], [
+            TelegramClient::button(__('bot.btn.today_money'), 'f:today'),
             TelegramClient::button(__('bot.btn.week'), 'f:week'),
             TelegramClient::button(__('bot.btn.month'), 'f:month'),
         ]];
@@ -171,11 +208,107 @@ class FinanceBot
         }
 
         $rows[] = [
-            TelegramClient::button(__('bot.btn.today'), 'nav:today'),
+            TelegramClient::button(__('bot.btn.help'), 'nav:help'),
             TelegramClient::button(__('bot.btn.home'), 'nav:menu'),
         ];
 
         return $rows;
+    }
+
+    /**
+     * Step one of writing money down with buttons: which bucket.
+     *
+     * The whole flow exists because the money screen used to be read-only. It
+     * showed what had been spent and offered no way to add to it, and the one
+     * way in — typing "ovqat 25000" — was written down nowhere the person
+     * standing at a counter would look.
+     */
+    private function startEntry(int $chatId, int $messageId, User $user, string $kind, bool $all): void
+    {
+        $kind = $kind === 'income' ? TransactionKind::Income : TransactionKind::Expense;
+
+        $categories = $this->finance->categoriesByUse($user, $kind);
+        $shorten = ! $all && $categories->count() > self::PICKER_SHORTLIST + 2;
+
+        $rows = [];
+        $buttons = [];
+
+        foreach ($shorten ? $categories->take(self::PICKER_SHORTLIST) : $categories as $category) {
+            $buttons[] = TelegramClient::button($category->label(), "f:new:{$category->id}");
+
+            if (count($buttons) === 2) {
+                $rows[] = $buttons;
+                $buttons = [];
+            }
+        }
+
+        if ($buttons !== []) {
+            $rows[] = $buttons;
+        }
+
+        if ($shorten) {
+            $rows[] = [TelegramClient::button(__('bot.btn.all_categories'), "f:add:{$kind->value}:all")];
+        }
+
+        $rows[] = [TelegramClient::button(__('bot.btn.back'), 'f:menu')];
+
+        $this->deliver($chatId, $messageId, $kind === TransactionKind::Income
+            ? __('bot.fin.pick_for_income')
+            : __('bot.fin.pick_for_expense'), TelegramClient::keyboard($rows));
+    }
+
+    /**
+     * Step two: the category is settled, so all that is left is a number.
+     *
+     * The choice is remembered against the chat for a quarter of an hour —
+     * long enough to look up a receipt, short enough that a number typed for
+     * some other reason tomorrow is not filed under it. It lives in the cache
+     * rather than the database on purpose: a half-finished entry is an
+     * intention, not a record, and losing one costs a second tap.
+     */
+    private function askAmount(int $chatId, int $messageId, User $user, int $categoryId): void
+    {
+        $category = FinanceCategory::query()
+            ->where('user_id', $user->id)
+            ->find($categoryId);
+
+        if ($category === null) {
+            $this->sendMenu($chatId, $user, $messageId);
+
+            return;
+        }
+
+        Cache::put($this->pendingKey($chatId), $category->id, now()->addMinutes(15));
+
+        $this->deliver(
+            $chatId,
+            $messageId,
+            __('bot.fin.ask_amount', ['category' => $category->label()]),
+            TelegramClient::keyboard([[
+                TelegramClient::button(__('bot.btn.back'), "f:add:{$category->kind->value}"),
+                TelegramClient::button(__('bot.btn.home'), 'nav:menu'),
+            ]])
+        );
+    }
+
+    /** The category this chat was asked to put its next number into, if any. */
+    private function pendingCategory(int $chatId, User $user): ?FinanceCategory
+    {
+        $id = Cache::get($this->pendingKey($chatId));
+
+        return $id === null
+            ? null
+            : FinanceCategory::query()->where('user_id', $user->id)->find($id);
+    }
+
+    private function forgetPending(int $chatId): void
+    {
+        Cache::forget($this->pendingKey($chatId));
+    }
+
+    private function pendingKey(int $chatId): string
+    {
+        return "finance:pending-category:{$chatId}";
     }
 
     /**
@@ -190,24 +323,28 @@ class FinanceBot
         $stats = new FinanceStats($user->id, $user->timezone);
         $today = $stats->today();
 
-        [$start, $end, $title, $empty, $other] = $period === 'week'
-            ? [$today->startOfWeek(), $today->endOfWeek(), __('bot.fin.week_title'), __('bot.fin.empty_week'), 'month']
-            : [
+        [$start, $end, $title, $empty] = match ($period) {
+            'today' => [$today, $today, __('bot.fin.day_title'), __('bot.fin.empty_day')],
+            'week' => [$today->startOfWeek(), $today->endOfWeek(), __('bot.fin.week_title'), __('bot.fin.empty_week')],
+            default => [
                 $today->startOfMonth(),
                 $today->endOfMonth(),
                 __('bot.fin.month_title', ['month' => $today->translatedFormat('F Y')]),
                 __('bot.fin.empty_month'),
-                'week',
-            ];
+            ],
+        };
+
+        // The other two zoom levels, in a fixed order, so the same button sits
+        // in the same place on all three screens.
+        $others = array_values(array_diff(['today', 'week', 'month'], [$period]));
 
         $summary = $stats->summary($start, $end);
 
         if ($summary['count'] === 0) {
             $this->deliver($chatId, $editMessageId, $title . "\n\n" . $empty, TelegramClient::keyboard([
-                [
-                    TelegramClient::button(__("bot.btn.{$other}"), "f:{$other}"),
-                    TelegramClient::button(__('bot.btn.back'), 'f:menu'),
-                ],
+                [TelegramClient::button(__('bot.btn.add_expense'), 'f:add:expense')],
+                $this->periodButtons($others),
+                [TelegramClient::button(__('bot.btn.back'), 'f:menu')],
             ]));
 
             return;
@@ -239,8 +376,9 @@ class FinanceBot
         }
 
         $this->deliver($chatId, $editMessageId, implode("\n", $lines), TelegramClient::keyboard([
+            $this->periodButtons($others),
             [
-                TelegramClient::button(__("bot.btn.{$other}"), "f:{$other}"),
+                TelegramClient::button(__('bot.btn.add_expense'), 'f:add:expense'),
                 TelegramClient::button(__('bot.btn.recent'), 'f:recent'),
             ],
             [
@@ -248,6 +386,18 @@ class FinanceBot
                 TelegramClient::button(__('bot.btn.home'), 'nav:menu'),
             ],
         ]));
+    }
+
+    /**
+     * @param  list<string>  $periods
+     * @return list<array<string, string>>
+     */
+    private function periodButtons(array $periods): array
+    {
+        return array_map(fn (string $period): array => TelegramClient::button(
+            __($period === 'today' ? 'bot.btn.today_money' : "bot.btn.{$period}"),
+            "f:{$period}"
+        ), $periods);
     }
 
     /**

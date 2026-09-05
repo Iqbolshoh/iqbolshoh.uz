@@ -125,6 +125,23 @@ class MoneyTextParser
     private const MIN_BARE_AMOUNT = 100;
 
     /**
+     * The amount in a message whose category is already settled.
+     *
+     * Used by the guided flow, where the person has just tapped a category and
+     * been asked how much — so "15" is unambiguously fifteen som and the floor
+     * that protects free text has no work to do here. Guessing wrong is
+     * impossible: the question was asked one message ago.
+     */
+    public function amountOnly(string $text): ?int
+    {
+        $remainder = null;
+
+        $amount = $this->extractAmount($this->normalise($text), $remainder, plausibleOnly: false);
+
+        return $amount !== null && $amount > 0 ? $amount : null;
+    }
+
+    /**
      * The first amount in the string, with its multiplier applied.
      *
      * Every number is tried in turn rather than only the first, so a sentence
@@ -132,7 +149,7 @@ class MoneyTextParser
      * twelve thousand som, not eight. Whatever is left of the sentence comes
      * back in `$remainder` for the category match.
      */
-    private function extractAmount(string $text, ?string &$remainder): ?int
+    private function extractAmount(string $text, ?string &$remainder, bool $plausibleOnly = true): ?int
     {
         // Grouped thousands first ("25 000", "1'200"), then a plain or decimal
         // number. Trying it the other way round would match just the "25".
@@ -163,7 +180,7 @@ class MoneyTextParser
             if ($multiplier !== null) {
                 $amount *= $multiplier;
                 $consumed = $match[2][1] + strlen($suffix);
-            } elseif ($amount < self::MIN_BARE_AMOUNT) {
+            } elseif ($plausibleOnly && $amount < self::MIN_BARE_AMOUNT) {
                 continue;
             }
 

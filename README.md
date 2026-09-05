@@ -71,6 +71,12 @@ Buyruqlar: `/menu`, `/today`, `/tomorrow`, `/status`, `/stats`, `/money`
 pul deb o'qiladi: `ovqat 25000` bitta xarajat qatori bo'lib yoziladi. Summa
 topilmasa bot **nima yetishmaganini aytadi** — jimgina menyu ko'rsatib qo'ymaydi.
 
+Pulni **tugma orqali** ham yozish mumkin, matn yozmasdan: `💰 Pul` →
+`➕ Xarajat` → turkum → faqat raqam (`25000`). Tanlangan turkum chat uchun 15
+daqiqa keshda saqlanadi; boshqa tugma bosilsa unutiladi, va turkumini o'zi
+aytgan qator (`taksi 12000`) tanlanganidan ustun turadi. Pul ekranidagi
+`📅 Bugungi hisob` — pul bo'yicha kun, rejalar ekrani emas.
+
 Summa deb nima olinadi: ko'paytirgichi bor son (`12k`, `5 mln`, `350 ming`) yoki
 kamida uch xonali son. Ikki xonali son summa emas — `ertalab 8 da yugurish`
 reja, xarajat emas, va ilgari bu jumla 8 so'mlik qator bo'lib yozilib qolar edi.

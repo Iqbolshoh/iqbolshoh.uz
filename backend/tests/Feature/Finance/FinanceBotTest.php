@@ -144,6 +144,110 @@ class FinanceBotTest extends TestCase
     }
 
     /**
+     * Money can be written down without typing anything but the number.
+     *
+     * This is the path the owner asked for after pressing "Pul" and finding
+     * nothing to press: the screen reported what had been spent and offered no
+     * way to add to it, and the one way in — writing "ovqat 25000" — was
+     * documented nowhere they would look while standing at a counter.
+     */
+    public function test_money_can_be_written_with_buttons_and_a_number(): void
+    {
+        $taxi = FinanceCategory::query()->where('key', 'taxi')->firstOrFail();
+
+        $this->bot->handleCallback(self::CHAT_ID, 10, $this->user, ['f', 'add', 'expense']);
+
+        $this->assertContains("f:new:{$taxi->id}", $this->buttonsOfLastMessage());
+
+        $this->bot->handleCallback(self::CHAT_ID, 10, $this->user, ['f', 'new', (string) $taxi->id]);
+        $this->bot->handleText(self::CHAT_ID, $this->user, '25000');
+
+        $transaction = Transaction::query()->firstOrFail();
+
+        $this->assertSame(25000, $transaction->amount);
+        $this->assertSame($taxi->id, $transaction->category_id);
+        $this->assertSame('expense', $transaction->kind->value);
+    }
+
+    /** The same two taps, the other direction. */
+    public function test_income_can_be_written_with_buttons_too(): void
+    {
+        $salary = FinanceCategory::query()->where('key', 'salary')->firstOrFail();
+
+        $this->bot->handleCallback(self::CHAT_ID, 10, $this->user, ['f', 'add', 'income']);
+        $this->bot->handleCallback(self::CHAT_ID, 10, $this->user, ['f', 'new', (string) $salary->id]);
+        $this->bot->handleText(self::CHAT_ID, $this->user, '5 mln');
+
+        $transaction = Transaction::query()->firstOrFail();
+
+        $this->assertSame(5000000, $transaction->amount);
+        $this->assertSame('income', $transaction->kind->value);
+        $this->assertSame($salary->id, $transaction->category_id);
+    }
+
+    /**
+     * A small bare number is only money while the bot is asking for one.
+     *
+     * Free text keeps its floor — that is what stops "ertalab 8 da yugurish"
+     * becoming an eight som expense — but the question "how much?" was asked
+     * one message ago, so there is nothing left to guess wrong.
+     */
+    public function test_a_small_number_counts_only_as_an_answer_to_the_question(): void
+    {
+        $this->assertFalse($this->bot->handleText(self::CHAT_ID, $this->user, '15'));
+        $this->assertSame(0, Transaction::query()->count());
+
+        $cafe = FinanceCategory::query()->where('key', 'cafe')->firstOrFail();
+
+        $this->bot->handleCallback(self::CHAT_ID, 10, $this->user, ['f', 'new', (string) $cafe->id]);
+
+        $this->assertTrue($this->bot->handleText(self::CHAT_ID, $this->user, '15'));
+        $this->assertSame(15, Transaction::query()->firstOrFail()->amount);
+    }
+
+    /**
+     * Walking away from a half-finished entry abandons it.
+     *
+     * Otherwise a category tapped and forgotten would quietly collect the next
+     * bare number typed for some other reason entirely.
+     */
+    public function test_leaving_the_flow_abandons_the_half_finished_entry(): void
+    {
+        $cafe = FinanceCategory::query()->where('key', 'cafe')->firstOrFail();
+
+        $this->bot->handleCallback(self::CHAT_ID, 10, $this->user, ['f', 'new', (string) $cafe->id]);
+        $this->bot->handleCallback(self::CHAT_ID, 10, $this->user, ['f', 'menu']);
+
+        $this->assertFalse($this->bot->handleText(self::CHAT_ID, $this->user, '15'));
+        $this->assertSame(0, Transaction::query()->count());
+    }
+
+    /**
+     * A line that names its own category beats the one that was tapped: the
+     * person changed their mind while typing, and the words are the evidence.
+     */
+    public function test_a_named_category_outranks_the_one_that_was_tapped(): void
+    {
+        $cafe = FinanceCategory::query()->where('key', 'cafe')->firstOrFail();
+
+        $this->bot->handleCallback(self::CHAT_ID, 10, $this->user, ['f', 'new', (string) $cafe->id]);
+        $this->bot->handleText(self::CHAT_ID, $this->user, 'taksi 12000');
+
+        $this->assertSame('taxi', Transaction::query()->firstOrFail()->category->key);
+    }
+
+    /** The money screen's own "today", which used to open the plans day. */
+    public function test_today_on_the_money_screen_is_about_money(): void
+    {
+        $this->bot->handleText(self::CHAT_ID, $this->user, 'taksi 12000');
+        $this->bot->handleCallback(self::CHAT_ID, 10, $this->user, ['f', 'today']);
+
+        Http::assertSent(fn ($request) => str_contains($request->url(), 'editMessageText')
+            && str_contains((string) $request['text'], Transaction::money(12000))
+            && str_contains((string) $request['text'], 'Taksi'));
+    }
+
+    /**
      * The picker offers a shortlist, not the whole catalogue.
      *
      * There are three dozen categories. Drawing all of them is not a choice

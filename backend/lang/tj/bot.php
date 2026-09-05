@@ -45,6 +45,9 @@ return [
         'skip' => '⏭ Гузарондан',
         'change_category' => '🏷 Иваз кардани гурӯҳ',
         'all_categories' => '🗂 Ҳамаи гурӯҳҳо',
+        'add_expense' => '➕ Хароҷот',
+        'add_income' => '➕ Даромад',
+        'today_money' => '📅 Имрӯз аз рӯи пул',
         'help' => '❓ Кумак',
         'language' => '🌐 Забон',
         'home' => '🏠 Асосӣ',
@@ -155,6 +158,12 @@ return [
         'pick_category' => 'Ба кадом гурӯҳ сабт кунам?',
         'note_line' => '<i>:note</i>',
         'category_changed' => '🏷 Гурӯҳ иваз шуд.',
+        'how_to_add' => '<i>Бо тугма нависед ё дар як сатр: <code>хӯрок 25000</code></i>',
+        'pick_for_expense' => 'Ба чӣ сарф кардед?',
+        'pick_for_income' => 'Даромад аз куҷо?',
+        'ask_amount' => "<b>:category</b> — чанд?\n\nТанҳо рақамро нависед: <code>25000</code>, <code>12k</code> ё <code>350 ҳазор</code>.",
+        'day_title' => '📅 <b>Имрӯз</b>',
+        'empty_day' => 'Имрӯз ҳанӯз чизе сабт нашудааст.',
     ],
 
     'summary' => [
