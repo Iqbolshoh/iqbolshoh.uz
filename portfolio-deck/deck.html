@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Iqbolshoh Ilhomjonov — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0b10;
+    --panel: #15151d;
+    --line: #262633;
+    --text: #f4f4f6;
+    --muted: #a3a3b2;
+    --red: #e11d2e;
+    --red-soft: rgba(225, 29, 46, .14);
+  }
+  @page { size: 1920px 1080px; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); }
+  body { font-family: "Poppins", sans-serif; color: var(--text); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .slide {
+    width: 1920px; height: 1080px; position: relative; overflow: hidden;
+    padding: 96px 120px 88px; page-break-after: always; break-after: page;
+    background:
+      radial-gradient(900px 600px at 100% 0%, rgba(225,29,46,.16), transparent 60%),
+      radial-gradient(700px 500px at 0% 100%, rgba(225,29,46,.08), transparent 60%),
+      var(--bg);
+  }
+  .slide:last-child { page-break-after: auto; break-after: auto; }
+  .slide::before { /* faint grid */
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .slide > * { position: relative; }
+
+  .footer { position: absolute; left: 120px; right: 120px; bottom: 40px; display: flex; justify-content: space-between; font-size: 18px; color: var(--muted); }
+  .footer b { color: var(--text); font-weight: 600; }
+  .logo { color: var(--red); font-weight: 700; }
+
+  .eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+  .eyebrow::before { content: ""; width: 44px; height: 3px; background: var(--red); border-radius: 2px; }
+  h1 { font-size: 92px; line-height: 1.02; font-weight: 800; letter-spacing: -.02em; }
+  h2 { font-size: 64px; line-height: 1.08; font-weight: 800; letter-spacing: -.02em; margin-top: 18px; }
+  h3 { font-size: 26px; font-weight: 700; }
+  .red { color: var(--red); }
+  .lead { font-size: 27px; line-height: 1.55; color: #d4d4dc; }
+  .muted { color: var(--muted); }
+
+  /* ── Slide 1 ── */
+  .cover { display: grid; grid-template-columns: 1fr 640px; gap: 80px; align-items: center; height: 100%; }
+  .role { font-size: 36px; font-weight: 600; margin-top: 22px; }
+  .cover .lead { margin-top: 30px; max-width: 900px; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 24px 26px; }
+  .stat .n { font-size: 50px; font-weight: 800; color: var(--red); line-height: 1; }
+  .stat .l { font-size: 18px; color: var(--muted); margin-top: 10px; line-height: 1.35; }
+  .portrait { width: 640px; height: 760px; border-radius: 32px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 40px 120px rgba(225,29,46,.22); }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+  .tags { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .tag { font-size: 18px; font-weight: 500; padding: 8px 18px; border-radius: 999px; background: var(--red-soft); color: #ffb3ba; border: 1px solid rgba(225,29,46,.35); }
+
+  /* ── Slide 2 ── */
+  .head { display: flex; justify-content: space-between; align-items: flex-end; }
+  .head .lead { max-width: 640px; font-size: 22px; text-align: right; }
+  .grid6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px 28px; margin-top: 34px; }
+  .proj { background: var(--panel); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+  .proj img { width: 100%; height: 196px; object-fit: cover; object-position: top; display: block; border-bottom: 1px solid var(--line); }
+  .proj .body { padding: 16px 24px 18px; }
+  .proj .url { font-size: 16px; color: var(--red); font-weight: 600; margin-top: 2px; }
+  .proj p { font-size: 16px; line-height: 1.45; color: var(--muted); margin-top: 6px; }
+
+  /* ── Slide 3 ── */
+  .teach { display: grid; grid-template-columns: 1fr 560px; gap: 72px; margin-top: 8px; }
+  .teach .lead { margin-top: 24px; }
+  .big { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 36px; }
+  .courses { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 28px; }
+  .course { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 24px; }
+  .course h3 { font-size: 22px; }
+  .course p { font-size: 16px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+  .course .k { font-size: 15px; color: #ffb3ba; margin-top: 12px; font-weight: 500; }
+  .side { display: flex; flex-direction: column; gap: 24px; }
+  .side .photo { height: 420px; border-radius: 26px; overflow: hidden; border: 1px solid var(--line); }
+  .side .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .ticks { background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 26px 28px; }
+  .ticks h3 { font-size: 22px; margin-bottom: 14px; }
+  .ticks li { list-style: none; font-size: 18px; line-height: 1.45; color: #d4d4dc; padding-left: 34px; position: relative; margin-top: 12px; }
+  .ticks li::before { content: "✓"; position: absolute; left: 0; top: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--red); color: #fff; font-size: 13px; font-weight: 700; display: grid; place-items: center; margin-top: 2px; }
+
+  /* ── Slide 4 ── */
+  .final { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 56px; }
+  .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 40px; margin-top: 28px; }
+  .skill .row { display: flex; justify-content: space-between; font-size: 20px; font-weight: 500; }
+  .skill .row span { color: var(--muted); }
+  .bar { height: 8px; border-radius: 99px; background: #23232e; margin-top: 8px; overflow: hidden; }
+  .bar i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #a1121f, var(--red)); }
+  .timeline { margin-top: 24px; border-left: 2px solid var(--line); padding-left: 32px; }
+  .t { position: relative; margin-top: 30px; }
+  .t:first-child { margin-top: 0; }
+  .t::before { content: ""; position: absolute; left: -41px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 5px var(--red-soft); }
+  .t .y { font-size: 18px; font-weight: 700; color: var(--red); }
+  .t .d { font-size: 23px; font-weight: 500; }
+  .contact { margin-top: 56px; display: grid; grid-template-columns: 1fr 210px; gap: 32px; align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: 24px; padding: 30px 34px; }
+  .contact .lines { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 30px; font-size: 19px; }
+  .contact .lines div span { display: block; font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+  .contact img { width: 210px; height: 210px; border-radius: 16px; background: #fff; padding: 10px; }
+  .sub { font-size: 26px; font-weight: 700; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<!-- 1 · About -->
+<section class="slide">
+  <div class="cover">
+    <div>
+      <div class="eyebrow">Portfolio · 2026</div>
+      <h1 style="margin-top:28px">Iqbolshoh<br><span class="red">Ilhomjonov</span></h1>
+      <div class="role">Full-Stack Developer &amp; Programming Teacher</div>
+      <p class="lead">Software Engineering graduate of Samarkand State University with <b>5+ years</b> of building web applications and SaaS platforms in Laravel and React. Founder of <b>Templates.uz</b>, and a teacher who has taken <b>160+ students</b> from their first line of code to their own projects.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">5+</div><div class="l">Years of experience</div></div>
+        <div class="stat"><div class="n">50+</div><div class="l">Projects shipped</div></div>
+        <div class="stat"><div class="n">45+</div><div class="l">Happy clients</div></div>
+        <div class="stat"><div class="n">160+</div><div class="l">Students taught</div></div>
+      </div>
+      <div class="tags">
+        <span class="tag">Laravel</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Tailwind CSS</span><span class="tag">Telegram bots</span>
+      </div>
+    </div>
+    <div class="portrait"><img src="img/me.jpg" alt=""></div>
+  </div>
+  <div class="footer"><span class="logo">&lt;/&gt; iqbolshoh.uz</span><span>Samarkand, Uzbekistan</span><span><b>01</b> / 04</span></div>
+</section>
+
+<!-- 2 · Portfolio -->
+<section class="slide" style="padding-top:72px">
+  <div class="head">
+    <div>
+      <div class="eyebrow">Portfolio</div>
+      <h2>Products running <span class="red">live</span> today</h2>
+    </div>
+    <p class="lead muted">Every project below is in production with real users — from a SaaS website builder to CRMs, an online judge and Telegram ordering.</p>
+  </div>
+  <div class="grid6">
+    <div class="proj"><img src="img/templatesuz.jpg" alt=""><div class="body"><h3>Templates.uz</h3><div class="url">templates.uz</div><p>SaaS platform: 400+ website templates and a no-code builder that publishes a site in minutes.</p></div></div>
+    <div class="proj"><img src="img/algor.jpg" alt=""><div class="body"><h3>ALGOR — Online Judge</h3><div class="url">algor.uz</div><p>Solve problems in C++, Python or JavaScript; hidden tests return a verdict in seconds.</p></div></div>
+    <div class="proj"><img src="img/vexa-crm.jpg" alt=""><div class="body"><h3>Vexa CRM for Education</h3><div class="url">crm.vexa.uz</div><p>Multi-center CRM: groups, attendance, grades, billing and a Telegram bot for parents.</p></div></div>
+    <div class="proj"><img src="img/cafe-vexa.jpg" alt=""><div class="body"><h3>Café Freddo</h3><div class="url">cafe.vexa.uz</div><p>Telegram Mini App ordering with distance-based delivery and auto-printed kitchen tickets.</p></div></div>
+    <div class="proj"><img src="img/prokatsam.jpg" alt=""><div class="body"><h3>Prokat Sam — Rental CRM</h3><div class="url">prokatsam.uz</div><p>Stock, rentals with a booking calendar, debts and real-time profit for a rental business.</p></div></div>
+    <div class="proj"><img src="img/cloudnova.jpg" alt=""><div class="body"><h3>CloudNova LMS</h3><div class="url">cloudnova.uz</div><p>Online learning: courses, video lessons, assignments, auto-graded tests and progress.</p></div></div>
+  </div>
+  <div class="footer"><span class="logo">&lt;/&gt; iqbolshoh.uz</span><span>More work at <b>iqbolshoh.uz/en/portfolio</b></span><span><b>02</b> / 04</span></div>
+</section>
+
+<!-- 3 · Teaching & students -->
+<section class="slide">
+  <div class="teach">
+    <div>
+      <div class="eyebrow">Teaching &amp; students</div>
+      <h2>I teach programming <span class="red">from zero</span></h2>
+      <p class="lead">At <b>IT Markaz</b> in Samarkand I lead groups in C++, Frontend and Backend. Lessons are hands-on: students write code in the very first class and finish the course with a project of their own.</p>
+      <div class="big">
+        <div class="stat"><div class="n">160+</div><div class="l">Students in my groups at IT Markaz</div></div>
+        <div class="stat"><div class="n">3</div><div class="l">Tracks: C++, Frontend, Backend</div></div>
+        <div class="stat"><div class="n">70+</div><div class="l">Developers mentored before IT Markaz</div></div>
+      </div>
+      <div class="courses">
+        <div class="course"><h3>Programming Fundamentals (C++)</h3><p>Algorithmic thinking: variables, conditions, loops, functions, problem solving.</p><div class="k">C++ · Algorithms</div></div>
+        <div class="course"><h3>Web Development — Frontend</h3><p>From page structure to interactive, responsive applications.</p><div class="k">HTML · CSS · JS · React</div></div>
+        <div class="course"><h3>Web Development — Backend</h3><p>Servers, databases and APIs — one real project, start to finish.</p><div class="k">PHP · Laravel · MySQL</div></div>
+      </div>
+    </div>
+    <div class="side">
+      <div class="photo"><img src="img/teach.jpg" alt=""></div>
+      <ul class="ticks">
+        <h3>How I teach</h3>
+        <li>Practice first — code from lesson one</li>
+        <li>Real projects instead of toy exercises</li>
+        <li>Attendance, grades and homework tracked in a CRM I built</li>
+        <li>Free tutorials on Instagram &amp; YouTube</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer"><span class="logo">&lt;/&gt; iqbolshoh.uz</span><span>IT Markaz · Samarkand</span><span><b>03</b> / 04</span></div>
+</section>
+
+<!-- 4 · Skills, journey, contact -->
+<section class="slide">
+  <div class="eyebrow">Skills · Journey · Contact</div>
+  <h2>Let's build — or learn — <span class="red">together</span></h2>
+  <div class="final">
+    <div>
+      <div class="sub">Core stack</div>
+      <div class="skills">
+        <div class="skill"><div class="row">Laravel <span>96%</span></div><div class="bar"><i style="width:96%"></i></div></div>
+        <div class="skill"><div class="row">Tailwind CSS <span>95%</span></div><div class="bar"><i style="width:95%"></i></div></div>
+        <div class="skill"><div class="row">JavaScript <span>92%</span></div><div class="bar"><i style="width:92%"></i></div></div>
+        <div class="skill"><div class="row">React <span>91%</span></div><div class="bar"><i style="width:91%"></i></div></div>
+        <div class="skill"><div class="row">PHP <span>90%</span></div><div class="bar"><i style="width:90%"></i></div></div>
+        <div class="skill"><div class="row">TypeScript <span>88%</span></div><div class="bar"><i style="width:88%"></i></div></div>
+        <div class="skill"><div class="row">MySQL <span>88%</span></div><div class="bar"><i style="width:88%"></i></div></div>
+        <div class="skill"><div class="row">REST API <span>87%</span></div><div class="bar"><i style="width:87%"></i></div></div>
+      </div>
+      <div class="contact">
+        <div class="lines">
+          <div><span>Email</span>iilhomjonov777@gmail.com</div>
+          <div><span>Phone</span>+998 77 603 00 33</div>
+          <div><span>Telegram</span>@iqbolshoh_777</div>
+          <div><span>GitHub</span>github.com/Iqbolshoh</div>
+          <div><span>LinkedIn</span>linkedin.com/in/iqbolshoh</div>
+          <div><span>Website</span>iqbolshoh.uz</div>
+        </div>
+        <img src="img/qr.png" alt="">
+      </div>
+    </div>
+    <div>
+      <div class="sub">Journey</div>
+      <div class="timeline">
+        <div class="t"><div class="y">2022</div><div class="d">Started Software Engineering at Samarkand State University</div></div>
+        <div class="t"><div class="y">2023</div><div class="d">Laravel &amp; REST APIs; first full-stack freelance project</div></div>
+        <div class="t"><div class="y">2024</div><div class="d">Open-source work and the iqbolshoh.uz portfolio</div></div>
+        <div class="t"><div class="y">2025</div><div class="d">Mentored 70+ developers; free tutorials on Instagram &amp; YouTube</div></div>
+        <div class="t"><div class="y">2026</div><div class="d">Founded Templates.uz; teaching 160+ students at IT Markaz</div></div>
+        <div class="t"><div class="y">Today</div><div class="d">Graduate, 5+ years in, 50+ projects shipped — open to new work</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="logo">&lt;/&gt; iqbolshoh.uz</span><span>Thank you</span><span><b>04</b> / 04</span></div>
+</section>
+
+</body>
+</html>
