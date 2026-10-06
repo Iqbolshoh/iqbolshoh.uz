@@ -11,7 +11,7 @@
     "greeting": "Salom, men",
     "name": "Iqbolshoh",
     "title": "Full-Stack Dasturchi",
-    "description": "Samarqandlik ishtiyoqli Full-Stack dasturchi. Zamonaviy veb-ilovalarni yaratish bo'yicha 4 yildan ortiq tajribaga egaman. Men Laravel, React va kengaytiriladigan tizim arxitekturasiga ixtisoslashganman hamda g'oyadan tortib ishga tushirishgacha tez, xavfsiz va foydalanuvchiga qaratilgan raqamli mahsulotlarni yetkazib beraman.",
+    "description": "Samarqandlik ishtiyoqli Full-Stack dasturchi. Zamonaviy veb-ilovalarni yaratish bo'yicha 5 yildan ortiq tajribaga egaman. Men Laravel, React va kengaytiriladigan tizim arxitekturasiga ixtisoslashganman hamda g'oyadan tortib ishga tushirishgacha tez, xavfsiz va foydalanuvchiga qaratilgan raqamli mahsulotlarni yetkazib beraman.",
     "viewPortfolio": "Portfelni ko'rish",
     "downloadCV": "CV yuklab olish",
     "availableForHire": "Yollash uchun ochiq",
@@ -58,7 +58,7 @@
   "about": {
     "title": "Men haqimda",
     "subtitle": "Men kimman?",
-    "description": "Mening ismim Iqbolshoh Ilhomjonov, Samarqand davlat universitetining Dasturiy injiniring yo'nalishi 4-bosqich talabasiman. Men full-stack dasturlashga ixtisoslashganman va real muammolarni kod orqali hal qilishni yaxshi ko'raman.",
+    "description": "Mening ismim Iqbolshoh Ilhomjonov, Samarqand davlat universitetining Dasturiy injiniring yo'nalishi bitiruvchisiman. Men full-stack dasturlashga ixtisoslashganman va real muammolarni kod orqali hal qilishni yaxshi ko'raman.",
     "subDescription": "O'zbekistonda tug'ilganman va Samarqandda o'sganman. Men doimiy izlanishga ishonaman va o'z yo'limni Islomiy qadriyatlar hamda tartib-intizom bilan bog'layman.",
     "journey": "Mening yo'lim",
     "journeyDescription": "Meni shu yerga olib kelgan yo'l",
@@ -66,8 +66,8 @@
     "keyHighlights": "Yo'limdagi asosiy yutuqlar",
     "technicalSkills": "Texnik ko'nikmalar",
     "beyondCoding": "Dasturlashdan tashqari",
-    "locationInfo": "SamDU talabasi",
-    "experienceInfo": "4+ Yillik Tajriba",
+    "locationInfo": "SamDU bitiruvchisi",
+    "experienceInfo": "5+ Yillik Tajriba",
     "codingPurpose": "Kod orqali yechim, maqsad bilan boshqariladi",
     "advanced": "Ilg'or"
   },
@@ -150,8 +150,8 @@
     },
     "about": {
       "title": "Iqbolshoh haqida | O'zbekistonda Dasturiy Injiniring Mutaxassisi",
-      "description": "Iqbolshoh Ilhomjonovning SamDU talabaligidan boshlab Templates.uz kabi SaaS platformalarini yaratish va 70 dan ortiq dasturchilarga ustozlik qilishigacha bo'lgan yo'li haqida bilib oling.",
-      "keywords": "Iqbolshoh haqida, dasturiy injiniring Samarqand, SamDU talabasi, Laravel ekspert, IT mentor O'zbekiston"
+      "description": "Iqbolshoh Ilhomjonovning SamDU'dagi o'qishidan boshlab Templates.uz kabi SaaS platformalarini yaratish va 70 dan ortiq dasturchilarga ustozlik qilishigacha bo'lgan yo'li haqida bilib oling.",
+      "keywords": "Iqbolshoh haqida, dasturiy injiniring Samarqand, SamDU bitiruvchisi, Laravel ekspert, IT mentor O'zbekiston"
     },
     "portfolio": {
       "title": "Loyihalar va Portfel | Iqbolshoh Dev",

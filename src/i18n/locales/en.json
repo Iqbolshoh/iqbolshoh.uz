@@ -11,7 +11,7 @@
     "greeting": "Hi, I'm",
     "name": "Iqbolshoh",
     "title": "Full-Stack Developer",
-    "description": "A passionate Full-Stack Developer from Samarkand with over 4 years of experience in building modern web applications. I specialize in Laravel, React, and scalable system architecture, delivering fast, secure, and user-focused digital products from concept to deployment.",
+    "description": "A passionate Full-Stack Developer from Samarkand with over 5 years of experience in building modern web applications. I specialize in Laravel, React, and scalable system architecture, delivering fast, secure, and user-focused digital products from concept to deployment.",
     "viewPortfolio": "View Portfolio",
     "downloadCV": "Download CV",
     "availableForHire": "Available for hire",
@@ -58,7 +58,7 @@
   "about": {
     "title": "About Me",
     "subtitle": "Who am I?",
-    "description": "My name is Iqbolshoh Ilhomjonov, a 4th-year Software Engineering student at Samarkand State University. I specialize in full-stack development and love solving real-world problems with code.",
+    "description": "My name is Iqbolshoh Ilhomjonov, a Software Engineering graduate of Samarkand State University. I specialize in full-stack development and love solving real-world problems with code.",
     "subDescription": "Born in Uzbekistan, raised in Samarkand. I believe in continuous learning and align my journey with Islamic values and discipline.",
     "journey": "My Journey",
     "journeyDescription": "The path that led me here",
@@ -66,8 +66,8 @@
     "keyHighlights": "Key highlights of my journey",
     "technicalSkills": "Technical Skills",
     "beyondCoding": "Beyond Coding",
-    "locationInfo": "SamSU Student",
-    "experienceInfo": "4+ Years Exp",
+    "locationInfo": "SamSU Graduate",
+    "experienceInfo": "5+ Years Exp",
     "codingPurpose": "Solving with code, guided by purpose",
     "advanced": "Advanced"
   },
@@ -150,8 +150,8 @@
     },
     "about": {
       "title": "About Iqbolshoh | Software Engineer in Uzbekistan",
-      "description": "Learn about Iqbolshoh Ilhomjonov's journey from a Software Engineering student at SamSU to building SaaS platforms like Templates.uz and mentoring over 70 developers.",
-      "keywords": "about Iqbolshoh, software engineer Samarkand, SamSU student, Laravel expert, tech mentor Uzbekistan"
+      "description": "Learn about Iqbolshoh Ilhomjonov's journey from Software Engineering at SamSU to building SaaS platforms like Templates.uz and mentoring over 70 developers.",
+      "keywords": "about Iqbolshoh, software engineer Samarkand, SamSU graduate, Laravel expert, tech mentor Uzbekistan"
     },
     "portfolio": {
       "title": "Projects & Portfolio | Iqbolshoh Dev",

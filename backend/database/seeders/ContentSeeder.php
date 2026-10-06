@@ -146,7 +146,7 @@ class ContentSeeder extends Seeder
         $this->insert('stats', ['label'], [
             [
                 'icon' => 'Star',
-                'value' => '4+',
+                'value' => '5+',
                 'label' => [
                     'en' => 'Years of Experience',
                     'uz' => 'Tajriba yillari',
@@ -219,6 +219,301 @@ class ContentSeeder extends Seeder
             ],
             [
                 'name' => [
+                    'en' => 'ALGOR — Online Judge',
+                    'uz' => 'ALGOR — Onlayn judge',
+                    'ru' => 'ALGOR — Онлайн-judge',
+                    'tj' => 'ALGOR — Онлайн-judge',
+                ],
+                'description' => [
+                    'en' => 'An online judge for students and olympiad contestants: write a solution in C++, Python or JavaScript and get a verdict on hidden tests within seconds, with topics, a leaderboard and profiles.',
+                    'uz' => 'O\'quvchilar va olimpiadachilar uchun onlayn judge: yechimni C++, Python yoki JavaScript\'da yozing va yashirin testlardagi natijani soniyalarda oling; mavzular, reyting va profillar bilan.',
+                    'ru' => 'Онлайн-judge для школьников и олимпиадников: решение на C++, Python или JavaScript проверяется на скрытых тестах за секунды; темы, рейтинг и профили.',
+                    'tj' => 'Онлайн-judge барои хонандагон ва олимпиадачиён: ҳалро бо C++, Python ё JavaScript нависед ва натиҷаи тестҳои пинҳониро дар чанд сония гиред; бо мавзӯъҳо, рейтинг ва профилҳо.',
+                ],
+                'image' => '/media/projects/algor.webp',
+                'tech' => [
+                    'Laravel',
+                    'Judge0',
+                    'CodeMirror',
+                    'Tailwind CSS',
+                    'MySQL',
+                ],
+                'live_demo' => 'https://algor.uz/',
+                'github' => null,
+                'featured' => true,
+                'category' => 'Full-Stack',
+                'sort_order' => 1,
+            ],
+            [
+                'name' => [
+                    'en' => 'Café Freddo — Telegram Ordering',
+                    'uz' => 'Café Freddo — Telegram orqali buyurtma',
+                    'ru' => 'Café Freddo — заказы в Telegram',
+                    'tj' => 'Café Freddo — фармоиш дар Telegram',
+                ],
+                'description' => [
+                    'en' => 'Telegram food ordering for a café: a Mini App menu and cart, distance-based delivery pricing, orders split across kitchen stations and printed as thermal tickets automatically.',
+                    'uz' => 'Kafe uchun Telegram orqali ovqat buyurtma tizimi: Mini App\'da menyu va savat, masofaga qarab yetkazish narxi, buyurtmalar oshxona stansiyalariga bo\'linib termoprinterda avtomatik chiqadi.',
+                    'ru' => 'Заказ еды через Telegram для кафе: меню и корзина в Mini App, доставка по расстоянию, заказы делятся по станциям кухни и автоматически печатаются термочеком.',
+                    'tj' => 'Фармоиши хӯрок тавассути Telegram барои қаҳвахона: меню ва сабад дар Mini App, нархи расонидан аз рӯи масофа, фармоишҳо ба истгоҳҳои ошхона тақсим шуда худкор чоп мешаванд.',
+                ],
+                'image' => '/media/projects/cafe-vexa.webp',
+                'tech' => [
+                    'Laravel',
+                    'Telegram Bot API',
+                    'Telegram Mini App',
+                    'Alpine.js',
+                    'Tailwind CSS',
+                ],
+                'live_demo' => 'https://cafe.vexa.uz/',
+                'github' => null,
+                'featured' => true,
+                'category' => 'Full-Stack',
+                'sort_order' => 2,
+            ],
+            [
+                'name' => [
+                    'en' => 'Vexa CRM — Education Centers',
+                    'uz' => 'Vexa CRM — O\'quv markazlari uchun',
+                    'ru' => 'Vexa CRM — для учебных центров',
+                    'tj' => 'Vexa CRM — барои марказҳои таълимӣ',
+                ],
+                'description' => [
+                    'en' => 'A multi-center CRM for learning centers: groups, schedules, attendance, grades, homework, billing by each student\'s joining day, analytics and a Telegram bot for teachers, students and parents.',
+                    'uz' => 'O\'quv markazlari uchun ko\'p markazli CRM: guruhlar, dars jadvali, davomat, baholar, uy vazifalari, o\'quvchi kelgan kundan hisoblanadigan to\'lovlar, analitika va o\'qituvchi, o\'quvchi hamda ota-onalar uchun Telegram bot.',
+                    'ru' => 'Мультицентровая CRM для учебных центров: группы, расписание, посещаемость, оценки, домашние задания, оплата от дня прихода ученика, аналитика и Telegram-бот для учителей, учеников и родителей.',
+                    'tj' => 'CRM-и бисёрмарказӣ барои марказҳои таълимӣ: гурӯҳҳо, ҷадвали дарс, ҳозиршавӣ, баҳоҳо, вазифаи хонагӣ, пардохт аз рӯзи омадани хонанда, таҳлил ва боти Telegram барои омӯзгорон, хонандагон ва волидон.',
+                ],
+                'image' => '/media/projects/vexa-crm.webp',
+                'tech' => [
+                    'Laravel',
+                    'Alpine.js',
+                    'Chart.js',
+                    'Tailwind CSS',
+                    'MySQL',
+                    'Telegram Bot API',
+                ],
+                'live_demo' => 'https://crm.vexa.uz/',
+                'github' => null,
+                'featured' => false,
+                'category' => 'Full-Stack',
+                'sort_order' => 3,
+            ],
+            [
+                'name' => [
+                    'en' => 'Prokat Sam — Rental CRM',
+                    'uz' => 'Prokat Sam — Ijara CRM',
+                    'ru' => 'Prokat Sam — CRM для аренды',
+                    'tj' => 'Prokat Sam — CRM-и иҷора',
+                ],
+                'description' => [
+                    'en' => 'A complete CRM for rental businesses: products and stock, clients, active rentals with a booking calendar, payments, debts and real-time profit, plus a Telegram bot.',
+                    'uz' => 'Ijara biznesi uchun to\'liq CRM: mahsulotlar va ombor, mijozlar, band qilish taqvimli faol ijaralar, to\'lovlar, qarzlar va real vaqtdagi foyda hamda Telegram bot.',
+                    'ru' => 'Полноценная CRM для арендного бизнеса: товары и склад, клиенты, активные аренды с календарём, платежи, долги и прибыль в реальном времени, плюс Telegram-бот.',
+                    'tj' => 'CRM-и мукаммал барои бизнеси иҷора: маҳсулот ва анбор, муштариён, иҷораҳои фаъол бо тақвим, пардохтҳо, қарзҳо ва фоида дар вақти воқеӣ, инчунин боти Telegram.',
+                ],
+                'image' => '/media/projects/prokatsam.webp',
+                'tech' => [
+                    'Laravel',
+                    'React',
+                    'TypeScript',
+                    'MySQL',
+                    'Redis',
+                    'Tailwind CSS',
+                ],
+                'live_demo' => 'https://prokatsam.uz/',
+                'github' => null,
+                'featured' => false,
+                'category' => 'Full-Stack',
+                'sort_order' => 4,
+            ],
+            [
+                'name' => [
+                    'en' => 'CloudNova LMS',
+                    'uz' => 'CloudNova LMS',
+                    'ru' => 'CloudNova LMS',
+                    'tj' => 'CloudNova LMS',
+                ],
+                'description' => [
+                    'en' => 'An online learning platform: courses, video lessons, assignments and automated tests, with teacher grading and a student dashboard that tracks progress in real time.',
+                    'uz' => 'Onlayn ta\'lim platformasi: kurslar, video darslar, topshiriqlar va avtomatik testlar; o\'qituvchi baholaydi, o\'quvchi esa shaxsiy kabinetda o\'zlashtirishini real vaqtda kuzatadi.',
+                    'ru' => 'Платформа онлайн-обучения: курсы, видеоуроки, задания и автотесты; преподаватель оценивает, а студент следит за успеваемостью в личном кабинете в реальном времени.',
+                    'tj' => 'Платформаи таълими онлайн: курсҳо, дарсҳои видеоӣ, супоришҳо ва тестҳои худкор; омӯзгор баҳо медиҳад ва донишҷӯ пешрафташро дар кабинети шахсӣ пайгирӣ мекунад.',
+                ],
+                'image' => '/media/projects/cloudnova.webp',
+                'tech' => [
+                    'Laravel',
+                    'Livewire',
+                    'Tailwind CSS',
+                    'MySQL',
+                    'Vite',
+                ],
+                'live_demo' => 'https://cloudnova.uz/',
+                'github' => null,
+                'featured' => false,
+                'category' => 'Full-Stack',
+                'sort_order' => 5,
+            ],
+            [
+                'name' => [
+                    'en' => 'Vexa Mebel — Furniture Orders',
+                    'uz' => 'Vexa Mebel — Mebel buyurtmalari',
+                    'ru' => 'Vexa Mebel — заказы мебели',
+                    'tj' => 'Vexa Mebel — фармоишҳои мебел',
+                ],
+                'description' => [
+                    'en' => 'Order management for a custom furniture company: a kanban of production stages, craftsmen tasks and piece-rate pay, deliveries, stock, a public catalogue and a Telegram bot.',
+                    'uz' => 'Buyurtma asosida mebel ishlab chiqaruvchi korxona uchun tizim: ishlab chiqarish bosqichlari kanbani, usta vazifalari va ishbay ish haqi, yetkazish, ombor, ochiq katalog va Telegram bot.',
+                    'ru' => 'Управление заказами мебельной компании: канбан этапов производства, задачи мастеров и сдельная оплата, доставка, склад, публичный каталог и Telegram-бот.',
+                    'tj' => 'Идоракунии фармоишҳо барои ширкати мебелсозӣ: канбани марҳилаҳои истеҳсол, вазифаҳои устоҳо ва музди корбайъ, расонидан, анбор, каталоги кушода ва боти Telegram.',
+                ],
+                'image' => '/media/projects/vexa-mebel.webp',
+                'tech' => [
+                    'Laravel',
+                    'Alpine.js',
+                    'Tailwind CSS',
+                    'MySQL',
+                    'Telegram Bot API',
+                ],
+                'live_demo' => 'https://organization.vexa.uz/',
+                'github' => null,
+                'featured' => false,
+                'category' => 'Full-Stack',
+                'sort_order' => 6,
+            ],
+            [
+                'name' => [
+                    'en' => 'Vexa Homes — Real Estate Portal',
+                    'uz' => 'Vexa Homes — Ko\'chmas mulk portali',
+                    'ru' => 'Vexa Homes — портал недвижимости',
+                    'tj' => 'Vexa Homes — портали амвол',
+                ],
+                'description' => [
+                    'en' => 'A real-estate portal for residential complexes in Samarkand: project pages, apartment filters by floor, rooms, area and price, floor plans, favourites and one-click requests.',
+                    'uz' => 'Samarqanddagi turar-joy majmualari uchun ko\'chmas mulk portali: loyiha sahifalari, qavat, xona, maydon va narx bo\'yicha filtr, planirovkalar, sevimlilar va bir bosishda ariza.',
+                    'ru' => 'Портал недвижимости для жилых комплексов Самарканда: страницы проектов, фильтр квартир по этажу, комнатам, площади и цене, планировки, избранное и заявка в один клик.',
+                    'tj' => 'Портали амволи ғайриманқул барои маҷмааҳои истиқоматии Самарқанд: саҳифаҳои лоиҳа, филтри хонаҳо аз рӯи ошёна, ҳуҷра, масоҳат ва нарх, нақшаҳо, интихобшудаҳо ва дархост бо як клик.',
+                ],
+                'image' => '/media/projects/vexa-homes.webp',
+                'tech' => [
+                    'Laravel',
+                    'Tailwind CSS',
+                    'MySQL',
+                    'Vite',
+                ],
+                'live_demo' => 'https://homes.vexa.uz/',
+                'github' => null,
+                'featured' => false,
+                'category' => 'Full-Stack',
+                'sort_order' => 7,
+            ],
+            [
+                'name' => [
+                    'en' => 'Vexa Sales — Online Store',
+                    'uz' => 'Vexa Sales — Onlayn do\'kon',
+                    'ru' => 'Vexa Sales — интернет-магазин',
+                    'tj' => 'Vexa Sales — мағозаи онлайн',
+                ],
+                'description' => [
+                    'en' => 'An online store with a sales back office: catalogue, cart and orders, stock, cashier sales, debts and reports in one panel.',
+                    'uz' => 'Savdo boshqaruvi bilan onlayn do\'kon: katalog, savat va buyurtmalar, ombor, kassa savdosi, qarzlar va hisobotlar bitta panelda.',
+                    'ru' => 'Интернет-магазин с бэк-офисом продаж: каталог, корзина и заказы, склад, кассовые продажи, долги и отчёты в одной панели.',
+                    'tj' => 'Мағозаи онлайн бо идоракунии савдо: каталог, сабад ва фармоишҳо, анбор, фурӯши касса, қарзҳо ва ҳисоботҳо дар як панел.',
+                ],
+                'image' => '/media/projects/vexa-sales.webp',
+                'tech' => [
+                    'Laravel',
+                    'Alpine.js',
+                    'Tailwind CSS',
+                    'MySQL',
+                    'Vite',
+                ],
+                'live_demo' => 'https://sales.vexa.uz/',
+                'github' => null,
+                'featured' => false,
+                'category' => 'Full-Stack',
+                'sort_order' => 8,
+            ],
+            [
+                'name' => [
+                    'en' => 'Vexa Game — Telegram Games',
+                    'uz' => 'Vexa Game — Telegram o\'yinlari',
+                    'ru' => 'Vexa Game — игры в Telegram',
+                    'tj' => 'Vexa Game — бозиҳо дар Telegram',
+                ],
+                'description' => [
+                    'en' => 'Telegram Mini App games for groups: a shared-seed challenge everyone plays alone, a replay-verified score and a group leaderboard posted right in the chat.',
+                    'uz' => 'Guruhlar uchun Telegram Mini App o\'yinlari: hamma bir xil sharoitda alohida o\'ynaydi, natija replay orqali tekshiriladi va reyting to\'g\'ridan-to\'g\'ri chatga chiqadi.',
+                    'ru' => 'Игры Telegram Mini App для групп: общий челлендж, который каждый проходит сам, проверка очков по повтору и рейтинг прямо в чате.',
+                    'tj' => 'Бозиҳои Telegram Mini App барои гурӯҳҳо: ҳама дар шароити якхела алоҳида бозӣ мекунанд, натиҷа тавассути replay санҷида мешавад ва рейтинг дар чат нашр мешавад.',
+                ],
+                'image' => '/media/projects/vexa-game.webp',
+                'tech' => [
+                    'Laravel',
+                    'Telegram Mini App',
+                    'Node.js',
+                    'Tailwind CSS',
+                    'MySQL',
+                ],
+                'live_demo' => 'https://game.vexa.uz/',
+                'github' => null,
+                'featured' => false,
+                'category' => 'Full-Stack',
+                'sort_order' => 9,
+            ],
+            [
+                'name' => [
+                    'en' => 'PUBG Championship UZ',
+                    'uz' => 'PUBG Championship UZ',
+                    'ru' => 'PUBG Championship UZ',
+                    'tj' => 'PUBG Championship UZ',
+                ],
+                'description' => [
+                    'en' => 'A tournament site for a PUBG Mobile league: team registration, tournaments, brackets, players and prize pools with an admin panel.',
+                    'uz' => 'PUBG Mobile ligasi uchun turnir sayti: jamoalarni ro\'yxatdan o\'tkazish, turnirlar, jadval, o\'yinchilar va sovrin jamg\'armasi hamda admin panel.',
+                    'ru' => 'Турнирный сайт лиги PUBG Mobile: регистрация команд, турниры, сетка, игроки и призовой фонд с админ-панелью.',
+                    'tj' => 'Сомонаи мусобиқа барои лигаи PUBG Mobile: бақайдгирии дастаҳо, турнирҳо, ҷадвал, бозингарон ва фонди ҷоизавӣ бо панели админ.',
+                ],
+                'image' => '/media/projects/pubg-championship.webp',
+                'tech' => [
+                    'Laravel',
+                    'Tailwind CSS',
+                    'MySQL',
+                    'Vite',
+                ],
+                'live_demo' => 'https://pubg.vexa.uz/',
+                'github' => null,
+                'featured' => false,
+                'category' => 'Full-Stack',
+                'sort_order' => 10,
+            ],
+            [
+                'name' => [
+                    'en' => 'Vexa.uz — Business Ecosystem',
+                    'uz' => 'Vexa.uz — Biznes ekotizimi',
+                    'ru' => 'Vexa.uz — бизнес-экосистема',
+                    'tj' => 'Vexa.uz — экосистемаи тиҷоратӣ',
+                ],
+                'description' => [
+                    'en' => 'The home page of the Vexa product family: sales, rental, CRM, restaurant and organization systems with features, prices and live demos, built as fast static HTML.',
+                    'uz' => 'Vexa mahsulotlar oilasining bosh sahifasi: savdo, ijara, CRM, restoran va tashkilot tizimlari imkoniyatlari, narxlari va jonli demolari bilan; tez ochiladigan statik HTML.',
+                    'ru' => 'Главная страница семейства продуктов Vexa: системы торговли, аренды, CRM, ресторана и организации с возможностями, ценами и живыми демо; быстрый статический HTML.',
+                    'tj' => 'Саҳифаи асосии оилаи маҳсулоти Vexa: низомҳои савдо, иҷора, CRM, тарабхона ва ташкилот бо имкониятҳо, нархҳо ва демоҳои зинда; HTML-и статикии зуд.',
+                ],
+                'image' => '/media/projects/vexa-uz.webp',
+                'tech' => [
+                    'HTML5',
+                    'CSS3',
+                    'JavaScript',
+                ],
+                'live_demo' => 'https://vexa.uz/',
+                'github' => null,
+                'featured' => false,
+                'category' => 'Full-Stack',
+                'sort_order' => 11,
+            ],
+            [
+                'name' => [
                     'en' => 'PHP Social Messenger',
                     'uz' => 'PHP Social Messenger',
                     'ru' => 'PHP Social Messenger',
@@ -241,7 +536,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/php-social-messenger',
                 'featured' => false,
                 'category' => 'Backend',
-                'sort_order' => 1,
+                'sort_order' => 12,
             ],
             [
                 'name' => [
@@ -267,7 +562,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/javascript-vocabulary-quiz',
                 'featured' => false,
                 'category' => 'Frontend',
-                'sort_order' => 2,
+                'sort_order' => 13,
             ],
             [
                 'name' => [
@@ -292,7 +587,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/iqbolshoh/java-calculator-app',
                 'featured' => false,
                 'category' => 'Desktop',
-                'sort_order' => 3,
+                'sort_order' => 14,
             ],
             [
                 'name' => [
@@ -318,7 +613,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/java-test-platform',
                 'featured' => false,
                 'category' => 'Desktop',
-                'sort_order' => 4,
+                'sort_order' => 15,
             ],
             [
                 'name' => [
@@ -343,7 +638,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/java-todo-list',
                 'featured' => false,
                 'category' => 'Desktop',
-                'sort_order' => 5,
+                'sort_order' => 16,
             ],
             [
                 'name' => [
@@ -370,7 +665,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/java-android-messenger',
                 'featured' => false,
                 'category' => 'Mobile',
-                'sort_order' => 6,
+                'sort_order' => 17,
             ],
             [
                 'name' => [
@@ -396,7 +691,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/php-authentication-system',
                 'featured' => false,
                 'category' => 'Backend',
-                'sort_order' => 7,
+                'sort_order' => 18,
             ],
             [
                 'name' => [
@@ -422,7 +717,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/php-business-website',
                 'featured' => false,
                 'category' => 'Full-Stack',
-                'sort_order' => 8,
+                'sort_order' => 19,
             ],
             [
                 'name' => [
@@ -448,7 +743,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/laravel-business-website',
                 'featured' => false,
                 'category' => 'Full-Stack',
-                'sort_order' => 9,
+                'sort_order' => 20,
             ],
             [
                 'name' => [
@@ -474,7 +769,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/php-click-payment',
                 'featured' => false,
                 'category' => 'Backend',
-                'sort_order' => 10,
+                'sort_order' => 21,
             ],
             [
                 'name' => [
@@ -500,7 +795,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/php-user-role-manager',
                 'featured' => false,
                 'category' => 'Backend',
-                'sort_order' => 11,
+                'sort_order' => 22,
             ],
             [
                 'name' => [
@@ -526,7 +821,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/php-education-management',
                 'featured' => false,
                 'category' => 'Full-Stack',
-                'sort_order' => 12,
+                'sort_order' => 23,
             ],
             [
                 'name' => [
@@ -553,7 +848,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/javascript-test-platform',
                 'featured' => false,
                 'category' => 'Frontend',
-                'sort_order' => 13,
+                'sort_order' => 24,
             ],
             [
                 'name' => [
@@ -579,7 +874,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/javascript-dynamic-slider',
                 'featured' => false,
                 'category' => 'Frontend',
-                'sort_order' => 14,
+                'sort_order' => 25,
             ],
             [
                 'name' => [
@@ -605,7 +900,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/javascript-text-encryption',
                 'featured' => false,
                 'category' => 'Frontend',
-                'sort_order' => 15,
+                'sort_order' => 26,
             ],
             [
                 'name' => [
@@ -632,7 +927,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/php-auth-master',
                 'featured' => false,
                 'category' => 'Backend',
-                'sort_order' => 16,
+                'sort_order' => 27,
             ],
             [
                 'name' => [
@@ -658,7 +953,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/php-english-platform',
                 'featured' => false,
                 'category' => 'Full-Stack',
-                'sort_order' => 17,
+                'sort_order' => 28,
             ],
             [
                 'name' => [
@@ -685,7 +980,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/samsu-ai-lab-laravel',
                 'featured' => false,
                 'category' => 'Full-Stack',
-                'sort_order' => 18,
+                'sort_order' => 29,
             ],
             [
                 'name' => [
@@ -711,7 +1006,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/iqbolshoh-portfolio',
                 'featured' => false,
                 'category' => 'Frontend',
-                'sort_order' => 19,
+                'sort_order' => 30,
             ],
             [
                 'name' => [
@@ -736,7 +1031,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/javascript-xo-game',
                 'featured' => false,
                 'category' => 'Frontend',
-                'sort_order' => 20,
+                'sort_order' => 31,
             ],
             [
                 'name' => [
@@ -761,7 +1056,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/javascript-calculator-website',
                 'featured' => false,
                 'category' => 'Frontend',
-                'sort_order' => 21,
+                'sort_order' => 32,
             ],
             [
                 'name' => [
@@ -787,7 +1082,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/javascript-language-switcher',
                 'featured' => false,
                 'category' => 'Frontend',
-                'sort_order' => 22,
+                'sort_order' => 33,
             ],
             [
                 'name' => [
@@ -813,7 +1108,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/samarkand-travel-guide',
                 'featured' => false,
                 'category' => 'Frontend',
-                'sort_order' => 23,
+                'sort_order' => 34,
             ],
             [
                 'name' => [
@@ -838,7 +1133,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/javascript-digital-clock',
                 'featured' => false,
                 'category' => 'Frontend',
-                'sort_order' => 24,
+                'sort_order' => 35,
             ],
             [
                 'name' => [
@@ -863,7 +1158,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/javascript-timer',
                 'featured' => false,
                 'category' => 'Frontend',
-                'sort_order' => 25,
+                'sort_order' => 36,
             ],
             [
                 'name' => [
@@ -889,7 +1184,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/html-css-form',
                 'featured' => false,
                 'category' => 'Frontend',
-                'sort_order' => 26,
+                'sort_order' => 37,
             ],
             [
                 'name' => [
@@ -916,7 +1211,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/php-send-mail',
                 'featured' => false,
                 'category' => 'Backend',
-                'sort_order' => 27,
+                'sort_order' => 38,
             ],
             [
                 'name' => [
@@ -942,7 +1237,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/php-mysql-marketplace',
                 'featured' => true,
                 'category' => 'Full-Stack',
-                'sort_order' => 28,
+                'sort_order' => 39,
             ],
             [
                 'name' => [
@@ -968,7 +1263,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/php-database-manager',
                 'featured' => false,
                 'category' => 'Backend',
-                'sort_order' => 29,
+                'sort_order' => 40,
             ],
             [
                 'name' => [
@@ -995,7 +1290,7 @@ class ContentSeeder extends Seeder
                 'github' => 'https://github.com/Iqbolshoh/php-ninja-game',
                 'featured' => false,
                 'category' => 'Full-Stack',
-                'sort_order' => 30,
+                'sort_order' => 41,
             ],
         ]);
 
@@ -1003,10 +1298,10 @@ class ContentSeeder extends Seeder
             [
                 'icon' => 'Award',
                 'text' => [
-                    'en' => 'Three or more years of hands-on programming experience',
-                    'uz' => 'Uch yoki undan ortiq yillik amaliy dasturlash tajribasi',
-                    'ru' => 'Три или более лет практического опыта программирования',
-                    'tj' => 'Се ё зиёда сол таҷрибаи амалии барномасозӣ',
+                    'en' => 'Five or more years of hands-on programming experience',
+                    'uz' => 'Besh yoki undan ortiq yillik amaliy dasturlash tajribasi',
+                    'ru' => 'Пять или более лет практического опыта программирования',
+                    'tj' => 'Панҷ ё зиёда сол таҷрибаи амалии барномасозӣ',
                 ],
                 'sort_order' => 0,
             ],
