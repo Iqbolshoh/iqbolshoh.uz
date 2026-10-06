@@ -6,6 +6,7 @@ import { ArrowRight, Download } from "lucide-react";
 import { Button } from "../components/UI/Button";
 import { Card } from "../components/UI/Card";
 import { TechBadge } from "../components/UI/TechBadge";
+import { Teaching } from "../components/Teaching";
 import { useContent } from "../context/ContentContext";
 import { usePath } from "../hooks/usePath";
 
@@ -390,6 +391,9 @@ export const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Teaching */}
+      <Teaching />
     </div>
   );
 };

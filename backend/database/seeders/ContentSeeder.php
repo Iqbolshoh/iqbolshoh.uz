@@ -179,7 +179,7 @@ class ContentSeeder extends Seeder
             ],
             [
                 'icon' => 'GraduationCap',
-                'value' => '70+',
+                'value' => '160+',
                 'label' => [
                     'en' => 'Mentored Students',
                     'uz' => 'O‘qitilgan shogirdlar',
@@ -1534,6 +1534,22 @@ class ContentSeeder extends Seeder
                 ],
                 'sort_order' => 10,
             ],
+            [
+                'year' => '2026',
+                'title' => [
+                    'en' => 'Teacher at IT Markaz',
+                    'uz' => 'IT Markazda o\'qituvchi',
+                    'ru' => 'Преподаватель в IT Markaz',
+                    'tj' => 'Омӯзгор дар IT Markaz',
+                ],
+                'description' => [
+                    'en' => 'Started teaching C++, Frontend and Backend groups at IT Markaz in Samarkand — more than 160 students so far.',
+                    'uz' => 'Samarqanddagi IT Markazda C++, Frontend va Backend guruhlariga dars bera boshladim — hozirgacha 160 dan ortiq o\'quvchi.',
+                    'ru' => 'Начал вести группы C++, Frontend и Backend в IT Markaz в Самарканде — уже более 160 учеников.',
+                    'tj' => 'Дар IT Markaz-и Самарқанд ба гурӯҳҳои C++, Frontend ва Backend дарс доданро оғоз кардам — то ҳол зиёда аз 160 хонанда.',
+                ],
+                'sort_order' => 11,
+            ],
         ]);
 
         $this->insert('beyonds', ['title', 'description'], [
@@ -1546,10 +1562,10 @@ class ContentSeeder extends Seeder
                     'tj' => 'Менторинг',
                 ],
                 'description' => [
-                    'en' => 'Taught more than twenty students from scratch in C++, frontend, and backend through structured lessons, real projects, and practical support.',
-                    'uz' => 'Yigirmadan ortiq talabalarga tizimli darslar, haqiqiy loyihalar va amaliy ko\'mak orqali C++, frontend va backendni noldan o\'rgatdim.',
-                    'ru' => 'Обучил более двадцати студентов с нуля программированию на C++, фронтенду и бэкенду с помощью структурированных уроков, реальных проектов и практической поддержки.',
-                    'tj' => 'Ба зиёда аз бист донишҷӯ аз сифр C++, frontend ва backend-ро тавассути дарсҳои сохторӣ, лоиҳаҳои воқеӣ ва дастгирии амалӣ омӯзонидам.',
+                    'en' => 'Teaching more than 160 students at IT Markaz, Samarkand — C++, frontend and backend from scratch through structured lessons, real projects and practical support.',
+                    'uz' => 'Samarqanddagi IT Markazda 160 dan ortiq o\'quvchiga tizimli darslar, haqiqiy loyihalar va amaliy ko\'mak orqali C++, frontend va backendni noldan o\'rgatyapman.',
+                    'ru' => 'Обучаю более 160 учеников в IT Markaz (Самарканд) — C++, фронтенд и бэкенд с нуля через структурированные уроки, реальные проекты и практическую поддержку.',
+                    'tj' => 'Дар IT Markaz-и Самарқанд ба зиёда аз 160 хонанда C++, frontend ва backend-ро аз сифр тавассути дарсҳои сохторӣ, лоиҳаҳои воқеӣ ва дастгирии амалӣ меомӯзонам.',
                 ],
                 'sort_order' => 0,
             ],

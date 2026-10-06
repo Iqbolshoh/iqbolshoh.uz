@@ -108,6 +108,37 @@
       "other": "Boshqa"
     }
   },
+  "teaching": {
+    "badge": "O'qituvchilik",
+    "title": "Dasturlashni o'rgataman",
+    "description": "Samarqanddagi IT Markazda C++, Frontend va Backend bo'yicha guruhlarga dars beraman. Dasturlashni noldan, amaliy loyihalar orqali o'rgataman — o'quvchilarim birinchi darsdanoq kod yozadi va kursni o'z loyihasi bilan tugatadi.",
+    "cta": "Darsga yozilish",
+    "facts": {
+      "studentsValue": "160+",
+      "students": "O'quvchilar",
+      "coursesValue": "3",
+      "courses": "Yo'nalish: C++, Frontend, Backend",
+      "placeValue": "IT Markaz",
+      "place": "Samarqand"
+    },
+    "courses": {
+      "cpp": {
+        "title": "Dasturlash asoslari (C++)",
+        "description": "Algoritmik fikrlash va dasturlash mantig'i noldan: o'zgaruvchilar, shartlar, sikllar, funksiyalar va masala yechish.",
+        "topics": "C++ · Algoritmlar · Masalalar yechish"
+      },
+      "frontend": {
+        "title": "Web dasturlash — Frontend",
+        "description": "Zamonaviy, moslashuvchan saytlar yaratish: sahifa tuzilishidan interaktiv ilovalargacha.",
+        "topics": "HTML · CSS · JavaScript · React"
+      },
+      "backend": {
+        "title": "Web dasturlash — Backend",
+        "description": "Server tomoni, ma'lumotlar bazasi va API: haqiqiy loyihani boshidan oxirigacha qurish.",
+        "topics": "PHP · Laravel · MySQL · REST API"
+      }
+    }
+  },
   "services": {
     "title": "Mening Xizmatlarim",
     "description": "G'oyalaringizni hayotga tatbiq etish uchun moslashtirilgan professional veb-dasturlash xizmatlari. G'oyadan tortib to ishga tushirishgacha, men sizga yordam beraman.",

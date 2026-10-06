@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { GraduationCap, MapPin, Calendar, Focus } from "lucide-react";
 import { Card } from "../components/UI/Card";
+import { Teaching } from "../components/Teaching";
 import { useContent } from "../context/ContentContext";
 export const About: React.FC = () => {
   const { personalInfo, techStack, journey, highlights, beyond } = useContent();
@@ -318,6 +319,9 @@ export const About: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Teaching */}
+      <Teaching />
     </div>
   );
 };

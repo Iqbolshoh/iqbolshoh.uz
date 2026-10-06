@@ -108,6 +108,37 @@
       "other": "Other"
     }
   },
+  "teaching": {
+    "badge": "Teaching",
+    "title": "I teach programming",
+    "description": "At IT Markaz in Samarkand I teach groups in C++, Frontend and Backend development. I teach from zero through hands-on projects — my students write code from the first lesson and finish the course with a project of their own.",
+    "cta": "Join a class",
+    "facts": {
+      "studentsValue": "160+",
+      "students": "Students",
+      "coursesValue": "3",
+      "courses": "Tracks: C++, Frontend, Backend",
+      "placeValue": "IT Markaz",
+      "place": "Samarkand"
+    },
+    "courses": {
+      "cpp": {
+        "title": "Programming Fundamentals (C++)",
+        "description": "Algorithmic thinking and programming logic from zero: variables, conditions, loops, functions and problem solving.",
+        "topics": "C++ · Algorithms · Problem solving"
+      },
+      "frontend": {
+        "title": "Web Development — Frontend",
+        "description": "Building modern, responsive websites: from page structure to interactive applications.",
+        "topics": "HTML · CSS · JavaScript · React"
+      },
+      "backend": {
+        "title": "Web Development — Backend",
+        "description": "The server side, databases and APIs: building a real project from start to finish.",
+        "topics": "PHP · Laravel · MySQL · REST API"
+      }
+    }
+  },
   "services": {
     "title": "My Services",
     "description": "Professional web development services tailored to bring your ideas to life. From concept to deployment, I've got you covered.",
