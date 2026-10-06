@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight, FileText } from "lucide-react";
 import { Button } from "../components/UI/Button";
 import { Card } from "../components/UI/Card";
 import { TechBadge } from "../components/UI/TechBadge";
@@ -78,11 +78,12 @@ export const Home: React.FC = () => {
                 <Button
                   variant="outline"
                   size="lg"
-                  icon={<Download className="h-5 w-5" aria-hidden="true" />}
-                  href="/uploads/iqbolshoh-cv.pdf"
-                  download
+                  icon={<FileText className="h-5 w-5" aria-hidden="true" />}
+                  href="/portfolio.pdf"
+                  target="_blank"
+                  rel="noopener"
                   className="border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white w-full sm:w-auto"
-                  aria-label="Download CV (PDF)"
+                  aria-label="Portfolio (PDF)"
                 >
                   {t("home.downloadCV")}
                 </Button>

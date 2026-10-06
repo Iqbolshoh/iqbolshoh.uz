@@ -84,6 +84,16 @@ export const Footer: React.FC = () => {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <a
+                    href="/portfolio.pdf"
+                    target="_blank"
+                    rel="noopener"
+                    className="text-sm text-gray-400 hover:text-primary-400 transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 rounded"
+                  >
+                    {t('home.downloadCV')}
+                  </a>
+                </li>
               </ul>
             </nav>
 
