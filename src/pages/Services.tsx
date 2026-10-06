@@ -28,7 +28,6 @@ export const Services: React.FC = () => {
     message: "",
     serviceId: "",
     serviceName: "",
-    servicePrice: "",
   });
 
   const categories = ["all", "frontend", "backend", "fullstack", "special"];
@@ -46,7 +45,6 @@ export const Services: React.FC = () => {
       ...formData,
       serviceId: service.id.toString(),
       serviceName: service.title.en,
-      servicePrice: service.price,
     });
     setIsModalOpen(true);
   };
@@ -61,7 +59,6 @@ export const Services: React.FC = () => {
       message: "",
       serviceId: "",
       serviceName: "",
-      servicePrice: "",
     });
     setTimeout(() => openTriggerRef.current?.focus(), 50);
   };
@@ -336,11 +333,6 @@ export const Services: React.FC = () => {
                       </div>
 
                       <div className="border-t border-gray-100 dark:border-gray-700 pt-4 mt-auto">
-                        <div className="text-center mb-4">
-                          <div className="text-xl font-bold text-primary-600 dark:text-primary-400">
-                            {t("services.startingFrom")} {service.price}
-                          </div>
-                        </div>
                         <Button
                           className="w-full group-hover:bg-primary-700 transition-colors duration-300"
                           icon={
@@ -425,12 +417,6 @@ export const Services: React.FC = () => {
                           ]
                         }
                       </h3>
-                    </div>
-                    <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
-                      <span>{t("services.price")}:</span>
-                      <span className="font-medium">
-                        {selectedService.price}
-                      </span>
                     </div>
                   </div>
                 )}
@@ -525,11 +511,6 @@ export const Services: React.FC = () => {
                     type="hidden"
                     name="serviceName"
                     value={formData.serviceName}
-                  />
-                  <input
-                    type="hidden"
-                    name="servicePrice"
-                    value={formData.servicePrice}
                   />
 
                   <Button

@@ -1002,6 +1002,7 @@
                         'journeys'      => ["Journey", 'milestone'],
                         'beyonds'       => ['Beyond code', 'heart-handshake'],
                         'process-steps' => ['Process', 'list-checks'],
+                        'certificates'  => ['Certificates', 'award'],
                     ];
                 @endphp
                 @canany(array_map(fn($section) => $section . '.view', array_keys($contentSections)))

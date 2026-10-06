@@ -3,6 +3,7 @@
     "home": "Home",
     "about": "About",
     "portfolio": "Portfolio",
+    "certificates": "Certificates",
     "services": "Services",
     "contact": "Contact",
     "hireMe": "Hire Me"
@@ -91,14 +92,28 @@
       "fullstack": "Full-Stack"
     }
   },
+  "certificates": {
+    "title": "Certificates & Achievements",
+    "description": "Certificates, diplomas, awards and courses I have earned along the way.",
+    "all": "All",
+    "view": "View",
+    "empty": "Nothing has been added yet.",
+    "close": "Close",
+    "types": {
+      "certificate": "Certificate",
+      "diploma": "Diploma",
+      "award": "Award",
+      "course": "Course",
+      "letter": "Letter of thanks",
+      "other": "Other"
+    }
+  },
   "services": {
     "title": "My Services",
     "description": "Professional web development services tailored to bring your ideas to life. From concept to deployment, I've got you covered.",
     "howIWorkTitle": "How I Work",
     "howIWorkDescription": "My proven process for delivering excellent results",
     "getStarted": "Get Started",
-    "startingFrom": "Starting from",
-    "price": "Price",
     "requestService": "Request This Service",
     "categories": {
       "all": "All Services",
@@ -157,6 +172,11 @@
       "title": "Projects & Portfolio | Iqbolshoh Dev",
       "description": "Explore custom web applications, SaaS platforms, and dynamic websites built by Iqbolshoh using React, Tailwind CSS, PHP, and Laravel.",
       "keywords": "full-stack portfolio, web app projects, SaaS developer, Laravel projects, React apps, custom website development"
+    },
+    "certificates": {
+      "title": "Certificates & Achievements | Iqbolshoh Dev",
+      "description": "Iqbolshoh Ilhomjonov's certificates, diplomas, awards and completed courses in software development.",
+      "keywords": "Iqbolshoh certificates, developer certificates, awards, diplomas, courses"
     },
     "services": {
       "title": "Web Development Services | UI/UX, APIs & Full-Stack Apps",

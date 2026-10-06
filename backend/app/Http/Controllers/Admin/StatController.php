@@ -22,7 +22,7 @@ class StatController extends ContentCrudController
             'singular' => 'Stat',
             'plural'   => 'Stats',
             'icon'     => 'bar-chart-3',
-            'hint'     => 'The numbers on the home page ("4+ years of experience")',
+            'hint'     => 'The numbers on the home page ("5+ years of experience")',
         ];
     }
 

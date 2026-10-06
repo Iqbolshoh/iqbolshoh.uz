@@ -29,6 +29,7 @@
         'journeys'      => ['Journey', 'milestone'],
         'beyonds'       => ['Beyond code', 'heart-handshake'],
         'process-steps' => ['Process', 'list-checks'],
+        'certificates'  => ['Certificates', 'award'],
     ];
 @endphp
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Beyond;
+use App\Models\Certificate;
 use App\Models\Highlight;
 use App\Models\Journey;
 use App\Models\ProcessStep;
@@ -73,6 +74,9 @@ class ContentController extends Controller
             'processSteps' => ProcessStep::orderBy('sort_order')
                 ->get(['step', 'title', 'description'])
                 ->toArray(),
+            'certificates' => Certificate::orderBy('sort_order')->orderByDesc('issued_at')
+                ->get(['id', 'title', 'description', 'issuer', 'type', 'issued_at', 'image', 'credential_url'])
+                ->toArray(),
             'technologies' => SiteTech::map($this->techNamesInUse()),
         ];
     }
@@ -115,7 +119,6 @@ class ContentController extends Controller
             'id'          => $s->id,
             'category'    => $s->category,
             'icon'        => $s->icon,
-            'price'       => $s->price,
             'title'       => $s->title,
             'description' => $s->description,
             'tech'        => $s->tech,

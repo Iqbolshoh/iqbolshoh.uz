@@ -43,7 +43,6 @@ export interface ServiceOrderPayload {
   message: string;
   serviceId: string | number;
   serviceName: string;
-  servicePrice: string;
 }
 
 const post = <T>(path: string, payload: unknown) =>

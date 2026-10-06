@@ -21,6 +21,7 @@ export const Header: React.FC = () => {
     { name: t('nav.home'),      href: toPath('/') },
     { name: t('nav.about'),     href: toPath('/about') },
     { name: t('nav.portfolio'), href: toPath('/portfolio') },
+    { name: t('nav.certificates'), href: toPath('/certificates') },
     { name: t('nav.services'),  href: toPath('/services') },
     { name: t('nav.contact'),   href: toPath('/contact') },
   ];

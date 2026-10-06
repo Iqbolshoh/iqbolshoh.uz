@@ -26,6 +26,7 @@ final class RolePermissionSeeder extends Seeder
         'journeys'      => ['view', 'create', 'edit', 'delete'],
         'beyonds'       => ['view', 'create', 'edit', 'delete'],
         'process-steps' => ['view', 'create', 'edit', 'delete'],
+        'certificates'  => ['view', 'create', 'edit', 'delete'],
         'settings'      => ['view', 'edit'],
         'messages'      => ['view', 'delete'],
     ];
@@ -68,6 +69,7 @@ final class RolePermissionSeeder extends Seeder
         'journeys'      => ['view', 'create', 'edit'],
         'beyonds'       => ['view', 'create', 'edit'],
         'process-steps' => ['view', 'create', 'edit'],
+        'certificates'  => ['view', 'create', 'edit'],
         'settings'      => ['view', 'edit'],
         'messages'      => ['view'],
     ];

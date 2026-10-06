@@ -34,11 +34,23 @@ export interface Service {
   id: number;
   category: string;
   icon: LucideIcon;
-  price: string | null;
   title: Translated;
   description: Translated;
   tech: string[];
   features: Record<string, string[]>;
+}
+
+export type CertificateType = 'certificate' | 'diploma' | 'award' | 'course' | 'letter' | 'other';
+
+export interface Certificate {
+  id: number;
+  title: Translated;
+  description: Translated | null;
+  issuer: string | null;
+  type: CertificateType;
+  issued_at: string | null;
+  image?: string;
+  credential_url: string | null;
 }
 
 /** Badge styling for one technology name, served by the API. */
@@ -57,6 +69,7 @@ export interface SiteContent {
   beyond: { icon: LucideIcon; title: Translated; description: Translated }[];
   services: Service[];
   processSteps: { step: string; title: Translated; description: Translated }[];
+  certificates: Certificate[];
   technologies: Record<string, TechMeta>;
 }
 
@@ -78,6 +91,7 @@ function normalize(raw: any): SiteContent {
     beyond: withIcons(raw.beyond),
     services: withIcons(raw.services),
     processSteps: raw.processSteps ?? [],
+    certificates: withImage(raw.certificates),
     technologies: raw.technologies ?? {},
   } as SiteContent;
 }

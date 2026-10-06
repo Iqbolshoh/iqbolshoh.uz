@@ -56,7 +56,7 @@ export const Footer: React.FC = () => {
                 {t('footer.navigation')}
               </h3>
               <ul className="space-y-3">
-                {['home', 'about', 'portfolio', 'services'].map((item) => (
+                {['home', 'about', 'portfolio', 'certificates', 'services'].map((item) => (
                   <li key={item}>
                     <Link
                       to={item === 'home' ? toPath('/') : toPath(`/${item}`)}

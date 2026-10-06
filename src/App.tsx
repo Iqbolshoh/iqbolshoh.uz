@@ -15,6 +15,7 @@ import { SUPPORTED_LANGS } from './hooks/usePath';
 const Home        = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
 const About       = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
 const Portfolio   = lazy(() => import('./pages/Portfolio').then(m => ({ default: m.Portfolio })));
+const Certificates = lazy(() => import('./pages/Certificates').then(m => ({ default: m.Certificates })));
 const Services    = lazy(() => import('./pages/Services').then(m => ({ default: m.Services })));
 const Contact     = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
 
@@ -102,6 +103,11 @@ function App() {
                 <Route path="portfolio" element={<>
                   <SEO title={t('seo.portfolio.title')} description={t('seo.portfolio.description')} keywords={t('seo.portfolio.keywords')} />
                   <Portfolio />
+                </>} />
+
+                <Route path="certificates" element={<>
+                  <SEO title={t('seo.certificates.title')} description={t('seo.certificates.description')} keywords={t('seo.certificates.keywords')} />
+                  <Certificates />
                 </>} />
 
                 <Route path="services" element={<>

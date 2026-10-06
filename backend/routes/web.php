@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BeyondController;
+use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\HighlightController;
 use App\Http\Controllers\Admin\JourneyController;
 use App\Http\Controllers\Admin\MessageController;
@@ -74,6 +75,7 @@ Route::prefix('admin')->group(function () {
                 'journeys'      => JourneyController::class,
                 'beyonds'       => BeyondController::class,
                 'process-steps' => ProcessStepController::class,
+                'certificates'  => CertificateController::class,
             ];
 
             foreach ($sections as $key => $controller) {

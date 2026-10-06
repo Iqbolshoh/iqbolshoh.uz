@@ -3,6 +3,7 @@
     "home": "Asosiy",
     "about": "Men haqimda",
     "portfolio": "Portfel",
+    "certificates": "Sertifikatlar",
     "services": "Xizmatlar",
     "contact": "Aloqa",
     "hireMe": "Meni yollash"
@@ -91,14 +92,28 @@
       "fullstack": "Full-Stack"
     }
   },
+  "certificates": {
+    "title": "Sertifikatlar va yutuqlar",
+    "description": "Yo'l davomida olgan sertifikatlarim, diplomlarim, mukofotlarim va tugatgan kurslarim.",
+    "all": "Barchasi",
+    "view": "Ko'rish",
+    "empty": "Hozircha hech narsa qo'shilmagan.",
+    "close": "Yopish",
+    "types": {
+      "certificate": "Sertifikat",
+      "diploma": "Diplom",
+      "award": "Mukofot",
+      "course": "Kurs",
+      "letter": "Tashakkurnoma",
+      "other": "Boshqa"
+    }
+  },
   "services": {
     "title": "Mening Xizmatlarim",
     "description": "G'oyalaringizni hayotga tatbiq etish uchun moslashtirilgan professional veb-dasturlash xizmatlari. G'oyadan tortib to ishga tushirishgacha, men sizga yordam beraman.",
     "howIWorkTitle": "Qanday ishlayman",
     "howIWorkDescription": "Ajoyib natijalar beradigan sinovdan o'tgan jarayonim",
     "getStarted": "Boshlash",
-    "startingFrom": "Boshlanish narxi",
-    "price": "Narxi",
     "requestService": "Bu xizmatga buyurtma berish",
     "categories": {
       "all": "Barcha Xizmatlar",
@@ -157,6 +172,11 @@
       "title": "Loyihalar va Portfel | Iqbolshoh Dev",
       "description": "Iqbolshoh tomonidan React, Tailwind CSS, PHP va Laravel yordamida yaratilgan maxsus veb-ilovalar, SaaS platformalar va dinamik veb-saytlarni ko'rib chiqing.",
       "keywords": "full-stack portfel, veb-ilova loyihalari, SaaS dasturchi, Laravel loyihalar, React ilovalar, maxsus veb-sayt yaratish"
+    },
+    "certificates": {
+      "title": "Sertifikatlar va yutuqlar | Iqbolshoh Dev",
+      "description": "Iqbolshoh Ilhomjonovning dasturlash bo'yicha sertifikatlari, diplomlari, mukofotlari va tugatgan kurslari.",
+      "keywords": "Iqbolshoh sertifikatlari, dasturchi sertifikatlari, mukofotlar, diplomlar, kurslar"
     },
     "services": {
       "title": "Veb Dasturlash Xizmatlari | UI/UX, API-lar va Full-Stack Ilovalar",

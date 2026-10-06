@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beyond;
+use App\Models\Certificate;
 use App\Models\ContactMessage;
 use App\Models\Highlight;
 use App\Models\Journey;
@@ -93,6 +94,7 @@ class DashboardController extends Controller
             'journeys'      => Journey::count(),
             'beyonds'       => Beyond::count(),
             'process-steps' => ProcessStep::count(),
+            'certificates'  => Certificate::count(),
         ];
 
         $inbox = [
