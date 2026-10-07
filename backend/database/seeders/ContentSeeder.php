@@ -375,7 +375,7 @@ class ContentSeeder extends Seeder
                     'MySQL',
                     'Telegram Bot API',
                 ],
-                'live_demo' => 'https://organization.vexa.uz/',
+                'live_demo' => 'https://erp.vexa.uz/',
                 'github' => null,
                 'featured' => false,
                 'category' => 'Full-Stack',
@@ -495,10 +495,10 @@ class ContentSeeder extends Seeder
                     'tj' => 'Vexa.uz — экосистемаи тиҷоратӣ',
                 ],
                 'description' => [
-                    'en' => 'The home page of the Vexa product family: sales, rental, CRM, restaurant and organization systems with features, prices and live demos, built as fast static HTML.',
-                    'uz' => 'Vexa mahsulotlar oilasining bosh sahifasi: savdo, ijara, CRM, restoran va tashkilot tizimlari imkoniyatlari, narxlari va jonli demolari bilan; tez ochiladigan statik HTML.',
-                    'ru' => 'Главная страница семейства продуктов Vexa: системы торговли, аренды, CRM, ресторана и организации с возможностями, ценами и живыми демо; быстрый статический HTML.',
-                    'tj' => 'Саҳифаи асосии оилаи маҳсулоти Vexa: низомҳои савдо, иҷора, CRM, тарабхона ва ташкилот бо имкониятҳо, нархҳо ва демоҳои зинда; HTML-и статикии зуд.',
+                    'en' => 'The home page of the Vexa product family: sales, rental, CRM, restaurant and ERP systems with features, prices and live demos, built as fast static HTML.',
+                    'uz' => 'Vexa mahsulotlar oilasining bosh sahifasi: savdo, ijara, CRM, restoran va ERP tizimlari imkoniyatlari, narxlari va jonli demolari bilan; tez ochiladigan statik HTML.',
+                    'ru' => 'Главная страница семейства продуктов Vexa: системы торговли, аренды, CRM, ресторана и ERP с возможностями, ценами и живыми демо; быстрый статический HTML.',
+                    'tj' => 'Саҳифаи асосии оилаи маҳсулоти Vexa: низомҳои савдо, иҷора, CRM, тарабхона ва ERP бо имкониятҳо, нархҳо ва демоҳои зинда; HTML-и статикии зуд.',
                 ],
                 'image' => '/media/projects/vexa-uz.webp',
                 'tech' => [
